@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import "../../styles/login.css";
 
 
 export const Login = () => {
 
+    const { store, actions } = useContext(Context);
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("")
 
@@ -20,27 +23,27 @@ export const Login = () => {
                                         <form>
                                             <div className="form-outline mb-4">
                                                 <input type="email" className="form-control form-control-lg"
+                                                    placeholder="Email"
                                                     value={userEmail}
                                                     onChange={(e) => { setUserEmail(e.target.value); }} />
                                                 <label className="form-label"
-
                                                 >Your Email</label>
                                             </div>
                                             <div className="form-outline mb-4">
                                                 <input type="password" className="form-control form-control-lg"
+                                                    placeholder="Password"
                                                     value={userPassword}
                                                     onChange={(e) => { setUserPassword(e.target.value); }} />
-
                                                 <label className="form-label"
-
                                                 >Password</label>
                                             </div>
-
                                             <div className="d-flex justify-content-center">
-                                                <button type="button"
-                                                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                                                >Enter
-                                                </button>
+                                                <Link to="/" onClick={() => { actions.login(userEmail, userPassword) }}>
+                                                    <button type="button"
+                                                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                                                    >Enter
+                                                    </button>
+                                                </Link>
                                             </div>
 
                                             <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
