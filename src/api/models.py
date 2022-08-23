@@ -9,10 +9,10 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     age =db.Column(db.Integer,unique=False,nullable=False)
     description =db.Column(db.String)
-    photo = db.Column()#investigar
-    location =db.Column()#investigar
+    # photo = db.Column() investigar
+    # location =db.Column()investigar
 
-    # userevents = db.relationship('Usereventos',backref=db.backref('Usereventos'))
+   
   
     def __repr__(self):
         return f'<User {self.email}>'
@@ -34,9 +34,9 @@ class Eventos(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
-    location =db.Column()#investigar
+    # location =db.Column() investigar
     
-    # usereventos =db.relationship('Usereventos',backref=db.backref('Usereventos'))
+    
     
     def __repr__(self):
         return '<Eventos %r>' % self.name
