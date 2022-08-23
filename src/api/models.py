@@ -7,13 +7,14 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    age =db.Column(db.Integer,unique=False,nullable=False)
-    description =db.Column(db.String)
+    age = db.Column(db.Integer,nullable=False)
+    management_event = db.Column(db.Integer,nullable=False)
+    participants = db.Column(db.Integer,nullable=False)  
+    description =db.Column(db.String,(240), nullable=False)
     photo = db.Column()#investigar
-    location =db.Column()#investigar
+    location =db.Column()#investigar // En proceso
 
     # userevents = db.relationship('Usereventos',backref=db.backref('Usereventos'))
-  
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -23,18 +24,25 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "age": self.age,
+            "management_event": self.management_event,
+            "participants" : self.participants,
+            "description" : self.description,
+            # "photo": self.photo,                  // en proceso de saber como se hace
+            # "location": self.location             // en proceso de saber como se hace
             # do not serialize the password, its a security breach
         }
-class Eventos(db.Model):
+class Events(db.Model):
     id = db.Column(db.Integer, primary_key=True )
-    sport = db.Column(db.String(250))
-    date = db.Column(db.Integer)
-    duration = db.Column(db.Integer)
-    agemin = db.Column(db.Integer)
-    agemax = db.Column(db.Integer)
-    payment = db.Column(db.Integer(), unique=False, nullable=False)
-    space= db.Column(db.Boolean(), unique=False, nullable=False)
-    location =db.Column()#investigar
+    sport = db.Column(db.String(80), nullable=False)
+    date = db.Column(db.Integer(), nullable=False)
+    duration = db.Column(db.Integer(), nullable=False)
+    payment = db.Column(db.Integer(), nullable=False)
+    space= db.Column(db.Boolean(), nullable=False)
+    agemin = db.Column(db.Integer,nullable=False)
+    agemax = db.Column(db.Integer,nullable=False)
+    city = db.Column(db.Integer,nullable=False)
+    direction = db.Column(db.Integer,nullable=False)
+    # location =db.Column()    //investigando
     
     # usereventos =db.relationship('Usereventos',backref=db.backref('Usereventos'))
     
@@ -44,18 +52,18 @@ class Eventos(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "deporte": self.deporte,
-            "fecha": self.fecha,
-            "duraciónevento": self.duraciónevento,
-            "edadminima": self.edadminima,
-            "edadmáxima": self.edadmáxima,
-            "opciónpago": self.opciónpago,
-            "depoairelibrecubiertorte": self.airelibrecubierto,
-            "Lugarprovincia": self.Lugarprovincia,
-            "depolugarciudadrte": self.lugarciudad,
-            "direcionevento": self.direcionevento,
+            "sport": self.sport,
+            "date": self.date,
+            "duration": self.duration,
+            "agemin": self.agemin,
+            "agemax": self.agemax,
+            "payment": self.payment,
+            "space": self.space,
+            "city": self.city,
+            "direction": self.direction,
+            # "location": self.location,        //investigando
         }
-class Usereventos(db.Model):
+class Userevents(db.Model):
     id = db.Column(db.Integer, primary_key=True )
     idusuario = db.Column(db.Integer, db.ForeignKey('user.id'))
     idevento  =db.Column(db.Integer, db.ForeignKey('eventos.id')),
