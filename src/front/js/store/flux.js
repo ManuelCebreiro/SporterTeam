@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 
 			login: (email, password) => {
-				fetch("https://3001-manuelcebre-sporterteam-309b27a0bpj.ws-eu62.gitpod.io/api/token", {
+				fetch(process.env.BACKEND_URL + "/api/token", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
