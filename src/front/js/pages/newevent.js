@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const Crearevento = () => {
+export const Newevent = () => {
   const { store, actions } = useContext(Context);
 
   return (

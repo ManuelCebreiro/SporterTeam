@@ -35,9 +35,9 @@ export const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/crearevento">
+            <Link to="/newevent">
               <a className="nav-link" href="#">
-                Crearevento
+                newevent
               </a>
             </Link>
           </li>
