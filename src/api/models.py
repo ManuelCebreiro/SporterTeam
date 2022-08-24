@@ -4,15 +4,15 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    age =db.Column(db.Integer,unique=False,nullable=False)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(80), unique=False)
+    age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
-    photo = db.Column()#investigar
-    location =db.Column()#investigar
+    # photo = db.Column() investigar
+    # location =db.Column()investigar
 
-    # userevents = db.relationship('Usereventos',backref=db.backref('Usereventos'))
+   
   
     def __repr__(self):
         return f'<User {self.email}>'
@@ -22,7 +22,7 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
-            "age": self.age,
+            "age": self.age
             # do not serialize the password, its a security breach
         }
 class Eventos(db.Model):
@@ -34,9 +34,9 @@ class Eventos(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
-    location =db.Column()#investigar
+    # location =db.Column() investigar
     
-    # usereventos =db.relationship('Usereventos',backref=db.backref('Usereventos'))
+    
     
     def __repr__(self):
         return '<Eventos %r>' % self.name
@@ -53,10 +53,10 @@ class Eventos(db.Model):
             "depoairelibrecubiertorte": self.airelibrecubierto,
             "Lugarprovincia": self.Lugarprovincia,
             "depolugarciudadrte": self.lugarciudad,
-            "direcionevento": self.direcionevento,
+            "direcionevento": self.direcionevento
         }
 class Usereventos(db.Model):
     id = db.Column(db.Integer, primary_key=True )
     idusuario = db.Column(db.Integer, db.ForeignKey('user.id'))
-    idevento  =db.Column(db.Integer, db.ForeignKey('eventos.id')),
+    idevento  =db.Column(db.Integer, db.ForeignKey('eventos.id'))
     admin = db.Column(db.Boolean)
