@@ -2,12 +2,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			url: "process.env.BACKEND_URL"
+			url: "https://3001-manuelcebre-sporterteam-lnie914wi3x.ws-eu62.gitpod.io"
 		},
 		actions: {
 
 			login: (email, password) => {
-				fetch(getStore.url + "/api/token", {
+				fetch(getStore().url + "/api/token", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
