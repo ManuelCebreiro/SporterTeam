@@ -9,6 +9,9 @@ export const Login = () => {
     const { store, actions } = useContext(Context);
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("")
+    const token = sessionStorage.getItem("token");
+
+
 
     return (
         <div className="container-fluid p-0" id="loginstyle">
@@ -25,7 +28,9 @@ export const Login = () => {
                                                 <input type="email" className="form-control form-control-lg"
                                                     placeholder="Email"
                                                     value={userEmail}
-                                                    onChange={(e) => { setUserEmail(e.target.value); }} />
+                                                    // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$
+                                                    onChange={(e) => { setUserEmail(e.target.value); }}
+                                                    required />
                                                 <label className="form-label"
                                                 >Your Email</label>
                                             </div>

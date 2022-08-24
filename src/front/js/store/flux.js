@@ -2,12 +2,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: "",
-			url: "https://3001-manuelcebre-sporterteam-lnie914wi3x.ws-eu62.gitpod.io"
 		},
 		actions: {
 
 			login: (email, password) => {
-				fetch(getStore().url + "/api/token", {
+				fetch("https://3001-manuelcebre-sporterteam-309b27a0bpj.ws-eu62.gitpod.io/api/token", {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -21,12 +20,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (respuestadelback.status == 200) {
 							return respuestadelback.json()
 						}
+						else if (respuestadelback.status == 401) {
+							console.log("El email o password es incorrecto o no existe, 401")
+						}
+						else if (respuestadelback.status == 402) {
+							console.log("El email o password es incorrecto o no existe, 402")
+						}
+
 					})
 					.then((respuestajson) => {
 						sessionStorage.setItem("token", respuestajson.access_token)
 						setStore({ token: respuestajson.access_token })
 					})
+			},
 
+			//FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
+			reloadToken: () => {
+				let datotoken = sessionStorage.getItem("token")
+				if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
+					setStore({ token: datotoken })
 			},
 
 
