@@ -28,7 +28,7 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link to="/">
+            <Link to="/photoperfil">
               <a className="nav-link" href="#">
                 Pagina principal <span className="sr-only">(current)</span>
               </a>

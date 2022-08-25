@@ -8,6 +8,8 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import cloudinary
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
@@ -26,6 +28,30 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
+#CARGAR IMAGEN EN LA BASE DE DATOS
+@api.route('/upload', methods=['POST'])
+@jwt_required()
+def handle_upload():
+    identity = get_jwt_identity()     #pide el token
+    user1 = User.query.filter_by(email = identity).one_or_none()
+    # cloudinary.uploader.upload(request.files['profile_image'], public_id=f'our_folder_team/picperfil')
+    result = cloudinary.uploader.upload(request.files['profile_image'],)
+    print(result['secure_url'])
+
+    user1.profile_image_url = result['secure_url']
+    db.session.add(user1)
+    db.session.commit()
+    
+    return jsonify(user1.profile_image_url), 200
+
+#ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
+@api.route('/load', methods=['GET'])
+@jwt_required()
+def handle_load():
+    identity = get_jwt_identity() 
+    user = User.query.filter_by(email = identity).one_or_none()
+    
+    return jsonify(user.profile_image_url), 200
 
 
 @api.route('/hello', methods=['POST', 'GET'])
