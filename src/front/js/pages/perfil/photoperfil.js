@@ -30,34 +30,42 @@ export const Photoperfil = props => {
 			.catch(error => console.error("ERRORRRR!!!", error))
 	};
 
-	// const LoadImage = (evt) => {
-	// 	evt.preventDefault();
-	// 	//usaremos esto para enviarlo al BACKEND
-	// 	console.log("Esta es la imagen cargada", files)
-	// 	let body = new FormData();
-	// 	body.append("profile_image", files[0])
-	// 	const options = {
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Accept: "application/json",
-	// 			Authorization: "Bearer " + store.token,
-	// 		},
-	// 		body,
-	// 		method: "POST",
-	// 	}
-	// 	fetch(process.env.BACKEND_URL + "/api/load", options)
-	// 		.then(resp => resp.json())
-	// 		.then(data => console.log("Sucess!!!", data))
-	// 		.catch(error => console.error("ERRORRRR!!!", error))
-	// };
+	const LoadImage = (evt) => {
+		console.log("Esta es la imagen cargada", files)
+		const options = {
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				Authorization: "Bearer " + store.token,
+			},
+			method: "GET",
+		}
+		fetch(process.env.BACKEND_URL + "/api/load", options)
+			.then(respuestadelback =>
+				respuestadelback.json())
+			.then(data => {
+				// if (respuestadelback.status == 200) {
+				setImage(data)
+				// }
+			})
+
+	};
+	useEffect(() => {
+		LoadImage()
+	}, []);
 
 	return (
 		<div className="jumbotron">
 			<h1 className="display-4">PERFIL USUARIO</h1>
 			<form onSubmit={upLoadImage}>
-				<input type="file" onChange={(e) => setFiles(e.target.files)} />
+				<div className="row">
+
+					<input type="file" onChange={(e) => setFiles(e.target.files)} />
+				</div>
 				<img src={image} />
-				<button>Upload</button>
+
+				<button >Upload</button>
+				<button onClick={LoadImage}>Poner de perfil</button>
 			</form>
 		</div>
 	);
