@@ -34,15 +34,14 @@ def create_token():
 def handle_upload():
     identity = get_jwt_identity()     #pide el token
     user1 = User.query.filter_by(email = identity).one_or_none()
-    # cloudinary.uploader.upload(request.files['profile_image'], public_id=f'our_folder_team/picperfil')
-    result = cloudinary.uploader.upload(request.files['profile_image'],)
-    print(result['secure_url'])
-
+    result = cloudinary.uploader.upload(request.files['profile_image'])
     user1.profile_image_url = result['secure_url']
     db.session.add(user1)
     db.session.commit()
     
     return jsonify(user1.profile_image_url), 200
+    # return jsonify(user1.profile_image_url), 200
+
 
 #ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
 @api.route('/load', methods=['GET'])

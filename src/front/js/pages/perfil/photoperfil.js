@@ -13,13 +13,11 @@ export const Photoperfil = props => {
 		let body = new FormData();
 		body.append("profile_image", files[0])
 		const options = {
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-				Authorization: "Bearer " + store.token,
-			},
 			body,
 			method: "POST",
+			headers: {
+				"Authorization": "Bearer " + store.token,
+			},
 		}
 		fetch(process.env.BACKEND_URL + "/api/upload", options)
 			.then(resp => resp.json())
@@ -51,7 +49,7 @@ export const Photoperfil = props => {
 
 	};
 	useEffect(() => {
-		LoadImage()
+		LoadImage
 	}, []);
 
 	return (
@@ -64,8 +62,8 @@ export const Photoperfil = props => {
 				</div>
 				<img src={image} />
 
-				<button >Upload</button>
-				<button onClick={LoadImage}>Poner de perfil</button>
+				<button onClick={LoadImage}>Cargar foto</button>
+				{/* <button >Poner de perfil</button> */}
 			</form>
 		</div>
 	);
