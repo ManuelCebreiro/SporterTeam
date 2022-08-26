@@ -6,6 +6,8 @@ export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
 	const [files, setFiles] = useState(null);
 	const [image, setImage] = useState("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
+	const [respuesta, setRespuesta] = useState("");
+
 
 	const upLoadImage = (evt) => {
 		evt.preventDefault();
@@ -46,24 +48,32 @@ export const Photoperfil = props => {
 				// if (respuestadelback.status == 200) {
 				setImage(data)
 				// }
+				setRespuesta("")
 			})
 
 	};
-	useEffect(() => {
-		LoadImage
-	}, []);
+	// useEffect(() => {
+	// 	LoadImage
+	// }, []);
 
+	const deleteImage = () => {
+		setImage("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
+		setRespuesta("Esta es la imagen predefinida, si quieres poner la tuya, carga tu foto")
+	}
 	return (
 		<div className="jumbotron">
 			<h1 className="display-4">PERFIL USUARIO</h1>
 			<form onSubmit={upLoadImage}>
 				<div className="row">
 
+					<img src={image} style={{ width: 200 }} />
+					<p><strong>{respuesta}</strong></p>
 					<input type="file" onChange={(e) => setFiles(e.target.files)} />
 				</div>
-				<img src={image} style={{ width: 200 }} />
-
 				<button onClick={LoadImage}>Cargar</button>
+				<button onClick={deleteImage}>Borrar</button>
+
+
 				{/* <button >Poner de perfil</button> */}
 			</form>
 		</div>
