@@ -7,6 +7,7 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(80), unique=False)
+    profile_image_url = db.Column(db.String(250), unique=False)
     age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
     # photo = db.Column() investigar

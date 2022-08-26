@@ -8,6 +8,8 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import cloudinary
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
@@ -34,5 +36,15 @@ def handle_hello():
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
+@api.route('/upload', methods=['POST'])
+@jwt_required()
+def handle_upload():
+    identity = get_jwt_identity()     #pide el token
+    user1 = User.query.filter_by(email = identity).one_or_none()
+    result = cloudinary.uploader.upload(request.files['profile_image'])
 
-    return jsonify(response_body), 200
+    user1.profile_image_url = result['secure_url']
+    db.session.add(user1)
+    db.session.commit()
+    
+    return jsonify(result), 200
