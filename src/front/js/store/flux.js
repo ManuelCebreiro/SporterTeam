@@ -2,11 +2,13 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
+      validacion: false,
     },
     actions: {
       logout: () => {
         setStore({ token: "" });
         sessionStorage.removeItem("token");
+        setStore({ validacion: false });
       },
 
       login: (email, password) => {
@@ -22,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((respuestadelback) => {
             if (respuestadelback.status == 200) {
+              setStore({ validacion: true });
               return respuestadelback.json();
             } else if (respuestadelback.status == 401) {
               console.log("El email o password es incorrecto o no existe, 401");
