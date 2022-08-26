@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
+import "/workspace/SporterTeam/src/front/styles/photoperfil.css"
 
 export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
@@ -60,11 +61,12 @@ export const Photoperfil = props => {
 
 					<input type="file" onChange={(e) => setFiles(e.target.files)} />
 				</div>
-				<img src={image} />
+				<img src={image} style={{ width: 200 }} />
 
-				<button onClick={LoadImage}>Cargar foto</button>
+				<button onClick={LoadImage}>Cargar</button>
 				{/* <button >Poner de perfil</button> */}
 			</form>
 		</div>
 	);
+
 };
