@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
-      validacion: true,
+      validacion: false,
       eventos: [],
     },
     actions: {
@@ -42,9 +42,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
-        if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
+        if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });
-        setStore({ validacion: true });
+          setStore({ validacion: true });
+        }
       },
 
       // Use getActions to call a function within a fuction

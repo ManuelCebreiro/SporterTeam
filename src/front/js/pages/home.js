@@ -10,6 +10,34 @@ export const Home = () => {
 
   return (
     <div className="container py-5">
+      <div className="row d-flex justify-content-center ">
+        <div className="col-5">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              payment
+            </label>
+          </div>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              space
+            </label>
+          </div>
+        </div>
+
+        <div className="col-5"></div>
+      </div>
       <div class="table-responsive">
         <table class="text-center table table-striped table-hover">
           <thead>
@@ -36,7 +64,7 @@ export const Home = () => {
                   <td>{event.duration}</td>
                   <td>{event.agemin}</td>
                   <td>{event.agemax}</td>
-                  <td>{(event.payment += "€")}</td>
+                  <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
                     <button className="btn btn-success ">Unirse</button>
