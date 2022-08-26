@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
-      validacion: false,
+      validacion: true,
+      eventos: [],
     },
     actions: {
       logout: () => {
@@ -24,7 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((respuestadelback) => {
             if (respuestadelback.status == 200) {
-              setStore({ validacion: true });
               return respuestadelback.json();
             } else if (respuestadelback.status == 401) {
               console.log("El email o password es incorrecto o no existe, 401");
@@ -35,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestajson) => {
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
+            setStore({ validacion: true });
           });
       },
 
@@ -43,11 +44,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         let datotoken = sessionStorage.getItem("token");
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
           setStore({ token: datotoken });
+        setStore({ validacion: true });
       },
 
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+      getEventos: () => {
+        fetch(process.env.BACKEND_URL + "/api/eventos", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((resp) => {
+            if (resp.status == 200) {
+              return resp.json();
+            } else {
+              console.log(resp.json());
+            }
+          })
+          .then((data) => {
+            setStore({ eventos: data });
+          });
       },
 
       getMessage: async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
@@ -9,10 +9,9 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    const isLogged = actions.login(userEmail, userPassword);
+  useEffect(() => {
     if (store.validacion) navigate("/home");
-  };
+  }, [store.validacion]);
 
   return (
     <div className="container-fluid p-0" id="loginstyle">
@@ -53,7 +52,9 @@ export const Login = () => {
                       </div>
                       <div className="d-flex justify-content-center">
                         <button
-                          onClick={handleClick}
+                          onClick={() => {
+                            actions.login(userEmail, userPassword);
+                          }}
                           type="button"
                           className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                         >
