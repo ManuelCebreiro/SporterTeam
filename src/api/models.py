@@ -2,6 +2,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+participant = db.Table('participant',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('evento_id', db.Integer, db.ForeignKey('evento.id'), primary_key=True)
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -9,8 +14,8 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False)
     age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
-    # photo = db.Column() investigar
-    # location =db.Column()investigar
+    participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
+    
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -23,8 +28,7 @@ class User(db.Model):
             "age": self.age
             # do not serialize the password, its a security breach
         }
-
-class Eventos(db.Model):
+class Evento(db.Model):
     id = db.Column(db.Integer, primary_key=True )
     sport = db.Column(db.String(250))
     date = db.Column(db.String)#cambiarla a string?
@@ -33,10 +37,10 @@ class Eventos(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
-    # location =db.Column() investigar
-    #falta hora de comienzo
+    admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
     def __repr__(self):
-        return '<Eventos %r>' % self.name
+        return '<Eventos %r>' % self.id
 
     def serialize(self):
         return {
@@ -53,8 +57,3 @@ class Eventos(db.Model):
             # "direcionevento": self.direcionevento
         }
         
-# class Usereventos(db.Model):
-#     id = db.Column(db.Integer, primary_key=True )
-#     idusuario = db.Column(db.Integer, db.ForeignKey('User.id'))
-#     idevento  =db.Column(db.Integer, db.ForeignKey('eventos.id'))
-#     admin = db.Column(db.Boolean)
