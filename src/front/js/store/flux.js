@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
+      imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
     },
     actions: {
       logout: () => {
@@ -41,7 +42,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
           setStore({ token: datotoken });
       },
-
+      traermeimagen: (img) => {
+        setStore({ imagen: img })
+      },
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");

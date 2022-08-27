@@ -45,16 +45,15 @@ export const Photoperfil = props => {
 			.then(respuestadelback =>
 				respuestadelback.json())
 			.then(data => {
-				// if (respuestadelback.status == 200) {
 				setImage(data)
-				// }
+				actions.traermeimagen(data)
 				setRespuesta("")
 			})
 
 	};
-	// useEffect(() => {
-	// 	LoadImage
-	// }, []);
+	useEffect(() => {
+		LoadImage()
+	}, []);
 
 	const deleteImage = () => {
 		setImage("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
