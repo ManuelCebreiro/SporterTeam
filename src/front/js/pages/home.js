@@ -34,9 +34,29 @@ export const Home = () => {
               space
             </label>
           </div>
+          <input type="number" min="0" max="600"></input>
+          <label class="form-check-label px-1" for="flexSwitchCheckDefault">
+            duration
+          </label>
         </div>
 
-        <div className="col-5"></div>
+        <div className="col-5">
+          <input type="number" min="0" max="150"></input>
+          <label class="form-check-label px-1" for="flexSwitchCheckDefault">
+            agemin
+          </label>
+          <input type="number" min="0" max="150"></input>
+          <label class="form-check-label px-1" for="flexSwitchCheckDefault">
+            agemax
+          </label>
+          <input
+            type="date"
+            id="start"
+            name="trip-start"
+            min="2022-08-27"
+            max="2030-12-31"
+          ></input>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="text-center table table-striped table-hover">
