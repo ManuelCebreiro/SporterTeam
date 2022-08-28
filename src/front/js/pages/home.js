@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const eventos = store.eventosFilter;
+  const evento = store.eventos;
   const [event, setEvent] = useState({
     payment: null,
     space: null,
@@ -14,6 +15,7 @@ export const Home = () => {
     agemin: 0,
     agemax: 200,
     date: "",
+    sport: "",
   });
 
   return (
@@ -73,7 +75,7 @@ export const Home = () => {
             }}
           ></input>
           <label class="form-check-label px-1" for="flexSwitchCheckDefault">
-            duration
+            MinDuration
           </label>
         </div>
 
@@ -110,6 +112,22 @@ export const Home = () => {
             min="2022-08-27"
             max="2030-12-31"
           ></input>
+          <select
+            class="form-select"
+            id="validationCustom04"
+            onChange={(e) => {
+              setEvent({ ...event, sport: e.target.value });
+            }}
+          >
+            <option selected disabled value="">
+              sport
+            </option>
+            <option>Baloncesto</option>
+            <option>Futbol</option>
+            <option>Padel</option>
+            <option>Tenis</option>
+            <option>cualquiera</option>;
+          </select>
           <button
             onClick={() => {
               actions.filterEvent(event);

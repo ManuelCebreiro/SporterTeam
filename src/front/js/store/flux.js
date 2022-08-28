@@ -9,9 +9,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       eventosFilter: [],
     },
     actions: {
+      //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
         const eventos = getStore().eventos;
-        console.log(event, "properties");
         const paymentResults =
           event.payment == null
             ? eventos
@@ -38,9 +38,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.date !== ""
             ? agemaxResults.filter((element) => element.date == event.date)
             : agemaxResults;
-
-        setStore({ eventosFilter: dateResults });
+        const sportResults =
+          event.sport == "" || event.sport == "cualquiera"
+            ? dateResults
+            : dateResults.filter((element) => element.sport == event.sport);
+        setStore({ eventosFilter: sportResults });
       },
+      //funcion para unirse a un evento de la lista
       joinEvent: (event) => {
         const store = getStore();
         fetch(process.env.BACKEND_URL + "/api/joinevent", {
