@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
@@ -6,56 +6,117 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const eventos = store.eventos;
+  const eventos = store.eventosFilter;
+  const [event, setEvent] = useState({
+    payment: null,
+    space: null,
+    duration: 0,
+    agemin: 0,
+    agemax: 200,
+    date: "",
+  });
 
   return (
     <div className="container py-5">
       <div className="row d-flex justify-content-center ">
         <div className="col-5">
           <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-            />
-            <label class="form-check-label" for="flexSwitchCheckDefault">
-              payment
-            </label>
+            <select
+              class="form-select"
+              id="validationCustom04"
+              onChange={(e) => {
+                if (e.target.value == "Si") {
+                  setEvent({ ...event, payment: true });
+                } else if (e.target.value == "No") {
+                  setEvent({ ...event, payment: false });
+                } else {
+                  setEvent({ ...event, payment: null });
+                }
+              }}
+            >
+              <option selected disabled value="">
+                payment
+              </option>
+              <option>Si</option>
+              <option>No</option>
+              <option>cualquiera</option>
+            </select>
           </div>
           <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-            />
-            <label class="form-check-label" for="flexSwitchCheckDefault">
-              space
-            </label>
+            <select
+              class="form-select"
+              id="validationCustom04"
+              onChange={(e) => {
+                if (e.target.value == "Si") {
+                  setEvent({ ...event, space: true });
+                } else if (e.target.value == "No") {
+                  setEvent({ ...event, space: false });
+                } else {
+                  setEvent({ ...event, space: null });
+                }
+              }}
+            >
+              <option selected disabled value="">
+                space
+              </option>
+              <option>Si</option>
+              <option>No</option>
+              <option>cualquiera</option>
+            </select>
           </div>
-          <input type="number" min="0" max="600"></input>
+          <input
+            type="number"
+            min="0"
+            max="600"
+            onChange={(e) => {
+              setEvent({ ...event, duration: e.target.value });
+            }}
+          ></input>
           <label class="form-check-label px-1" for="flexSwitchCheckDefault">
             duration
           </label>
         </div>
 
         <div className="col-5">
-          <input type="number" min="0" max="150"></input>
+          <input
+            type="number"
+            min="0"
+            max="150"
+            onChange={(e) => {
+              setEvent({ ...event, agemin: e.target.value });
+            }}
+          ></input>
           <label class="form-check-label px-1" for="flexSwitchCheckDefault">
             agemin
           </label>
-          <input type="number" min="0" max="150"></input>
+          <input
+            type="number"
+            min="0"
+            max="150"
+            onChange={(e) => {
+              setEvent({ ...event, agemax: e.target.value });
+            }}
+          ></input>
           <label class="form-check-label px-1" for="flexSwitchCheckDefault">
             agemax
           </label>
           <input
+            onChange={(e) => {
+              setEvent({ ...event, date: e.target.value });
+            }}
             type="date"
             id="start"
             name="trip-start"
             min="2022-08-27"
             max="2030-12-31"
           ></input>
+          <button
+            onClick={() => {
+              actions.filterEvent(event);
+            }}
+          >
+            filter
+          </button>
         </div>
       </div>
       <div class="table-responsive">
@@ -87,7 +148,14 @@ export const Home = () => {
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
-                    <button className="btn btn-success ">Unirse</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => {
+                        actions.joinEvent(event.id);
+                      }}
+                    >
+                      Unirse
+                    </button>
                   </td>
                 </tr>
               );

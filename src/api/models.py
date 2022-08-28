@@ -37,7 +37,7 @@ class Evento(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
-    admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
 
     def __repr__(self):
         return '<Eventos %r>' % self.id

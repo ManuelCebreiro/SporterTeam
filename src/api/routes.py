@@ -35,6 +35,21 @@ def get_eventos():
         return jsonify(response), 200
     except:
         return jsonify("invalid Method "), 401
+#endpoint para apuntarse a un evento
+@api.route('/joinevent', methods=["POST"])
+@jwt_required()
+def post_eventos():
+    eventId = request.json.get("id")
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email = identity).one_or_none()
+    event = Evento.query.filter_by(id =eventId).one_or_none()
+
+    user.participant.append(event)
+    db.session.commit()
+
+    return jsonify("participant add"),200
+
+
 
 
 

@@ -1,11 +1,65 @@
+import { element } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
       validacion: false,
       eventos: [],
+      eventosFilter: [],
     },
     actions: {
+      filterEvent: (event) => {
+        const eventos = getStore().eventos;
+        console.log(event, "properties");
+        const paymentResults =
+          event.payment == null
+            ? eventos
+            : event.payment == true
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
+        const spaceResult =
+          event.space == null
+            ? paymentResults
+            : event.space == true
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
+        const durationResults = spaceResult.filter(
+          (element) => element.duration >= event.duration
+        );
+        const ageminResults = durationResults.filter(
+          (element) => element.agemin >= event.agemin
+        );
+        const agemaxResults = ageminResults.filter(
+          (element) => element.agemax <= event.agemax
+        );
+
+        const dateResults =
+          event.date !== ""
+            ? agemaxResults.filter((element) => element.date == event.date)
+            : agemaxResults;
+
+        setStore({ eventosFilter: dateResults });
+      },
+      joinEvent: (event) => {
+        const store = getStore();
+        fetch(process.env.BACKEND_URL + "/api/joinevent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + store.token,
+          },
+          body: JSON.stringify({
+            id: event,
+          }),
+        }).then((resp) => {
+          if (resp.ok) {
+            alert("usuario registrado");
+          }
+        });
+      },
+
       logout: () => {
         setStore({ token: "" });
         sessionStorage.removeItem("token");
@@ -68,6 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             setStore({ eventos: data });
+            setStore({ eventosFilter: data });
           });
       },
 
