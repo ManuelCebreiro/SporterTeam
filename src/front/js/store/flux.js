@@ -1,12 +1,73 @@
+import { element } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
+      validacion: false,
+      eventos: [],
+      eventosFilter: [],
     },
     actions: {
+      //funcion que filtra los eventos en la pagina pricipal
+      filterEvent: (event) => {
+        const eventos = getStore().eventos;
+        const paymentResults =
+          event.payment == null
+            ? eventos
+            : event.payment == true
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
+        const spaceResult =
+          event.space == null
+            ? paymentResults
+            : event.space == true
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
+        const durationResults = spaceResult.filter(
+          (element) => element.duration >= event.duration
+        );
+        const ageminResults = durationResults.filter(
+          (element) => element.agemin >= event.agemin
+        );
+        const agemaxResults = ageminResults.filter(
+          (element) => element.agemax <= event.agemax
+        );
+
+        const dateResults =
+          event.date !== ""
+            ? agemaxResults.filter((element) => element.date == event.date)
+            : agemaxResults;
+        const sportResults =
+          event.sport == "" || event.sport == "cualquiera"
+            ? dateResults
+            : dateResults.filter((element) => element.sport == event.sport);
+        setStore({ eventosFilter: sportResults });
+      },
+      //funcion para unirse a un evento de la lista
+      joinEvent: (event) => {
+        const store = getStore();
+        fetch(process.env.BACKEND_URL + "/api/joinevent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + store.token,
+          },
+          body: JSON.stringify({
+            id: event,
+          }),
+        }).then((resp) => {
+          if (resp.ok) {
+            alert("usuario registrado");
+          }
+        });
+      },
+
       logout: () => {
         setStore({ token: "" });
         sessionStorage.removeItem("token");
+        setStore({ validacion: false });
       },
 
       login: (email, password) => {
@@ -32,19 +93,41 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestajson) => {
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
+            setStore({ validacion: true });
           });
       },
 
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
-        if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
+        if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });
+          setStore({ validacion: true });
+        }
       },
 
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+      getEventos: () => {
+        fetch(process.env.BACKEND_URL + "/api/eventos", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((resp) => {
+            if (resp.status == 200) {
+              return resp.json();
+            } else {
+              console.log(resp.json());
+            }
+          })
+          .then((data) => {
+            setStore({ eventos: data });
+            setStore({ eventosFilter: data });
+          });
       },
 
       getMessage: async () => {
