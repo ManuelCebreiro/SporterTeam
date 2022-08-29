@@ -9,6 +9,30 @@ const getState = ({ getStore, getActions, setStore }) => {
       eventosFilter: [],
     },
     actions: {
+      // función para registrar usuario nuevo
+      register: (email, username, password, age) => {
+        console.log(`register: ${email} ${username} ${password} ${age}`);
+        fetch(process.env.BACKEND_URL + "/api/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+            age: age,
+          }),
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((resp) => {
+            return resp.json(), console.log("estoy aqui", resp);
+          })
+          .then((data) => {
+            console.log(data);
+          });
+      },
+
       //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
         const eventos = getStore().eventos;
