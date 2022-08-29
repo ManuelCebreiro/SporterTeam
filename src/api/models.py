@@ -37,6 +37,8 @@ class Evento(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
+    participantmax =db.Column(db.Integer,unique=False)
+    description =db.Column(db.String(250))
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
 
     def __repr__(self):
@@ -51,6 +53,7 @@ class Evento(db.Model):
             "agemin": self.agemin,
             "agemax": self.agemax,
             "payment": self.payment,
+            "participantmax": self.participantmax,
             "space": self.space,
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,

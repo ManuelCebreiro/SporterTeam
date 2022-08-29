@@ -16,14 +16,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -129,7 +129,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ eventosFilter: data });
           });
       },
-
+      crearevento: (event) => {
+        fetch(process.env.BACKEND_URL + "/api/crearevento", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: event.payment,
+            space: event.space,
+            duration: event.duration,
+            agemin: event.agemin,
+            agemax: event.agemax,
+            date: event.date,
+            sport: event.sport,
+            description: event.description,
+            participantmax: event.participantmax
+          }),
+        })
+          .then((respuestadelback) => {
+            if (respuestadelback.status == 200) {
+              return respuestadelback.json();
+            }
+          })
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend

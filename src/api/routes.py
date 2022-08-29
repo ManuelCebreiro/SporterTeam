@@ -35,6 +35,7 @@ def get_eventos():
         return jsonify(response), 200
     except:
         return jsonify("invalid Method "), 401
+
 #endpoint para apuntarse a un evento
 @api.route('/joinevent', methods=["POST"])
 @jwt_required()
@@ -49,6 +50,21 @@ def post_eventos():
 
     return jsonify("participant add"),200
 
+@api.route('/crearevento', methods=["POST"])
+def create_evento():
+    payment = request.json.get("payment")
+    space = request.json.get("space")
+    duration = request.json.get("duration")
+    agemin = request.json.get("agemin")
+    agemax = request.json.get("agemax")
+    date = request.json.get("date")
+    sport = request.json.get("sport")
+    description = request.json.get("description")
+    participantmax = request.json.get("participantmax")
+    evento = Evento(payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    db.session.add(evento)
+    db.session.commit()
+    return jsonify({"msg":"evento creado"})
 
 
 
