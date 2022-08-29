@@ -41,7 +41,7 @@ def get_eventos():
 @jwt_required()
 def post_eventos():
     eventId = request.json.get("id")
-    identity = get_jwt_identity()
+    identity = get_jwt_identity()           #guardar token en un usuario
     user = User.query.filter_by(email = identity).one_or_none()
     event = Evento.query.filter_by(id =eventId).one_or_none()
 
@@ -51,7 +51,10 @@ def post_eventos():
     return jsonify("participant add"),200
 
 @api.route('/crearevento', methods=["POST"])
+# @jwt_required()
 def create_evento():
+    # identity = get_jwt_identity()       
+    # user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado                  
     payment = request.json.get("payment")
     space = request.json.get("space")
     duration = request.json.get("duration")
@@ -62,6 +65,7 @@ def create_evento():
     description = request.json.get("description")
     participantmax = request.json.get("participantmax")
     evento = Evento(payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    # user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
     return jsonify({"msg":"evento creado"})

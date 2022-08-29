@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/newevent.css";
+import { nominalTypeHack } from "prop-types";
 
 export const Newevent = () => {
   const { store, actions } = useContext(Context);
@@ -16,11 +17,12 @@ export const Newevent = () => {
     description: "",
     participantmax: 0
   });
+  const [eventazo, setEventazo] = useState([]);
 
   return (
     <div>
       <h1>Crear evento</h1>
-      <div class="container py-5">
+      <div class="container py-5 bg-light border border-dark">
         <div class="row">
           <div class="col-md-2">
             <label class="form-label">Deporte</label>
@@ -101,6 +103,7 @@ export const Newevent = () => {
                   setEvent({ ...event, space: true });
                 } else if (e.target.value == "Aire libre") {
                   setEvent({ ...event, space: false });
+
                 }
               }}
             >
@@ -120,67 +123,59 @@ export const Newevent = () => {
             <button class="btn btn-primary" type="submit"
               onClick={() => {
                 actions.crearevento(event);
+                setEventazo([...eventazo, event]);
               }}
             >Crear</button>
           </div>
+          <ul>
+            <div class="container">
+              <div class="table-responsive">
+                <table class="text-center table table-striped table-hover">
+                  {eventazo.length > 0 ?
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Deporte</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Duracion</th>
+                        <th scope="col">Edad mínima</th>
+                        <th scope="col">Edad máxima</th>
+                        <th scope="col">Pago</th>
+                        <th scope="col">Espacio</th>
+                      </tr>
+                    </thead> : undefined}
+                  <tbody>
+                    {eventazo.map((event, index) => {
 
+                      return (
+                        <tr>
+                          <th key={index} scope="row">
+                            {index}
+                          </th>
+                          <td>{event.sport}</td>
+                          <td>{event.date}</td>
+                          <td>{event.duration}</td>
+                          <td>{event.agemin}</td>
+                          <td>{event.agemax}</td>
+                          <td>{event.payment + "€"}</td>
+                          <td>{event.space ? "cubierto" : "airelibre"}</td>
+                          <td>
+
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ul>
         </div>
       </div>
+
+
     </div>
+
   );
-  <div className="text-center">
-    <ul className="list-group">
-      {/* {inputText.map((texto, index) => { */}
-      return (
-      <li>
-        <div class="table-responsive">
-          <table class="text-center table table-striped table-hover">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">sport</th>
-                <th scope="col">date</th>
-                <th scope="col">duration</th>
-                <th scope="col">agemin</th>
-                <th scope="col">agemax</th>
-                <th scope="col">payment</th>
-                <th scope="col">space</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventos.map((event, index) => {
-                return (
-                  <tr>
-                    <th key={index} scope="row">
-                      {index}
-                    </th>
-                    <td>{event.sport}</td>
-                    <td>{event.date}</td>
-                    <td>{event.duration}</td>
-                    <td>{event.agemin}</td>
-                    <td>{event.agemax}</td>
-                    <td>{event.payment + "€"}</td>
-                    <td>{event.space ? "cubierto" : "airelibre"}</td>
-                    <td>
-                      <button
-                        className="btn btn-success"
-                        onClick={() => {
-                          actions.joinEvent(event.id);
-                        }}
-                      >
-                        Unirse
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </li>
-      )
-      {/* } */}
-    </ul>
-  </div>
 };
 

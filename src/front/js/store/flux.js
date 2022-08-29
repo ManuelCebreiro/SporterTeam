@@ -130,10 +130,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       crearevento: (event) => {
+        // const store = getStore();
         fetch(process.env.BACKEND_URL + "/api/crearevento", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            // Accept: "application/json",
+            // Authorization: "Bearer " + store.token,
           },
           body: JSON.stringify({
             payment: event.payment,
