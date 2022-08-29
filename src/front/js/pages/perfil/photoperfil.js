@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
 import "/workspace/SporterTeam/src/front/styles/photoperfil.css"
+// import cloudinary from "cloudinary/lib/cloudinary";
+
 
 export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
@@ -55,10 +57,29 @@ export const Photoperfil = props => {
 		LoadImage()
 	}, []);
 
+	// const Borrar = () => {
+	// 	var cloudinary = require('cloudinary').v2;
+	// 	cloudinary.config({
+	// 		cloud_name: 'xx',
+	// 		api_key: 'xx',
+	// 		api_secret: 'xx'
+	// 	});
+	// 	cloudinary.uploader.destroy('sample', function (result) { console.log(result) });
+	// }
+
 	const deleteImage = () => {
 		setImage("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
 		setRespuesta("Esta es la imagen predefinida, si quieres poner la tuya, carga tu foto")
 	}
+
+	// const deleteImage = async (e) => {
+	// 	e.preventDefault();
+	// 	cloudinary.v2.uploader.destroy(imageData.public_id, function (error, result) {
+	// 		console.log(result, error)
+	// 	})
+	// 		.then(resp => console.log(resp))
+	// 		.catch(_err => console.log("Something went wrong, please try again later."));
+	// }
 	return (
 		<div className="jumbotron">
 			<h1 className="display-4">PERFIL USUARIO</h1>
