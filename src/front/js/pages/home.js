@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import { MapLocalization } from "../component/mapLocalization";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -20,6 +21,7 @@ export const Home = () => {
 
   return (
     <div className="container py-5">
+      <MapLocalization />
       <div className="row d-flex justify-content-center ">
         <div className="col-5">
           <div class="form-check form-switch">

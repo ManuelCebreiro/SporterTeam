@@ -22,6 +22,7 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
+      state.actions.localization();
       state.actions.reloadToken();
       state.actions.getEventos();
     }, []);

@@ -7,6 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       validacion: false,
       eventos: [],
       eventosFilter: [],
+      lat: 0,
+      lng: 0,
+      Ciudades: {
+        A_Coruña: { lat: 43.37012643, lng: -8.39114853 },
+      },
     },
     actions: {
       //funcion que filtra los eventos en la pagina pricipal
@@ -44,6 +49,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             : dateResults.filter((element) => element.sport == event.sport);
         setStore({ eventosFilter: sportResults });
       },
+      //FUNCION PARA SACAR LA UBICACION DEL USUARIO
+      localization: () => {
+        if (!navigator.geolocation) {
+          alert("no tengo permisos para ver tu ubicacion");
+        } else {
+          navigator.geolocation.getCurrentPosition(success);
+
+          function success(userlocation) {
+            console.log(userlocation);
+            setStore({
+              lat: userlocation.coords.latitude,
+            });
+            setStore({
+              lng: userlocation.coords.longitude,
+            });
+          }
+        }
+      },
       //funcion para unirse a un evento de la lista
       joinEvent: (event) => {
         const store = getStore();
@@ -71,6 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       login: (email, password) => {
+        const actions = getActions();
         fetch(process.env.BACKEND_URL + "/api/token", {
           method: "POST",
           headers: {
@@ -94,6 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
+            actions.localization();
           });
       },
 
