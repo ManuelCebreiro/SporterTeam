@@ -52,10 +52,12 @@ export const Login = () => {
                           onClick={() => {
                             actions.login(userEmail, userPassword);
                           }}
+
                         >
                           <button
                             type="button"
                             className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+
                           >
                             Enter
                           </button>

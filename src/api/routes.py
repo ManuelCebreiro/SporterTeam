@@ -42,7 +42,6 @@ def handle_upload():
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
-
 #ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
 @api.route('/load', methods=['GET'])
 @jwt_required()
