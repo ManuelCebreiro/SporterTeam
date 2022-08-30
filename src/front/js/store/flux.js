@@ -5,10 +5,40 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: "",
       validacion: false,
+      validacionregister: false,
       eventos: [],
       eventosFilter: [],
     },
     actions: {
+      // función para registrar usuario nuevo
+      register: (email, username, password, age) => {
+        console.log(`register: ${email} ${username} ${password} ${age}`);
+        fetch(process.env.BACKEND_URL + "/api/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+            age: age,
+          }),
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((resp) => {
+            if (resp.status == 200) {
+              setStore({ validacionregister: true });
+              return resp.json();
+            } else {
+              alert("Usuario ya existe");
+            }
+          })
+          .then((data) => {
+            console.log(data);
+          });
+      },
+
       //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
         const eventos = getStore().eventos;
