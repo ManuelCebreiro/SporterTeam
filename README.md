@@ -41,9 +41,9 @@ The `Provider` is already set. You can consume from any component using the useC
 ```jsx
 import { Context } from "../store/appContext";
 const MyComponentSuper = () => {
-    //here you use useContext to get store and actions
-    const { store, actions } = useContext(Context);
-    return <div>{/* you can use your actions or store inside the html */}</div>;
+  //here you use useContext to get store and actions
+  const { store, actions } = useContext(Context);
+  return <div>{/* you can use your actions or store inside the html */}</div>;
 };
 ```
 
@@ -89,7 +89,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
@@ -97,3 +97,15 @@ To update with all yours tables you can edit the file app.py and go to the line 
 ## Publish your website!
 
 This boilerplate it's 100% integrated with Herkou, [follow this tutorial](https://start.4geeksacademy.com/backend/deploy-heroku-posgres) and just by pushing your changes to the heroku repository will deploy the website afterwards.
+
+## leaflet
+
+-Si da error la instalacion de los paquetes de leaflet ejecutar la secuencia que ves a continuacion:
+
+1.-(npm install react react-dom leaflet)
+2.(npm install react-leaflet --legacy-peer-deps)
+3.(npm install -D @types/leaflet --legacy-peer-deps)
+
+Documentacion leaflet:(https://react-leaflet.js.org/docs/start-introduction/).
+Video tutorial(https://www.youtube.com/watch?v=NfDTO4c0xLc&t=1555s)
+las cordenadas predefinidas vienen de aqui:(https://www.ign.es/web/ane-datos-geograficos/-/datos-geograficos/datosPoblacion?tipoBusqueda=capitales)
