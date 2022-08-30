@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: "",
       validacion: false,
+      validacionregister: false,
       eventos: [],
       eventosFilter: [],
     },
@@ -26,7 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         })
           .then((resp) => {
-            return resp.json(), console.log("estoy aqui", resp);
+            if (resp.status == 200) {
+              setStore({ validacionregister: true });
+              return resp.json();
+            } else {
+              alert("Usuario ya existe");
+            }
           })
           .then((data) => {
             console.log(data);

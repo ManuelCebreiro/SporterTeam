@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import ReactDOM from "react-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import "../../styles/register.css";
@@ -22,7 +22,12 @@ const patterns = {
 };
 
 export const Register = () => {
+  const navigate = useNavigate();
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    if (store.validacionregister) navigate("/");
+  }, [store.validacionregister]);
+
   const {
     register,
     watch,
@@ -30,9 +35,13 @@ export const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (userInfo) => console.log(userInfo);
-
-  console.log(errors);
+  const onSubmit = (userInfo) =>
+    actions.register(
+      userInfo.email,
+      userInfo.username,
+      userInfo.password,
+      userInfo.age
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -100,7 +109,6 @@ export const Register = () => {
       <label htmlFor="age">Tu edad</label>
       <input
         name="age"
-        type="number"
         className={errors.age && "error"}
         {...register("age", {
           required: messages.required,
@@ -112,7 +120,7 @@ export const Register = () => {
       />
       {errors.age && <p>{errors.age.message}</p>}
 
-      <input type="submit" onClick={handleSubmit(onSubmit)} />
+      <input value="submit" type="submit" />
     </form>
   );
 };

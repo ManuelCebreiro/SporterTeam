@@ -11,7 +11,7 @@ from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
-# ENDPOINT REGISTRO DE USUARIO NUEVO
+# ENDPOINT REGISTRO DE USUARIO NUEVO Y CHECK SI EXISTE
 
 
 @api.route("/register", methods=["POST"])
@@ -21,15 +21,14 @@ def create_user():
     password = request.json.get("password")
     age = request.json.get("age")
     user = User(email=email, password=password, username=username, age=age)
+    user_email = User.query.filter_by(email=email).one_or_none()
+    user_username = User.query.filter_by(username=username).one_or_none()
+    if user_email or user_username:
+        return jsonify({"msg": "El usuario ya existe"}), 401
     db.session.add(user)
     db.session.commit()
 
-# Check if user exists
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    if user != None:
-        raise APIException("user already exists", 400)
-    return jsonify({"msg": "user register"})
+    return jsonify({"msg": "user register"}), 200
 
 
 # ENDPOINT PARA OBTENER EL TOKEN EN EL LOGIN
