@@ -8,7 +8,7 @@ export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
 	// const [files, setFiles] = useState(null);
 	// const [image, setImage] = useState("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
-	// const [respuesta, setRespuesta] = useState("");
+	const [respuesta, setRespuesta] = useState("");
 
 
 	const upLoadImage = (evt) => {
@@ -27,10 +27,11 @@ export const Photoperfil = props => {
 			.then(resp => resp.json())
 			.then(data => actions.LoadImage(data)
 			)
-			// .then(data => {
-			// 	console.log("Todo bien very nice men!!!", data)
-			// 	setImage(data)
-			// })
+		// .then(data => {
+		// 	console.log("Todo bien very nice men!!!", data)
+		// 	setImage(data)
+		// })
+		actions.getrespuesta("")
 			.catch(error => console.error("ERRORRRR!!!", error))
 
 	};
@@ -49,7 +50,7 @@ export const Photoperfil = props => {
 			)
 			.catch(error => console.error("ERRORRRR!!!", error))
 
-		actions.getrespuesta("Esta es la imagen predefinida, si quieres poner la tuya, carga tu foto")
+		actions.getrespuesta("Esta es la imagen predefinida.")
 	}
 	return (
 		<div className="jumbotron">
