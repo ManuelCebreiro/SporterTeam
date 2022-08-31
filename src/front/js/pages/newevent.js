@@ -28,11 +28,12 @@ export const Newevent = () => {
             <label class="form-label">Deporte</label>
             <select class="form-select"
               onChange={(e) => {
+                console.log(e.target.value.length)
                 setEvent({ ...event, sport: e.target.value });
               }}>
               <option selected disabled
 
-              >Elige</option>
+              >{""}</option>
               <option>Baloncesto</option>
               <option>Fútbol</option>
               <option>Tenis</option>
@@ -93,6 +94,7 @@ export const Newevent = () => {
               min="0"
               max="150"
               onChange={(e) => {
+                console.log(typeof (Number(e.target.value)))
                 setEvent({ ...event, agemax: e.target.value });
               }}
               required />
@@ -125,10 +127,13 @@ export const Newevent = () => {
           <div class="col-12 mt-3">
             <button class="btn btn-primary" type="submit"
               onClick={() => {
-                console.log(event)
-                if (event.description != "" && event.participantmax >= 2 && event.participantmax < 30 && event.sport != "" && event.date != "" && event.agemax < 200 && event.agemin > 0 && event.duration >= 0 && event.duration > 400 && event.space != null) {
-                  setEventazo([...eventazo, event]);
+                console.log(event.sport)
+                if (event.description != "" && Number(event.participantmax) >= 2 && Number(event.participantmax) < 30 && event.sport.length != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) > 0 && event.space != null) {
+                  // if (event.description != "" && Number(event.participantmax) >= 2&& Number(event.participantmax) < 30 && event.sport != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) >= 0 && Number(event.duration) > 400 && event.space != null) {
+
+                  console.log(event)
                   actions.crearevento(event);
+                  setEventazo([...eventazo, event]);
                   console.log(eventazo)
                 } else alert("Te faltan campos por cubrir.")
               }}
