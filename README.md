@@ -109,3 +109,9 @@ This boilerplate it's 100% integrated with Herkou, [follow this tutorial](https:
 Documentacion leaflet:(https://react-leaflet.js.org/docs/start-introduction/).
 Video tutorial(https://www.youtube.com/watch?v=NfDTO4c0xLc&t=1555s)
 las cordenadas predefinidas vienen de aqui:(https://www.ign.es/web/ane-datos-geograficos/-/datos-geograficos/datosPoblacion?tipoBusqueda=capitales)
+
+## si tienes que actualizar react
+
+1-npm install -g npm-check-updates
+2-ncu -u
+3-npm install

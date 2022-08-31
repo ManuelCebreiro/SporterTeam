@@ -38,6 +38,8 @@ class Evento(db.Model):
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
+    localization = db.Column(db.String)
+    
 
     def __repr__(self):
         return '<Eventos %r>' % self.id
@@ -52,6 +54,9 @@ class Evento(db.Model):
             "agemax": self.agemax,
             "payment": self.payment,
             "space": self.space,
+            "localization":self.localization
+        
+           
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento

@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
-import { MapLocalization } from "../component/mapLocalization";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const ciudades = store.ciudades;
   const eventos = store.eventosFilter;
   const evento = store.eventos;
   const [event, setEvent] = useState({
@@ -17,11 +16,11 @@ export const Home = () => {
     agemax: 200,
     date: "",
     sport: "",
+    localizacion: "",
   });
 
   return (
     <div className="container py-5">
-      <MapLocalization />
       <div className="row d-flex justify-content-center ">
         <div className="col-5">
           <div class="form-check form-switch">
@@ -137,6 +136,20 @@ export const Home = () => {
           >
             filter
           </button>
+          <select
+            class="form-select"
+            id="validationCustom04"
+            onChange={(e) => {
+              setEvent({ ...event, sport: e.target.value });
+            }}
+          >
+            <option selected disabled value="">
+              localizacion
+            </option>
+            {ciudades.map((localizacion) => {
+              return <option>{localizacion}</option>;
+            })}
+          </select>
         </div>
       </div>
       <div class="table-responsive">
@@ -151,6 +164,7 @@ export const Home = () => {
               <th scope="col">agemax</th>
               <th scope="col">payment</th>
               <th scope="col">space</th>
+              <th scope="col">localizacion</th>
             </tr>
           </thead>
           <tbody>
@@ -165,6 +179,7 @@ export const Home = () => {
                   <td>{event.duration}</td>
                   <td>{event.agemin}</td>
                   <td>{event.agemax}</td>
+                  <td>{event.localization}</td>
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
