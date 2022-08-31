@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       logout: () => {
         setStore({ token: "" });
+        setStore({ imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200", })
         sessionStorage.removeItem("token");
       },
 
@@ -71,7 +72,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(respuestadelback =>
             respuestadelback.json())
           .then(data => {
-            setStore({ imagen: data })
+            if (data) {
+              setStore({ imagen: data })
+            }
             setStore({ respuesta: "" })
           })
 
