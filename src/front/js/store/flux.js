@@ -38,24 +38,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ token: respuestajson.access_token });
           });
       },
-      LoadImage: (evt) => {
-        const store = getStore();
-        const options = {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + store.token,
-          },
-          method: "GET",
-        }
-        fetch(process.env.BACKEND_URL + "/api/load", options)
-          .then(respuestadelback =>
-            respuestadelback.json())
-          .then(data => {
-            setStore({ imagen: data })
-            setStore({ respuesta: "" })
-          })
+      LoadImage: (data) => {
+        // const store = getStore();
+        // console.log("entramos")
+        // const options = {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     Accept: "application/json",
+        //     Authorization: "Bearer " + store.token,
+        //   },
+        //   method: "GET",
+        // }
+        // fetch(process.env.BACKEND_URL + "/api/load", options)
+        //   .then(respuestadelback =>
+        //     respuestadelback.json())
+        //   .then(data => {
+        //     setStore({ respuesta: "" })
+        //   })
 
+        setStore({ imagen: data })
       },
       Load: (parametro) => {
         const options = {
@@ -86,9 +87,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined)
           setStore({ token: datotoken });
       },
-      traermeimagen: (img) => {
-        setStore({ imagen: img })
-      },
+      // traermeimagen: (img) => {
+      //   setStore({ imagen: img })
+      // },
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");

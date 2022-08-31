@@ -6,7 +6,7 @@ import "/workspace/SporterTeam/src/front/styles/photoperfil.css"
 
 export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
-	const [files, setFiles] = useState(null);
+	// const [files, setFiles] = useState(null);
 	// const [image, setImage] = useState("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
 	// const [respuesta, setRespuesta] = useState("");
 
@@ -14,9 +14,8 @@ export const Photoperfil = props => {
 	const upLoadImage = (evt) => {
 		evt.preventDefault();
 		//usaremos esto para enviarlo al BACKEND
-		console.log("Esto son los archivos", files)
 		let body = new FormData();
-		body.append("profile_image", files[0])
+		body.append("profile_image", evt.target.files[0])
 		const options = {
 			body,
 			method: "POST",
@@ -26,33 +25,46 @@ export const Photoperfil = props => {
 		}
 		fetch(process.env.BACKEND_URL + "/api/upload", options)
 			.then(resp => resp.json())
+			.then(data => actions.LoadImage(data)
+			)
 			// .then(data => {
 			// 	console.log("Todo bien very nice men!!!", data)
 			// 	setImage(data)
 			// })
 			.catch(error => console.error("ERRORRRR!!!", error))
+
 	};
 
-	// const deleteImage = () => {
-	// 	actions.traermeimagen("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
-	// 	actions.getrespuesta("Esta es la imagen predefinida, si quieres poner la tuya, carga tu foto")
-	// }
+
+	const deleteImage = () => {
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Authorization": "Bearer " + store.token,
+			},
+		}
+		fetch(process.env.BACKEND_URL + "/api/upload", options)
+			.then(resp => resp.json())
+			.then(data => actions.LoadImage(data)
+			)
+			.catch(error => console.error("ERRORRRR!!!", error))
+
+		actions.getrespuesta("Esta es la imagen predefinida, si quieres poner la tuya, carga tu foto")
+	}
 	return (
 		<div className="jumbotron">
 			<h1 className="display-4">PERFIL USUARIO</h1>
-			<form onSubmit={upLoadImage}>
-				<div className="row">
+			{/* <form onSubmit={upLoadImage}> */}
+			<div className="row">
 
-					<img src={store.imagen} style={{ width: 200 }} />
-					<p><strong>{store.respuesta}</strong></p>
-					<input type="file" onChange={(e) => setFiles(e.target.files)} />
-				</div>
-				<button onClick={() => { actions.LoadImage() }}>Cargar</button>
-				{/* <button onClick={deleteImage}>Borrar</button> */}
-
-
-				{/* <button >Poner de perfil</button> */}
-			</form>
+				<img src={store.imagen} style={{ width: 200 }} />
+				<button onClick={deleteImage} className="btn-close "></button>
+				<p><strong>{store.respuesta}</strong></p>
+				<input type="file" onChange={(e) => { upLoadImage(e) }} />
+			</div>
+			{/* <button onClick={(e) => { upLoadImage(e) }}>Cargar</button> */}
+			{/* <button >Poner de perfil</button> */}
+			{/* </form> */}
 		</div>
 	);
 

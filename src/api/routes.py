@@ -42,6 +42,17 @@ def handle_upload():
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
+@api.route('/upload', methods=['DELETE'])
+@jwt_required()
+def handle_deleteimage():
+    identity = get_jwt_identity()     #pide el token
+    user1 = User.query.filter_by(email = identity).one_or_none()
+    user1.profile_image_url = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
+    db.session.commit()
+    
+    return jsonify(user1.profile_image_url), 200
+    # return jsonify(user1.profile_image_url), 200
+
 #ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
 @api.route('/load', methods=['GET'])
 @jwt_required()
