@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import getState from "../store/flux";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
     <nav className="navbar navbar-expand-lg  bg-danger p-1">
-      <Link to="/perfil">
+      <Link to="/photoperfil">
         <img
           id="imagenPerfilNavbar"
           className="img-fluid rounded-circle"
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+          src={store.imagen}
         ></img>
       </Link>
 
@@ -28,7 +29,7 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link to="/">
+            <Link to="/home">
               <a className="nav-link" href="#">
                 Pagina principal <span className="sr-only">(current)</span>
               </a>

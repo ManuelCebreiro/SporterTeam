@@ -41,9 +41,9 @@ The `Provider` is already set. You can consume from any component using the useC
 ```jsx
 import { Context } from "../store/appContext";
 const MyComponentSuper = () => {
-    //here you use useContext to get store and actions
-    const { store, actions } = useContext(Context);
-    return <div>{/* you can use your actions or store inside the html */}</div>;
+  //here you use useContext to get store and actions
+  const { store, actions } = useContext(Context);
+  return <div>{/* you can use your actions or store inside the html */}</div>;
 };
 ```
 
@@ -89,7 +89,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
@@ -97,3 +97,20 @@ To update with all yours tables you can edit the file app.py and go to the line 
 ## Publish your website!
 
 This boilerplate it's 100% integrated with Herkou, [follow this tutorial](https://start.4geeksacademy.com/backend/deploy-heroku-posgres) and just by pushing your changes to the heroku repository will deploy the website afterwards.
+
+PAQUETES A INSTALAR
+
+En el archivo .env
+Poner si falta
+BACKEND_URL=https://3001-manuelcebre-sporterteam-zsuzsc2i9jn.ws-eu63.gitpod.io
+
+Y para las fotos de perfil. Cloudinary.
+CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6a
+
+## INSTALAR REACT-HOOK-FORM
+
+npm install react-hook-form
+
+## MANO DE SANTO
+
+rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade

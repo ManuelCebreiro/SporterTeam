@@ -4,6 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
+      imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
+      respuesta: "",
       validacion: false,
       validacionregister: false,
       eventos: [],
@@ -46,14 +48,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -96,11 +98,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         setStore({ token: "" });
+        setStore({ imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200", })
         sessionStorage.removeItem("token");
         setStore({ validacion: false });
       },
 
       login: (email, password) => {
+        const actions = getActions()
         fetch(process.env.BACKEND_URL + "/api/token", {
           method: "POST",
           headers: {
@@ -121,10 +125,55 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
           .then((respuestajson) => {
+            actions.Load(respuestajson.access_token)
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
           });
+      },
+      LoadImage: (data) => {
+        // const store = getStore();
+        // console.log("entramos")
+        // const options = {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     Accept: "application/json",
+        //     Authorization: "Bearer " + store.token,
+        //   },
+        //   method: "GET",
+        // }
+        // fetch(process.env.BACKEND_URL + "/api/load", options)
+        //   .then(respuestadelback =>
+        //     respuestadelback.json())
+        //   .then(data => {
+        //     setStore({ respuesta: "" })
+        //   })
+
+        setStore({ imagen: data })
+      },
+      Load: (parametro) => {
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + parametro
+          },
+          method: "GET",
+        }
+        fetch(process.env.BACKEND_URL + "/api/load", options)
+          .then(respuestadelback =>
+            respuestadelback.json())
+          .then(data => {
+            if (data) {
+              setStore({ imagen: data })
+            }
+            setStore({ respuesta: "" })
+          })
+
+      },
+
+      getrespuesta: (str) => {
+        setStore({ respuesta: str })
       },
 
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
