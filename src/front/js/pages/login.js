@@ -1,13 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.validacion) navigate("/home");
+  }, [store.validacion]);
 
   return (
     <div className="container-fluid p-0" id="loginstyle">
@@ -47,28 +51,24 @@ export const Login = () => {
                         <label className="form-label">Password</label>
                       </div>
                       <div className="d-flex justify-content-center">
-                        <Link
-                          to="/"
+                        <button
                           onClick={() => {
                             actions.login(userEmail, userPassword);
                           }}
-
+                          type="button"
+                          className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                         >
-                          <button
-                            type="button"
-                            className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-
-                          >
-                            Enter
-                          </button>
-                        </Link>
+                          Enter
+                        </button>
                       </div>
 
                       <p className="text-center text-muted mt-5 mb-0">
                         Have already an account?{" "}
-                        <a href="#!" className="fw-bold text-body">
-                          Register here
-                        </a>
+                        <Link to="/register">
+                          <a href="#!" className="fw-bold text-body">
+                            Register here
+                          </a>
+                        </Link>
                       </p>
                     </form>
                   </div>

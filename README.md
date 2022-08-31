@@ -106,3 +106,11 @@ BACKEND_URL=https://3001-manuelcebre-sporterteam-zsuzsc2i9jn.ws-eu63.gitpod.io
 
 Y para las fotos de perfil. Cloudinary.
 CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6a
+
+## INSTALAR REACT-HOOK-FORM
+
+npm install react-hook-form
+
+## MANO DE SANTO
+
+rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade

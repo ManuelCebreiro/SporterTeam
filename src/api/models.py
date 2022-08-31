@@ -2,6 +2,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+participant = db.Table('participant',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('evento_id', db.Integer, db.ForeignKey('evento.id'), primary_key=True)
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -10,11 +15,9 @@ class User(db.Model):
     profile_image_url =  db.Column(db.String(250), unique=False)
     age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
-    # photo = db.Column() investigar
-    # location =db.Column()investigar
+    participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
+    
 
-   
-  
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -26,38 +29,32 @@ class User(db.Model):
             "age": self.age
             # do not serialize the password, its a security breach
         }
-class Eventos(db.Model):
+class Evento(db.Model):
     id = db.Column(db.Integer, primary_key=True )
     sport = db.Column(db.String(250))
-    date = db.Column(db.Integer)
+    date = db.Column(db.String)#cambiarla a string?
     duration = db.Column(db.Integer)
     agemin = db.Column(db.Integer)
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
-    # location =db.Column() investigar
-    
-    
-    
+    admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
+
     def __repr__(self):
-        return '<Eventos %r>' % self.name
+        return '<Eventos %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "deporte": self.deporte,
-            "fecha": self.fecha,
-            "duraciónevento": self.duraciónevento,
-            "edadminima": self.edadminima,
-            "edadmáxima": self.edadmáxima,
-            "opciónpago": self.opciónpago,
-            "depoairelibrecubiertorte": self.airelibrecubierto,
-            "Lugarprovincia": self.Lugarprovincia,
-            "depolugarciudadrte": self.lugarciudad,
-            "direcionevento": self.direcionevento
+            "sport": self.sport,
+            "date": self.date,
+            "duration": self.duration,
+            "agemin": self.agemin,
+            "agemax": self.agemax,
+            "payment": self.payment,
+            "space": self.space,
+            # "Lugarprovincia": self.Lugarprovincia,
+            # "depolugarciudadrte": self.lugarciudad,
+            # "direcionevento": self.direcionevento
         }
-class Usereventos(db.Model):
-    id = db.Column(db.Integer, primary_key=True )
-    idusuario = db.Column(db.Integer, db.ForeignKey('user.id'))
-    idevento  =db.Column(db.Integer, db.ForeignKey('eventos.id'))
-    admin = db.Column(db.Boolean)
+        
