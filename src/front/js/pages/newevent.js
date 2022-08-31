@@ -49,7 +49,7 @@ export const Newevent = () => {
           </div>
           <div class="col-md-2">
             <label class="form-label">Duracion evento</label>
-            <input type="text" class="form-control" placeholder="Duracion evento"
+            <input type="number" class="form-control" placeholder="Duracion evento"
               onChange={(e) => {
                 setEvent({ ...event, duration: e.target.value });
               }}
@@ -57,7 +57,10 @@ export const Newevent = () => {
           </div>
           <div class="col-md-2">
             <label class="form-label">Participantes</label>
-            <input type="text" class="form-control" placeholder="Participantes" required />
+            <input type="number" class="form-control" placeholder="Participantes" required
+              onChange={(e) => {
+                setEvent({ ...event, participantmax: e.target.value });
+              }} />
           </div>
 
           <div class="col-md-2">
@@ -86,7 +89,7 @@ export const Newevent = () => {
           </div>
           <div class="col-md-2">
             <label class="form-label">Edad máxima</label>
-            <input type="text" class="form-control" placeholder="Edad máxima"
+            <input type="number" class="form-control" placeholder="Edad máxima"
               min="0"
               max="150"
               onChange={(e) => {
@@ -122,8 +125,12 @@ export const Newevent = () => {
           <div class="col-12 mt-3">
             <button class="btn btn-primary" type="submit"
               onClick={() => {
-                actions.crearevento(event);
-                setEventazo([...eventazo, event]);
+                console.log(event)
+                if (event.description != "" && event.participantmax >= 2 && event.participantmax < 30 && event.sport != "" && event.date != "" && event.agemax < 200 && event.agemin > 0 && event.duration >= 0 && event.duration > 400 && event.space != null) {
+                  setEventazo([...eventazo, event]);
+                  actions.crearevento(event);
+                  console.log(eventazo)
+                } else alert("Te faltan campos por cubrir.")
               }}
             >Crear</button>
           </div>
@@ -174,7 +181,7 @@ export const Newevent = () => {
       </div>
 
 
-    </div>
+    </div >
 
   );
 };
