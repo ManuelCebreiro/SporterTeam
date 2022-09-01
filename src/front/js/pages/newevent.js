@@ -7,15 +7,15 @@ import { nominalTypeHack } from "prop-types";
 export const Newevent = () => {
   const { store, actions } = useContext(Context);
   const [event, setEvent] = useState({
-    payment: 0,
+    payment: "",
     space: null,
-    duration: 0,
-    agemin: 0,
-    agemax: 200,
+    duration: "",
+    agemin: "",
+    agemax: "",
     date: "",
     sport: "",
     description: "",
-    participantmax: 0
+    participantmax: ""
   });
   const [eventazo, setEventazo] = useState([]);
 
@@ -27,8 +27,8 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Deporte</label>
             <select class="form-select"
+              value={event.sport}
               onChange={(e) => {
-                console.log(e.target.value.length)
                 setEvent({ ...event, sport: e.target.value });
               }}>
               <option selected disabled
@@ -44,6 +44,7 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Fecha</label>
             <input type="date" class="form-control" min="2022-08-27" max="2030-12-31" placeholder="Fecha" required
+              value={event.date}
               onChange={(e) => {
                 setEvent({ ...event, date: e.target.value });
               }} />
@@ -51,6 +52,7 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Duracion evento</label>
             <input type="number" class="form-control" placeholder="Duracion evento"
+              value={event.duration}
               onChange={(e) => {
                 setEvent({ ...event, duration: e.target.value });
               }}
@@ -59,6 +61,7 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Participantes</label>
             <input type="number" class="form-control" placeholder="Participantes" required
+              value={event.participantmax}
               onChange={(e) => {
                 setEvent({ ...event, participantmax: e.target.value });
               }} />
@@ -77,6 +80,7 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Opción de pago</label>
             <input type="number" class="form-control" placeholder="Cantidad"
+              value={event.payment}
               onChange={(e) => {
                 setEvent({ ...event, payment: e.target.value });
               }} required />
@@ -84,6 +88,7 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Edad mínima</label>
             <input type="number" min="0" max="150" class="form-control" placeholder="Edad mínima"
+              value={event.agemin}
               onChange={(e) => {
                 setEvent({ ...event, agemin: e.target.value });
               }} required />
@@ -93,6 +98,7 @@ export const Newevent = () => {
             <input type="number" class="form-control" placeholder="Edad máxima"
               min="0"
               max="150"
+              value={event.agemax}
               onChange={(e) => {
                 console.log(typeof (Number(e.target.value)))
                 setEvent({ ...event, agemax: e.target.value });
@@ -103,6 +109,7 @@ export const Newevent = () => {
             <label class="form-label">Tipo de lugar</label>
 
             <select class="form-select"
+              value={event.space}
               onChange={(e) => {
                 if (e.target.value == "Cubierto") {
                   setEvent({ ...event, space: true });
@@ -119,7 +126,8 @@ export const Newevent = () => {
           </div>
           <div class="form-group">
             <label class="my-3">Descripción</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            <textarea class="form-control" rows="3"
+              value={event.description}
               onChange={(e) => {
                 setEvent({ ...event, description: e.target.value });
               }}></textarea>
@@ -127,14 +135,23 @@ export const Newevent = () => {
           <div class="col-12 mt-3">
             <button class="btn btn-primary" type="submit"
               onClick={() => {
-                console.log(event.sport)
                 if (event.description != "" && Number(event.participantmax) >= 2 && Number(event.participantmax) < 30 && event.sport.length != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) > 0 && event.space != null) {
                   // if (event.description != "" && Number(event.participantmax) >= 2&& Number(event.participantmax) < 30 && event.sport != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) >= 0 && Number(event.duration) > 400 && event.space != null) {
 
                   console.log(event)
                   actions.crearevento(event);
                   setEventazo([...eventazo, event]);
-                  console.log(eventazo)
+                  setEvent({
+                    payment: "",
+                    space: "",
+                    duration: "",
+                    agemin: "",
+                    agemax: "",
+                    date: "",
+                    sport: "",
+                    description: "",
+                    participantmax: ""
+                  })
                 } else alert("Te faltan campos por cubrir.")
               }}
             >Crear</button>
@@ -166,9 +183,9 @@ export const Newevent = () => {
                           </th>
                           <td>{event.sport}</td>
                           <td>{event.date}</td>
-                          <td>{event.duration}</td>
-                          <td>{event.agemin}</td>
-                          <td>{event.agemax}</td>
+                          <td>{event.duration + " min."}</td>
+                          <td>{event.agemin + " años."}</td>
+                          <td>{event.agemax + " años."}</td>
                           <td>{event.payment + "€"}</td>
                           <td>{event.space ? "cubierto" : "airelibre"}</td>
                           <td>
