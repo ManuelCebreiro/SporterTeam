@@ -14,19 +14,19 @@
   margin: 0 auto;
 }
 
-#form_register,
+#form_register
 p {
   color: #bf1650;
   font-size: 17px;
   text-align: left;
 }
 
-p::before {
+#form_register p::before {
   display: inline;
   content: "⚠ ";
 }
 
-input {
+#form_register input {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -37,11 +37,11 @@ input {
   font-size: 14px;
 }
 
-.error {
+#form_register .error {
   border: 1px solid #bf1650;
 }
 
-label {
+#form_register label {
   line-height: 2;
   text-align: left;
   display: block;
