@@ -6,7 +6,7 @@ import getState from "../store/flux";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
-    <nav className="navbar navbar-expand-lg  bg-danger p-1">
+    <nav className="navbar navbar-expand-lg  bg-secondary p-1 primary">
       <Link to="/photoperfil">
         <img
           id="imagenPerfilNavbar"
@@ -30,14 +30,14 @@ export const Navbar = () => {
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link to="/home">
-              <a className="nav-link" href="#">
+              <a className="nav-link text-warning" href="#">
                 Pagina principal <span className="sr-only">(current)</span>
               </a>
             </Link>
           </li>
           <li className="nav-item">
             <Link to="/newevent">
-              <a className="nav-link" href="#">
+              <a className="nav-link text-warning" href="#">
                 newevent
               </a>
             </Link>
@@ -49,14 +49,14 @@ export const Navbar = () => {
                 actions.logout();
               }}
             >
-              <a className="nav-link" href="">
+              <a className="nav-link text-warning" href="">
                 Log out
               </a>
             </Link>
           </li>
           <li className="nav-item dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle text-warning"
               href="#"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"
@@ -69,13 +69,13 @@ export const Navbar = () => {
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item text-warning" href="#">
                 Action
               </a>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item text-warning" href="#">
                 Another action
               </a>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item text-warning" href="#">
                 Something else here
               </a>
             </div>

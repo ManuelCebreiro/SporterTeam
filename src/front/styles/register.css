@@ -1,35 +1,31 @@
-body {
+#body_register {
   background: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 100;
 }
 
-form {
+#form_register {
   max-width: 350px;
   margin: 0 auto;
 }
 
-h1 {
-  font-weight: 100;
-  color: rgb(177, 13, 13);
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(79, 98, 148);
-}
-
-p {
+#form_register p {
   color: #bf1650;
   font-size: 17px;
   text-align: left;
 }
 
-p::before {
+#form_register p::before {
   display: inline;
   content: "⚠ ";
 }
 
-input {
+#form_register input {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -40,11 +36,11 @@ input {
   font-size: 14px;
 }
 
-.error {
+#form_register .error {
   border: 1px solid #bf1650;
 }
 
-label {
+#form_register label {
   line-height: 2;
   text-align: left;
   display: block;
@@ -55,7 +51,7 @@ label {
   font-weight: 200;
 }
 
-input[type="submit"] {
+#register_btn {
   background: #5a66a4;
   color: white;
   text-transform: uppercase;
@@ -67,31 +63,24 @@ input[type="submit"] {
   letter-spacing: 5px;
 }
 
-input[type="submit"]:hover {
+#register_btn:hover {
   cursor: pointer;
   background: #4858aa;
 }
 
-input[type="submit"]:active {
+#register_btn:active {
   transition: 0.3s all;
   transform: translateY(3px);
   border: 1px solid transparent;
   opacity: 0.8;
 }
 
-input:disabled {
+#register_btn:disabled {
   opacity: 0.4;
 }
 
-input[type="submit"] {
+#register_btn {
   -webkit-appearance: none;
-}
-
-div {
-  text-align: center;
-  padding: 15px;
-  font-size: 18px;
-  font-weight: 100;
 }
 
 .App {

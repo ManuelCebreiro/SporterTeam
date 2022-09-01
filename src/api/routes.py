@@ -33,6 +33,36 @@ def create_user():
     return jsonify({"msg": "user register"}), 200
 
 
+# ENDPOINT PARA CAMBIAR DATOS DEL PERFIL DEL USUARIO
+
+@api.route("/edituserprofile", methods=["POST"])
+@jwt_required()
+def edit_user():
+    username = request.json.get("username")
+    email = request.json.get("email")
+    password = request.json.get("password")
+    age = request.json.get("age")
+    description = request.json.get("description")
+
+    user = User(email=email, password=password, username=username,
+                age=age, description=descripton)
+    user_new_email = User.query.filter_by(new_email=email).one_or_none()
+    user_new_username = User.query.filter_by(
+        new_username=username).one_or_none()
+    user_new_password = User.query.filter_by(
+        new_password=password).one_or_none()
+    user_new_age = User.query.filter_by(new_age=age).one_or_none()
+    user_description = User.query.filter_by(
+        description=description).one_or_none()
+
+    if user_email or user_username or user_new_password or user_new_email or user_description:
+        return jsonify({"msg": "Error cargando los datos"}), 401
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({"msg": "Perfil actualizado"}), 200
+
+
 # ENDPOINT PARA OBTENER EL TOKEN EN EL LOGIN
 @api.route('/token', methods=["POST"])
 def create_token():
@@ -47,38 +77,43 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-#CARGAR IMAGEN EN LA BASE DE DATOS
+# CARGAR IMAGEN EN LA BASE DE DATOS
+
+
 @api.route('/upload', methods=['POST'])
 @jwt_required()
 def handle_upload():
-    identity = get_jwt_identity()     #pide el token
-    user1 = User.query.filter_by(email = identity).one_or_none()
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
     result = cloudinary.uploader.upload(request.files['profile_image'])
     user1.profile_image_url = result['secure_url']
     db.session.add(user1)
     db.session.commit()
-    
+
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
+
 
 @api.route('/upload', methods=['DELETE'])
 @jwt_required()
 def handle_deleteimage():
-    identity = get_jwt_identity()     #pide el token
-    user1 = User.query.filter_by(email = identity).one_or_none()
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
     user1.profile_image_url = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
     db.session.commit()
-    
+
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
-#ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
+# ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
+
+
 @api.route('/load', methods=['GET'])
 @jwt_required()
 def handle_load():
-    identity = get_jwt_identity() 
-    user = User.query.filter_by(email = identity).one_or_none()
-    
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email=identity).one_or_none()
+
     return jsonify(user.profile_image_url), 200
 # ENDPOINT PARA OPTENER TODOS LOS EVENTOS
 

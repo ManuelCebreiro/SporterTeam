@@ -167,9 +167,9 @@ export const EditUserProfile = () => {
         />
         {errors.age && <p>{errors.age.message}</p>}
 
-        <input id="register_btn" value="Enviar" type="submit" />
+        <input id="register_btn" value="submit" type="submit" />
       </form>
-      <Link to="/">
+      <Link to="/home">
         <a href="#!" className="fw-bold text-body">
           Salir de Ajustes
         </a>
