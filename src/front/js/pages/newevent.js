@@ -15,8 +15,11 @@ export const Newevent = () => {
     date: "",
     sport: "",
     description: "",
-    participantmax: ""
+    participantmax: "",
+    ciudad: "",
   });
+
+  const cities = store.ciudades
   const [eventazo, setEventazo] = useState([]);
 
   return (
@@ -64,18 +67,34 @@ export const Newevent = () => {
               value={event.participantmax}
               onChange={(e) => {
                 setEvent({ ...event, participantmax: e.target.value });
+                console.log({ participantmax: e.target.value })
               }} />
           </div>
 
           <div class="col-md-2">
             <label for="validationCustom04" class="form-label">Ciudad</label>
-            <select class="form-select">
-              <option selected disabled>Elige...</option>
-              <option>...</option>
+            <select class="form-select"
+              value={event.ciudad}
+              onChange={(e) => {
+                setEvent({ ...event, ciudad: e.target.value });
+                console.log({ ...event, ciudad: e.target.value })
+              }}
+
+            >
+              <option>Elige ciudad</option>
+              {cities.map((texto, index) => {
+                return (
+                  <option
+                    key={index}
+                  >
+                    {texto.ciudad}
+                  </option>
+
+                )
+              }
+              )}
+
             </select>
-            {/* <div class="invalid-feedback">
-              Please select a valid state.
-            </div> */}
           </div>
           <div class="col-md-2">
             <label class="form-label">Opción de pago</label>
@@ -135,7 +154,7 @@ export const Newevent = () => {
           <div class="col-12 mt-3">
             <button class="btn btn-primary" type="submit"
               onClick={() => {
-                if (event.description != "" && Number(event.participantmax) >= 2 && Number(event.participantmax) < 30 && event.sport.length != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) > 0 && event.space != null) {
+                if (event.description != "" && Number(event.participantmax) >= 2 && Number(event.participantmax) < 30 && event.sport.length != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) > 0 && event.space != null && event.ciudad != "") {
                   // if (event.description != "" && Number(event.participantmax) >= 2&& Number(event.participantmax) < 30 && event.sport != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) >= 0 && Number(event.duration) > 400 && event.space != null) {
 
                   console.log(event)
@@ -150,7 +169,8 @@ export const Newevent = () => {
                     date: "",
                     sport: "",
                     description: "",
-                    participantmax: ""
+                    participantmax: "",
+                    ciudad: ""
                   })
                 } else alert("Te faltan campos por cubrir.")
               }}
@@ -169,6 +189,7 @@ export const Newevent = () => {
                         <th scope="col">Duracion</th>
                         <th scope="col">Edad mínima</th>
                         <th scope="col">Edad máxima</th>
+                        <th scope="col">Ciudad</th>
                         <th scope="col">Pago</th>
                         <th scope="col">Espacio</th>
                       </tr>
@@ -186,6 +207,7 @@ export const Newevent = () => {
                           <td>{event.duration + " min."}</td>
                           <td>{event.agemin + " años."}</td>
                           <td>{event.agemax + " años."}</td>
+                          <td>{event.ciudad}</td>
                           <td>{event.payment + "€"}</td>
                           <td>{event.space ? "cubierto" : "airelibre"}</td>
                           <td>
