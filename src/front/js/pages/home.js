@@ -140,14 +140,14 @@ export const Home = () => {
             class="form-select"
             id="validationCustom04"
             onChange={(e) => {
-              setEvent({ ...event, sport: e.target.value });
+              setEvent({ ...event, localizacion: e.target.value });
             }}
           >
             <option selected disabled value="">
               localizacion
             </option>
             {ciudades.map((localizacion) => {
-              return <option>{localizacion}</option>;
+              return <option>{localizacion.ciudad}</option>;
             })}
           </select>
         </div>
@@ -179,9 +179,10 @@ export const Home = () => {
                   <td>{event.duration}</td>
                   <td>{event.agemin}</td>
                   <td>{event.agemax}</td>
-                  <td>{event.localization}</td>
+
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
+                  <td>{event.localization}</td>
                   <td>
                     <button
                       className="btn btn-success"
