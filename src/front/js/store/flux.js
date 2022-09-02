@@ -42,24 +42,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       // función para editar los ajustes usuario ya existente
-      register: (
-        new_email,
-        new_username,
-        new_password,
-        new_age,
-        description
+      editUser: (
+        newEmail,
+        newUsername,
+        newPassword,
+        newAge,
+        newDescription
       ) => {
         console.log(
-          `edituserprofile: ${new_email} ${new_username} ${new_password}  ${new_age} ${description}`
+          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
         );
-        fetch(process.env.BACKEND_URL + "/api/edituserprofile", {
+        fetch(process.env.BACKEND_URL + "/api/edituser", {
           method: "POST",
           body: JSON.stringify({
-            new_email: email,
-            new_username: username,
-            new_password: password,
-            new_age: age,
-            description: description,
+            new_email: newEmail,
+            new_username: newUsername,
+            new_password: newPassword,
+            new_age: newAge,
+            new_description: newDescription,
           }),
 
           headers: {
@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({ validacionregister: true });
               return resp.json();
             } else {
-              alert("Datos cambiados correctamente");
+              alert("Error al cambiar los datos");
             }
           })
           .then((data) => {

@@ -35,29 +35,32 @@ def create_user():
 
 # ENDPOINT PARA CAMBIAR DATOS DEL PERFIL DEL USUARIO
 
-@api.route("/edituserprofile", methods=["POST"])
+@api.route("/edituser", methods=["POST"])
 @jwt_required()
 def edit_user():
-    username = request.json.get("username")
-    email = request.json.get("email")
-    password = request.json.get("password")
-    age = request.json.get("age")
-    description = request.json.get("description")
+    new_username = request.json.get("new_username")
+    new_email = request.json.get("new_email")
+    new_password = request.json.get("new_password")
+    new_age = request.json.get("new_age")
+    new_description = request.json.get("new_description")
+    current_user = User.query.filter_by(email=get_jwt_identity()).first()
 
-    user = User(email=email, password=password, username=username,
-                age=age, description=descripton)
-    user_new_email = User.query.filter_by(new_email=email).one_or_none()
+    user_new_email = User.query.filter_by(email=new_email).one_or_none()
     user_new_username = User.query.filter_by(
-        new_username=username).one_or_none()
-    user_new_password = User.query.filter_by(
-        new_password=password).one_or_none()
-    user_new_age = User.query.filter_by(new_age=age).one_or_none()
-    user_description = User.query.filter_by(
-        description=description).one_or_none()
+        username=new_username).one_or_none()
+    if user_new_username or user_new_email:
+        return jsonify({"msg": "username o email ya existen"}), 401
+    if new_username:
+        current_user.username = new_username
+    if new_email:
+        current_user.email = new_email
+    if new_password:
+        current_user.password = new_password
+    if new_age:
+        current_user.age = new_age
+    if new_description:
+        current_user.description = new_description
 
-    if user_email or user_username or user_new_password or user_new_email or user_description:
-        return jsonify({"msg": "Error cargando los datos"}), 401
-    db.session.add(user)
     db.session.commit()
 
     return jsonify({"msg": "Perfil actualizado"}), 200

@@ -29,10 +29,8 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link to="/home">
-              <a className="nav-link text-warning" href="#">
-                Pagina principal <span className="sr-only">(current)</span>
-              </a>
+            <Link className="nav-link text-warning" to="/home">
+              Pagina principal <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
