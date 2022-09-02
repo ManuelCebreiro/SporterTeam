@@ -200,6 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             date: event.date,
             sport: event.sport,
             description: event.description,
+            ciudad: event.ciudad,
             participantmax: event.participantmax
           }),
         })
@@ -209,6 +210,33 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
       },
+      // useradmin: (event) => {
+      //   // const store = getStore();
+      //   fetch(process.env.BACKEND_URL + "/api/useradmin", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       // Accept: "application/json",
+      //       // Authorization: "Bearer " + store.token,
+      //     },
+      //     body: JSON.stringify({
+      //       payment: event.payment,
+      //       space: event.space,
+      //       duration: event.duration,
+      //       agemin: event.agemin,
+      //       agemax: event.agemax,
+      //       date: event.date,
+      //       sport: event.sport,
+      //       description: event.description,
+      //       participantmax: event.participantmax
+      //     }),
+      //   })
+      //     .then((respuestadelback) => {
+      //       if (respuestadelback.status == 200) {
+      //         return respuestadelback.json();
+      //       }
+      //     })
+      // },
       getMessage: async () => {
         try {
           // fetching data from the backend

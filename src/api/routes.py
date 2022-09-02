@@ -64,7 +64,8 @@ def create_evento():
     sport = request.json.get("sport")
     description = request.json.get("description")
     participantmax = request.json.get("participantmax")
-    evento = Evento(payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    ciudad = request.json.get("ciudad")
+    evento = Evento(ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
     # user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
