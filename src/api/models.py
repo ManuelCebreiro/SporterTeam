@@ -16,7 +16,6 @@ class User(db.Model):
     description =db.Column(db.String)
     participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
     
-
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -59,6 +58,7 @@ class Evento(db.Model):
             "participantmax": self.participantmax,
             "space": self.space,
             "ciudad" : self.ciudad,
+            "admin" : self.admin
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento

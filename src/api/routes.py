@@ -30,6 +30,7 @@ def create_token():
 
 @api.route('/eventos', methods=["GET"])
 def get_eventos():
+
     try:
         response = [x.serialize() for x in Evento.query.all()]
         return jsonify(response), 200
@@ -51,10 +52,10 @@ def post_eventos():
     return jsonify("participant add"),200
 
 @api.route('/crearevento', methods=["POST"])
-# @jwt_required()
+@jwt_required()
 def create_evento():
-    # identity = get_jwt_identity()       
-    # user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado                  
+    identity = get_jwt_identity()       
+    user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado                  
     payment = request.json.get("payment")
     space = request.json.get("space")
     duration = request.json.get("duration")
@@ -65,8 +66,8 @@ def create_evento():
     description = request.json.get("description")
     participantmax = request.json.get("participantmax")
     ciudad = request.json.get("ciudad")
-    evento = Evento(ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
-    # user.participant.append(evento)         #usuario metido en la tabla de participantes
+    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
     return jsonify({"msg":"evento creado"})
