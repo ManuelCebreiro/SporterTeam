@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { DatosEventoUnico } from "../component/datoseventounico";
 
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -85,6 +85,7 @@ export const Home = () => {
             min="0"
             max="150"
             onChange={(e) => {
+              console.log(typeof e.target.value);
               setEvent({ ...event, agemin: e.target.value });
             }}
           ></input>
@@ -166,6 +167,7 @@ export const Home = () => {
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
+                    <DatosEventoUnico id={1} />
                     <button
                       className="btn btn-success"
                       onClick={() => {

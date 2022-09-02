@@ -100,18 +100,27 @@ def post_eventos():
     identity = get_jwt_identity()
     user = User.query.filter_by(email=identity).one_or_none()
     event = Evento.query.filter_by(id=eventId).one_or_none()
-
     user.participant.append(event)
     db.session.commit()
 
     return jsonify("participant add"), 200
+#sacar los datos de un evento
+@api.route('/lookevent/<int:id>', methods=["GET"])
+def get_event(id):
+    try:
+        event = Evento.query.filter_by(id=id).one_or_none()
+        return jsonify(event.serialize()),200
+    except:
+        return "invalid Method ", 400
+#sacar todos los usuarios
+@api.route('/playerEvents/<int:id>', methods=["GET"])
+def get_users(id):
+    try:
+        event = Evento.query.filter_by(id=id).one_or_none()
+        eventoUser =event.user
+        response =[x.serialize() for x in eventoUser]
+        return jsonify(response), 200
+    except:
+        return"invalid Method",400
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200

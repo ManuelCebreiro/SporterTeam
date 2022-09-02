@@ -26,7 +26,8 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
-            "age": self.age
+            "age": self.age,
+            
             # do not serialize the password, its a security breach
         }
 class Evento(db.Model):
@@ -39,7 +40,10 @@ class Evento(db.Model):
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
-
+    description =db.Column(db.String(250))
+    localization = db.Column(db.String(250))
+    participantmax = db.Column(db.Integer,unique=False)
+    
     def __repr__(self):
         return '<Eventos %r>' % self.id
 
@@ -53,6 +57,9 @@ class Evento(db.Model):
             "agemax": self.agemax,
             "payment": self.payment,
             "space": self.space,
+            "description":self.description,
+            "localization":self.localization,
+            "participantmax":self.participantmax
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
