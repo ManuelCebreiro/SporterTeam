@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
+import { element } from "prop-types";
 
 export const DetallesEvento = () => {
   const { store, actions } = useContext(Context);
@@ -45,17 +46,35 @@ export const DetallesEvento = () => {
           </h5>
           <h5>Espacio:{detalles.space ? "cubierto" : "airelibre"}</h5>
         </div>
-        <div className="col-4">
+        <div className="col-4 ">
           <h1>JUGADORES</h1>
-          <ul>
-            {players.map((element, index) => {
-              return <li key={index}>{element.username}</li>;
-            })}
-          </ul>
+          <div className="row">
+            <div className="col-5 text-center">
+              {players.map((element, index) => {
+                if (element.id % 2 !== 0) {
+                  return <ol key={index}>{element.username}</ol>;
+                }
+              })}
+            </div>
+            <div className="col-5 text-center">
+              {players.map((element, index) => {
+                if (element.id % 2 == 0) {
+                  return <ol key={index}>{element.username}</ol>;
+                }
+              })}
+            </div>
+          </div>
         </div>
         <div className="col-4">
           <h1>Descripcion</h1>-{detalles.description}
         </div>
+      </div>
+      <div className="row text-center">
+        <Link to="/perfil">
+          <button type="button" class="btn btn-secondary">
+            Volver al Perfil
+          </button>
+        </Link>
       </div>
     </div>
   );

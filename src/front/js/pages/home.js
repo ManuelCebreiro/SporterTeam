@@ -167,7 +167,6 @@ export const Home = () => {
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
-                    <DatosEventoUnico id={1} />
                     <button
                       className="btn btn-success"
                       onClick={() => {

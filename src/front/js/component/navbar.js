@@ -30,16 +30,22 @@ export const Navbar = () => {
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link to="/home">
-              <a className="nav-link" href="#">
-                Pagina principal <span className="sr-only">(current)</span>
-              </a>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
+                Pagina principal
+              </button>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/newevent">
-              <a className="nav-link" href="#">
-                newevent
-              </a>
+            <Link to="/newevent" className="mt-1">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
+                Newevent
+              </button>
             </Link>
           </li>
           <li className="nav-item">
@@ -49,9 +55,12 @@ export const Navbar = () => {
                 actions.logout();
               }}
             >
-              <a className="nav-link" href="">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
                 Log out
-              </a>
+              </button>
             </Link>
           </li>
           <li className="nav-item dropdown">
@@ -68,17 +77,7 @@ export const Navbar = () => {
             <div
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div>
+            ></div>
           </li>
         </ul>
       </div>
