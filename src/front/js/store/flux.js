@@ -1,15 +1,16 @@
-import { element } from "prop-types";
-
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: "",
-      imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
+      imagen:
+        "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
       validacionregister: false,
       eventos: [],
       eventosFilter: [],
+      dataEventoUnico: {},
+      jugadores: [],
       ciudades: [
         { ciudad: "A_Coruña", posicion: [43.37012643, -8.39114853] },
         { ciudad: "Albacete", posicion: [38.99588053, -1.85574745] },
@@ -65,9 +66,32 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      get_player_event: (eventid) => {
+        fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
+          .then((resp) => {
+            return resp.json();
+          })
+          .then((data) => {
+            setStore({ jugadores: data });
+          });
+      },
+      look_event: (eventid) => {
+        fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
+          .then((resp) => {
+            if (resp.ok) {
+              setStore({ datavalidacionEvento: true });
+              return resp.json();
+            } else {
+              alert("ha habido un problema intentalo de nuevo mas tarde");
+              return;
+            }
+          })
+          .then((data) => {
+            setStore({ dataEventoUnico: data });
+          });
+      },
       // función para registrar usuario nuevo
       register: (email, username, password, age) => {
-        console.log(`register: ${email} ${username} ${password} ${age}`);
         fetch(process.env.BACKEND_URL + "/api/register", {
           method: "POST",
           body: JSON.stringify({
@@ -76,22 +100,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             password: password,
             age: age,
           }),
-
           headers: {
             "Content-Type": "application/json",
           },
-        })
-          .then((resp) => {
-            if (resp.status == 200) {
-              setStore({ validacionregister: true });
-              return resp.json();
-            } else {
-              alert("Usuario ya existe");
-            }
-          })
-          .then((data) => {
-            console.log(data);
-          });
+        }).then((resp) => {
+          if (resp.status == 200) {
+            setStore({ validacionregister: true });
+            return resp.json();
+          } else {
+            alert("Usuario ya existe");
+          }
+        });
       },
 
       //funcion que filtra los eventos en la pagina pricipal
@@ -101,14 +120,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-              ? eventos.filter((element) => element.payment > 0)
-              : eventos.filter((element) => element.payment == 0);
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-              ? paymentResults.filter((element) => element.space == true)
-              : paymentResults.filter((element) => element.space == false);
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -127,7 +146,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.sport == "" || event.sport == "cualquiera"
             ? dateResults
             : dateResults.filter((element) => element.sport == event.sport);
-        setStore({ eventosFilter: sportResults });
+        const ciudadesResults =
+          event.ciudad == "" || event.ciudad == "Cualquiera"
+            ? sportResults
+            : sportResults.filter((element) => element.ciudad == event.ciudad);
+        setStore({ eventosFilter: ciudadesResults });
       },
       //funcion para unirse a un evento de la lista
       joinEvent: (event) => {
@@ -151,13 +174,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         setStore({ token: "" });
-        setStore({ imagen: "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200", })
+        setStore({
+          imagen:
+            "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
+        });
         sessionStorage.removeItem("token");
         setStore({ validacion: false });
       },
 
       login: (email, password) => {
-        const actions = getActions()
+        const actions = getActions();
         fetch(process.env.BACKEND_URL + "/api/token", {
           method: "POST",
           headers: {
@@ -178,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
           .then((respuestajson) => {
-            actions.Load(respuestajson.access_token)
+            actions.Load(respuestajson.access_token);
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
@@ -202,31 +228,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         //     setStore({ respuesta: "" })
         //   })
 
-        setStore({ imagen: data })
+        setStore({ imagen: data });
       },
       Load: (parametro) => {
         const options = {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + parametro
+            Authorization: "Bearer " + parametro,
           },
           method: "GET",
-        }
+        };
         fetch(process.env.BACKEND_URL + "/api/load", options)
-          .then(respuestadelback =>
-            respuestadelback.json())
-          .then(data => {
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
             if (data) {
-              setStore({ imagen: data })
+              setStore({ imagen: data });
             }
-            setStore({ respuesta: "" })
-          })
-
+            setStore({ respuesta: "" });
+          });
       },
 
       getrespuesta: (str) => {
-        setStore({ respuesta: str })
+        setStore({ respuesta: str });
       },
 
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
@@ -280,14 +304,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             sport: event.sport,
             description: event.description,
             ciudad: event.ciudad,
-            participantmax: event.participantmax
+            participantmax: event.participantmax,
           }),
-        })
-          .then((respuestadelback) => {
-            if (respuestadelback.status == 200) {
-              return respuestadelback.json();
-            }
-          })
+        }).then((respuestadelback) => {
+          if (respuestadelback.status == 200) {
+            return respuestadelback.json();
+          }
+        });
       },
       // useradmin: (event) => {
       //   // const store = getStore();

@@ -129,10 +129,24 @@ def create_evento():
     return jsonify({"msg":"evento creado"})
 
 
-
-
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+#sacar los datos de un evento
+@api.route('/lookevent/<int:id>', methods=["GET"])
+def get_event(id):
+    try:
+        event = Evento.query.filter_by(id=id).one_or_none()
+        return jsonify(event.serialize()),200
+    except:
+        return "invalid Method ", 400
+#sacar todos los usuarios
+@api.route('/playerEvents/<int:id>', methods=["GET"])
+def get_users(id):
+    try:
+        event = Evento.query.filter_by(id=id).one_or_none()
+        eventoUser =event.user
+        response =[x.serialize() for x in eventoUser]
+        return jsonify(response), 200
+    except:
+        return"invalid Method",400
 
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"

@@ -59,7 +59,9 @@ class Evento(db.Model):
             "participantmax": self.participantmax,
             "space": self.space,
             "ciudad" : self.ciudad,
-            "admin" : self.admin
+            "admin" : self.admin,
+            "description":self.description,
+            "participantmax":self.participantmax,
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento

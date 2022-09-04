@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { DatosEventoUnico } from "../component/datoseventounico";
 
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const eventos = store.eventosFilter;
-  const evento = store.eventos;
+  const ciudad = store.ciudades;
   const [event, setEvent] = useState({
     payment: null,
     space: null,
@@ -16,6 +16,7 @@ export const Home = () => {
     agemax: 200,
     date: "",
     sport: "",
+    ciudad: "",
   });
 
   return (
@@ -85,6 +86,7 @@ export const Home = () => {
             min="0"
             max="150"
             onChange={(e) => {
+              console.log(typeof e.target.value);
               setEvent({ ...event, agemin: e.target.value });
             }}
           ></input>
@@ -123,10 +125,25 @@ export const Home = () => {
               sport
             </option>
             <option>Baloncesto</option>
-            <option>Futbol</option>
+            <option>Fútbol</option>
             <option>Padel</option>
             <option>Tenis</option>
             <option>cualquiera</option>;
+          </select>
+          <select
+            class="form-select"
+            id="validationCustom04"
+            onChange={(e) => {
+              setEvent({ ...event, ciudad: e.target.value });
+            }}
+          >
+            <option selected disabled value="">
+              ciudad
+            </option>
+            <option>Cualquiera</option>
+            {ciudad.map((element, index) => {
+              return <option key={index}>{element.ciudad}</option>;
+            })}
           </select>
           <button
             onClick={() => {
@@ -142,13 +159,14 @@ export const Home = () => {
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col">sport</th>
-              <th scope="col">date</th>
-              <th scope="col">duration</th>
-              <th scope="col">agemin</th>
-              <th scope="col">agemax</th>
-              <th scope="col">payment</th>
-              <th scope="col">space</th>
+              <th scope="col">Sport</th>
+              <th scope="col">Date</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Agemin</th>
+              <th scope="col">Agemax</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Payment</th>
+              <th scope="col">Space</th>
             </tr>
           </thead>
           <tbody>
@@ -162,6 +180,7 @@ export const Home = () => {
                   <td>{event.date}</td>
                   <td>{event.duration}</td>
                   <td>{event.agemin}</td>
+                  <td>{event.ciudad}</td>
                   <td>{event.agemax}</td>
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
