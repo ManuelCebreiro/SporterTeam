@@ -128,11 +128,11 @@ export const Newevent = () => {
             <label class="form-label">Tipo de lugar</label>
 
             <select class="form-select"
-              value={event.space}
+              // value={event.space ? "cubierto" : "airelibre"}
               onChange={(e) => {
                 if (e.target.value == "Cubierto") {
                   setEvent({ ...event, space: true });
-                } else if (e.target.value == "Aire libre") {
+                } else {
                   setEvent({ ...event, space: false });
 
                 }
@@ -209,7 +209,7 @@ export const Newevent = () => {
                           <td>{event.agemax + " años."}</td>
                           <td>{event.ciudad}</td>
                           <td>{event.payment + "€"}</td>
-                          <td>{event.space ? "cubierto" : "airelibre"}</td>
+                          <td>{event.space ? "Cubierto" : "Aire libre"}</td>
                           <td>
 
                           </td>

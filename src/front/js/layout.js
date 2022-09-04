@@ -5,10 +5,12 @@ import React, { useContext } from "react";
 import { Home } from "./pages/home";
 import { Perfil } from "./pages/perfil";
 import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import { Newevent } from "./pages/newevent";
 import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Photoperfil } from "./pages/perfil/photoperfil";
 
 //create your first component
 const Layout = () => {
@@ -29,6 +31,8 @@ const Layout = () => {
             <Route element={<Newevent />} path="/newevent" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Login />} path="/" />
+            <Route element={<Register />} path="/register" />
+            <Route element={<Photoperfil />} path="/photoperfil" />
           </Routes>
           <Footer />
         </ScrollToTop>

@@ -64,9 +64,11 @@ export const Login = () => {
 
                       <p className="text-center text-muted mt-5 mb-0">
                         Have already an account?{" "}
-                        <a href="#!" className="fw-bold text-body">
-                          Register here
-                        </a>
+                        <Link to="/register">
+                          <a href="#!" className="fw-bold text-body">
+                            Register here
+                          </a>
+                        </Link>
                       </p>
                     </form>
                   </div>
