@@ -85,6 +85,7 @@ def handle_load():
 
 @api.route('/eventos', methods=["GET"])
 def get_eventos():
+
     try:
         response = [x.serialize() for x in Evento.query.all()]
         return jsonify(response), 200
@@ -97,14 +98,37 @@ def get_eventos():
 @jwt_required()
 def post_eventos():
     eventId = request.json.get("id")
-    identity = get_jwt_identity()
-    user = User.query.filter_by(email=identity).one_or_none()
-    event = Evento.query.filter_by(id=eventId).one_or_none()
+    identity = get_jwt_identity()           #guardar token en un usuario
+    user = User.query.filter_by(email = identity).one_or_none()
+    event = Evento.query.filter_by(id =eventId).one_or_none()
 
     user.participant.append(event)
     db.session.commit()
 
-    return jsonify("participant add"), 200
+    return jsonify("participant add"),200
+
+@api.route('/crearevento', methods=["POST"])
+@jwt_required()
+def create_evento():
+    identity = get_jwt_identity()       
+    user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado                  
+    payment = request.json.get("payment")
+    space = request.json.get("space")
+    duration = request.json.get("duration")
+    agemin = request.json.get("agemin")
+    agemax = request.json.get("agemax")
+    date = request.json.get("date")
+    sport = request.json.get("sport")
+    description = request.json.get("description")
+    participantmax = request.json.get("participantmax")
+    ciudad = request.json.get("ciudad")
+    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    user.participant.append(evento)         #usuario metido en la tabla de participantes
+    db.session.add(evento)
+    db.session.commit()
+    return jsonify({"msg":"evento creado"})
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])

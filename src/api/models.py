@@ -17,7 +17,6 @@ class User(db.Model):
     description =db.Column(db.String)
     participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
     
-
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -26,7 +25,9 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
-            "age": self.age
+            "age": self.age,
+            "description" : self.description,
+            "participant" : self.participant,
             # do not serialize the password, its a security breach
         }
 class Evento(db.Model):
@@ -38,6 +39,9 @@ class Evento(db.Model):
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
     space= db.Column(db.Boolean(), unique=False, nullable=False)
+    participantmax = db.Column(db.Integer,unique=False)
+    ciudad = db.Column(db.String)
+    description =db.Column(db.String(250))
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
 
     def __repr__(self):
@@ -52,7 +56,10 @@ class Evento(db.Model):
             "agemin": self.agemin,
             "agemax": self.agemax,
             "payment": self.payment,
+            "participantmax": self.participantmax,
             "space": self.space,
+            "ciudad" : self.ciudad,
+            "admin" : self.admin
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
