@@ -25,7 +25,7 @@ export const DetallesEvento = () => {
           </h5>
           <h5>
             Donde:
-            {detalles.localization}
+            {detalles.ciudad}
           </h5>
           <h5>
             Plazas:

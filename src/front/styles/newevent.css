@@ -1,0 +1,15 @@
+#fondodecrearevento {
+    margin-top: 5%;
+    width: 800px;
+    height: 400px;
+    padding: 1%;
+    background-color: azure;
+    border-radius: 5%;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fechastyle {
+    width: 5%;
+}

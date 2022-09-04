@@ -9,7 +9,6 @@ import { Register } from "./pages/register";
 import { Newevent } from "./pages/newevent";
 import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 import { Photoperfil } from "./pages/perfil/photoperfil";
 import { DetallesEvento } from "./pages/detalles_Evento";
 
@@ -39,7 +38,6 @@ const Layout = () => {
               path="/Detalles_Evento/:theid"
             />
           </Routes>
-          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>
