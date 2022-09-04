@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      userDataEventos: [],
       token: "",
       imagen:
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
@@ -66,6 +67,22 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      getUserDataEventos: () => {
+        const store = getStore();
+
+        var requestOptions = {
+          method: "GET",
+          headers: { Authorization: "Bearer " + store.token },
+        };
+
+        fetch(
+          "https://3001-manuelcebre-sporterteam-2wh68869gud.ws-eu63.gitpod.io/api/Userdataparticipant",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ userDataEventos: result }))
+          .catch((error) => console.log("error", error));
+      },
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
           .then((resp) => {

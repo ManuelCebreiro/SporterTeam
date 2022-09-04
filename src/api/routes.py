@@ -153,3 +153,15 @@ def get_users(id):
     }
 
     return jsonify(response_body), 200
+
+@api.route('/Userdataparticipant', methods=["GET"])
+@jwt_required()
+def get_userdataParticipant():
+    try:
+        identity = get_jwt_identity()       
+        user = User.query.filter_by(email = identity).one_or_none() 
+        userpar = user.participant
+        response =[x.serialize() for x in userpar] 
+        return jsonify(response),200
+    except:
+        return "Data fail",400
