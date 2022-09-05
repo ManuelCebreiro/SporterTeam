@@ -22,13 +22,13 @@
   font-size: 14px;
 }
 
-#form_register p {
+#form_register_body p {
   color: #bf1650;
   font-size: 17px;
   text-align: left;
 }
 
-#form_register p::before {
+#form_register_body p::before {
   display: inline;
   content: "⚠ ";
 }
