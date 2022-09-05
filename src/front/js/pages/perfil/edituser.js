@@ -25,9 +25,10 @@ const patterns = {
 export const EditUser = () => {
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
+  const user = store.datosUsuario;
   useEffect(() => {
-    if (store.validacionregister) navigate("/");
-  }, [store.validacionregister]);
+    actions.DatosUsuarioLogeado();
+  }, []);
 
   const {
     register,
@@ -50,7 +51,7 @@ export const EditUser = () => {
   return (
     <div id="body_register">
       <form id="form_register" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="new_username">"Username de BBDD"</label>
+        <label htmlFor="new_username">Username de {user.username}</label>
         <input
           name="new_username"
           type="text"
@@ -69,7 +70,7 @@ export const EditUser = () => {
         />
         {errors.new_username && <p>{errors.new_username.message}</p>}
 
-        <label htmlFor="new_description">"Algo sobre tí"</label>
+        <label htmlFor="new_description">Descripción</label>
         <textarea
           id="description-textarea"
           name="new_description"
@@ -85,7 +86,7 @@ export const EditUser = () => {
         />
         {errors.new_description && <p>{errors.new_description.message}</p>}
 
-        <label htmlFor="new_email">"Email de BBDD"</label>
+        <label htmlFor="new_email">Email de {user.email}</label>
         <input
           name="new_email"
           type="text"
@@ -147,7 +148,7 @@ export const EditUser = () => {
         />
         {errors.password && <p>{errors.password.message}</p>} */}
 
-        <label htmlFor="new_age">"Edad de BBDD"</label>
+        <label htmlFor="new_age">Edad: {user.age}</label>
         <input
           name="new_age"
           placeholder="Actualizar edad"

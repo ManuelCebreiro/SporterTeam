@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       validacionregister: false,
       eventos: [],
       eventosFilter: [],
+      datosUsuario: {},
     },
     actions: {
       // función para registrar usuario nuevo
@@ -264,6 +265,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
+
+      //Fetch de los datos de usuario ya logeado
+      DatosUsuarioLogeado: () => {
+        const store = getStore();
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + store.token,
+          },
+          method: "GET",
+        };
+        fetch(process.env.BACKEND_URL + "/api/user", options)
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
+      },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
