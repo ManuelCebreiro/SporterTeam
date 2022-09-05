@@ -47,6 +47,15 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
+    response = user1.serialize()
+
+    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200
+
 #CARGAR IMAGEN EN LA BASE DE DATOS
 @api.route('/upload', methods=['POST'])
 @jwt_required()

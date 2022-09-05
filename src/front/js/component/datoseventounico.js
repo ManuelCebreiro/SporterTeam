@@ -9,7 +9,7 @@ export const DatosEventoUnico = ({ id }) => {
   return (
     <div>
       <Link
-        to="/Detalles_Evento/1"
+        to={`/Detalles_Evento/${id}`}
         onClick={() => {
           actions.look_event(id);
         }}

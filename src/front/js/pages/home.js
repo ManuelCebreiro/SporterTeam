@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { DatosEventoUnico } from "../component/datoseventounico";
+
 
 import "../../styles/home.css";
 
@@ -18,7 +19,10 @@ export const Home = () => {
     sport: "",
     ciudad: "",
   });
+  useEffect(() => {
+    actions.getEventos();
 
+  }, []);
   return (
     <div className="container py-5">
       <div className="row d-flex justify-content-center ">
@@ -180,8 +184,8 @@ export const Home = () => {
                   <td>{event.date}</td>
                   <td>{event.duration}</td>
                   <td>{event.agemin}</td>
-                  <td>{event.ciudad}</td>
                   <td>{event.agemax}</td>
+                  <td>{event.ciudad}</td>
                   <td>{event.payment + "€"}</td>
                   <td>{event.space ? "cubierto" : "airelibre"}</td>
                   <td>
@@ -193,6 +197,7 @@ export const Home = () => {
                     >
                       Unirse
                     </button>
+                    <DatosEventoUnico id={event.id} />
                   </td>
                 </tr>
               );

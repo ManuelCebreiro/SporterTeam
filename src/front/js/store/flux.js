@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       eventosFilter: [],
       dataEventoUnico: {},
       jugadores: [],
+      datosUsuario: {},
       ciudades: [
         { ciudad: "A_Coruña", posicion: [43.37012643, -8.39114853] },
         { ciudad: "Albacete", posicion: [38.99588053, -1.85574745] },
@@ -120,14 +121,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -210,25 +211,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ validacion: true });
           });
       },
-      LoadImage: (data) => {
-        // const store = getStore();
-        // console.log("entramos")
-        // const options = {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //     Authorization: "Bearer " + store.token,
-        //   },
-        //   method: "GET",
-        // }
-        // fetch(process.env.BACKEND_URL + "/api/load", options)
-        //   .then(respuestadelback =>
-        //     respuestadelback.json())
-        //   .then(data => {
-        //     setStore({ respuesta: "" })
-        //   })
+      // -------------------------------><------------------------------------------
+      DatosUsuarioLogeado: () => {
+        const store = getStore();
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + store.token,
+          },
+          method: "GET",
+        }
+        fetch(process.env.BACKEND_URL + "/api/user", options)
+          .then(respuestadelback =>
+            respuestadelback.json())
+          .then(data => {
+            setStore({ datosUsuario: data })
+          })
+        // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
 
-        setStore({ imagen: data });
       },
       Load: (parametro) => {
         const options = {
