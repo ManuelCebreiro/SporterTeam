@@ -122,7 +122,7 @@ def create_evento():
     description = request.json.get("description")
     participantmax = request.json.get("participantmax")
     ciudad = request.json.get("ciudad")
-    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax,estadoEvento = "Abierto")
     user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
@@ -136,7 +136,7 @@ def get_event(id):
         event = Evento.query.filter_by(id=id).one_or_none()
         return jsonify(event.serialize()),200
     except:
-        return "invalid Method ", 400
+        return jsonify("invalid Method "), 400
 #sacar todos los usuarios
 @api.route('/playerEvents/<int:id>', methods=["GET"])
 def get_users(id):
@@ -146,7 +146,7 @@ def get_users(id):
         response =[x.serialize() for x in eventoUser]
         return jsonify(response), 200
     except:
-        return"invalid Method",400
+        return jsonify("invalid Method"),400
 
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
@@ -164,4 +164,4 @@ def get_userdataParticipant():
         response =[x.serialize() for x in userpar] 
         return jsonify(response),200
     except:
-        return "Data fail",400
+        return jsonify( "Data fail"),400

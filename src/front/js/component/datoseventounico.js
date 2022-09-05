@@ -14,7 +14,7 @@ export const DatosEventoUnico = ({ id }) => {
           actions.look_event(id);
         }}
       >
-        <button className="btn btn-info btn-sm">Ver mas datos </button>
+        <button className="btn btn-info btn-sm p-0 border">Mas datos</button>
       </Link>
     </div>
   );

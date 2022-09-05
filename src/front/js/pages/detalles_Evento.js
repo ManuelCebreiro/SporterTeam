@@ -13,12 +13,19 @@ export const DetallesEvento = () => {
     actions.look_event(params.theid);
     actions.get_player_event(params.theid);
   }, []);
-
+  const color =
+    detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
+      ? { color: "green" }
+      : { color: "red" };
   return (
     <div className="container">
       <div className="row">
         <div className="col-4 text-start">
           <h1>Cuándo y dónde</h1>
+          <h5>
+            Estado del evento:
+            <span style={color}>{detalles.estadoEvento}</span>
+          </h5>
           <h5>
             Fecha:
             {detalles.date}
@@ -50,14 +57,14 @@ export const DetallesEvento = () => {
           <h1>JUGADORES</h1>
           <div className="row">
             <div className="col-5 text-center">
-              {players.map((element, index) => {
+              {Array.from(players).map((element, index) => {
                 if (element.id % 2 !== 0) {
                   return <ol key={index}>{element.username}</ol>;
                 }
               })}
             </div>
             <div className="col-5 text-center">
-              {players.map((element, index) => {
+              {Array.from(players).map((element, index) => {
                 if (element.id % 2 == 0) {
                   return <ol key={index}>{element.username}</ol>;
                 }
@@ -70,7 +77,12 @@ export const DetallesEvento = () => {
         </div>
       </div>
       <div className="row text-center">
-        <Link to="/perfil">
+        <Link
+          to="/perfil"
+          onClick={() => {
+            actions.getUserDataEventos();
+          }}
+        >
           <button type="button" class="btn btn-secondary">
             Volver al Perfil
           </button>

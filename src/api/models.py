@@ -43,6 +43,8 @@ class Evento(db.Model):
     ciudad = db.Column(db.String)
     description =db.Column(db.String(250))
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
+    estadoEvento =db.Column(db.String(80)) #Abierto(buscando participantes) ,Cerrado(ya tiene todos los participantes),Finalizado(El evento ya se acabo), Cancelado(Evento cancelado)
+    
 
     def __repr__(self):
         return '<Eventos %r>' % self.id
@@ -62,6 +64,7 @@ class Evento(db.Model):
             "admin" : self.admin,
             "description":self.description,
             "participantmax":self.participantmax,
+            "estadoEvento":self.estadoEvento,
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento

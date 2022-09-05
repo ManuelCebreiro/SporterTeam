@@ -68,20 +68,18 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       getUserDataEventos: () => {
-        const store = getStore();
-
+        const token = sessionStorage.getItem("token");
         var requestOptions = {
           method: "GET",
-          headers: { Authorization: "Bearer " + store.token },
+          headers: { Authorization: "Bearer " + token },
         };
 
         fetch(
-          "https://3001-manuelcebre-sporterteam-2wh68869gud.ws-eu63.gitpod.io/api/Userdataparticipant",
+          process.env.BACKEND_URL + "/api/Userdataparticipant",
           requestOptions
         )
           .then((response) => response.json())
-          .then((result) => setStore({ userDataEventos: result }))
-          .catch((error) => console.log("error", error));
+          .then((result) => setStore({ userDataEventos: result }));
       },
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
@@ -171,13 +169,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       //funcion para unirse a un evento de la lista
       joinEvent: (event) => {
-        const store = getStore();
+        const token = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/joinevent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + store.token,
+            Authorization: "Bearer " + store,
           },
           body: JSON.stringify({
             id: event,
@@ -329,33 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
-      // useradmin: (event) => {
-      //   // const store = getStore();
-      //   fetch(process.env.BACKEND_URL + "/api/useradmin", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       // Accept: "application/json",
-      //       // Authorization: "Bearer " + store.token,
-      //     },
-      //     body: JSON.stringify({
-      //       payment: event.payment,
-      //       space: event.space,
-      //       duration: event.duration,
-      //       agemin: event.agemin,
-      //       agemax: event.agemax,
-      //       date: event.date,
-      //       sport: event.sport,
-      //       description: event.description,
-      //       participantmax: event.participantmax
-      //     }),
-      //   })
-      //     .then((respuestadelback) => {
-      //       if (respuestadelback.status == 200) {
-      //         return respuestadelback.json();
-      //       }
-      //     })
-      // },
+
       getMessage: async () => {
         try {
           // fetching data from the backend

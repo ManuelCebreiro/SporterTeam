@@ -4,7 +4,20 @@ import { DatosEventoUnico } from "../component/datoseventounico";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
-  const userEventos = store.userDataEventos;
+  const [userEventosactivos, setUserEventosactivos] = useState([]);
+  const [userEventosFinalizado, setUserEventosFinalizado] = useState([]);
+  useEffect(() => {
+    actions.getUserDataEventos();
+    setUserEventosFinalizado(filtrado(store.userDataEventos, "Finalizado"));
+    setUserEventosactivos(filtrado(store.userDataEventos, "Abierto"));
+  }, []);
+
+  function filtrado(arr, filtro) {
+    const filterarray = Array.from(arr).filter(
+      (element) => element.estadoEvento == filtro
+    );
+    return filterarray;
+  }
 
   return (
     <div class="container py-2">
@@ -100,14 +113,16 @@ export const Perfil = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Ejemplo</td>
-                          <td>Ejemplo</td>
-                          <td>Ejemplo</td>
-                          <td>
-                            <DatosEventoUnico />
-                          </td>
-                        </tr>
+                        {userEventosactivos.map((element, index) => (
+                          <tr key={index}>
+                            <td>{element.sport}</td>
+                            <td>{element.date}</td>
+                            <td>{element.ciudad}</td>
+                            <td>
+                              <DatosEventoUnico id={element.id} />
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -128,14 +143,16 @@ export const Perfil = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Ejemplo</td>
-                          <td>Ejemplo</td>
-                          <td>Ejemplo</td>
-                          <td>
-                            <DatosEventoUnico />
-                          </td>
-                        </tr>
+                        {userEventosFinalizado.map((element, index) => (
+                          <tr key={index}>
+                            <td>{element.sport}</td>
+                            <td>{element.date}</td>
+                            <td>{element.ciudad}</td>
+                            <td>
+                              <DatosEventoUnico id={element.id} />
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
