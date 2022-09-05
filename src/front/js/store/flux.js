@@ -41,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
           });
       },
+
       // función para editar los ajustes usuario ya existente
       editUser: (
         newEmail,
@@ -49,6 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         newAge,
         newDescription
       ) => {
+        const store = getStore();
         console.log(
           `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
         );
@@ -64,6 +66,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + store.token,
           },
         })
           .then((resp) => {

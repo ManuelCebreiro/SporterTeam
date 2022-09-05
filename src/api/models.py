@@ -3,20 +3,23 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 participant = db.Table('participant',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-    db.Column('evento_id', db.Integer, db.ForeignKey('evento.id'), primary_key=True)
-)
+                       db.Column('user_id', db.Integer, db.ForeignKey(
+                           'user.id'), primary_key=True),
+                       db.Column('evento_id', db.Integer, db.ForeignKey(
+                           'evento.id'), primary_key=True)
+                       )
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(80), unique=False)
-    profile_image_url =  db.Column(db.String(250), unique=False)
-    age =db.Column(db.Integer,unique=False)
-    description =db.Column(db.String)
-    participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
-    
+    profile_image_url = db.Column(db.String(250), unique=False)
+    age = db.Column(db.Integer, unique=False)
+    description = db.Column(db.String)
+    participant = db.relationship(
+        'Evento', secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -26,19 +29,22 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "username": self.username,
-            "age": self.age
+            "age": self.age,
+            "participant": self.participant
             # do not serialize the password, its a security breach
         }
+
+
 class Evento(db.Model):
-    id = db.Column(db.Integer, primary_key=True )
+    id = db.Column(db.Integer, primary_key=True)
     sport = db.Column(db.String(250))
-    date = db.Column(db.String)#cambiarla a string?
+    date = db.Column(db.String)  # cambiarla a string?
     duration = db.Column(db.Integer)
     agemin = db.Column(db.Integer)
     agemax = db.Column(db.Integer)
     payment = db.Column(db.Integer(), unique=False, nullable=False)
-    space= db.Column(db.Boolean(), unique=False, nullable=False)
-    admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
+    space = db.Column(db.Boolean(), unique=False, nullable=False)
+    admin = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
         return '<Eventos %r>' % self.id
@@ -57,4 +63,3 @@ class Evento(db.Model):
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
         }
-        

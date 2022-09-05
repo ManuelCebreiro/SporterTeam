@@ -41,6 +41,11 @@ export const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link text-warning" to="/edituser">
+              Edituser
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link
               to="/"
               onClick={() => {

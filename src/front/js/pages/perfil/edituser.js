@@ -20,7 +20,6 @@ const patterns = {
   new_email:
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i,
   new_age: /^0?(1[89]|[2-9]\d)$/i,
-  new_description: /^[A-Za-z]+$/i,
 };
 
 export const EditUser = () => {
@@ -81,10 +80,6 @@ export const EditUser = () => {
             maxLength: {
               value: 300,
               message: "Username debe tener máximo 300 caracteres",
-            },
-            pattern: {
-              value: patterns.new_description,
-              message: messages.new_description,
             },
           })}
         />
