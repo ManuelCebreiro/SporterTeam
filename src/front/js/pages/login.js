@@ -56,7 +56,7 @@ export const Login = () => {
                             actions.login(userEmail, userPassword);
                           }}
                           type="button"
-                          className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                          className="btn btn-success btn-block btn-lg gradient-custom-4 "
                         >
                           Enter
                         </button>
