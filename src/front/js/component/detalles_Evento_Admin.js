@@ -10,6 +10,7 @@ export const DetallesEventoAdmin = () => {
   const cities = store.ciudades;
   let params = useParams();
   const [details, setDetails] = useState({
+    id: detalles.id,
     payment: detalles.payment,
     space: detalles.space,
     duration: detalles.duration,
@@ -32,7 +33,7 @@ export const DetallesEventoAdmin = () => {
 
   return (
     <div className="container">
-      <h1>Editar perfil</h1>
+      <h1>Editar Evento</h1>
       <div class="container py-5 bg-light border border-dark">
         <div class="row">
           <div class="col-md-2">

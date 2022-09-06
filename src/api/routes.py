@@ -66,7 +66,7 @@ def handle_upload():
     user1.profile_image_url = result['secure_url']
     db.session.add(user1)
     db.session.commit()
-    
+
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
@@ -77,7 +77,7 @@ def handle_deleteimage():
     user1 = User.query.filter_by(email = identity).one_or_none()
     user1.profile_image_url = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
     db.session.commit()
-    
+
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
@@ -85,9 +85,9 @@ def handle_deleteimage():
 @api.route('/load', methods=['GET'])
 @jwt_required()
 def handle_load():
-    identity = get_jwt_identity() 
+    identity = get_jwt_identity()
     user = User.query.filter_by(email = identity).one_or_none()
-    
+
     return jsonify(user.profile_image_url), 200
 # ENDPOINT PARA OPTENER TODOS LOS EVENTOS
 
@@ -119,8 +119,8 @@ def post_eventos():
 @api.route('/crearevento', methods=["POST"])
 @jwt_required()
 def create_evento():
-    identity = get_jwt_identity()       
-    user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado                  
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email = identity).one_or_none()     #usuario filtrado
     payment = request.json.get("payment")
     space = request.json.get("space")
     duration = request.json.get("duration")
@@ -162,3 +162,13 @@ def get_users(id):
     }
 
     return jsonify(response_body), 200
+
+# ----------------------------------------------------ENDPOINT PARA MODIFICAR DATOS DE UN EVENTO-------------------------------------------------------------
+
+# @api.route('/modificarevento', methods=["POST"])
+# def modificar_evento():
+#     eventoNew = request.json.get("evento")
+#     eventoOld = Evento.query.filter_by(id=eventoNew["id"]).one_or_none()
+#     evento = eventoOld(ciudad = eventoNew["ciudad"], payment = eventoNew["payment"], space = eventoNew["space"], duration = eventoNew["duration"], agemin = eventoNew["agemin"], agemax = eventoNew["agemax"], date = eventoNew["date"], sport = eventoNew["sport"], description = eventoNew["description"], participantmax = eventoNew["participantmax"], estadoEvento = eventoNew["estadoEvento"] )
+#     db.session.commit()
+#     return jsonify({"msg":"evento modificado"})
