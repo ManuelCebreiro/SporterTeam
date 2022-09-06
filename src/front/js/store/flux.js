@@ -213,12 +213,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       // -------------------------------><------------------------------------------
       DatosUsuarioLogeado: () => {
-        const store = getStore();
+        const token = sessionStorage.getItem("token");
         const options = {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + store.token,
+            Authorization: "Bearer " + token,
           },
           method: "GET",
         }
