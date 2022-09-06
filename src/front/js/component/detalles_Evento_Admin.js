@@ -180,7 +180,9 @@ export const DetallesEventoAdmin = () => {
 
           <div class="col-12 mt-3">
 
-            <button class="btn btn-primary" type="submit">Modificar</button>
+            <button class="btn btn-primary" type="submit"
+              onClick={() => { actions.modificarevento(details) }}
+            >Modificar</button>
           </div>
 
         </div>

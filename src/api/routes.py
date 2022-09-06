@@ -165,10 +165,35 @@ def get_users(id):
 
 # ----------------------------------------------------ENDPOINT PARA MODIFICAR DATOS DE UN EVENTO-------------------------------------------------------------
 
-# @api.route('/modificarevento', methods=["POST"])
-# def modificar_evento():
-#     eventoNew = request.json.get("evento")
-#     eventoOld = Evento.query.filter_by(id=eventoNew["id"]).one_or_none()
-#     evento = eventoOld(ciudad = eventoNew["ciudad"], payment = eventoNew["payment"], space = eventoNew["space"], duration = eventoNew["duration"], agemin = eventoNew["agemin"], agemax = eventoNew["agemax"], date = eventoNew["date"], sport = eventoNew["sport"], description = eventoNew["description"], participantmax = eventoNew["participantmax"], estadoEvento = eventoNew["estadoEvento"] )
-#     db.session.commit()
-#     return jsonify({"msg":"evento modificado"})
+@api.route('/modificarevento', methods=["PUT"])
+def modificar_evento():
+    eventoNew = request.json.get("evento")
+    joder = eventoNew["id"]
+    eventoOld = Evento.query.filter_by(id = joder).one_or_none()
+    # eventoOld(ciudad = eventoNew["ciudad"], payment = eventoNew["payment"], space = eventoNew["space"], duration = eventoNew["duration"], agemin = eventoNew["agemin"], agemax = eventoNew["agemax"], date = eventoNew["date"], sport = eventoNew["sport"], description = eventoNew["description"], participantmax = eventoNew["participantmax"], estadoEvento = eventoNew["estadoEvento"] )
+    
+    if eventoNew["ciudad"]:
+        eventoOld.ciudad = eventoNew["ciudad"]
+    if eventoNew["payment"]:
+        eventoOld.payment = eventoNew["payment"]
+    if eventoNew["space"]:
+        eventoOld.space = eventoNew["space"]
+    if eventoNew["duration"]:
+        eventoOld.duration = eventoNew["duration"]
+    if eventoNew["agemin"]:
+        eventoOld.agemin = eventoNew["agemin"]
+    if eventoNew["agemax"]:
+        eventoOld.agemax = eventoNew["agemax"]
+    if eventoNew["date"]:
+        eventoOld.date = eventoNew["date"]
+    if eventoNew["sport"]:
+        eventoOld.sport = eventoNew["sport"]
+    if eventoNew["description"]:
+        eventoOld.description = eventoNew["description"]
+    if eventoNew["participantmax"]:
+        eventoOld.participantmax = eventoNew["participantmax"]
+    if eventoNew["estadoEvento"]:
+        eventoOld.estadoEvento = eventoNew["estadoEvento"]
+    
+    db.session.commit()
+    return jsonify({"msg":"evento modificado"})

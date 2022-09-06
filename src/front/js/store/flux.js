@@ -313,33 +313,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
-      // useradmin: (event) => {
-      //   // const store = getStore();
-      //   fetch(process.env.BACKEND_URL + "/api/useradmin", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       // Accept: "application/json",
-      //       // Authorization: "Bearer " + store.token,
-      //     },
-      //     body: JSON.stringify({
-      //       payment: event.payment,
-      //       space: event.space,
-      //       duration: event.duration,
-      //       agemin: event.agemin,
-      //       agemax: event.agemax,
-      //       date: event.date,
-      //       sport: event.sport,
-      //       description: event.description,
-      //       participantmax: event.participantmax
-      //     }),
-      //   })
-      //     .then((respuestadelback) => {
-      //       if (respuestadelback.status == 200) {
-      //         return respuestadelback.json();
-      //       }
-      //     })
-      // },
+      modificarevento: (event) => {
+        fetch(process.env.BACKEND_URL + "/api/modificarevento", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            evento: event
+          }),
+        }).then((respuestadelback) => {
+          if (respuestadelback.status == 200) {
+            return respuestadelback.json();
+          }
+        });
+        alert("Evento modificado con exito")
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend
