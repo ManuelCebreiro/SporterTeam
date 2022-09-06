@@ -29,7 +29,8 @@ export const EditUser = () => {
   const user = store.datosUsuario;
   useEffect(() => {
     actions.DatosUsuarioLogeado();
-  }, []);
+    if (store.validacioneditregister) navigate("/home");
+  }, [store.validacioneditregister]);
 
   const {
     register,
@@ -54,7 +55,7 @@ export const EditUser = () => {
       <form id="form_register" onSubmit={handleSubmit(onSubmit)}>
         <Photoperfil />
         <div id="form_register_body">
-          <label htmlFor="new_username">Username de {user.username}</label>
+          <label htmlFor="new_username">Username: {user.username}</label>
           <input
             name="new_username"
             type="text"
@@ -73,7 +74,7 @@ export const EditUser = () => {
           />
           {errors.new_username && <p>{errors.new_username.message}</p>}
 
-          <label htmlFor="new_description">Descripción</label>
+          <label htmlFor="new_description">Descripción:</label>
           <textarea
             id="description-textarea"
             name="new_description"
@@ -89,7 +90,7 @@ export const EditUser = () => {
           />
           {errors.new_description && <p>{errors.new_description.message}</p>}
 
-          <label htmlFor="new_email">Email de {user.email}</label>
+          <label htmlFor="new_email">Email: {user.email}</label>
           <input
             name="new_email"
             type="text"
@@ -104,7 +105,7 @@ export const EditUser = () => {
           />
           {errors.new_email && <p>{errors.new_email.message}</p>}
 
-          <label htmlFor="new_password">Contraseña nueva</label>
+          <label htmlFor="new_password">Contraseña nueva:</label>
           <input
             name="new_password"
             type="password"
@@ -118,12 +119,12 @@ export const EditUser = () => {
           />
           {errors.new_password && <p>{errors.new_password.message}</p>}
 
-          <label htmlFor="new_password_repeat">Repite contraseña nueva</label>
+          <label htmlFor="new_password_repeat">Repite contraseña nueva:</label>
           <input
             name="new_password_repeat"
             type="password"
             className={errors.new_password_repeat && "error"}
-            {...register("new_password_repeatt", {
+            {...register("new_password_repeat", {
               validate: (value) => {
                 if (watch("new_password") != value) {
                   return "Contraseña no coinciden";

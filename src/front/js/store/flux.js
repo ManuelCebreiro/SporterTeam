@@ -73,7 +73,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((resp) => {
             if (resp.status == 200) {
-              setStore({ validacionregister: true });
+              setStore({ validacioneditregister: true });
+              alert("Perfil de usuario actualizado correctamente");
               return resp.json();
             } else {
               alert("Error al cambiar los datos");

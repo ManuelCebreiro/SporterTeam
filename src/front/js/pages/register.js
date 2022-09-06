@@ -129,8 +129,8 @@ export const Register = () => {
           <input id="register_btn" value="submit" type="submit" />
         </div>
       </form>
-      <Link className="fw-bold text-body" to="/home">
-        Salir de Ajustes
+      <Link className="fw-bold text-body" to="/">
+        Salir de Registro
       </Link>
     </div>
   );
