@@ -165,3 +165,14 @@ def get_userdataParticipant():
         return jsonify(response),200
     except:
         return jsonify( "Data fail"),400
+
+        
+# Endpoint obtener datos usuario
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
+    response = user1.serialize()
+
+    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200

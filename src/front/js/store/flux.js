@@ -65,6 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zamora", posicion: [41.49913956, -5.75494831] },
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
+      datosUsuario: {},
     },
     actions: {
       getUserDataEventos: () => {
@@ -175,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + store,
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
             id: event,
@@ -326,6 +327,23 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
+      },
+      //Fetch de los datos de usuario ya logeado
+      DatosUsuarioLogeado: () => {
+        const token = sessionStorage.getItem("token");
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          method: "GET",
+        };
+        fetch(process.env.BACKEND_URL + "/api/user", options)
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
       },
 
       getMessage: async () => {

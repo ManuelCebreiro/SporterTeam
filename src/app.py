@@ -15,7 +15,12 @@ from flask_jwt_extended import JWTManager
 
 
 #from models import Person
-
+def set_up_jwt(app):
+    
+    app.config["JWT_SECRET_KEY"] = os.getenv("FLASK_APP_KEY")
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(days=1)
+    jwt = JWTManager(app)
+    
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')

@@ -4,21 +4,21 @@ import { DatosEventoUnico } from "../component/datoseventounico";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
-  const [userEventosactivos, setUserEventosactivos] = useState([]);
-  const [userEventosFinalizado, setUserEventosFinalizado] = useState([]);
+
   useEffect(() => {
     actions.getUserDataEventos();
-    setUserEventosFinalizado(filtrado(store.userDataEventos, "Finalizado"));
-    setUserEventosactivos(filtrado(store.userDataEventos, "Abierto"));
+    actions.DatosUsuarioLogeado();
   }, []);
 
-  function filtrado(arr, filtro) {
-    const filterarray = Array.from(arr).filter(
-      (element) => element.estadoEvento == filtro
-    );
-    return filterarray;
-  }
-
+  const eventos = store.userDataEventos;
+  const userEventosactivos = Array.from(eventos).filter(
+    (element) =>
+      element.estadoEvento == "Abierto" || element.estadoEvento == "Cerrado"
+  );
+  const userEventosFinalizado = Array.from(eventos).filter(
+    (element) => element.estadoEvento == "Finalizado"
+  );
+  const user = store.datosUsuario;
   return (
     <div class="container py-2">
       <div class="main-body">
@@ -63,23 +63,21 @@ export const Perfil = () => {
                   <div class="col-sm-3">
                     <h6 class="mb-0">Username:</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">hanks</div>
+                  <div class="col-sm-9 text-secondary">{user.username}</div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Age</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">31</div>
+                  <div class="col-sm-9 text-secondary">{user.age}</div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Description</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    Me gusta pelarme la banana
-                  </div>
+                  <div class="col-sm-9 text-secondary">{user.description}</div>
                 </div>
 
                 <hr />
