@@ -10,15 +10,17 @@
   background-color: #FF773D;
 }
 
-#bgdetalles {
+body #bgdetalles {
   background-color: #ffd5b3;
-  border: solid black;
+  border-left: solid black;
+  border-right: solid black;
+
 }
 
 #bgdetallesadmin {
-  background-color: #ffe2ca;
+  background-color: #fafafa;
   border: solid black;
-  border-style: double;
+  border-style: 2px solid;
   border-radius: 2%;
 }
 

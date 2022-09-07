@@ -20,10 +20,10 @@ export const DetallesEvento = () => {
 
   return (
 
-    <div className="container mt-4" id="bgdetalles">
-      <div className="row">
-        <div className="col-4 text-start">
-          <h1>Cuándo y dónde</h1>
+    <div className="container" id="bgdetalles">
+      <div className="row py-4">
+        <div className="col-4">
+          <h1 className="text-center">Cuándo y dónde</h1>
           <div className="bg-warning">
             <div className="row bg-light ms-1" id="estilosdatos">
               <h5>
@@ -108,7 +108,7 @@ export const DetallesEvento = () => {
           </div>
         </div>
         <div className="col-4 ">
-          <h1>JUGADORES</h1>
+          <h1 className="text-center">JUGADORES</h1>
           <div className="row">
             <div className="col-5 text-center">
               {players.map((element, index) => {
@@ -134,7 +134,7 @@ export const DetallesEvento = () => {
           </div>
         </div>
         <div className="col-4">
-          <h1>Descripcion</h1>-{detalles.description}
+          <h1 className="text-center">Descripcion</h1>-{detalles.description}
         </div>
       </div>
       {detalles.admin == datosUsuario.id ? <DetallesEventoAdmin /> : undefined}
