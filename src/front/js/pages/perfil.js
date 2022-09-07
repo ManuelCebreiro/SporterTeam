@@ -20,26 +20,26 @@ export const Perfil = () => {
   );
   const user = store.datosUsuario;
   return (
-    <div class="container py-2">
-      <div class="main-body">
-        <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
+    <div className="container py-2">
+      <div className="main-body">
+        <div className="row gutters-sm">
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex flex-column align-items-center text-center">
                   <img
                     src={store.imagen}
                     alt="Admin"
-                    class="rounded-circle fluid"
+                    className="rounded-circle fluid"
                     style={{ width: "250px" }}
                   />
                 </div>
               </div>
             </div>
-            <div class="card mt-3 p-2">
+            <div className="card mt-3 p-2">
               <h5>Eventos Pendientes</h5>
-              <table class="table">
-                <thead class="thead-dark">
+              <table className="table">
+                <thead className="thead-dark">
                   <tr>
                     <th scope="col">Sport</th>
                     <th scope="col">Date</th>
@@ -56,35 +56,37 @@ export const Perfil = () => {
               </table>
             </div>
           </div>
-          <div class="col-md-8">
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Username:</h6>
+          <div className="col-md-8">
+            <div className="card mb-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Username:</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">{user.username}</div>
+                  <div className="col-sm-9 text-secondary">{user.username}</div>
                 </div>
                 <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Age</h6>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Age</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">{user.age}</div>
+                  <div className="col-sm-9 text-secondary">{user.age}</div>
                 </div>
                 <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Description</h6>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <h6 className="mb-0">Description</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">{user.description}</div>
+                  <div className="col-sm-9 text-secondary">
+                    {user.description}
+                  </div>
                 </div>
 
                 <hr />
-                <div class="row">
-                  <div class="col-sm-12">
+                <div className="row">
+                  <div className="col-sm-12">
                     <a
-                      class="btn btn-info "
+                      className="btn btn-info "
                       target="__blank"
                       href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
                     >
@@ -95,15 +97,15 @@ export const Perfil = () => {
               </div>
             </div>
 
-            <div class="row gutters-sm">
-              <div class="col-sm-6 mb-3">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="d-flex align-items-center mb-3">
+            <div className="row gutters-sm">
+              <div className="col-sm-6 mb-3">
+                <div className="card h-100">
+                  <div className="card-body">
+                    <h5 className="d-flex align-items-center mb-3">
                       Eventos en los que participo
                     </h5>
-                    <table class="table">
-                      <thead class="thead-dark">
+                    <table className="table">
+                      <thead className="thead-dark">
                         <tr>
                           <th scope="col">Sport</th>
                           <th scope="col">Date</th>
@@ -126,14 +128,14 @@ export const Perfil = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 mb-3">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h5 class="d-flex align-items-center mb-3">
+              <div className="col-sm-6 mb-3">
+                <div className="card h-100">
+                  <div className="card-body">
+                    <h5 className="d-flex align-items-center mb-3">
                       Historial de eventos
                     </h5>
-                    <table class="table">
-                      <thead class="thead-dark">
+                    <table className="table">
+                      <thead className="thead-dark">
                         <tr>
                           <th scope="col">Sport</th>
                           <th scope="col">Date</th>

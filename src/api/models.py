@@ -15,7 +15,7 @@ class User(db.Model):
     profile_image_url =  db.Column(db.String(250), unique=False)
     age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
-    participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('user', lazy=True))
+    participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('users', lazy=True))#cambiarle el nombre
     
     def __repr__(self):
         return f'<User {self.email}>'
@@ -28,8 +28,20 @@ class User(db.Model):
             "age": self.age,
             "description" : self.description,
             "participant" : self.participant,
+            
             # do not serialize the password, its a security breach
         }
+
+    def serializeWithoutParticipant(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "username": self.username,
+            "age": self.age,
+            "description" : self.description,
+            # do not serialize the password, its a security breach
+        }
+
 class Evento(db.Model):
     id = db.Column(db.Integer, primary_key=True )
     sport = db.Column(db.String(250))

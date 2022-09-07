@@ -68,6 +68,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       datosUsuario: {},
     },
     actions: {
+      expulsarUsuarioEvento: (idevento, idusuario) => {
+        const token = sessionStorage.getItem("token");
+        fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({
+            idUser: idusuario,
+          }),
+        });
+      },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
         var requestOptions = {
@@ -82,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => setStore({ userDataEventos: result }));
       },
+      //octener todos los jugadores de un evento
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
           .then((resp) => {
@@ -91,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ jugadores: data });
           });
       },
+
       look_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
           .then((resp) => {

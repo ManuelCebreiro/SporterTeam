@@ -142,17 +142,23 @@ def get_event(id):
 def get_users(id):
     try:
         event = Evento.query.filter_by(id=id).one_or_none()
-        eventoUser =event.user
-        response =[x.serialize() for x in eventoUser]
+        eventoUser = User.query.with_parent(event).all()
+        response =[x.serializeWithoutParticipant() for x in eventoUser]
         return jsonify(response), 200
     except:
-        return jsonify("invalid Method"),400
+        return jsonify("Data fail")
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+#echar usuario del evento
+@api.route('/exitEvents/<int:id>', methods=["DELETE"])
+def delete_usersEvent(id):
+    idUser = request.json.get("idUser")
+    user = User.query.filter_by(id = idUser).one_or_none()
+    event = Evento.query.filter_by(id=id).one_or_none()
+    user.participant.remove(event)
+    db.session.commit()
+    return jsonify("Usuario expulsado")
 
-    return jsonify(response_body), 200
+
 
 @api.route('/Userdataparticipant', methods=["GET"])
 @jwt_required()

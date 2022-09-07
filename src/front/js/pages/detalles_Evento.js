@@ -1,17 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
-import { element } from "prop-types";
+import { ExpulsarUsuarioEvento } from "../component/botonExpulsarUsuario";
 
 export const DetallesEvento = () => {
   const { store, actions } = useContext(Context);
   const detalles = store.dataEventoUnico;
   const players = store.jugadores;
+  const user = store.datosUsuario;
   let params = useParams();
 
   useEffect(() => {
     actions.look_event(params.theid);
     actions.get_player_event(params.theid);
+    actions.DatosUsuarioLogeado();
   }, []);
   const color =
     detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
@@ -74,6 +76,14 @@ export const DetallesEvento = () => {
         </div>
         <div className="col-4">
           <h1>Descripcion</h1>-{detalles.description}
+          <div>
+            <ExpulsarUsuarioEvento
+              idevento={detalles.id}
+              idusuario={user.id}
+              buttontext={"Salir del evento"}
+              linkverificacion={true}
+            />
+          </div>
         </div>
       </div>
       <div className="row text-center">
@@ -83,7 +93,7 @@ export const DetallesEvento = () => {
             actions.getUserDataEventos();
           }}
         >
-          <button type="button" class="btn btn-secondary">
+          <button type="button" className="btn btn-secondary">
             Volver al Perfil
           </button>
         </Link>
