@@ -6,8 +6,6 @@ import "/workspace/SporterTeam/src/front/styles/photoperfil.css"
 
 export const Photoperfil = props => {
 	const { store, actions } = useContext(Context);
-	// const [files, setFiles] = useState(null);
-	// const [image, setImage] = useState("https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200")
 	const [respuesta, setRespuesta] = useState("");
 
 
@@ -27,10 +25,6 @@ export const Photoperfil = props => {
 			.then(resp => resp.json())
 			.then(data => actions.LoadImage(data)
 			)
-		// .then(data => {
-		// 	console.log("Todo bien very nice men!!!", data)
-		// 	setImage(data)
-		// })
 		actions.getrespuesta("")
 			.catch(error => console.error("ERRORRRR!!!", error))
 

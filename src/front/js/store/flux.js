@@ -231,6 +231,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
 
       },
+      LoadImage: (data) => {
+        setStore({ imagen: data });
+      },
+
       Load: (parametro) => {
         const options = {
           headers: {

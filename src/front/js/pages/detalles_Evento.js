@@ -18,13 +18,9 @@ export const DetallesEvento = () => {
     actions.DatosUsuarioLogeado();
   }, []);
 
-
   return (
 
     <div className="container">
-
-      {detalles.admin == datosUsuario.id ? <DetallesEventoAdmin /> : undefined}
-
       <div className="row">
         <div className="col-4 text-start">
           <h1>Cuándo y dónde</h1>
@@ -61,8 +57,10 @@ export const DetallesEvento = () => {
             <div className="col-5 text-center">
               {players.map((element, index) => {
                 if (element.id % 2 !== 0) {
-                  return <ol key={index}>{element.username}</ol>;
-                  <button type="button" class="btn-close" aria-label="Close"></button>
+                  return <ol key={index}>{element.username}
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                  </ol>;
+
                 }
               })}
 
@@ -70,8 +68,10 @@ export const DetallesEvento = () => {
             <div className="col-5 text-center">
               {players.map((element, index) => {
                 if (element.id % 2 == 0) {
-                  return <ol key={index}>{element.username}</ol>;
-                  <button type="button" class="btn-close" aria-label="Close"></button>
+                  return <ol key={index}>{element.username}
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                  </ol>;
+
                 }
               })}
             </div>
@@ -81,6 +81,7 @@ export const DetallesEvento = () => {
           <h1>Descripcion</h1>-{detalles.description}
         </div>
       </div>
+      {detalles.admin == datosUsuario.id ? <DetallesEventoAdmin /> : undefined}
       <div className="row text-center">
         <Link to="/perfil">
           <button type="button" class="btn btn-secondary">
