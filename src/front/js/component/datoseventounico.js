@@ -9,12 +9,12 @@ export const DatosEventoUnico = ({ id }) => {
   return (
     <div>
       <Link
-        to="/Detalles_Evento/1"
+        to={`/Detalles_Evento/${id}`}
         onClick={() => {
           actions.look_event(id);
         }}
       >
-        <button className="btn btn-info">Ver datos del evento</button>
+        <button className="btn btn-info btn-sm p-0 border">Mas datos</button>
       </Link>
     </div>
   );

@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      userDataEventos: [],
       token: "",
       imagen:
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
@@ -64,8 +65,38 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zamora", posicion: [41.49913956, -5.75494831] },
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
+      datosUsuario: {},
     },
     actions: {
+      expulsarUsuarioEvento: (idevento, idusuario) => {
+        const token = sessionStorage.getItem("token");
+        fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({
+            idUser: idusuario,
+          }),
+        });
+      },
+      getUserDataEventos: () => {
+        const token = sessionStorage.getItem("token");
+        var requestOptions = {
+          method: "GET",
+          headers: { Authorization: "Bearer " + token },
+        };
+
+        fetch(
+          process.env.BACKEND_URL + "/api/Userdataparticipant",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => setStore({ userDataEventos: result }));
+      },
+      //octener todos los jugadores de un evento
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
           .then((resp) => {
@@ -75,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ jugadores: data });
           });
       },
+
       look_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
           .then((resp) => {
@@ -154,13 +186,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       //funcion para unirse a un evento de la lista
       joinEvent: (event) => {
-        const store = getStore();
+        const token = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/joinevent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + store.token,
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
             id: event,
@@ -312,33 +344,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
-      // useradmin: (event) => {
-      //   // const store = getStore();
-      //   fetch(process.env.BACKEND_URL + "/api/useradmin", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       // Accept: "application/json",
-      //       // Authorization: "Bearer " + store.token,
-      //     },
-      //     body: JSON.stringify({
-      //       payment: event.payment,
-      //       space: event.space,
-      //       duration: event.duration,
-      //       agemin: event.agemin,
-      //       agemax: event.agemax,
-      //       date: event.date,
-      //       sport: event.sport,
-      //       description: event.description,
-      //       participantmax: event.participantmax
-      //     }),
-      //   })
-      //     .then((respuestadelback) => {
-      //       if (respuestadelback.status == 200) {
-      //         return respuestadelback.json();
-      //       }
-      //     })
-      // },
+      //Fetch de los datos de usuario ya logeado
+      DatosUsuarioLogeado: () => {
+        const token = sessionStorage.getItem("token");
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          method: "GET",
+        };
+        fetch(process.env.BACKEND_URL + "/api/user", options)
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
+      },
+
       getMessage: async () => {
         try {
           // fetching data from the backend
