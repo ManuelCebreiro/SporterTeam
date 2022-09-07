@@ -6,8 +6,8 @@ import getState from "../store/flux";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
-    <nav className="navbar navbar-expand-lg  bg-danger p-1">
-      <Link to="/photoperfil">
+    <nav className="navbar navbar-expand-lg p-1" id="navbarstyle">
+      <Link to="/perfil">
         <img
           id="imagenPerfilNavbar"
           className="img-fluid rounded-circle"

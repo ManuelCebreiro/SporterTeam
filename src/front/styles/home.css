@@ -2,3 +2,31 @@
   width: 40px;
   height: 40px;
 }
+
+/* PALETA COLORES #FABC3C #FFB238 #F19143 #FF773D #F55536 */
+
+/* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
+#navbarstyle {
+  background-color: #FF773D;
+}
+
+#bgdetalles {
+  background-color: #ffd5b3;
+  border: solid black;
+}
+
+#bgdetallesadmin {
+  background-color: #ffe2ca;
+  border: solid black;
+  border-style: double;
+  border-radius: 2%;
+}
+
+#estilosdatos {
+  border: solid 2px black;
+  border-bottom: none;
+}
+
+#estilosdatos1 {
+  border: solid 2px black;
+}

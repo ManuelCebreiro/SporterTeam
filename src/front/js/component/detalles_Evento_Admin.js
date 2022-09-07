@@ -33,8 +33,8 @@ export const DetallesEventoAdmin = () => {
 
   return (
     <div className="container">
-      <h1>Editar Evento</h1>
-      <div class="container py-5 bg-light border border-dark">
+      <h1 className="text-center">Editar Evento</h1>
+      <div class="container py-5" id="bgdetallesadmin">
         <div class="row">
           <div class="col-md-2">
             <label class="form-label">Deporte</label>
