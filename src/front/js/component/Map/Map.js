@@ -20,6 +20,20 @@ class MapComp extends Component {
     const searchControl = new ELG.Geosearch().addTo(map);
     const results = new L.LayerGroup().addTo(map);
 
+    map.on("click", (e) => {
+      new ELG.ReverseGeocode().latlng(e.latlng).run((error, result) => {
+        if (error) {
+          return;
+        }
+        if (this.marker && map.hasLayer(this.marker))
+          map.removeLayer(this.marker);
+
+        this.marker = L.marker(result.latlng).addTo(map);
+        bindPopup(result.address.Match_addr);
+        openPopup();
+      });
+    });
+
     searchControl.on("results", function (data) {
       results.clearLayers();
       for (let i = data.results.length - 1; i >= 0; i--) {
@@ -29,12 +43,12 @@ class MapComp extends Component {
   }
 
   render() {
-    const center = [37.7833, -122.4167];
+    const center = [40.4167, -3.7037];
     return (
       <Map
         style={{ height: "100vh" }}
         center={center}
-        zoom="10"
+        zoom="6"
         ref={(m) => {
           this.leafletMap = m;
         }}
