@@ -19,31 +19,52 @@ class MapComp extends Component {
     const map = this.leafletMap.leafletElement;
     const searchControl = new ELG.Geosearch().addTo(map);
     const results = new L.LayerGroup().addTo(map);
-    //const popup = L.popup();
-    //   function onMapClick(e) {
-    //     popup
-    //         .setLatLng(e.latlng)
-    //         .setContent("You clicked the map at " + e.latlng.toString())
-    //         .openOn(map);
-    // }
 
-    // map.on('click', onMapClick);
+    const markers = []; //MARKERS es el Array de distintos marker
 
-    const marker = L.marker([43.262985, -2.935013]).addTo(map);
+    function compareMarkers(marker1, marker2) {
+      //Compara dos markers y devuelve true si son iguales
+      const positionMarker1 = marker1.getLatLng();
+      const positionMarker2 = marker2.getLatLng();
+      return (
+        positionMarker1.lat === positionMarker2.lat &&
+        positionMarker1.lng === positionMarker2.lng
+      );
+    }
 
+    function findMarker(marker) {
+      //Comparar el Array hasta encontrar elemento
+      for (let i = markers.length - 1; i >= 0; i--) {
+        if (compareMarkers(markers[i], marker)) {
+          return i;
+        }
+      }
+      return null;
+    }
+    // Función de hacer click en el mapa
     map.on("click", (e) => {
       new ELG.ReverseGeocode().latlng(e.latlng).run((error, result) => {
         if (error) {
           return;
         }
-        if (this.marker && map.hasLayer(this.marker))
-          map.removeLayer(this.marker);
 
-        this.marker = L.marker(result.latlng).addTo(map);
+        const marker = L.marker(result.latlng).addTo(map);
         marker.bindPopup(result.address.Match_addr).openPopup();
+        marker.on("click", (clickEvent) => {
+          //Función de hacer click en un marker para borrarlo del Array MARKERS y del mapa
+          const positionArray = findMarker(marker);
+          if (positionArray != null) {
+            markers.splice(positionArray, 1); // SPLICE Elimina el marker del Array
+          }
+
+          marker.remove(); //REMOVE Elimina el marker del Mapa
+        });
+        markers.push(marker); // PUSH Añade el marker al Array
+        console.log(markers);
+        console.log(result.latlng);
       });
     });
-
+    // Función de búsqueda en el mapa
     searchControl.on("results", function (data) {
       results.clearLayers();
       for (let i = data.results.length - 1; i >= 0; i--) {
