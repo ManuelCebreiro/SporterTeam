@@ -114,3 +114,14 @@ npm install react-hook-form
 ## MANO DE SANTO
 
 rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade
+
+## ESRI-LEAFLET INSTALACIONES
+
+leaflet:1.4.0
+react-leaflet:2.2.1
+esri-leaflet:2.2.3
+esri-leaflet-geocoder:2.2.13
+
+EN EL TEMPLATE DE HTML :
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" crossorigin=""/>
