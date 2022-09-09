@@ -169,7 +169,7 @@ export const EditUser = () => {
           <input id="register_btn" value="submit" type="submit" />
         </div>
       </form>
-      <Link className="fw-bold text-body" to="/home">
+      <Link className="fw-bold text-body" to="/perfil">
         Salir de Ajustes
       </Link>
     </div>

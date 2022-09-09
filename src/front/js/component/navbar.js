@@ -29,20 +29,23 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link className="nav-link text-warning" to="/home">
-              Pagina principal <span className="sr-only">(current)</span>
+            <Link to="/home">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
+                Pagina principal
+              </button>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/newevent">
-              <a className="nav-link text-warning" href="#">
-                newevent
-              </a>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-warning" to="/edituser">
-              Edituser
+            <Link to="/newevent" className="mt-1">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
+                Newevent
+              </button>
             </Link>
           </li>
           <li className="nav-item">
@@ -52,9 +55,12 @@ export const Navbar = () => {
                 actions.logout();
               }}
             >
-              <a className="nav-link text-warning" href="">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm mt-1 ms-1"
+              >
                 Log out
-              </a>
+              </button>
             </Link>
           </li>
           <li className="nav-item dropdown">
@@ -71,17 +77,7 @@ export const Navbar = () => {
             <div
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
-            >
-              <a className="dropdown-item text-warning" href="#">
-                Action
-              </a>
-              <a className="dropdown-item text-warning" href="#">
-                Another action
-              </a>
-              <a className="dropdown-item text-warning" href="#">
-                Something else here
-              </a>
-            </div>
+            ></div>
           </li>
         </ul>
       </div>

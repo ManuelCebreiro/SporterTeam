@@ -9,8 +9,8 @@ const messages = {
   required: "Este campo es obligatorio",
   username: "El formato introducido no es el correcto",
   email: "Debes introducir una dirección correcta",
-  password: "Password debe tener mínimo 5 caracteres",
-  password_repeat: "Password no coincide",
+  password: "Contraseña debe tener mínimo 5 caracteres",
+  password_repeat: "Contraseña no coincide",
   age: "Debes tener mínimo 18 y máximo 99 años",
 };
 
