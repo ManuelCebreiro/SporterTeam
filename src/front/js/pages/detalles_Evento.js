@@ -1,28 +1,31 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
-import { element } from "prop-types";
+import { ExpulsarUsuarioEvento } from "../component/botonExpulsarUsuario";
 import { DetallesEventoAdmin } from "../component/detalles_Evento_Admin";
 
 export const DetallesEvento = () => {
   const { store, actions } = useContext(Context);
   const detalles = store.dataEventoUnico;
   const players = store.jugadores;
+  const user = store.datosUsuario;
   let params = useParams();
   const datosUsuario = store.datosUsuario;
-  // console.log(players)
 
   useEffect(() => {
     actions.look_event(params.theid);
     actions.get_player_event(params.theid);
     actions.DatosUsuarioLogeado();
   }, []);
-
+  const color =
+    detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
+      ? { color: "green" }
+      : { color: "red" };
   return (
 
     <div className="container" id="bgdetalles">
       <div className="row py-4">
-        <div className="col-4">
+        <div className="col-6 ps-4">
           <h1 className="text-center">Cuándo y dónde</h1>
           <div className="bg-warning">
             <div className="row bg-light ms-1" id="estilosdatos">
@@ -107,25 +110,37 @@ export const DetallesEvento = () => {
             </div>
           </div>
         </div>
-        <div className="col-4 ">
+        <div className="col-3 ">
           <h1 className="text-center">JUGADORES</h1>
           <div className="row">
-            <div className="col-5 text-center">
-              {players.map((element, index) => {
+            <div className="col-5 text-start">
+              {Array.from(players).map((element, index) => {
                 if (element.id % 2 !== 0) {
-                  return <ol key={index}>{element.username}
-                    <button type="button" class="btn-close" aria-label="Close"></button>
+                  return <ol key={index} className="ps-2">
+                    {element.username} {""}
+                    {user.id == detalles.admin ? <button type="button" class="btn-close" aria-label="Close"
+                      onClick={() => {
+                        actions.expulsarUsuarioEvento(detalles.id, element.id);
+                      }}
+                    ></button> : undefined}
+
                   </ol>;
+
 
                 }
               })}
 
             </div>
-            <div className="col-5 text-center">
-              {players.map((element, index) => {
+            <div className="col-5 text-start">
+              {Array.from(players).map((element, index) => {
                 if (element.id % 2 == 0) {
-                  return <ol key={index}>{element.username}
-                    <button type="button" class="btn-close" aria-label="Close"></button>
+                  return <ol key={index} className="ps-2">{element.username} {""}
+                    {user.id == detalles.admin ? <button type="button" class="btn-close" aria-label="Close"
+                      onClick={() => {
+                        actions.expulsarUsuarioEvento(detalles.id, element.id);
+                      }}
+                    ></button> : undefined}
+
                   </ol>;
 
                 }
@@ -133,19 +148,34 @@ export const DetallesEvento = () => {
             </div>
           </div>
         </div>
-        <div className="col-4">
-          <h1 className="text-center">Descripcion</h1>-{detalles.description}
+        <div className="col-3">
+          <h1>Descripcion</h1>
+          <div>{detalles.description}</div>
+          <div>
+            <ExpulsarUsuarioEvento
+              idevento={detalles.id}
+              idusuario={user.id}
+              buttontext={"Salir del evento"}
+              linkverificacion={true}
+
+            />
+          </div>
         </div>
       </div>
       {detalles.admin == datosUsuario.id ? <DetallesEventoAdmin /> : undefined}
       <div className="row text-center">
-        <Link to="/perfil">
-          <button type="button" class="btn btn-secondary my-4">
+        <Link
+          to="/perfil"
+          onClick={() => {
+            actions.getUserDataEventos(params.theid);
+          }}
+        >
+          <button type="button" className="btn btn-secondary">
             Volver al Perfil
           </button>
         </Link>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 
 

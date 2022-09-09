@@ -11,9 +11,11 @@
 }
 
 body #bgdetalles {
+  height: 100%;
   background-color: #ffd5b3;
   border-left: solid black;
   border-right: solid black;
+  border-bottom: solid black;
 
 }
 

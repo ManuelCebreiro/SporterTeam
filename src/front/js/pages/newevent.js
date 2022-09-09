@@ -30,13 +30,12 @@ export const Newevent = () => {
           <div class="col-md-2">
             <label class="form-label">Deporte</label>
             <select class="form-select"
-              value={event.sport}
+              // value={event.sport}
               onChange={(e) => {
                 setEvent({ ...event, sport: e.target.value });
               }}>
-              <option selected disabled
+              <option selected disabled>Elige</option>
 
-              >{""}</option>
               <option>Baloncesto</option>
               <option>Fútbol</option>
               <option>Tenis</option>
@@ -68,6 +67,7 @@ export const Newevent = () => {
               onChange={(e) => {
                 setEvent({ ...event, participantmax: e.target.value });
                 console.log({ participantmax: e.target.value })
+
               }} />
           </div>
 
@@ -147,6 +147,7 @@ export const Newevent = () => {
             <label class="my-3">Descripción</label>
             <textarea class="form-control" rows="3"
               value={event.description}
+              placeholder="Descripción"
               onChange={(e) => {
                 setEvent({ ...event, description: e.target.value });
               }}></textarea>

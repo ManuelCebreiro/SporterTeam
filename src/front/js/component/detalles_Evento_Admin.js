@@ -39,24 +39,21 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label class="form-label">Deporte</label>
             <select class="form-select"
-              defaultValue={detalles.sport}
+              Value={detalles.sport}
               onChange={(e) => {
                 setDetails({ ...details, sport: e.target.value });
               }}>
-              <option selected disabled
-
-              >{""}</option>
+              <option selected disabled>Elige</option>
               <option>Baloncesto</option>
               <option>Fútbol</option>
               <option>Tenis</option>
               <option>Padel</option>
 
-
             </select>          </div>
           <div class="col-md-2">
             <label class="form-label">Fecha</label>
             <input type="date" class="form-control" min="2022-08-27" max="2030-12-31" placeholder="Fecha" required
-              defaultValue={detalles.date}
+              Value={detalles.date}
               onChange={(e) => {
                 setDetails({ ...details, date: e.target.value });
               }} />
@@ -64,7 +61,7 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label class="form-label">Duracion evento</label>
             <input type="number" class="form-control" placeholder="Duracion evento"
-              defaultValue={detalles.duration}
+              Value={detalles.duration}
               onChange={(e) => {
                 setDetails({ ...details, duration: e.target.value });
               }}
@@ -73,7 +70,7 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label class="form-label">Participantes</label>
             <input type="number" class="form-control" placeholder="Participantes" required
-              defaultValue={detalles.participantmax}
+              Value={detalles.participantmax}
               onChange={(e) => {
                 setDetails({ ...details, participantmax: e.target.value });
               }} />
@@ -82,7 +79,7 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label for="validationCustom04" class="form-label">Ciudad</label>
             <select class="form-select"
-              defaultValue={detalles.ciudad}
+              Value={detalles.ciudad}
               onChange={(e) => {
                 setDetails({ ...details, ciudad: e.target.value });
               }}
@@ -106,7 +103,7 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label class="form-label">Opción de pago</label>
             <input type="number" class="form-control" placeholder="Cantidad"
-              defaultValue={detalles.payment}
+              Value={detalles.payment}
               onChange={(e) => {
                 setDetails({ ...details, payment: e.target.value });
               }} required />
@@ -114,7 +111,7 @@ export const DetallesEventoAdmin = () => {
           <div class="col-md-2">
             <label class="form-label">Edad mínima</label>
             <input type="number" min="0" max="150" class="form-control" placeholder="Edad mínima"
-              defaultValue={detalles.agemin}
+              Value={detalles.agemin}
               onChange={(e) => {
                 setDetails({ ...details, agemin: e.target.value });
               }} required />
@@ -124,7 +121,7 @@ export const DetallesEventoAdmin = () => {
             <input type="number" class="form-control" placeholder="Edad máxima"
               min="0"
               max="150"
-              defaultValue={detalles.agemax}
+              Value={detalles.agemax}
               onChange={(e) => {
                 console.log(typeof (Number(e.target.value)))
                 setDetails({ ...details, agemax: e.target.value });
@@ -135,7 +132,7 @@ export const DetallesEventoAdmin = () => {
             <label class="form-label">Tipo de lugar</label>
 
             <select class="form-select"
-              defaultValue={detalles.space}
+              Value={detalles.space}
 
               // value={event.space ? "cubierto" : "airelibre"}
               onChange={(e) => {
@@ -156,7 +153,7 @@ export const DetallesEventoAdmin = () => {
             <label class="form-label">Estado evento</label>
 
             <select class="form-select"
-              defaultValue={detalles.estadoEvento}
+              Value={detalles.estadoEvento}
               onChange={(e) => {
                 setDetails({ ...details, estadoEvento: e.target.value });
               }
@@ -172,17 +169,20 @@ export const DetallesEventoAdmin = () => {
           <div class="form-group">
             <label class="my-3">Descripción</label>
             <textarea class="form-control" rows="3"
-              defaultValue={detalles.description}
+              Value={detalles.description}
+              placeholder="Descripcion"
               onChange={(e) => {
                 setDetails({ ...details, description: e.target.value });
               }}></textarea>
           </div>
 
           <div class="col-12 mt-3">
-
-            <button class="btn btn-primary" type="submit"
-              onClick={() => { actions.modificarevento(details) }}
-            >Modificar</button>
+            <Link
+              to="/perfil">
+              <button class="btn btn-primary" type="submit"
+                onClick={() => { actions.modificarevento(details) }}
+              >Modificar</button>
+            </Link>
           </div>
 
         </div>

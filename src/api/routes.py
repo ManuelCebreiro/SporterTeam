@@ -47,15 +47,6 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-@api.route('/user', methods=['GET'])
-@jwt_required()
-def get_user():
-    identity = get_jwt_identity()  # pide el token
-    user1 = User.query.filter_by(email=identity).one_or_none()
-    response = user1.serialize()
-
-    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200
-
 #CARGAR IMAGEN EN LA BASE DE DATOS
 @api.route('/upload', methods=['POST'])
 @jwt_required()
@@ -131,7 +122,7 @@ def create_evento():
     description = request.json.get("description")
     participantmax = request.json.get("participantmax")
     ciudad = request.json.get("ciudad")
-    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax)
+    evento = Evento(admin = user.id, ciudad = ciudad, payment = payment, space = space, duration = duration, agemin = agemin, agemax = agemax, date = date, sport = sport, description = description, participantmax = participantmax,estadoEvento = "Abierto")
     user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
@@ -145,23 +136,52 @@ def get_event(id):
         event = Evento.query.filter_by(id=id).one_or_none()
         return jsonify(event.serialize()),200
     except:
-        return "invalid Method ", 400
+        return jsonify("invalid Method "), 400
 #sacar todos los usuarios
 @api.route('/playerEvents/<int:id>', methods=["GET"])
 def get_users(id):
     try:
         event = Evento.query.filter_by(id=id).one_or_none()
-        eventoUser =event.user
-        response =[x.serialize() for x in eventoUser]
+        eventoUser = User.query.with_parent(event).all()
+        response =[x.serializeWithoutParticipant() for x in eventoUser]
         return jsonify(response), 200
     except:
-        return"invalid Method",400
+        return jsonify("Data fail")
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+#echar usuario del evento
+@api.route('/exitEvents/<int:id>', methods=["DELETE"])
+def delete_usersEvent(id):
+    idUser = request.json.get("idUser")
+    user = User.query.filter_by(id = idUser).one_or_none()
+    event = Evento.query.filter_by(id=id).one_or_none()
+    user.participant.remove(event)
+    db.session.commit()
+    return jsonify("Usuario expulsado")
 
-    return jsonify(response_body), 200
+
+
+@api.route('/Userdataparticipant', methods=["GET"])
+@jwt_required()
+def get_userdataParticipant():
+    try:
+        identity = get_jwt_identity()       
+        user = User.query.filter_by(email = identity).one_or_none() 
+        userpar = user.participant
+        response =[x.serialize() for x in userpar] 
+        return jsonify(response),200
+    except:
+        return jsonify( "Data fail"),400
+
+        
+# Endpoint obtener datos usuario
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
+    response = user1.serialize()
+
+    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200
 
 # ----------------------------------------------------ENDPOINT PARA MODIFICAR DATOS DE UN EVENTO-------------------------------------------------------------
 
