@@ -65,7 +65,7 @@ export const Navbar = () => {
           </li>
           <li className="nav-item dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle text-warning"
               href="#"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"

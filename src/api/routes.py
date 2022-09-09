@@ -33,6 +33,41 @@ def create_user():
     return jsonify({"msg": "user register"}), 200
 
 
+# ENDPOINT PARA CAMBIAR DATOS DEL PERFIL DEL USUARIO
+
+@api.route("/edituser", methods=["POST"])
+@jwt_required()
+def edit_user():
+    new_username = request.json.get("new_username")
+    new_email = request.json.get("new_email")
+    new_password = request.json.get("new_password")
+    new_age = request.json.get("new_age")
+    new_description = request.json.get("new_description")
+    current_user = User.query.filter_by(email=get_jwt_identity()).first()
+
+    user_new_email = User.query.filter_by(email=new_email).one_or_none()
+    user_new_username = User.query.filter_by(
+        username=new_username).one_or_none()
+    print(user_new_username)
+    print(user_new_email)
+    if user_new_username or user_new_email:
+        return jsonify({"msg": "username o email ya existen"}), 401
+    if new_username:
+        current_user.username = new_username
+    if new_email:
+        current_user.email = new_email
+    if new_password:
+        current_user.password = new_password
+    if new_age:
+        current_user.age = new_age
+    if new_description:
+        current_user.description = new_description
+
+    db.session.commit()
+
+    return jsonify({"msg": "Perfil actualizado"}), 200
+
+
 # ENDPOINT PARA OBTENER EL TOKEN EN EL LOGIN
 @api.route('/token', methods=["POST"])
 def create_token():
@@ -47,12 +82,26 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-#CARGAR IMAGEN EN LA BASE DE DATOS
+# Endpoint obtener datos usuario
+
+
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
+    response = user1.serialize()
+
+    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200
+
+# CARGAR IMAGEN EN LA BASE DE DATOS
+
+
 @api.route('/upload', methods=['POST'])
 @jwt_required()
 def handle_upload():
-    identity = get_jwt_identity()     #pide el token
-    user1 = User.query.filter_by(email = identity).one_or_none()
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
     result = cloudinary.uploader.upload(request.files['profile_image'])
     user1.profile_image_url = result['secure_url']
     db.session.add(user1)
@@ -61,23 +110,26 @@ def handle_upload():
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
+
 @api.route('/upload', methods=['DELETE'])
 @jwt_required()
 def handle_deleteimage():
-    identity = get_jwt_identity()     #pide el token
-    user1 = User.query.filter_by(email = identity).one_or_none()
+    identity = get_jwt_identity()  # pide el token
+    user1 = User.query.filter_by(email=identity).one_or_none()
     user1.profile_image_url = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
     db.session.commit()
 
     return jsonify(user1.profile_image_url), 200
     # return jsonify(user1.profile_image_url), 200
 
-#ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
+# ENDPOINT PARA TRAER LA IMAGEN DE PERFIL DE LA BASE DE DATOS
+
+
 @api.route('/load', methods=['GET'])
 @jwt_required()
 def handle_load():
     identity = get_jwt_identity()
-    user = User.query.filter_by(email = identity).one_or_none()
+    user = User.query.filter_by(email=identity).one_or_none()
 
     return jsonify(user.profile_image_url), 200
 # ENDPOINT PARA OPTENER TODOS LOS EVENTOS
@@ -173,17 +225,6 @@ def get_userdataParticipant():
         return jsonify( "Data fail"),400
 
         
-# Endpoint obtener datos usuario
-@api.route('/user', methods=['GET'])
-@jwt_required()
-def get_user():
-    identity = get_jwt_identity()  # pide el token
-    user1 = User.query.filter_by(email=identity).one_or_none()
-    response = user1.serialize()
-
-    return jsonify({"username": user1.username, "description": user1.description, "email": user1.email, "age": user1.age, "id": user1.id, }), 200
-
-# ----------------------------------------------------ENDPOINT PARA MODIFICAR DATOS DE UN EVENTO-------------------------------------------------------------
 
 @api.route('/modificarevento', methods=["PUT"])
 def modificar_evento():

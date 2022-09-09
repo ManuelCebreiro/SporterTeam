@@ -21,6 +21,7 @@ export const DetallesEvento = () => {
     detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
       ? { color: "green" }
       : { color: "red" };
+
   return (
 
     <div className="container" id="bgdetalles">

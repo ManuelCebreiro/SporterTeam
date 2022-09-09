@@ -7,7 +7,7 @@
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
 #navbarstyle {
-  background-color: #FF773D;
+  background-color: #ff773d;
 }
 
 body #bgdetalles {
@@ -16,7 +16,6 @@ body #bgdetalles {
   border-left: solid black;
   border-right: solid black;
   border-bottom: solid black;
-
 }
 
 #bgdetallesadmin {
