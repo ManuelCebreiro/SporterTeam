@@ -6,7 +6,7 @@ import getState from "../store/flux";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
-    <nav className="navbar navbar-expand-lg  bg-danger p-1">
+    <nav className="navbar navbar-expand-lg  bg-secondary p-1 primary">
       <Link to="/photoperfil">
         <img
           id="imagenPerfilNavbar"
@@ -65,7 +65,7 @@ export const Navbar = () => {
           </li>
           <li className="nav-item dropdown">
             <a
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle text-warning"
               href="#"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"

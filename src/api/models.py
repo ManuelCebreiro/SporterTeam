@@ -3,9 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 participant = db.Table('participant',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-    db.Column('evento_id', db.Integer, db.ForeignKey('evento.id'), primary_key=True)
-)
+                       db.Column('user_id', db.Integer, db.ForeignKey(
+                           'user.id'), primary_key=True),
+                       db.Column('evento_id', db.Integer, db.ForeignKey(
+                           'evento.id'), primary_key=True)
+                       )
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,9 +46,9 @@ class User(db.Model):
         }
 
 class Evento(db.Model):
-    id = db.Column(db.Integer, primary_key=True )
+    id = db.Column(db.Integer, primary_key=True)
     sport = db.Column(db.String(250))
-    date = db.Column(db.String)#cambiarla a string?
+    date = db.Column(db.String)  # cambiarla a string?
     duration = db.Column(db.Integer)
     agemin = db.Column(db.Integer)
     agemax = db.Column(db.Integer)
@@ -81,4 +84,3 @@ class Evento(db.Model):
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
         }
-        

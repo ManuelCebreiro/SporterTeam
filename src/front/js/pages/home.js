@@ -77,7 +77,10 @@ export const Home = () => {
               setEvent({ ...event, duration: e.target.value });
             }}
           ></input>
-          <label className="form-check-label px-1" for="flexSwitchCheckDefault">
+          <label
+            className="form-check-label px-1"
+            htmlFor="flexSwitchCheckDefault"
+          >
             MinDuration
           </label>
         </div>
@@ -92,7 +95,10 @@ export const Home = () => {
               setEvent({ ...event, agemin: e.target.value });
             }}
           ></input>
-          <label className="form-check-label px-1" for="flexSwitchCheckDefault">
+          <label
+            className="form-check-label px-1"
+            htmlFor="flexSwitchCheckDefault"
+          >
             agemin
           </label>
           <input
@@ -103,7 +109,10 @@ export const Home = () => {
               setEvent({ ...event, agemax: e.target.value });
             }}
           ></input>
-          <label className="form-check-label px-1" for="flexSwitchCheckDefault">
+          <label
+            className="form-check-label px-1"
+            htmlFor="flexSwitchCheckDefault"
+          >
             agemax
           </label>
           <input

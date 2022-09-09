@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { DatosEventoUnico } from "../component/datoseventounico";
+import { Link } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
@@ -85,13 +86,9 @@ export const Perfil = () => {
                 <hr />
                 <div className="row">
                   <div className="col-sm-12">
-                    <a
-                      className="btn btn-info "
-                      target="__blank"
-                      href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
-                    >
+                    <Link to="/Edituser" className="btn btn-info">
                       Edit
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
