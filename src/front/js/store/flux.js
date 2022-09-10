@@ -1,3 +1,5 @@
+import swal from "sweetalert";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -114,7 +116,14 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({ datavalidacionEvento: true });
               return resp.json();
             } else {
-              alert("ha habido un problema intentalo de nuevo mas tarde");
+              swal(
+                "Ups, hubo un problema!",
+                "Inténtalo de nuevo más tarde",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
               return;
             }
           })
@@ -140,7 +149,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ validacionregister: true });
             return resp.json();
           } else {
-            alert("Usuario ya existe");
+            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+              dangerMode: true,
+            });
           }
         });
       },
@@ -177,7 +188,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ validacionregister: true });
             return resp.json();
           } else {
-            alert("Usuario ya existe");
+            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+              dangerMode: true,
+            });
           }
         });
       },
@@ -213,10 +226,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((resp) => {
             if (resp.status == 200) {
               setStore({ validacioneditregister: true });
-              alert("Perfil de usuario actualizado correctamente");
+              swal("Perfil de usuario actualizado correctamente", {
+                icon: "success",
+                timer: 4000,
+              });
               return resp.json();
             } else {
-              alert("Error al cambiar los datos");
+              swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+                dangerMode: true,
+              });
             }
           })
           .then((data) => {
@@ -278,7 +296,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }).then((resp) => {
           if (resp.ok) {
-            alert("usuario registrado");
+            swal("Usuario registrado", {
+              icon: "success",
+              timer: 4000,
+            });
           }
         });
       },
