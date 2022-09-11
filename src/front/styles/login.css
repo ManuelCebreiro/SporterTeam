@@ -8,10 +8,13 @@
   background-size: cover;
 }
 
-/* .card {
+/* #cardLogin {
   opacity: 0.7;
   box-shadow: 6px 20px 10px black;
 } */
+#btnLogin {
+  width: 300px;
+}
 
 button:hover {
   opacity: 1;

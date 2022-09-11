@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
+import SporterGradient from "../component/sporterGradient";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
@@ -14,13 +15,18 @@ export const Login = () => {
   }, [store.validacion]);
 
   return (
-    <div className="container-fluid p-0" id="loginstyle">
+    <div className="container-fluid p-0 bg-light" id="loginstyle">
       <section className="vh-100 bg-image-fluid">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div className="card" style={{ borderRadius: "15px" }}>
+                <div
+                  id="cardLogin"
+                  className="card"
+                  style={{ borderRadius: "15px", background: "lightgray" }}
+                >
+                  <SporterGradient />
                   <div className="card-body p-5">
                     <h2 className="text-uppercase text-center mb-5">LOGIN</h2>
                     <form>
@@ -52,6 +58,7 @@ export const Login = () => {
                       </div>
                       <div className="d-flex justify-content-center">
                         <button
+                          id="btnLogin"
                           onClick={() => {
                             actions.login(userEmail, userPassword);
                           }}
