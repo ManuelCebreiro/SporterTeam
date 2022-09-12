@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/newevent.css";
 import { nominalTypeHack } from "prop-types";
+import swal from "sweetalert";
 
 export const Newevent = () => {
   const { store, actions } = useContext(Context);
@@ -218,7 +219,15 @@ export const Newevent = () => {
                     participantmax: "",
                     ciudad: "",
                   });
-                } else alert("Te faltan campos por cubrir.");
+                } else
+                  swal(
+                    "Ups, hubo un problema!",
+                    "te faltan campos por rellenar..",
+                    "error",
+                    {
+                      dangerMode: true,
+                    }
+                  );
               }}
             >
               Crear
