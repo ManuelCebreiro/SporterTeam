@@ -15,18 +15,18 @@ export const Login = () => {
   }, [store.validacion]);
 
   return (
-    <div className="container-fluid p-0 bg-light" id="loginstyle">
+    <div className="container-fluid p-0 " id="loginstyle">
       <section className="vh-100 bg-image-fluid">
-        <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+        <SporterGradient />
+        <div className="mask d-flex align-items-center h-80 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div
                   id="cardLogin"
                   className="card"
-                  style={{ borderRadius: "15px", background: "lightgray" }}
+                  style={{ borderRadius: "15px", background: "#F19143" }}
                 >
-                  <SporterGradient />
                   <div className="card-body p-5">
                     <h2 className="text-uppercase text-center mb-5">LOGIN</h2>
                     <form>
@@ -63,7 +63,7 @@ export const Login = () => {
                             actions.login(userEmail, userPassword);
                           }}
                           type="button"
-                          className="btn btn-success btn-block btn-lg gradient-custom-4 "
+                          className="btn  btn-block btn-lg gradient-custom-2 "
                         >
                           Enter
                         </button>

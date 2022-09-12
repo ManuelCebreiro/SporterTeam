@@ -46,7 +46,7 @@ export const Register = () => {
   return (
     <div id="body_register">
       <form id="form_register" onSubmit={handleSubmit(onSubmit)}>
-        <div id="form_register_body">
+        <div id="form_register_body" className="cardRegister">
           <label htmlFor="username">Username</label>
           <input
             name="username"
@@ -127,11 +127,11 @@ export const Register = () => {
           {errors.age && <p>{errors.age.message}</p>}
 
           <input id="register_btn" value="submit" type="submit" />
+          <Link id="salirRegistro" className="fw-bold" to="/">
+            Salir de Registro
+          </Link>
         </div>
       </form>
-      <Link className="fw-bold text-body" to="/">
-        Salir de Registro
-      </Link>
     </div>
   );
 };

@@ -36,7 +36,7 @@ const boxAnimation = keyframes`
 `;
 
 const GradientBox = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   justify-content: center;
   margin: auto;
