@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
-      validacionregister: false,
+      // validacionregister: false,
       eventos: [],
       eventosFilter: [],
       dataEventoUnico: {},
@@ -185,7 +185,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }).then((resp) => {
           if (resp.status == 200) {
-            setStore({ validacionregister: true });
             return resp.json();
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
