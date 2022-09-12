@@ -10,6 +10,10 @@
   background-color: #ff773d;
 }
 
+body {
+  background: #f0eeee;
+}
+
 body #bgdetalles {
   height: 100%;
   background-color: #ffd5b3;
@@ -32,4 +36,13 @@ body #bgdetalles {
 
 #estilosdatos1 {
   border: solid 2px black;
+}
+
+#estilosperfil {
+  background: #ffffff;
+}
+
+#estilosperfil2 {
+  background: #ffffff;
+
 }

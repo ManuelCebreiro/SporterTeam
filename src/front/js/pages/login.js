@@ -9,6 +9,7 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (store.validacion) navigate("/home");
   }, [store.validacion]);
@@ -34,6 +35,11 @@ export const Login = () => {
                           onChange={(e) => {
                             setUserEmail(e.target.value);
                           }}
+                          onKeyPress={(event) => {
+                            if (event.key === 'Enter') {
+                              actions.login(userEmail, userPassword);
+                            }
+                          }}
                           required
                         />
                         <label className="form-label">Your Email</label>
@@ -47,6 +53,11 @@ export const Login = () => {
                           onChange={(e) => {
                             setUserPassword(e.target.value);
                           }}
+                          onKeyPress={(event) => {
+                            if (event.key === 'Enter') {
+                              actions.login(userEmail, userPassword);
+                            }
+                          }}
                         />
                         <label className="form-label">Password</label>
                       </div>
@@ -55,6 +66,9 @@ export const Login = () => {
                           onClick={() => {
                             actions.login(userEmail, userPassword);
                           }}
+
+
+
                           type="button"
                           className="btn btn-success btn-block btn-lg gradient-custom-4 "
                         >
