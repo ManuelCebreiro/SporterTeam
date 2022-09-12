@@ -26,31 +26,32 @@ export const Newevent = () => {
   return (
     <div>
       <h1>Crear evento</h1>
-      <div class="container py-5 bg-light border border-dark">
-        <div class="row">
-          <div class="col-md-2">
-            <label class="form-label">Deporte</label>
+      <div className="container py-5 bg-light border border-dark">
+        <div className="row">
+          <div className="col-md-2">
+            <label className="form-label">Deporte</label>
             <select
-              class="form-select"
-              value={event.sport}
+              className="form-select"
+              // value={event.sport}
               onChange={(e) => {
                 setEvent({ ...event, sport: e.target.value });
               }}
             >
               <option selected disabled>
-                {""}
+                Elige
               </option>
+
               <option>Baloncesto</option>
               <option>Fútbol</option>
               <option>Tenis</option>
               <option>Padel</option>
             </select>{" "}
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Fecha</label>
+          <div className="col-md-2">
+            <label className="form-label">Fecha</label>
             <input
               type="date"
-              class="form-control"
+              className="form-control"
               min="2022-08-27"
               max="2030-12-31"
               placeholder="Fecha"
@@ -61,11 +62,11 @@ export const Newevent = () => {
               }}
             />
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Duracion evento</label>
+          <div className="col-md-2">
+            <label className="form-label">Duracion evento</label>
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               placeholder="Duracion evento"
               value={event.duration}
               onChange={(e) => {
@@ -74,11 +75,11 @@ export const Newevent = () => {
               required
             />
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Participantes</label>
+          <div className="col-md-2">
+            <label className="form-label">Participantes</label>
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               placeholder="Participantes"
               required
               value={event.participantmax}
@@ -89,12 +90,12 @@ export const Newevent = () => {
             />
           </div>
 
-          <div class="col-md-2">
-            <label for="validationCustom04" class="form-label">
+          <div className="col-md-2">
+            <label htmlFor="validationCustom04" className="form-label">
               Ciudad
             </label>
             <select
-              class="form-select"
+              className="form-select"
               value={event.ciudad}
               onChange={(e) => {
                 setEvent({ ...event, ciudad: e.target.value });
@@ -107,11 +108,11 @@ export const Newevent = () => {
               })}
             </select>
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Opción de pago</label>
+          <div className="col-md-2">
+            <label className="form-label">Opción de pago</label>
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               placeholder="Cantidad"
               value={event.payment}
               onChange={(e) => {
@@ -120,13 +121,13 @@ export const Newevent = () => {
               required
             />
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Edad mínima</label>
+          <div className="col-md-2">
+            <label className="form-label">Edad mínima</label>
             <input
               type="number"
               min="0"
               max="150"
-              class="form-control"
+              className="form-control"
               placeholder="Edad mínima"
               value={event.agemin}
               onChange={(e) => {
@@ -135,11 +136,11 @@ export const Newevent = () => {
               required
             />
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Edad máxima</label>
+          <div className="col-md-2">
+            <label className="form-label">Edad máxima</label>
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               placeholder="Edad máxima"
               min="0"
               max="150"
@@ -151,11 +152,11 @@ export const Newevent = () => {
               required
             />
           </div>
-          <div class="col-md-2">
-            <label class="form-label">Tipo de lugar</label>
+          <div className="col-md-2">
+            <label className="form-label">Tipo de lugar</label>
 
             <select
-              class="form-select"
+              className="form-select"
               // value={event.space ? "cubierto" : "airelibre"}
               onChange={(e) => {
                 if (e.target.value == "Cubierto") {
@@ -172,20 +173,21 @@ export const Newevent = () => {
               <option>Aire libre</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="my-3">Descripción</label>
+          <div className="form-group">
+            <label className="my-3">Descripción</label>
             <textarea
-              class="form-control"
+              className="form-control"
               rows="3"
               value={event.description}
+              placeholder="Descripción"
               onChange={(e) => {
                 setEvent({ ...event, description: e.target.value });
               }}
             ></textarea>
           </div>
-          <div class="col-12 mt-3">
+          <div className="col-12 mt-3">
             <button
-              class="btn btn-primary"
+              className="btn btn-primary"
               type="submit"
               onClick={() => {
                 if (
@@ -232,9 +234,9 @@ export const Newevent = () => {
             </button>
           </div>
           <ul>
-            <div class="container">
-              <div class="table-responsive">
-                <table class="text-center table table-striped table-hover">
+            <div className="container">
+              <div className="table-responsive">
+                <table className="text-center table table-striped table-hover">
                   {eventazo.length > 0 ? (
                     <thead>
                       <tr>
