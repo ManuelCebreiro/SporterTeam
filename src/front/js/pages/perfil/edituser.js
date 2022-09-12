@@ -29,7 +29,7 @@ export const EditUser = () => {
   const user = store.datosUsuario;
   useEffect(() => {
     actions.DatosUsuarioLogeado();
-    if (store.validacioneditregister) navigate("/home");
+    if (store.validacioneditregister) navigate("/photoperfil");
   }, [store.validacioneditregister]);
 
   const {

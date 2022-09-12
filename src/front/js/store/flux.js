@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
-      validacionregister: false,
+      //validacionregister: false,
       eventos: [],
       eventosFilter: [],
       dataEventoUnico: {},
@@ -153,43 +153,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         newAge,
         newDescription
       ) => {
-        const store = getStore();
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
-        fetch(process.env.BACKEND_URL + "/api/edituser", {
-          method: "POST",
-          body: JSON.stringify({
-            new_email: newEmail,
-            new_username: newUsername,
-            new_password: newPassword,
-            new_age: newAge,
-            new_description: newDescription,
-          }),
-
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + store.token,
-          },
-        }).then((resp) => {
-          if (resp.status == 200) {
-            setStore({ validacionregister: true });
-            return resp.json();
-          } else {
-            alert("Usuario ya existe");
-          }
-        });
-      },
-
-      // función para editar los ajustes usuario ya existente
-      editUser: (
-        newEmail,
-        newUsername,
-        newPassword,
-        newAge,
-        newDescription
-      ) => {
         const token = sessionStorage.getItem("token");
         console.log(
           `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
@@ -212,7 +175,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((resp) => {
             if (resp.status == 200) {
-              setStore({ validacioneditregister: true });
               alert("Perfil de usuario actualizado correctamente");
               return resp.json();
             } else {

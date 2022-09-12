@@ -111,6 +111,10 @@ CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6
 
 npm install react-hook-form
 
+## INSTALAR SWEETALERT
+
+$ npm install --save sweetalert
+
 ## MANO DE SANTO
 
 rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade
