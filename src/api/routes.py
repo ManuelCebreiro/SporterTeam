@@ -201,6 +201,16 @@ def delete_usersEvent(id):
     db.session.commit()
     return jsonify("Usuario expulsado")
 
+@api.route('/playerEvents/<int:id>', methods=["GET"])
+def get_users(id):
+    try:
+        event = Evento.query.filter_by(id=id).one_or_none()
+        eventoUser = User.query.with_parent(event).all()
+        response =[x.serializeWithoutParticipant() for x in eventoUser]
+        return jsonify(response), 200
+    except:
+        return jsonify("Data fail")
+
 
 
 @api.route('/Userdataparticipant', methods=["GET"])
@@ -215,6 +225,13 @@ def get_userdataParticipant():
     except:
         return jsonify( "Data fail"),400
 
-        
+
+@api.route('/eventosp/<int:id>', methods=["GET"])
+def get_eventosp(id):
+    user = Evento.query.get(id)
+    users = user.serialize()
+    response = users["eventosp"]
+    return jsonify({"response":response}), 200
+    
 
 
