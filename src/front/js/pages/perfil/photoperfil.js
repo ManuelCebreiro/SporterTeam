@@ -56,7 +56,7 @@ export const Photoperfil = (props) => {
           onClick={deleteImage}
           className="btn-close btn-close-white"
         ></button>
-        <p>
+        <p t>
           <strong>{store.respuesta}</strong>
         </p>
         <input

@@ -7,10 +7,6 @@
   padding: 15px;
   font-size: 18px;
   font-weight: 100;
-  text-align: center;
-  padding: 15px;
-  font-size: 18px;
-  font-weight: 100;
 }
 
 #form_register {
@@ -46,6 +42,7 @@
   padding: 10px 15px;
   margin-bottom: 15px;
   font-size: 14px;
+  color: rgb(58, 55, 55);
 }
 
 #form_register .error {
