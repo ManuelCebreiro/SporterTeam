@@ -39,10 +39,16 @@ body #bgdetalles {
 }
 
 #estilosperfil {
-  background: #ffffff;
+  background: #2F3768;
+  box-shadow: 5px 10px 5px black;
+  border-radius: 2%;
 }
 
-#estilosperfil2 {
-  background: #ffffff;
+#estiloperfil {
+  box-shadow: 4px 4px 4px 4px black;
+}
 
+#estilotitulo {
+  background: #E9E5DF;
+  text-align: center;
 }
