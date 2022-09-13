@@ -48,12 +48,14 @@ export const Photoperfil = (props) => {
     actions.getrespuesta("Esta es la imagen predefinida.");
   };
   return (
-    <div className="foto de usuario">
-      <h2 className="display-5">PERFIL USUARIO</h2>
+    <div id="fotoEditUser" className="foto de usuario">
       {/* <form onSubmit={upLoadImage}> */}
       <div className="row">
         <img src={store.imagen} style={{ width: 200 }} />
-        <button onClick={deleteImage} className="btn-close "></button>
+        <button
+          onClick={deleteImage}
+          className="btn-close btn-close-white"
+        ></button>
         <p>
           <strong>{store.respuesta}</strong>
         </p>

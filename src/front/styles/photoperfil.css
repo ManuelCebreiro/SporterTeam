@@ -1,7 +1,35 @@
 #imgperfil {
-    position: relative;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+#fotoEditUser {
+  color: #fefefe;
+  position: relative;
+  margin: 0 auto;
+}
+#fotoEditUser,
+button {
+  color: #fefefe;
+}
+#fotoEditUser,
+input {
+  color: #fefefe;
+  width: 300px;
+}
+@media screen and (max-width: 770px) {
+  #fotoEditUser,
+  input {
+    width: 230px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #fotoEditUser,
+  input {
     width: 200px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 50%;
+  }
 }

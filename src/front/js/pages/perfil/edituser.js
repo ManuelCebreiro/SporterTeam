@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Photoperfil } from "./photoperfil";
 
-import "../../../styles/register.css";
+import "../../../styles/edituser.css";
 
 const messages = {
   required: "Este campo es obligatorio",
@@ -51,92 +51,145 @@ export const EditUser = () => {
   };
 
   return (
-    <div id="body_register">
-      <form id="form_register" onSubmit={handleSubmit(onSubmit)}>
-        <Photoperfil />
-        <div id="form_register_body">
-          <label htmlFor="new_username">Username: {user.username}</label>
-          <input
-            name="new_username"
-            type="text"
-            placeholder="Tu nuevo Username"
-            className={errors.new_username && "error"}
-            {...register("new_username", {
-              minLength: {
-                value: 5,
-                message: "Username debe tener mínimo 5 caracteres",
-              },
-              pattern: {
-                value: patterns.new_username,
-                message: messages.new_username,
-              },
-            })}
-          />
-          {errors.new_username && <p>{errors.new_username.message}</p>}
+    <div className="container-fluid p-0 " id="edituserStyle">
+      <div id="body_edituser" className="vh-120 bg-image-fluid">
+        <form id="form_edituser" onSubmit={handleSubmit(onSubmit)}>
+          <div id="form_edituser_body">
+            <h4 id="form_edituser_tittle" className="display-6">
+              PERFIL DE USUARIO
+            </h4>
+            <div id="form_edituser_text">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 px2">
+                    <Photoperfil />
+                  </div>
 
-          <label htmlFor="new_description">Descripción:</label>
-          <textarea
-            id="description-textarea"
-            name="new_description"
-            type="text"
-            placeholder="Algo sobre tí"
-            className={errors.new_description && "error"}
-            {...register("new_description", {
-              maxLength: {
-                value: 300,
-                message: "Username debe tener máximo 300 caracteres",
-              },
-            })}
-          />
-          {errors.new_description && <p>{errors.new_description.message}</p>}
+                  <div class="col-sm-6 px-2">
+                    <label htmlFor="new_username">
+                      Username: {user.username}
+                    </label>
+                    <input
+                      name="new_username"
+                      type="text"
+                      placeholder="Tu nuevo Username"
+                      className={errors.new_username && "error"}
+                      {...register("new_username", {
+                        minLength: {
+                          value: 5,
+                          message: "Username debe tener mínimo 5 caracteres",
+                        },
+                        pattern: {
+                          value: patterns.new_username,
+                          message: messages.new_username,
+                        },
+                      })}
+                    />
+                    {errors.new_username && (
+                      <p>{errors.new_username.message}</p>
+                    )}
+                    <label htmlFor="new_age">Edad: {user.age}</label>
+                    <input
+                      name="new_age"
+                      placeholder="Actualizar edad"
+                      className={errors.age && "error"}
+                      {...register("new_age", {
+                        pattern: {
+                          value: patterns.new_age,
+                          message: messages.new_age,
+                        },
+                      })}
+                    />
+                    {errors.new_age && <p>{errors.new_age.message}</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="form_edituser_text-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label htmlFor="new_description">Descripción:</label>
+                    <textarea
+                      id="description-textarea"
+                      name="new_description"
+                      type="text"
+                      placeholder="Algo sobre tí"
+                      className={errors.new_description && "error"}
+                      {...register("new_description", {
+                        maxLength: {
+                          value: 300,
+                          message: "Username debe tener máximo 300 caracteres",
+                        },
+                      })}
+                    />
+                    {errors.new_description && (
+                      <p>{errors.new_description.message}</p>
+                    )}
+                  </div>
+                  <div class="col-sm-6">
+                    <label htmlFor="new_email">Email: {user.email}</label>
+                    <input
+                      name="new_email"
+                      type="text"
+                      placeholder="Tu nuevo correo electrónico"
+                      className={errors.new_email && "error"}
+                      {...register("new_email", {
+                        pattern: {
+                          value: patterns.new_email,
+                          message: messages.new_email,
+                        },
+                      })}
+                    />
+                    {errors.new_email && <p>{errors.new_email.message}</p>}
+                  </div>
+                </div>
+              </div>
 
-          <label htmlFor="new_email">Email: {user.email}</label>
-          <input
-            name="new_email"
-            type="text"
-            placeholder="Tu nuevo correo electrónico"
-            className={errors.new_email && "error"}
-            {...register("new_email", {
-              pattern: {
-                value: patterns.new_email,
-                message: messages.new_email,
-              },
-            })}
-          />
-          {errors.new_email && <p>{errors.new_email.message}</p>}
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label htmlFor="new_password">Contraseña nueva:</label>
+                    <input
+                      name="new_password"
+                      type="password"
+                      className={errors.new_password && "error"}
+                      {...register("new_password", {
+                        minLength: {
+                          value: 5,
+                          message: "Contraseña debe tener mínimo 5 caracteres",
+                        },
+                      })}
+                    />
+                    {errors.new_password && (
+                      <p>{errors.new_password.message}</p>
+                    )}
+                  </div>
 
-          <label htmlFor="new_password">Contraseña nueva:</label>
-          <input
-            name="new_password"
-            type="password"
-            className={errors.new_password && "error"}
-            {...register("new_password", {
-              minLength: {
-                value: 5,
-                message: "Contraseña debe tener mínimo 5 caracteres",
-              },
-            })}
-          />
-          {errors.new_password && <p>{errors.new_password.message}</p>}
+                  <div class="col-sm-6">
+                    <label htmlFor="new_password_repeat">
+                      Repite contraseña nueva:
+                    </label>
+                    <input
+                      name="new_password_repeat"
+                      type="password"
+                      className={errors.new_password_repeat && "error"}
+                      {...register("new_password_repeat", {
+                        validate: (value) => {
+                          if (watch("new_password") != value) {
+                            return "Contraseña no coinciden";
+                          }
+                        },
+                      })}
+                    />
+                    {errors.new_password_repeat && (
+                      <p>{errors.new_password_repeat.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
 
-          <label htmlFor="new_password_repeat">Repite contraseña nueva:</label>
-          <input
-            name="new_password_repeat"
-            type="password"
-            className={errors.new_password_repeat && "error"}
-            {...register("new_password_repeat", {
-              validate: (value) => {
-                if (watch("new_password") != value) {
-                  return "Contraseña no coinciden";
-                }
-              },
-            })}
-          />
-          {errors.new_password_repeat && (
-            <p>{errors.new_password_repeat.message}</p>
-          )}
-
-          {/* <label htmlFor="password">Confirmar con contraseña antigua</label>
+              {/* <label htmlFor="password">Confirmar con contraseña antigua</label>
         <input
           name="password"
           type="password"
@@ -152,26 +205,14 @@ export const EditUser = () => {
         />
         {errors.password && <p>{errors.password.message}</p>} */}
 
-          <label htmlFor="new_age">Edad: {user.age}</label>
-          <input
-            name="new_age"
-            placeholder="Actualizar edad"
-            className={errors.age && "error"}
-            {...register("new_age", {
-              pattern: {
-                value: patterns.new_age,
-                message: messages.new_age,
-              },
-            })}
-          />
-          {errors.new_age && <p>{errors.new_age.message}</p>}
-
-          <input id="register_btn" value="submit" type="submit" />
-        </div>
-      </form>
-      <Link className="fw-bold text-body" to="/perfil">
-        Salir de Ajustes
-      </Link>
+              <input id="edituser_btn" value="submit" type="submit" />
+              <Link id="salirEditUser" className="fw-bold" to="/perfil">
+                Salir de Ajustes
+              </Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
