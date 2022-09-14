@@ -193,7 +193,7 @@ export const Newevent = () => {
                 if (
                   event.description != "" &&
                   Number(event.participantmax) >= 2 &&
-                  Number(event.participantmax) < 30 &&
+                  Number(event.participantmax) < 50 &&
                   event.sport.length != "" &&
                   event.date != "" &&
                   Number(event.agemax) < 200 &&

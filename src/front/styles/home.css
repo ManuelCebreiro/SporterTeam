@@ -39,16 +39,47 @@ body #bgdetalles {
 }
 
 #estilosperfil {
-  background: #2F3768;
+  background: #fafafa;
   box-shadow: 5px 10px 5px black;
   border-radius: 2%;
 }
 
-#estiloperfil {
+#estilofondoperfil {
+  background: #2F3768;
   box-shadow: 4px 4px 4px 4px black;
+  border-radius: 2%;
+}
+
+#estilodivs {
+  box-shadow: 1px 1px 1px 1px black;
+
 }
 
 #estilotitulo {
   background: #E9E5DF;
   text-align: center;
+
+}
+
+#botoneditar {
+  color: white;
+
+}
+
+#botoneditar::hover {
+  color: yellow;
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
