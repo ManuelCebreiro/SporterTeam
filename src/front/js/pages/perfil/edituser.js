@@ -61,11 +61,14 @@ export const EditUser = () => {
             <div id="form_edituser_text">
               <div class="container">
                 <div className="row bg-grey">
-                  <div className="col-sm-6 px-2 py-5">
+                  <div className="col-sm-6 px-2 py-4">
                     <Photoperfil />
                   </div>
 
-                  <div className="col-sm-6 px-2 gy-0 py-0 my-0">
+                  <div
+                    id="form_edituser_text-1"
+                    className="col-sm-6 px-2 gy-0 py-0 my-0"
+                  >
                     <label className="mb-1" htmlFor="new_username">
                       Username: {user.username}
                     </label>
@@ -88,7 +91,9 @@ export const EditUser = () => {
                     {errors.new_username && (
                       <p>{errors.new_username.message}</p>
                     )}
-                    <label htmlFor="new_age">Edad: {user.age}</label>
+                    <label className="mb-1" htmlFor="new_age">
+                      Edad: {user.age}
+                    </label>
                     <input
                       name="new_age"
                       placeholder="Actualizar edad"
@@ -102,7 +107,9 @@ export const EditUser = () => {
                     />
                     {errors.new_age && <p>{errors.new_age.message}</p>}
 
-                    <label htmlFor="new_email">Email: {user.email}</label>
+                    <label className="mb-1" htmlFor="new_email">
+                      Email: {user.email}
+                    </label>
                     <input
                       name="new_email"
                       type="text"
@@ -120,11 +127,16 @@ export const EditUser = () => {
                 </div>
               </div>
               <div id="form_edituser_text-2">
-                <div class="container">
-                  <div class="form-group mb-0 gy-0">
-                    <label htmlFor="new_description">Descripción:</label>
+                <div classname="container">
+                  <div className="form-group mb-0 my-0 py-0 px-2 gy-0 col-sm-12">
+                    <label
+                      className="my-1 py-1 mx-1 mb-1 "
+                      htmlFor="new_description"
+                    >
+                      Descripción:
+                    </label>
                     <textarea
-                      class="form-control"
+                      class="form-control mx-1 px-1"
                       id="exampleFormControlTextarea1"
                       rows="3"
                       name="new_description"
@@ -143,52 +155,54 @@ export const EditUser = () => {
                     )}
                   </div>
                 </div>
-              </div>
 
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label htmlFor="new_password">Contraseña nueva:</label>
-                    <input
-                      name="new_password"
-                      type="password"
-                      className={errors.new_password && "error"}
-                      {...register("new_password", {
-                        minLength: {
-                          value: 5,
-                          message: "Contraseña debe tener mínimo 5 caracteres",
-                        },
-                      })}
-                    />
-                    {errors.new_password && (
-                      <p>{errors.new_password.message}</p>
-                    )}
-                  </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label className="mb-1" htmlFor="new_password">
+                        Contraseña nueva:
+                      </label>
+                      <input
+                        name="new_password"
+                        type="password"
+                        className={errors.new_password && "error"}
+                        {...register("new_password", {
+                          minLength: {
+                            value: 5,
+                            message:
+                              "Contraseña debe tener mínimo 5 caracteres",
+                          },
+                        })}
+                      />
+                      {errors.new_password && (
+                        <p>{errors.new_password.message}</p>
+                      )}
+                    </div>
 
-                  <div class="col-sm-6">
-                    <label htmlFor="new_password_repeat">
-                      Repite contraseña nueva:
-                    </label>
-                    <input
-                      name="new_password_repeat"
-                      type="password"
-                      className={errors.new_password_repeat && "error"}
-                      {...register("new_password_repeat", {
-                        validate: (value) => {
-                          if (watch("new_password") != value) {
-                            return "Contraseña no coinciden";
-                          }
-                        },
-                      })}
-                    />
-                    {errors.new_password_repeat && (
-                      <p>{errors.new_password_repeat.message}</p>
-                    )}
+                    <div class="col-sm-6">
+                      <label className="mb-1" htmlFor="new_password_repeat">
+                        Repite contraseña nueva:
+                      </label>
+                      <input
+                        name="new_password_repeat"
+                        type="password"
+                        className={errors.new_password_repeat && "error"}
+                        {...register("new_password_repeat", {
+                          validate: (value) => {
+                            if (watch("new_password") != value) {
+                              return "Contraseña no coinciden";
+                            }
+                          },
+                        })}
+                      />
+                      {errors.new_password_repeat && (
+                        <p>{errors.new_password_repeat.message}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* <label htmlFor="password">Confirmar con contraseña antigua</label>
+                {/* <label htmlFor="password">Confirmar con contraseña antigua</label>
         <input
           name="password"
           type="password"
@@ -203,16 +217,20 @@ export const EditUser = () => {
           })}
         />
         {errors.password && <p>{errors.password.message}</p>} */}
-
-              <input
-                className="btn mb-2"
-                id="edituser_btn"
-                value="submit"
-                type="submit"
-              />
-              <Link id="salirEditUser" className="fw-bold" to="/perfil">
-                Salir de Ajustes
-              </Link>
+                <div className="col-6 mx-auto">
+                  <input
+                    className="btn mb-2"
+                    id="edituser_btn"
+                    value="submit"
+                    type="submit"
+                  />
+                </div>
+                <div className="col-6 mx-auto">
+                  <Link id="salirEditUser" className="fw-bold" to="/perfil">
+                    Salir de Ajustes
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </form>
