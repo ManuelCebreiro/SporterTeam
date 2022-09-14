@@ -256,14 +256,16 @@ def mostrarusuariospendientes(idevento):
     usuarios = [x.serializeWithoutParticipant() for x in userdata]
     return jsonify(usuarios),200
 
-# @api.route('/administrasusuarios/<int:idevento>/<int:iduser>', methods=["GET"])
-# def adminusers(idevento,iduser):
-#     # evento = User.query.get(idevento)
-#     # user = User.query.get(iduser)
-#     asociacion = Asociacion.query.filter_by(user_id = iduser,event_id =idevento).first()
+@api.route('/administrasusuarios/<int:idevento>/<int:iduser>', methods=["DELETE"])
+def adminusers(idevento,iduser):
+    evento = Evento.query.get(idevento)
+    user = User.query.get(iduser)
+    association = Association.query.filter_by(user_id = iduser,event_id = idevento).first()
+    db.session.delete(association)
+    db.session.commit()
+    
+    return jsonify("response")
 
-#     return jsonify(asociacion.serialize())
-        
     
 
 

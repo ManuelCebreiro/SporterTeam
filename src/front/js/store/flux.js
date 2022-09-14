@@ -1,3 +1,5 @@
+import { element } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -66,6 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
       datosUsuario: {},
+      eventosPendientes: {},
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -439,6 +442,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             setStore({ datosUsuario: data });
           });
+      },
+      geteventosPendientes: (iduser) => {
+        fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const auxdata = data.filter(
+              (element) =>
+                element.ParticiopantesPendientes.peticion == "aceptada"
+            );
+            console.log(auxdata);
+            setStore({ eventosPendientes: auxdata });
+          })
+
+          .catch((error) => console.log("error", error));
       },
 
       getMessage: async () => {
