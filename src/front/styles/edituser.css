@@ -46,22 +46,9 @@
   padding: 5px 20px;
 }
 #description-textarea {
-  height: 120px;
-  width: 330px;
-  padding-left: 15px;
   border: 1px solid lightgrey;
   border-radius: 5px;
   font-size: 14px;
-}
-@media screen and (max-width: 770px) {
-  #description-textarea {
-    width: 230px;
-  }
-}
-@media screen and (max-width: 320px) {
-  #description-textarea {
-    width: 200px;
-  }
 }
 
 #form_edituser_text-1 p {
@@ -96,7 +83,7 @@
 #form_edituser input {
   display: block;
   box-sizing: border-box;
-  width: 95%;
+  width: 100%;
   border-radius: 4px;
   border: 1px solid #fefefe;
   padding: 5px 15px;
@@ -121,12 +108,12 @@
   border: 1px solid #fefefe;
   color: #fefefe;
   text-transform: uppercase;
-
-  margin-top: 40px;
+  margin-top: 25px;
   padding: 15px;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 5px;
+  width: 200px;
 }
 
 #edituser_btn:hover {

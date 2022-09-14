@@ -48,7 +48,7 @@ export const Photoperfil = (props) => {
     actions.getrespuesta("Esta es la imagen predefinida.");
   };
   return (
-    <div id="fotoEditUser" className="foto de usuario">
+    <div id="fotoEditUser" className="fotodeusuario">
       {/* <form onSubmit={upLoadImage}> */}
       <div className="row">
         <img src={store.imagen} style={{ width: 200 }} />
@@ -61,6 +61,7 @@ export const Photoperfil = (props) => {
         </p>
         <input
           type="file"
+          className="border-0"
           onChange={(e) => {
             upLoadImage(e);
           }}

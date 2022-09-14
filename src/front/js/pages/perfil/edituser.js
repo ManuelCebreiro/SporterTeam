@@ -51,7 +51,7 @@ export const EditUser = () => {
   };
 
   return (
-    <div className="container-fluid p-0 " id="edituserStyle">
+    <div className="container-fluid p-0" id="edituserStyle">
       <div id="body_edituser" className="vh-120 bg-image-fluid">
         <form id="form_edituser" onSubmit={handleSubmit(onSubmit)}>
           <div id="form_edituser_body">
@@ -60,13 +60,13 @@ export const EditUser = () => {
             </h4>
             <div id="form_edituser_text">
               <div class="container">
-                <div class="row">
-                  <div class="col-sm-6 px2">
+                <div className="row bg-grey">
+                  <div className="col-sm-6 px-2 py-5">
                     <Photoperfil />
                   </div>
 
-                  <div class="col-sm-6 px-2">
-                    <label htmlFor="new_username">
+                  <div className="col-sm-6 px-2 gy-0 py-0 my-0">
+                    <label className="mb-1" htmlFor="new_username">
                       Username: {user.username}
                     </label>
                     <input
@@ -101,33 +101,7 @@ export const EditUser = () => {
                       })}
                     />
                     {errors.new_age && <p>{errors.new_age.message}</p>}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="form_edituser_text-2">
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label htmlFor="new_description">Descripción:</label>
-                    <textarea
-                      id="description-textarea"
-                      name="new_description"
-                      type="text"
-                      placeholder="Algo sobre tí"
-                      className={errors.new_description && "error"}
-                      {...register("new_description", {
-                        maxLength: {
-                          value: 300,
-                          message: "Username debe tener máximo 300 caracteres",
-                        },
-                      })}
-                    />
-                    {errors.new_description && (
-                      <p>{errors.new_description.message}</p>
-                    )}
-                  </div>
-                  <div class="col-sm-6">
+
                     <label htmlFor="new_email">Email: {user.email}</label>
                     <input
                       name="new_email"
@@ -142,6 +116,31 @@ export const EditUser = () => {
                       })}
                     />
                     {errors.new_email && <p>{errors.new_email.message}</p>}
+                  </div>
+                </div>
+              </div>
+              <div id="form_edituser_text-2">
+                <div class="container">
+                  <div class="form-group mb-0 gy-0">
+                    <label htmlFor="new_description">Descripción:</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      name="new_description"
+                      type="text"
+                      placeholder="Algo sobre tí"
+                      className={errors.new_description && "error"}
+                      {...register("new_description", {
+                        maxLength: {
+                          value: 300,
+                          message: "Username debe tener máximo 300 caracteres",
+                        },
+                      })}
+                    />
+                    {errors.new_description && (
+                      <p>{errors.new_description.message}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -205,7 +204,12 @@ export const EditUser = () => {
         />
         {errors.password && <p>{errors.password.message}</p>} */}
 
-              <input id="edituser_btn" value="submit" type="submit" />
+              <input
+                className="btn mb-2"
+                id="edituser_btn"
+                value="submit"
+                type="submit"
+              />
               <Link id="salirEditUser" className="fw-bold" to="/perfil">
                 Salir de Ajustes
               </Link>
