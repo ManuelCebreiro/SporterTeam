@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Evento
+from api.models import db, User, Evento ,Association
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -225,13 +225,45 @@ def get_userdataParticipant():
     except:
         return jsonify( "Data fail"),400
 
+#usuario hace peticion para unirse al evento
+@api.route('/peticionUnion/<int:iduser>/<int:idevent>', methods=["POST"])
+def hacerpeticion(iduser,idevent):
+    usuario = User.query.get(iduser)
+    evento = Evento.query.get(idevent)
+    peticion = Association(user_id = usuario.id, event_id = evento.id, peticion = "Pendiente")
+    usuario.eventospendientes.append(peticion)
+    evento.usuariospendientes.append(peticion)
+    db.session.commit()
+    return jsonify("peticion realizada con exito"),200
 
-@api.route('/eventosp/<int:id>', methods=["GET"])
-def get_eventosp(id):
-    user = Evento.query.get(id)
-    users = user.serialize()
-    response = users["eventosp"]
-    return jsonify({"response":response}), 200
+#mostrar eventos pendientes de un usuario
+@api.route('/mostrareventospendientes/<int:iduser>', methods=["GET"])
+def mostrareventospendientes(iduser):
+    usuario = User.query.get(iduser)
+    eventoUser = Association.query.with_parent(usuario).all()
+    data = [x.serialize() for x in eventoUser]
+    eventodata = list(map(lambda x:Evento.query.get(x["event_id"]),data))
+    eventos = [x.serialize() for x in eventodata]
+    return jsonify(eventos),200
+
+#mostrar usuarios pendientes de un evento
+@api.route('/mostrarusuariospendientes/<int:idevento>', methods=["GET"])
+def mostrarusuariospendientes(idevento):
+    evento = User.query.get(idevento)
+    eventoUser = Association.query.with_parent(evento).all()
+    data = [x.serialize() for x in eventoUser]
+    userdata = list(map(lambda x:User.query.get(x["user_id"]),data))
+    usuarios = [x.serializeWithoutParticipant() for x in userdata]
+    return jsonify(usuarios),200
+
+# @api.route('/administrasusuarios/<int:idevento>/<int:iduser>', methods=["GET"])
+# def adminusers(idevento,iduser):
+#     # evento = User.query.get(idevento)
+#     # user = User.query.get(iduser)
+#     asociacion = Asociacion.query.filter_by(user_id = iduser,event_id =idevento).first()
+
+#     return jsonify(asociacion.serialize())
+        
     
 
 

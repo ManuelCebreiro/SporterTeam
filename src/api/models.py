@@ -10,6 +10,7 @@ participant = db.Table('participant',
                        )
 
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -33,7 +34,7 @@ class User(db.Model):
             "age": self.age,
             "description" : self.description,
             "participant" : self.participant,
-            "eventosp":eventosp
+            "losEventospendientes":eventosp
 # do not serialize the password, its a security breach
         }
     
@@ -83,7 +84,7 @@ class Evento(db.Model):
             "admin" : self.admin,
             "description":self.description,
             "estadoEvento":self.estadoEvento,
-            "eventosp":eventosp
+            "ParticiopantesPendientes":eventosp
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
@@ -91,8 +92,8 @@ class Evento(db.Model):
 
 class Association(db.Model):
     __tablename__ = 'association'
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('evento.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('evento.id'),primary_key=True)
     peticion = db.Column(db.String(50))
     user = db.relationship("User")
     evento =db.relationship("Evento")
@@ -105,4 +106,5 @@ class Association(db.Model):
             "user_id":self.user_id,
             "event_id":self.event_id,
             "peticion":self.peticion,
+            
         }
