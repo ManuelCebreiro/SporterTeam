@@ -50,8 +50,12 @@ export const Photoperfil = (props) => {
   return (
     <div id="fotoEditUser" className="fotodeusuario">
       {/* <form onSubmit={upLoadImage}> */}
-      <div className="row px-1 mx-1 my-3 mb-0">
-        <img src={store.imagen} style={{ width: 250 }} />
+      <div className="row px-1 mx-1 my-3 mb-0 ">
+        <img
+          className="rounded-circle img-fluid"
+          src={store.imagen}
+          style={{ width: 250 }}
+        />
         <button
           onClick={deleteImage}
           className="btn-close btn-close-white"

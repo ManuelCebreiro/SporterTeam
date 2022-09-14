@@ -54,20 +54,21 @@ export const EditUser = () => {
     <div className="container-fluid p-0" id="edituserStyle">
       <div id="body_edituser" className="vh-120 bg-image-fluid">
         <form id="form_edituser" onSubmit={handleSubmit(onSubmit)}>
-          <div id="form_edituser_body">
+          <div className="px-1 py-4" id="form_edituser_body">
             <h4 id="form_edituser_tittle" className="display-6">
               PERFIL DE USUARIO
             </h4>
             <div id="form_edituser_text">
               <div class="container">
                 <div className="row bg-grey">
-                  <div className="col-sm-6 px-2 py-4">
+                  <div className="col-sm-1"> </div>
+                  <div className="col-sm-5 px-1 py-4">
                     <Photoperfil />
                   </div>
 
                   <div
                     id="form_edituser_text-1"
-                    className="col-sm-6 px-2 gy-0 py-0 my-0"
+                    className="col-sm-5 px-2 gy-0 py-0 ms-2 my-0"
                   >
                     <label className="mb-1" htmlFor="new_username">
                       Username: {user.username}
@@ -126,39 +127,46 @@ export const EditUser = () => {
                   </div>
                 </div>
               </div>
+              <div className="col-sm-1"> </div>
               <div id="form_edituser_text-2">
                 <div classname="container">
-                  <div className="form-group mb-0 my-0 py-0 px-2 gy-0 col-sm-12">
-                    <label
-                      className="my-1 py-1 mx-1 mb-1 "
-                      htmlFor="new_description"
-                    >
-                      Descripción:
-                    </label>
-                    <textarea
-                      class="form-control mx-1 px-1"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
-                      name="new_description"
-                      type="text"
-                      placeholder="Algo sobre tí"
-                      className={errors.new_description && "error"}
-                      {...register("new_description", {
-                        maxLength: {
-                          value: 300,
-                          message: "Username debe tener máximo 300 caracteres",
-                        },
-                      })}
-                    />
-                    {errors.new_description && (
-                      <p>{errors.new_description.message}</p>
-                    )}
+                  <div class="row">
+                    <div className="col-sm-1"> </div>
+                    <div className="form-group mb-0 my-0 py-0 px-2 gy-0 col-sm-10">
+                      <label
+                        className="my-1 py-1 mx-1 mb-1 "
+                        htmlFor="new_description"
+                      >
+                        Descripción:
+                      </label>
+                      <textarea
+                        class="form-control px-1"
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                        name="new_description"
+                        type="text"
+                        placeholder="Algo sobre tí"
+                        className={errors.new_description && "error"}
+                        {...register("new_description", {
+                          maxLength: {
+                            value: 300,
+                            message:
+                              "Username debe tener máximo 300 caracteres",
+                          },
+                        })}
+                      />
+                      {errors.new_description && (
+                        <p>{errors.new_description.message}</p>
+                      )}
+                    </div>
+                    <div className="col-sm-1"> </div>
                   </div>
                 </div>
 
                 <div class="container">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div className="col-sm-1"> </div>
+                    <div class="col-sm-4 px-0">
                       <label className="mb-1" htmlFor="new_password">
                         Contraseña nueva:
                       </label>
@@ -178,8 +186,9 @@ export const EditUser = () => {
                         <p>{errors.new_password.message}</p>
                       )}
                     </div>
+                    <div className="col-sm-2"> </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4 px-0">
                       <label className="mb-1" htmlFor="new_password_repeat">
                         Repite contraseña nueva:
                       </label>
@@ -199,6 +208,7 @@ export const EditUser = () => {
                         <p>{errors.new_password_repeat.message}</p>
                       )}
                     </div>
+                    <div className="col-sm-1"> </div>
                   </div>
                 </div>
 
@@ -221,7 +231,7 @@ export const EditUser = () => {
                   <input
                     className="btn mb-2"
                     id="edituser_btn"
-                    value="submit"
+                    value="Confirmar Cambios"
                     type="submit"
                   />
                 </div>
