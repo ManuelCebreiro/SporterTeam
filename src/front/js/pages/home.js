@@ -29,7 +29,7 @@ export const Home = () => {
   }, []);
   return (
     <div className="container py-5">
-      <div className="row d-flex justify-content-center bg-light border border-dark px-3">
+      <div className="row d-flex justify-content-center bg-light border border-dark p-3">
         <div className="col-5">
           <div className="form-check form-switch">
             <h5>Payment</h5>
@@ -167,49 +167,51 @@ export const Home = () => {
         </div>
       </div>
       <div className="table-responsive">
-        <table className="text-center table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Sport</th>
-              <th scope="col">Date</th>
-              <th scope="col">Duration</th>
-              <th scope="col">Agemin</th>
-              <th scope="col">Agemax</th>
-              <th scope="col">Ciudad</th>
-              <th scope="col">Payment</th>
-              <th scope="col">Space</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventos.map((event, index) => {
-              return (
-                <tr key={index}>
-                  <th scope="row">{index}</th>
-                  <td>{event.sport}</td>
-                  <td>{event.date}</td>
-                  <td>{event.duration} {"minutos"}</td>
-                  <td>{event.agemin} {"años"}</td>
-                  <td>{event.agemax} {"años"}</td>
-                  <td>{event.ciudad}</td>
-                  <td>{event.payment} {"€"}</td>
-                  <td>{event.space ? "Cubierto" : "Aire libre"}</td>
-                  <td>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => {
-                        actions.joinEvent(event.id);
-                      }}
-                    >
-                      Unirse
-                    </button>
-                    {/* <DatosEventoUnico id={event.id} /> */}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div class="table-wrapper-scroll-y tablapaginacentral">
+          <table className="text-center table table-striped table-hover mt-4">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Sport</th>
+                <th scope="col">Date</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Agemin</th>
+                <th scope="col">Agemax</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Space</th>
+              </tr>
+            </thead>
+            <tbody>
+              {eventos.map((event, index) => {
+                return (
+                  <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <td>{event.sport}</td>
+                    <td>{event.date}</td>
+                    <td>{event.duration} {"minutos"}</td>
+                    <td>{event.agemin} {"años"}</td>
+                    <td>{event.agemax} {"años"}</td>
+                    <td>{event.ciudad}</td>
+                    <td>{event.payment} {"€"}</td>
+                    <td>{event.space ? "Cubierto" : "Aire libre"}</td>
+                    <td>
+                      <button
+                        className="btn btn-success"
+                        onClick={() => {
+                          actions.joinEvent(event.id);
+                        }}
+                      >
+                        Unirse
+                      </button>
+                      {/* <DatosEventoUnico id={event.id} /> */}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

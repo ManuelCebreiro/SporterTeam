@@ -83,3 +83,11 @@ body #bgdetalles {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.tablapaginacentral {
+  margin-top: 1%;
+  position: relative;
+  height: 600px;
+  overflow: auto;
+
+}
