@@ -90,9 +90,9 @@ export const Perfil = () => {
         <div className="row mx-0">
           <div className="col-lg-1 col-md-1"></div>
           {/* <div className="row"> */}
-          <div className="col-lg-10 col-md-10 col-xs-10 mb-3" id="estilosperfil">
+          <div className="col-lg-10 col-md-10 col-xs-10 mb-3">
 
-            <div className="card mt-3 p-2" id="estilodivs">
+            <div className="card mt-3 p-2" id="estilosperfil">
               <h5 id="estilotitulo">Eventos Pendientes</h5>
               <table className="table table-striped">
                 <thead className="thead-dark">
@@ -115,7 +115,7 @@ export const Perfil = () => {
 
             <div className="row gutters-sm">
               <div className="col-sm-12 mb-3">
-                <div className="card mt-3 p-2" id="estilodivs">
+                <div className="card mt-3 p-2" id="estilosperfil">
                   <h5 className=" mb-3" id="estilotitulo">
                     Eventos en los que participo
                   </h5>
@@ -157,7 +157,7 @@ export const Perfil = () => {
               </div>
               <br />
               <div className="col-sm-12 mb-3">
-                <div className="card mt-3 p-2" id="estilodivs" >
+                <div className="card mt-3 p-2" id="estilosperfil" >
                   <h5 className=" mb-3" id="estilotitulo">
                     Historial de eventos
                   </h5>

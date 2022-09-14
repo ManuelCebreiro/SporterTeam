@@ -22,6 +22,9 @@ body #bgdetalles {
   border-bottom: solid black;
 }
 
+/* -------------- fin estilos detalles evento -------------- */
+
+/* ----------- ESTILOS DETALLES EVENTO ADMINISTRADOR --------------- */
 #bgdetallesadmin {
   background-color: #fafafa;
   border: solid black;
@@ -38,6 +41,10 @@ body #bgdetalles {
   border: solid 2px black;
 }
 
+/* ---------------- fin estilos detalles evento administrador ------------ */
+
+
+/* ---------------------------------- ESTILOS DE PERFIL------------------------------- */
 #estilosperfil {
   background: #fafafa;
   box-shadow: 5px 10px 5px black;
@@ -50,17 +57,25 @@ body #bgdetalles {
   border-radius: 2%;
 }
 
-#estilodivs {
+#estilofondofiltros {
+  background: #4c5483fa;
+  box-shadow: 4px 4px 4px 4px black;
+  border-radius: 2%;
+}
+
+/* #estilodivs {
   box-shadow: 1px 1px 1px 1px black;
 
-}
+} */
 
 #estilotitulo {
   background: #E9E5DF;
   text-align: center;
-
 }
 
+/* -------------------------------(final estilos perfil------------------------------------------------ */
+
+/* ---------------------------- ESTILO BOTON EDITAR ---------------- */
 #botoneditar {
   color: white;
 
@@ -70,6 +85,9 @@ body #bgdetalles {
   color: yellow;
 }
 
+/* ---------- final boton editar -------------- */
+
+/* -------------     ESTILOS PAGINA CENTRAL ----------------- */
 .my-custom-scrollbar {
   position: relative;
   height: 300px;
@@ -87,7 +105,8 @@ body #bgdetalles {
 .tablapaginacentral {
   margin-top: 1%;
   position: relative;
-  height: 600px;
+  height: 500px;
   overflow: auto;
-
 }
+
+/* ---------- fin estilos pagina central ------------- */
