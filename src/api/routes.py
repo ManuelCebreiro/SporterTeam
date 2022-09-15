@@ -241,7 +241,8 @@ def hacerpeticion(iduser,idevent):
 def mostrareventospendientes(iduser):
     usuario = User.query.get(iduser)
     eventoUser = Association.query.with_parent(usuario).all()
-    data = [x.serialize() for x in eventoUser]
+    pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
+    data = [x.serialize() for x in pendientes]
     eventodata = list(map(lambda x:Evento.query.get(x["event_id"]),data))
     eventos = [x.serialize() for x in eventodata]
     return jsonify(eventos),200
@@ -251,7 +252,8 @@ def mostrareventospendientes(iduser):
 def mostrarusuariospendientes(idevento):
     evento = User.query.get(idevento)
     eventoUser = Association.query.with_parent(evento).all()
-    data = [x.serialize() for x in eventoUser]
+    pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
+    data = [x.serialize() for x in pendientes]
     userdata = list(map(lambda x:User.query.get(x["user_id"]),data))
     usuarios = [x.serializeWithoutParticipant() for x in userdata]
     return jsonify(usuarios),200

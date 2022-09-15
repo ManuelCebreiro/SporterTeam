@@ -2,15 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { DatosEventoUnico } from "../component/datoseventounico";
 import { Link } from "react-router-dom";
+import { element } from "prop-types";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
+  const user = store.datosUsuario;
 
   useEffect(() => {
     actions.getUserDataEventos();
     actions.DatosUsuarioLogeado();
+    actions.geteventosPendientes(user.id);
   }, []);
 
+  const eventosPendientes = store.eventosPendientes;
   const eventos = store.userDataEventos;
   const userEventosactivos = Array.from(eventos).filter(
     (element) =>
@@ -19,7 +23,7 @@ export const Perfil = () => {
   const userEventosFinalizado = Array.from(eventos).filter(
     (element) => element.estadoEvento == "Finalizado"
   );
-  const user = store.datosUsuario;
+
   return (
     <div className="container py-2">
       <div className="main-body">
@@ -44,15 +48,23 @@ export const Perfil = () => {
                   <tr>
                     <th scope="col">Sport</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Duration</th>
                     <th scope="col">Ciudad</th>
+                    <th scope="col">Espacio</th>
+                    <th scope="col">Payment</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Ejemplo</td>
-                    <td>Ejemplo</td>
-                    <td>Ejemplo</td>
-                  </tr>
+                  {Array.from(eventosPendientes).map((element, index) => (
+                    <tr key={index}>
+                      <td>{element.sport}</td>
+                      <td>{element.date}</td>
+                      <td>{element.duration}</td>
+                      <td>{element.ciudad}</td>
+                      <td>{element.space}</td>
+                      <td>{element.payment}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

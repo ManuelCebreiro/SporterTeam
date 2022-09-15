@@ -22,7 +22,6 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
-      state.actions.geteventosPendientes(1);
       state.actions.reloadToken();
       state.actions.getEventos();
     }, []);

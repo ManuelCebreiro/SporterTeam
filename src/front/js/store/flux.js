@@ -69,6 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       datosUsuario: {},
       eventosPendientes: {},
+      userPendientes: {},
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -451,12 +452,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            const auxdata = data.filter(
-              (element) =>
-                element.ParticiopantesPendientes.peticion == "aceptada"
-            );
-            console.log(auxdata);
-            setStore({ eventosPendientes: auxdata });
+            setStore({ eventosPendientes: data });
+          })
+
+          .catch((error) => console.log("error", error));
+      },
+      getuserPendientes: (iduser) => {
+        fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            setStore({ userPendientes: data });
           })
 
           .catch((error) => console.log("error", error));
