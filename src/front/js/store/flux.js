@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       datosUsuario: {},
       eventosPendientes: {},
-      userPendientes: {},
+      usuariospendientes: {},
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -412,9 +412,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
+
       getEventos: () => {
         fetch(process.env.BACKEND_URL + "/api/eventos", {
           method: "GET",
@@ -478,10 +476,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         alert("Evento modificado con exito");
       },
-      geteventosPendientes: (iduser) => {
-        console.log(iduser);
+      // usuarios pendiente de un evento
+      getusersPendientes: (idevento) => {
         fetch(
-          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+          process.env.BACKEND_URL + "/api/mostrarusuariospendientes/" + idevento
         )
           .then((response) => {
             return response.json();
@@ -492,31 +490,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           .catch((error) => console.log("error", error));
       },
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
+      // eventos pendientes de un usuario
+      geteventosPendientes: (iduser) => {
+        console.log(iduser);
+        fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            setStore({ usuariospendientes: data });
+          })
 
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
+          .catch((error) => console.log("error", error));
       },
     },
   };
