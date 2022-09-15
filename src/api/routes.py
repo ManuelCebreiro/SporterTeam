@@ -210,15 +210,7 @@ def delete_usersEvent(id):
     db.session.commit()
     return jsonify("Usuario expulsado")
 
-@api.route('/playerEvents/<int:id>', methods=["GET"])
-def get_users(id):
-    try:
-        event = Evento.query.filter_by(id=id).one_or_none()
-        eventoUser = User.query.with_parent(event).all()
-        response =[x.serializeWithoutParticipant() for x in eventoUser]
-        return jsonify(response), 200
-    except:
-        return jsonify("Data fail")
+
 
 
 

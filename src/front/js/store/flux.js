@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
       datosUsuario: {},
-      eventosPendientecomms: {},
+      eventosPendientes: {},
       userPendientes: {},
     },
     actions: {
@@ -353,10 +353,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             sessionStorage.setItem("token", respuestajson.access_token);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
+            getActions().DatosUsuarioLogeado();
           });
       },
       // -------------------------------><------------------------------------------
-      DatosUsuarioLogeado: () => {
+      DatosUsuarioLogeado: async () => {
         const token = sessionStorage.getItem("token");
         const options = {
           headers: {
@@ -369,6 +370,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/user", options)
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
+            sessionStorage.setItem("userid", data.id);
             setStore({ datosUsuario: data });
           });
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
@@ -476,23 +478,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         alert("Evento modificado con exito");
       },
+      geteventosPendientes: (iduser) => {
+        console.log(iduser);
+        fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            setStore({ eventosPendientes: data });
+          })
 
-      modificarevento: (event) => {
-        fetch(process.env.BACKEND_URL + "/api/modificarevento", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            evento: event,
-          }),
-        }).then((respuestadelback) => {
-          if (respuestadelback.status == 200) {
-            return respuestadelback.json();
-          }
-        });
-        alert("Evento modificado con exito");
+          .catch((error) => console.log("error", error));
       },
       getMessage: async () => {
         try {

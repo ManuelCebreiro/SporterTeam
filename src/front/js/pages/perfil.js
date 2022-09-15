@@ -2,19 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { DatosEventoUnico } from "../component/datoseventounico";
 import { Link } from "react-router-dom";
-import { element } from "prop-types";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
-  const user = store.datosUsuario;
 
   useEffect(() => {
     actions.getUserDataEventos();
     actions.DatosUsuarioLogeado();
-    actions.geteventosPendientes(user.id);
+    actions.geteventosPendientes(sessionStorage.getItem("userid"));
   }, []);
+  const user = store.datosUsuario;
 
   const eventosPendientes = store.eventosPendientes;
+  console.log(eventosPendientes);
   const eventos = store.userDataEventos;
   const userEventosactivos = Array.from(eventos).filter(
     (element) =>
