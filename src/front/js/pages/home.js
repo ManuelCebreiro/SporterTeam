@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { DatosEventoUnico } from "../component/datoseventounico";
 
+
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -22,10 +23,13 @@ export const Home = () => {
     sport: "",
     ciudad: "",
   });
+  useEffect(() => {
+    actions.getEventos();
 
+  }, []);
   return (
     <div className="container py-5">
-      <div className="row d-flex justify-content-center ">
+      <div className="row d-flex justify-content-center bg-light border border-dark px-3">
         <div className="col-5">
           <div className="form-check form-switch">
             <h5>Payment</h5>
@@ -184,12 +188,12 @@ export const Home = () => {
                   <th scope="row">{index}</th>
                   <td>{event.sport}</td>
                   <td>{event.date}</td>
-                  <td>{event.duration}</td>
-                  <td>{event.agemin}</td>
+                  <td>{event.duration} {"minutos"}</td>
+                  <td>{event.agemin} {"años"}</td>
+                  <td>{event.agemax} {"años"}</td>
                   <td>{event.ciudad}</td>
-                  <td>{event.agemax}</td>
-                  <td>{event.payment + "€"}</td>
-                  <td>{event.space ? "cubierto" : "airelibre"}</td>
+                  <td>{event.payment} {"€"}</td>
+                  <td>{event.space ? "Cubierto" : "Aire libre"}</td>
                   <td>
                     <button
                       className="btn btn-success"
@@ -199,6 +203,7 @@ export const Home = () => {
                     >
                       Unirse
                     </button>
+                    {/* <DatosEventoUnico id={event.id} /> */}
                   </td>
                 </tr>
               );
