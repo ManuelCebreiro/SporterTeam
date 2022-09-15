@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
       datosUsuario: {},
-      eventosPendientes: {},
+      eventosPendientecomms: {},
       userPendientes: {},
     },
     actions: {
