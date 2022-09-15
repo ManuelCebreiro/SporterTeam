@@ -32,138 +32,11 @@ export const Home = () => {
       <div className="row d-flex justify-content-center border border-dark p-3"
         id="estilofondofiltros"
       >
-        <div className="col-5">
-          <div className="form-check form-switch">
-            <div className="row my-1">
-              <h5 className="text-white">Payment</h5>
-            </div>
-            <div className="row">
-              <select
-                defaultValue="cualquiera"
-                className="form-select"
-                id="validationCustom04"
-                onChange={(e) => {
-                  if (e.target.value == "Si") {
-                    setEvent({ ...event, payment: true });
-                  } else if (e.target.value == "No") {
-                    setEvent({ ...event, payment: false });
-                  } else {
-                    setEvent({ ...event, payment: null });
-                  }
-                }}
-              >
-                <option>Si</option>
-                <option>No</option>
-                <option>cualquiera</option>
-              </select>
-            </div>
-
-          </div>
-          <div className="form-check form-switch">
-            <div className="row my-1">
-              <h5 className="text-white">Space</h5>
-            </div>
-            <div className="row">
-              <select
-                defaultValue="cualquiera"
-                className="form-select"
-                id="validationCustom04"
-                onChange={(e) => {
-                  if (e.target.value == "Si") {
-                    setEvent({ ...event, space: true });
-                  } else if (e.target.value == "No") {
-                    setEvent({ ...event, space: false });
-                  } else {
-                    setEvent({ ...event, space: null });
-                  }
-                }}
-              >
-                <option>Si</option>
-                <option>No</option>
-                <option>cualquiera</option>
-              </select>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-3 text-center ps-3 pe-1 my-2">
-              <label
-                className="form-check-label px-1 text-white my-1"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                Duración
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="600"
-                onChange={(e) => {
-                  setEvent({ ...event, duration: e.target.value });
-                }}
-              ></input>
-
-            </div>
-            <div className="col-lg-3 text-center px-1 my-2">
-              <label
-                className="form-check-label px-1 text-white my-1"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                Edad min.
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="150"
-                onChange={(e) => {
-                  console.log(typeof e.target.value);
-                  setEvent({ ...event, agemin: e.target.value });
-                }}
-              ></input>
-
-
-            </div>
-            <div className="col-lg-3 text-center px- my-2">
-              <label
-                className="form-check-label px-1 text-white my-1"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                Edad máx.
-              </label>
-              <input
-                type="number"
-                min="0"
-                max="150"
-                onChange={(e) => {
-                  setEvent({ ...event, agemax: e.target.value });
-                }}
-              ></input>
-
-            </div>
-            <div className="col-lg-3 text-center px-1 my-2">
-              <label
-                className="form-check-label px-1 text-white my-1"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                Fecha
-              </label>
-              <input
-                onChange={(e) => {
-                  setEvent({ ...event, date: e.target.value });
-                }}
-                type="date"
-                id="start"
-                name="trip-start"
-                min="2022-08-27"
-                max="2030-12-31"
-              ></input>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-5">
-          <div className="row ms-3 my-1">
+        <div className="col-lg-3 text-center my-1">
+          <div className="row my-1">
             <h5 className="text-white">Sport</h5>
           </div>
-          <div className="row ms-3">
+          <div className="row mx-1">
             <select
               className="form-select"
               id="validationCustom04"
@@ -178,10 +51,12 @@ export const Home = () => {
               <option>cualquiera</option>;
             </select>
           </div>
-          <div className="row ms-3 my-1">
+        </div>
+        <div className="col-lg-3 text-center my-1">
+          <div className="row my-1">
             <h5 className="text-white">Ciudad</h5>
           </div>
-          <div className="row ms-3">
+          <div className="row mx-1">
             <select
               defaultValue="Cualquiera"
               className="form-select"
@@ -196,21 +71,154 @@ export const Home = () => {
               })}
             </select>
           </div>
-          <div className="row ms-3 mt-4">
-            <div className="col-lg-3"></div>
-            <div className="col-lg-6">
-              <button
-                onClick={() => {
-                  actions.filterEvent(event);
-                }}
-              >
-                Filtrar eventos
-              </button>
-            </div>
-            <div className="col-lg-3"></div>
+        </div>
+
+
+        <div className="col-lg-3 text-center my-1">
+          <div className="row my-1">
+            <h5 className="text-white">Payment</h5>
+          </div>
+          <div className="row mx-1">
+            <select
+              defaultValue="cualquiera"
+              className="form-select"
+              id="validationCustom04"
+              onChange={(e) => {
+                if (e.target.value == "Si") {
+                  setEvent({ ...event, payment: true });
+                } else if (e.target.value == "No") {
+                  setEvent({ ...event, payment: false });
+                } else {
+                  setEvent({ ...event, payment: null });
+                }
+              }}
+            >
+              <option>Si</option>
+              <option>No</option>
+              <option>cualquiera</option>
+            </select>
+          </div>
+        </div>
+        <div className="col-lg-3 text-center my-1">
+          <div className="row my-1">
+            <h5 className="text-white">Space</h5>
+          </div>
+          <div className="row mx-1">
+            <select
+              defaultValue="cualquiera"
+              className="form-select"
+              id="validationCustom04"
+              onChange={(e) => {
+                if (e.target.value == "Si") {
+                  setEvent({ ...event, space: true });
+                } else if (e.target.value == "No") {
+                  setEvent({ ...event, space: false });
+                } else {
+                  setEvent({ ...event, space: null });
+                }
+              }}
+            >
+              <option>Si</option>
+              <option>No</option>
+              <option>cualquiera</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-3 col-md-6 col-sm-6 text-center ps-3 pe-1 my-2">
+            <label
+              className="form-check-label px-1 text-white my-1"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Duración
+            </label>
+            <input
+              className="border-3 rounded-pill"
+              type="number"
+              min="0"
+              max="600"
+              onChange={(e) => {
+                setEvent({ ...event, duration: e.target.value });
+              }}
+            ></input>
+
+          </div>
+          <div className="col-lg-3 col-md-6 col-sm-6 text-center px-1 my-2">
+            <label
+              className="form-check-label px-1 text-white my-1"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Edad mínima.
+            </label>
+            <input
+              className="border-3 rounded-pill"
+              type="number"
+              min="0"
+              max="150"
+              onChange={(e) => {
+                console.log(typeof e.target.value);
+                setEvent({ ...event, agemin: e.target.value });
+              }}
+            ></input>
+
+
+          </div>
+          <div className="col-lg-3 col-md-6 col-sm-6 text-center px- my-2">
+            <label
+              className="form-check-label px-1 text-white my-1"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Edad máxima.
+            </label>
+            <input
+              className="border-3 rounded-pill"
+              type="number"
+              min="0"
+              max="150"
+              onChange={(e) => {
+                setEvent({ ...event, agemax: e.target.value });
+              }}
+            ></input>
+
+          </div>
+          <div className="col-lg-3 col-md-6 col-sm-6 text-center px-1 my-2">
+            <label
+              className="form-check-label px-1 text-white my-1"
+              htmlFor="flexSwitchCheckDefault"
+            >
+              Fecha
+            </label>
+            <input
+              className="border-3 rounded-pill"
+
+              onChange={(e) => {
+                setEvent({ ...event, date: e.target.value });
+              }}
+              type="date"
+              id="start"
+              name="trip-start"
+              min="2022-08-27"
+              max="2030-12-31"
+            ></input>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-12 text-center">
+            <button
+              className="border-3 rounded-pill p-2"
+              onClick={() => {
+                actions.filterEvent(event);
+              }}
+            >
+              Filtrar eventos
+            </button>
           </div>
         </div>
       </div>
+
+
+
       <div className="table-responsive">
         <div class="table-wrapper-scroll-y tablapaginacentral">
           <table className="text-center table table-striped table-hover mt-4">

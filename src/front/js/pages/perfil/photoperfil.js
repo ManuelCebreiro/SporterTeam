@@ -46,7 +46,8 @@ export const Photoperfil = (props) => {
       <h2 className="display-5">PERFIL USUARIO</h2>
       {/* <form onSubmit={upLoadImage}> */}
       <div className="row">
-        <img src={store.imagen} style={{ width: 200 }} />
+        <img src={store.imagen} style={{ width: 200 }}
+          className="rounded-circle" />
         <button onClick={deleteImage} className="btn-close "></button>
         <p>
           <strong>{store.respuesta}</strong>
