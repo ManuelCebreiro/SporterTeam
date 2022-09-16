@@ -26,12 +26,15 @@ const patterns = {
 export const EditUser = () => {
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
-  const user = store.datosUsuario;
+
   useEffect(() => {
     actions.DatosUsuarioLogeado();
-    if (store.validacioneditregister) navigate("/photoperfil");
+    if (store.validacioneditregister) {
+      actions.validacionFalse();
+      navigate("/photoperfil");
+    }
   }, [store.validacioneditregister]);
-
+  const user = store.datosUsuario;
   const {
     register,
     watch,

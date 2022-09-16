@@ -66,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
       datosUsuario: {},
+      validacioneditregister: false,
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -137,14 +138,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }).then((resp) => {
           if (resp.status == 200) {
-            setStore({ validacionregister: true });
+            setStore({ validacioneditregister: true });
             return resp.json();
           } else {
             alert("Usuario ya existe");
           }
         });
       },
-
+      validacionFalse: () => {
+        setStore({ validacioneditregister: false });
+      },
       // función para editar los ajustes usuario ya existente
       editUser: (
         newEmail,
@@ -154,9 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         newDescription
       ) => {
         const token = sessionStorage.getItem("token");
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
+
         fetch(process.env.BACKEND_URL + "/api/edituser", {
           method: "POST",
           body: JSON.stringify({
@@ -172,18 +173,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             Accept: "application/json",
             Authorization: "Bearer " + token,
           },
-        })
-          .then((resp) => {
-            if (resp.status == 200) {
-              alert("Perfil de usuario actualizado correctamente");
-              return resp.json();
-            } else {
-              alert("Error al cambiar los datos");
-            }
-          })
-          .then((data) => {
-            console.log(data);
-          });
+        }).then((resp) => {
+          if (resp.status == 200) {
+            setStore({ validacioneditregister: true });
+            alert("Perfil de usuario actualizado correctamente");
+          } else {
+            alert("Error al cambiar los datos");
+          }
+        });
       },
 
       //funcion que filtra los eventos en la pagina pricipal

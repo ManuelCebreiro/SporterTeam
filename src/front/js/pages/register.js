@@ -25,8 +25,11 @@ export const Register = () => {
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
   useEffect(() => {
-    if (store.validacionregister) navigate("/");
-  }, [store.validacionregister]);
+    if (store.validacioneditregister) {
+      actions.validacionFalse();
+      navigate("/");
+    }
+  }, [store.validacioneditregister]);
 
   const {
     register,
