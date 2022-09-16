@@ -1,7 +1,35 @@
-/*
-    home.css: This website contains selectors only used in home.css
+#imagenPerfilNavbar {
+  width: 40px;
+  height: 40px;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+/* PALETA COLORES #FABC3C #FFB238 #F19143 #FF773D #F55536 */
+
+/* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
+#navbarstyle {
+  background-color: #ff773d;
+}
+
+body #bgdetalles {
+  height: 100%;
+  background-color: #ffd5b3;
+  border-left: solid black;
+  border-right: solid black;
+  border-bottom: solid black;
+}
+
+#bgdetallesadmin {
+  background-color: #fafafa;
+  border: solid black;
+  border-style: 2px solid;
+  border-radius: 2%;
+}
+
+#estilosdatos {
+  border: solid 2px black;
+  border-bottom: none;
+}
+
+#estilosdatos1 {
+  border: solid 2px black;
+}

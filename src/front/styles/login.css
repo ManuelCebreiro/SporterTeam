@@ -1,0 +1,54 @@
+#loginstyle {
+  background: url(https://i.ibb.co/Dkp724b/background.jpg) no-repeat center
+    center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#letrasLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-wrap {
+  position: relative;
+  text-align: center;
+}
+.text-wrap h1 {
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 4.3em;
+  line-height: 1.2em;
+}
+.text {
+  mix-blend-mode: overlay;
+}
+.text-wrap .text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: soft-light;
+  color: #fff;
+}
+.text-wrap .colored {
+  color: #ffd713;
+}
+
+#cardLogin {
+  background-color: #2d4053;
+  opacity: 0.7;
+  box-shadow: 6px 20px 10px black;
+}
+#btnLogin {
+  width: 300px;
+  background-color: #a5a2a2;
+  border: 1px solid #fefefe;
+  color: #2d4053;
+}
+
+button:hover {
+  opacity: 0.9;
+}
