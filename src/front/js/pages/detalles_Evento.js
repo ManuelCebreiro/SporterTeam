@@ -136,7 +136,7 @@ export const DetallesEvento = () => {
         </div>
         <div className="col-3">
           {detalles.admin == datosUsuario.id ? (
-            <JugadorespendientesEvento idevento={detalles.id} />
+            <JugadorespendientesEvento idevento={params.theid} />
           ) : undefined}
           <h1>Descripcion</h1>
           <div>{detalles.description}</div>

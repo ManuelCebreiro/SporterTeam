@@ -14,8 +14,9 @@ export const Perfil = () => {
   const user = store.datosUsuario;
 
   const eventosPendientes = store.eventosPendientes;
-  console.log(eventosPendientes);
+
   const eventos = store.userDataEventos;
+
   const userEventosactivos = Array.from(eventos).filter(
     (element) =>
       element.estadoEvento == "Abierto" || element.estadoEvento == "Cerrado"

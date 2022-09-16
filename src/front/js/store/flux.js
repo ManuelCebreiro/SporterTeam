@@ -178,44 +178,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         newAge,
         newDescription
       ) => {
-        const store = getStore();
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
-        fetch(process.env.BACKEND_URL + "/api/edituser", {
-          method: "POST",
-          body: JSON.stringify({
-            new_email: newEmail,
-            new_username: newUsername,
-            new_password: newPassword,
-            new_age: newAge,
-            new_description: newDescription,
-          }),
-
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + store.token,
-          },
-        }).then((resp) => {
-          if (resp.status == 200) {
-            return resp.json();
-          } else {
-            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
-              dangerMode: true,
-            });
-          }
-        });
-      },
-
-      // función para editar los ajustes usuario ya existente
-      editUser: (
-        newEmail,
-        newUsername,
-        newPassword,
-        newAge,
-        newDescription
-      ) => {
         const token = sessionStorage.getItem("token");
         console.log(
           `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
@@ -295,24 +257,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ eventosFilter: ciudadesResults });
       },
       //funcion para unirse a un evento de la lista
-      joinEvent: (event) => {
-        const token = sessionStorage.getItem("token");
-        fetch(process.env.BACKEND_URL + "/api/joinevent", {
+      joinEvent: (eventid, userid) => {
+        fetch(process.env.BACKEND_URL + "/api/joinevent/" + userid, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
-            id: event,
+            id: eventid,
           }),
         }).then((resp) => {
           if (resp.ok) {
-            swal("Usuario registrado", {
-              icon: "success",
-              timer: 4000,
-            });
+            getActions().getusersPendientes(eventid);
+            getActions().get_player_event(eventid);
           }
         });
       },
@@ -485,14 +443,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            setStore({ eventosPendientes: data });
+            setStore({ usuariospendientes: data });
           })
 
           .catch((error) => console.log("error", error));
       },
       // eventos pendientes de un usuario
       geteventosPendientes: (iduser) => {
-        console.log(iduser);
         fetch(
           process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
         )
@@ -500,10 +457,23 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            setStore({ usuariospendientes: data });
+            setStore({ eventosPendientes: data });
           })
 
           .catch((error) => console.log("error", error));
+      },
+      denegarpeticion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/administrasusuarios/" +
+            idevento +
+            "/" +
+            iduser,
+          {
+            method: "DELETE",
+          }
+        );
+        getActions().getusersPendientes(sessionStorage.getItem("userid"));
       },
     },
   };

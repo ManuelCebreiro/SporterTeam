@@ -146,14 +146,13 @@ def get_eventos():
 # endpoint para apuntarse a un evento
 
 
-@api.route('/joinevent', methods=["POST"])
-@jwt_required()
-def post_eventos():
-    eventId = request.json.get("id")
-    identity = get_jwt_identity()           #guardar token en un usuario
-    user = User.query.filter_by(email = identity).one_or_none()
-    event = Evento.query.filter_by(id =eventId).one_or_none()
+@api.route('/joinevent/<int:userid>', methods=["POST"])
 
+def post_eventos(userid):
+    eventId = request.json.get("id")
+             
+    user = User.query.filter_by(id = userid).one_or_none()
+    event = Evento.query.filter_by(id =eventId).one_or_none()
     user.participant.append(event)
     db.session.commit()
 
@@ -240,8 +239,7 @@ def hacerpeticion(iduser,idevent):
 #mostrar eventos pendientes de un usuario
 @api.route('/mostrareventospendientes/<int:iduser>', methods=["GET"])
 def mostrareventospendientes(iduser):
-    usuario = User.query.get(iduser)
-    eventoUser = Association.query.with_parent(usuario).all()
+    eventoUser = Association.query.filter_by(user_id = iduser).all()
     pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
     data = [x.serialize() for x in pendientes]
     eventodata = list(map(lambda x:Evento.query.get(x["event_id"]),data))
@@ -251,8 +249,7 @@ def mostrareventospendientes(iduser):
 #mostrar usuarios pendientes de un evento
 @api.route('/mostrarusuariospendientes/<int:idevento>', methods=["GET"])
 def mostrarusuariospendientes(idevento):
-    evento = User.query.get(idevento)
-    eventoUser = Association.query.with_parent(evento).all()
+    eventoUser = Association.query.filter_by(event_id = idevento).all()
     pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
     data = [x.serialize() for x in pendientes]
     userdata = list(map(lambda x:User.query.get(x["user_id"]),data))
