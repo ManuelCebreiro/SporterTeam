@@ -115,6 +115,10 @@ npm install react-hook-form
 
 $ npm install --save sweetalert
 
+## INSTALAR STYLED COMPONENTS EN REACT
+
+npm install --save styled-components
+
 ## MANO DE SANTO
 
 rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade

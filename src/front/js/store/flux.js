@@ -1,3 +1,5 @@
+import swal from "sweetalert";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -7,11 +9,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
-      //validacionregister: false,
       eventos: [],
       eventosFilter: [],
       dataEventoUnico: {},
       jugadores: [],
+      datosUsuario: {},
       ciudades: [
         { ciudad: "A_Coruña", posicion: [43.37012643, -8.39114853] },
         { ciudad: "Albacete", posicion: [38.99588053, -1.85574745] },
@@ -82,6 +84,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             idUser: idusuario,
           }),
         });
+        const players = getStore().jugadores;
+        const filtrarJugadoresnoEliminados = players.filter(
+          (element) => element.id !== idusuario
+        );
+        console.log(
+          filtrarJugadoresnoEliminados,
+          "esta deberia ser la listas nueva"
+        );
+
+        setStore({ jugadores: filtrarJugadoresnoEliminados });
+        getStore().jugadores;
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -115,7 +128,14 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({ datavalidacionEvento: true });
               return resp.json();
             } else {
-              alert("ha habido un problema intentalo de nuevo mas tarde");
+              swal(
+                "Ups, hubo un problema!",
+                "Inténtalo de nuevo más tarde",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
               return;
             }
           })
@@ -141,13 +161,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ validacioneditregister: true });
             return resp.json();
           } else {
-            alert("Usuario ya existe");
+            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+              dangerMode: true,
+            });
           }
         });
       },
       validacionFalse: () => {
         setStore({ validacioneditregister: false });
       },
+      validacionFalse: () => {
+        setStore({ validacioneditregister: false });
+      },
+
       // función para editar los ajustes usuario ya existente
       editUser: (
         newEmail,
@@ -176,9 +202,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         }).then((resp) => {
           if (resp.status == 200) {
             setStore({ validacioneditregister: true });
-            alert("Perfil de usuario actualizado correctamente");
+            swal("Perfil de usuario actualizado correctamente", {
+              icon: "success",
+              timer: 4000,
+            });
           } else {
-            alert("Error al cambiar los datos");
+            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+              dangerMode: true,
+            });
           }
         });
       },
@@ -237,7 +268,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }).then((resp) => {
           if (resp.ok) {
-            alert("usuario registrado");
+            swal("Usuario registrado", {
+              icon: "success",
+              timer: 4000,
+            });
           }
         });
       },
@@ -280,26 +314,28 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ validacion: true });
           });
       },
+      // -------------------------------><------------------------------------------
+      DatosUsuarioLogeado: () => {
+        const token = sessionStorage.getItem("token");
+        const options = {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          method: "GET",
+        };
+        fetch(process.env.BACKEND_URL + "/api/user", options)
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
+        // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
+      },
       LoadImage: (data) => {
-        // const store = getStore();
-        // console.log("entramos")
-        // const options = {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //     Authorization: "Bearer " + store.token,
-        //   },
-        //   method: "GET",
-        // }
-        // fetch(process.env.BACKEND_URL + "/api/load", options)
-        //   .then(respuestadelback =>
-        //     respuestadelback.json())
-        //   .then(data => {
-        //     setStore({ respuesta: "" })
-        //   })
-
         setStore({ imagen: data });
       },
+
       Load: (parametro) => {
         const options = {
           headers: {
@@ -381,25 +417,26 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
+        alert("Evento modificado con exito");
       },
-      //Fetch de los datos de usuario ya logeado
-      DatosUsuarioLogeado: () => {
-        const token = sessionStorage.getItem("token");
-        const options = {
+
+      modificarevento: (event) => {
+        fetch(process.env.BACKEND_URL + "/api/modificarevento", {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
-          method: "GET",
-        };
-        fetch(process.env.BACKEND_URL + "/api/user", options)
-          .then((respuestadelback) => respuestadelback.json())
-          .then((data) => {
-            setStore({ datosUsuario: data });
-          });
+          body: JSON.stringify({
+            evento: event,
+          }),
+        }).then((respuestadelback) => {
+          if (respuestadelback.status == 200) {
+            return respuestadelback.json();
+          }
+        });
+        alert("Evento modificado con exito");
       },
-
       getMessage: async () => {
         try {
           // fetching data from the backend

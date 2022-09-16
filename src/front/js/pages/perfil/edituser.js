@@ -31,7 +31,7 @@ export const EditUser = () => {
     actions.DatosUsuarioLogeado();
     if (store.validacioneditregister) {
       actions.validacionFalse();
-      navigate("/photoperfil");
+      navigate("/perfil");
     }
   }, [store.validacioneditregister]);
   const user = store.datosUsuario;

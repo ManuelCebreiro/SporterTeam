@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
+import SporterGradient from "../component/sporterGradient";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
@@ -14,68 +15,100 @@ export const Login = () => {
   }, [store.validacion]);
 
   return (
-    <div className="container-fluid p-0" id="loginstyle">
-      <section className="vh-100 bg-image-fluid">
-        <div className="mask d-flex align-items-center h-100 gradient-custom-3">
-          <div className="container h-100">
-            <div className="row d-flex justify-content-center align-items-center h-100">
-              <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div className="card" style={{ borderRadius: "15px" }}>
-                  <div className="card-body p-5">
-                    <h2 className="text-uppercase text-center mb-5">LOGIN</h2>
-                    <form>
-                      <div className="form-outline mb-4">
-                        <input
-                          type="email"
-                          className="form-control form-control-lg"
-                          placeholder="Email"
-                          value={userEmail}
-                          // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$
-                          onChange={(e) => {
-                            setUserEmail(e.target.value);
-                          }}
-                          required
-                        />
-                        <label className="form-label">Your Email</label>
-                      </div>
-                      <div className="form-outline mb-4">
-                        <input
-                          type="password"
-                          className="form-control form-control-lg"
-                          placeholder="Password"
-                          value={userPassword}
-                          onChange={(e) => {
-                            setUserPassword(e.target.value);
-                          }}
-                        />
-                        <label className="form-label">Password</label>
-                      </div>
-                      <div className="d-flex justify-content-center">
-                        <button
-                          onClick={() => {
-                            actions.login(userEmail, userPassword);
-                          }}
-                          type="button"
-                          className="btn btn-success btn-block btn-lg gradient-custom-4 "
-                        >
-                          Enter
-                        </button>
-                      </div>
+    <div className="container-fluid p-0 " id="loginstyle">
+      <div className="row">
+        <div id="letrasLogin" className="col-sm-4">
+          <div>
+            <div className="text-wrap">
+              <h1 className="text">RUN,</h1>
+              <h1 className="text-overlay">RUN,</h1>
+            </div>
+            <div className="text-wrap">
+              <h1 className="text">JUMP,</h1>
+              <h1 className="text-overlay">JUMP,</h1>
+            </div>
+            <div className="text-wrap">
+              <h1 className="text">SPORTER</h1>
+              <h1 className="text-overlay colored">SPORTER</h1>
+            </div>
+          </div>
+        </div>
 
-                      <p className="text-center text-muted mt-5 mb-0">
-                        Have already an account?{" "}
-                        <Link className="fw-bold text-body" to="/register">
-                          Register here
-                        </Link>
-                      </p>
-                    </form>
+        <div className="col-sm-8">
+          <section className="vh-100 bg-image-fluid">
+            <SporterGradient />
+            <div className="mask d-flex align-items-center h-80 gradient-custom-3">
+              <div className="container h-100">
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                  <div className="col-sm-8">
+                    <div
+                      id="cardLogin"
+                      className="card"
+                      style={{ borderRadius: "15px", background: "#2d4053" }}
+                    >
+                      <div className="card-body p-5">
+                        <h2
+                          style={{ color: "#fefefe" }}
+                          className="text-uppercase text-center mb-5"
+                        >
+                          LOGIN
+                        </h2>
+                        <form>
+                          <div className="form-outline mb-4">
+                            <input
+                              type="email"
+                              className="form-control form-control-lg"
+                              placeholder="Email"
+                              value={userEmail}
+                              // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$
+                              onChange={(e) => {
+                                setUserEmail(e.target.value);
+                              }}
+                              required
+                            />
+                            <label className="form-label">Your Email</label>
+                          </div>
+                          <div className="form-outline mb-4">
+                            <input
+                              type="password"
+                              className="form-control form-control-lg"
+                              placeholder="Password"
+                              value={userPassword}
+                              onChange={(e) => {
+                                setUserPassword(e.target.value);
+                              }}
+                            />
+                            <label className="form-label">Password</label>
+                          </div>
+                          <div className="d-flex justify-content-center">
+                            <button
+                              id="btnLogin"
+                              onClick={() => {
+                                actions.login(userEmail, userPassword);
+                              }}
+                              type="button"
+                              className="btn  btn-block btn-lg gradient-custom-2 "
+                            >
+                              Enter
+                            </button>
+                          </div>
+
+                          <p className="text-center text-muted mt-5 mb-0">
+                            Have already an account?{" "}
+                            <Link className="fw-bold text-body" to="/register">
+                              Register here
+                            </Link>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
