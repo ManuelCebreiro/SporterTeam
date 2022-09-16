@@ -110,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => setStore({ userDataEventos: result }));
       },
-      //octener todos los jugadores de un evento
+      //obtener todos los jugadores de un evento
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
           .then((resp) => {
