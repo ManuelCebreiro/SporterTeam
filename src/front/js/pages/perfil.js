@@ -49,7 +49,7 @@ export const Perfil = () => {
                     alt="Admin"
                     className="rounded-circle fluid"
                     id="estiloperfil"
-                    style={{ width: "250px" }}
+                    style={{ width: "250px", height: "250px" }}
                   />
                 </div>
               </div>

@@ -6,6 +6,53 @@ import { nominalTypeHack } from "prop-types";
 import swal from "sweetalert";
 
 export const Newevent = () => {
+
+  const validarMayorQue = (numeroaValidar, condicion, texto) => {
+    if (Number(numeroaValidar) >= condicion) {
+      return true
+    } else {
+      swal(
+        "¡Ups, hubo un problema!",
+        texto,
+        "error",
+        {
+          dangerMode: true,
+        }
+      );
+      return false
+    };
+  };
+  const validarMenorQue = (numeroaValidar, condicion, texto) => {
+    if (Number(numeroaValidar) < condicion) {
+      return true
+    } else {
+      swal(
+        "¡Ups, hubo un problema!",
+        texto,
+        "error",
+        {
+          dangerMode: true,
+        }
+      );
+      return false
+    };
+  };
+  const validarCampoVacio = (campoAValidar, condicion, texto) => {
+    if (campoAValidar != condicion) {
+      return true
+    } else {
+      swal(
+        "¡Ups, hubo un problema!",
+        texto,
+        "error",
+        {
+          dangerMode: true,
+        }
+      );
+      return false
+    };
+  }
+
   const { store, actions } = useContext(Context);
   const [event, setEvent] = useState({
     payment: "",
@@ -128,7 +175,7 @@ export const Newevent = () => {
               min="0"
               max="150"
               className="form-control"
-              placeholder="Edad mínima"
+              placeholder="Mínimo 18 años"
               value={event.agemin}
               onChange={(e) => {
                 setEvent({ ...event, agemin: e.target.value });
@@ -141,7 +188,7 @@ export const Newevent = () => {
             <input
               type="number"
               className="form-control"
-              placeholder="Edad máxima"
+              placeholder="Máximo 100 años"
               min="0"
               max="150"
               value={event.agemax}
@@ -159,6 +206,7 @@ export const Newevent = () => {
               className="form-select"
               // value={event.space ? "cubierto" : "airelibre"}
               onChange={(e) => {
+                console.log(e.target.value)
                 if (e.target.value == "Cubierto") {
                   setEvent({ ...event, space: true });
                 } else {
@@ -191,20 +239,20 @@ export const Newevent = () => {
               type="submit"
               onClick={() => {
                 if (
-                  event.description != "" &&
-                  Number(event.participantmax) >= 2 &&
-                  Number(event.participantmax) < 50 &&
-                  event.sport.length != "" &&
-                  event.date != "" &&
-                  Number(event.agemax) < 200 &&
-                  Number(event.agemin) > 0 &&
-                  Number(event.duration) > 0 &&
-                  event.space != null &&
-                  event.ciudad != ""
+                  validarCampoVacio(event.sport.length, "", "Debes escoger un deporte") &&
+                  validarMayorQue(event.duration, 30, "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " + `${event.duration}`) &&
+                  validarMayorQue(event.agemin, 18, "La edad puesta es " + `${event.agemin}` + " y debe tener mínimo 18 años") &&
+                  validarMenorQue(event.agemax, 100, "La edad puesta es " + `${event.agemax}` + " y no debe ser mayor que 100"),
+                  validarMayorQue(event.agemax, `${event.agemin}`, "La edad máxima puesta es " + `${event.agemax}` + " y debe ser mayor o igual que la edad mínima que has escogido, que es " + `${event.agemin}`) &&
+                  validarMenorQue(event.participantmax, 50, "El campo de participantes debe ser menor que 50") &&
+                  validarMayorQue(event.participantmax, 2, "El campo de participantes debe ser mayor o igual que 2") &&
+                  validarCampoVacio(event.date, "", "Debes escoger una fecha") &&
+                  validarCampoVacio(event.space, null, "Debes escoger un tipo de lugar") &&
+                  validarCampoVacio(event.ciudad, "", "Debes escoger una ciudad") &&
+                  validarCampoVacio(event.description, "", "El campo debería contener una breve descripción")
                 ) {
-                  // if (event.description != "" && Number(event.participantmax) >= 2&& Number(event.participantmax) < 30 && event.sport != "" && event.date != "" && Number(event.agemax) < 200 && Number(event.agemin) > 0 && Number(event.duration) >= 0 && Number(event.duration) > 400 && event.space != null) {
 
-                  console.log(event);
+                  console.log(eventazo);
                   actions.crearevento(event);
                   setEventazo([...eventazo, event]);
                   setEvent({
@@ -217,17 +265,10 @@ export const Newevent = () => {
                     sport: "",
                     description: "",
                     participantmax: "",
-                    ciudad: "",
-                  });
-                } else
-                  swal(
-                    "Ups, hubo un problema!",
-                    "te faltan campos por rellenar..",
-                    "error",
-                    {
-                      dangerMode: true,
-                    }
-                  );
+                    ciudad: ""
+                  })
+                };
+
               }}
             >
               Crear
@@ -246,6 +287,7 @@ export const Newevent = () => {
                         <th scope="col">Duracion</th>
                         <th scope="col">Edad mínima</th>
                         <th scope="col">Edad máxima</th>
+                        <th scope="col">Participantes</th>
                         <th scope="col">Ciudad</th>
                         <th scope="col">Pago</th>
                         <th scope="col">Espacio</th>
@@ -264,6 +306,7 @@ export const Newevent = () => {
                           <td>{event.duration + " min."}</td>
                           <td>{event.agemin + " años."}</td>
                           <td>{event.agemax + " años."}</td>
+                          <td>{event.participantmax + " participantes."}</td>
                           <td>{event.ciudad}</td>
                           <td>{event.payment + "€"}</td>
                           <td>{event.space ? "Cubierto" : "Aire libre"}</td>
