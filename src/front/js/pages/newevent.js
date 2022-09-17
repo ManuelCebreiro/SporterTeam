@@ -8,6 +8,7 @@ import swal from "sweetalert";
 export const Newevent = () => {
 
   const validarMayorQue = (numeroaValidar, condicion, texto) => {
+
     if (Number(numeroaValidar) >= condicion) {
       return true
     } else {
@@ -71,12 +72,15 @@ export const Newevent = () => {
   const [eventazo, setEventazo] = useState([]);
 
   return (
-    <div>
-      <h1>Crear evento</h1>
-      <div className="container py-5 bg-light border border-dark">
+    <div className="fondonewevent">
+      <div className="row mb-5"></div>
+      <div id="estilofondofiltros" className="container p-3 border border-dark">
+        <div id="estilotitulonewevento" className="row text-center text-white font-monospace">
+          <h1>Crear evento</h1>
+        </div>
         <div className="row">
           <div className="col-md-2">
-            <label className="form-label">Deporte</label>
+            <label className="form-label text-white">Deporte</label>
             <select
               className="form-select"
               // value={event.sport}
@@ -95,7 +99,7 @@ export const Newevent = () => {
             </select>{" "}
           </div>
           <div className="col-md-2">
-            <label className="form-label">Fecha</label>
+            <label className="form-label text-white">Fecha</label>
             <input
               type="date"
               className="form-control"
@@ -110,7 +114,7 @@ export const Newevent = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">Duracion evento</label>
+            <label className="form-label text-white">Duración</label>
             <input
               type="number"
               className="form-control"
@@ -123,7 +127,7 @@ export const Newevent = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">Participantes</label>
+            <label className="form-label text-white">Participantes</label>
             <input
               type="number"
               className="form-control"
@@ -138,7 +142,7 @@ export const Newevent = () => {
           </div>
 
           <div className="col-md-2">
-            <label htmlFor="validationCustom04" className="form-label">
+            <label htmlFor="validationCustom04" className="form-label text-white">
               Ciudad
             </label>
             <select
@@ -156,7 +160,7 @@ export const Newevent = () => {
             </select>
           </div>
           <div className="col-md-2">
-            <label className="form-label">Opción de pago</label>
+            <label className="form-label text-white">Pago</label>
             <input
               type="number"
               className="form-control"
@@ -169,7 +173,7 @@ export const Newevent = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">Edad mínima</label>
+            <label className="form-label text-white">Edad mínima</label>
             <input
               type="number"
               min="0"
@@ -183,8 +187,8 @@ export const Newevent = () => {
               required
             />
           </div>
-          <div className="col-md-2">
-            <label className="form-label">Edad máxima</label>
+          <div className="col-md-2 pe-1">
+            <label className="form-label text-white">Edad máxima</label>
             <input
               type="number"
               className="form-control"
@@ -200,7 +204,7 @@ export const Newevent = () => {
             />
           </div>
           <div className="col-md-2">
-            <label className="form-label">Tipo de lugar</label>
+            <label className="form-label text-white">Tipo de lugar</label>
 
             <select
               className="form-select"
@@ -222,7 +226,7 @@ export const Newevent = () => {
             </select>
           </div>
           <div className="form-group">
-            <label className="my-3">Descripción</label>
+            <label className="my-3 text-white">Descripción</label>
             <textarea
               className="form-control"
               rows="3"
@@ -235,14 +239,15 @@ export const Newevent = () => {
           </div>
           <div className="col-12 mt-3">
             <button
-              className="btn btn-primary"
+              className="btn"
+              id="btncrearevento"
               type="submit"
               onClick={() => {
                 if (
                   validarCampoVacio(event.sport.length, "", "Debes escoger un deporte") &&
                   validarMayorQue(event.duration, 30, "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " + `${event.duration}`) &&
                   validarMayorQue(event.agemin, 18, "La edad puesta es " + `${event.agemin}` + " y debe tener mínimo 18 años") &&
-                  validarMenorQue(event.agemax, 100, "La edad puesta es " + `${event.agemax}` + " y no debe ser mayor que 100"),
+                  validarMenorQue(event.agemax, 100, "La edad puesta es " + `${event.agemax}` + " y no debe ser mayor que 100") &&
                   validarMayorQue(event.agemax, `${event.agemin}`, "La edad máxima puesta es " + `${event.agemax}` + " y debe ser mayor o igual que la edad mínima que has escogido, que es " + `${event.agemin}`) &&
                   validarMenorQue(event.participantmax, 50, "El campo de participantes debe ser menor que 50") &&
                   validarMayorQue(event.participantmax, 2, "El campo de participantes debe ser mayor o igual que 2") &&
@@ -321,6 +326,6 @@ export const Newevent = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </div >
   );
 };

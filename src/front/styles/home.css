@@ -110,3 +110,8 @@ body #bgdetalles {
 }
 
 /* ---------- fin estilos pagina central ------------- */
+
+#btncrearevento {
+  background-color: #ff773d;
+  color: white
+}

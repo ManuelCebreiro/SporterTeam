@@ -13,3 +13,14 @@
 #fechastyle {
     width: 5%;
 }
+
+.fondonewevent {
+    background-image: url('https://img.freepik.com/foto-gratis/cool-hombre-negro-haciendo-deportes-jugando-baloncesto-al-amanecer-silueta_285396-1442.jpg?w=1380&t=st=1663454983~exp=1663455583~hmac=cf4d5ea7524dd0b757d226ae05263d01f17e3149208c79cc2387f53ef984ea58');
+    background-size: cover;
+    height: 100vh;
+}
+
+#estilotitulonewevento {
+    -webkit-text-stroke: 1px black;
+    color: transparent;
+}
