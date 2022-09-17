@@ -5,27 +5,49 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 #letrasLogin {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.text-wrap {
+.text-wrap-login {
   position: relative;
   text-align: center;
 }
-.text-wrap h1 {
+.text-wrap-login h1 {
   color: #fff;
   letter-spacing: 1px;
   margin: 0;
-  font-size: 4.3em;
+  font-size: 7.5em;
   line-height: 1.2em;
 }
-.text {
+@media screen and (max-width: 1100px) {
+  .text-wrap-login h1 {
+    font-size: 5.5em;
+    line-height: 1.1em;
+  }
+}
+@media screen and (max-width: 770px) {
+  .text-wrap-login h1 {
+    font-size: 4.9em;
+    line-height: 1em;
+  }
+}
+@media screen and (max-width: 320px) {
+  .text-wrap-login h1 {
+    font-size: 3.2em;
+    line-height: 0.8em;
+  }
+}
+
+.text-login {
   mix-blend-mode: overlay;
 }
-.text-wrap .text-overlay {
+.text-wrap-login .text-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -33,7 +55,7 @@
   mix-blend-mode: soft-light;
   color: #fff;
 }
-.text-wrap .colored {
+.text-wrap-login .colored {
   color: #ffd713;
 }
 
@@ -49,6 +71,7 @@
   color: #2d4053;
 }
 
-button:hover {
+#btnLogin:hover {
   opacity: 0.9;
+  background-color: #ffd713;
 }
