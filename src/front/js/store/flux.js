@@ -83,15 +83,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             idUser: idusuario,
           }),
-        },
-
-        );
+        });
         const players = getStore().jugadores;
-        const filtrarJugadoresnoEliminados = players.filter((element) => element.id !== idusuario)
-        console.log(filtrarJugadoresnoEliminados, "esta deberia ser la listas nueva")
+        const filtrarJugadoresnoEliminados = players.filter(
+          (element) => element.id !== idusuario
+        );
+        console.log(
+          filtrarJugadoresnoEliminados,
+          "esta deberia ser la listas nueva"
+        );
 
-        setStore({ jugadores: filtrarJugadoresnoEliminados })
-        getStore().jugadores
+        setStore({ jugadores: filtrarJugadoresnoEliminados });
+        getStore().jugadores;
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -115,7 +118,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             setStore({ jugadores: data });
-
           });
       },
 
@@ -258,14 +260,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-              ? eventos.filter((element) => element.payment > 0)
-              : eventos.filter((element) => element.payment == 0);
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-              ? paymentResults.filter((element) => element.space == true)
-              : paymentResults.filter((element) => element.space == false);
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -340,8 +342,24 @@ const getState = ({ getStore, getActions, setStore }) => {
               return respuestadelback.json();
             } else if (respuestadelback.status == 401) {
               console.log("El email o password es incorrecto o no existe, 401");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             } else if (respuestadelback.status == 402) {
               console.log("El email o password es incorrecto o no existe, 402");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             }
           })
           .then((respuestajson) => {
@@ -361,15 +379,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + token,
           },
           method: "GET",
-        }
+        };
         fetch(process.env.BACKEND_URL + "/api/user", options)
-          .then(respuestadelback =>
-            respuestadelback.json())
-          .then(data => {
-            setStore({ datosUsuario: data })
-          })
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
-
       },
       LoadImage: (data) => {
         setStore({ imagen: data });
@@ -455,7 +471,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
-        })
+        });
       },
       modificarevento: (event) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
@@ -465,14 +481,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            evento: event
+            evento: event,
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito")
+        alert("Evento modificado con exito");
       },
 
       modificarevento: (event) => {
@@ -483,14 +499,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            evento: event
+            evento: event,
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito")
+        alert("Evento modificado con exito");
       },
       getMessage: async () => {
         try {
