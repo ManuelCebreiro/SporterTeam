@@ -42,17 +42,24 @@ export const Photoperfil = (props) => {
     actions.getrespuesta("Esta es la imagen predefinida.");
   };
   return (
-    <div className="foto de usuario">
-      <h2 className="display-5">PERFIL USUARIO</h2>
+    <div id="fotoEditUser" className="fotodeusuario">
       {/* <form onSubmit={upLoadImage}> */}
-      <div className="row">
-        <img src={store.imagen} style={{ width: 200 }} />
-        <button onClick={deleteImage} className="btn-close "></button>
-        <p>
+      <div className="row px-1 mx-1 my-3 mb-0 ">
+        <img
+          className="rounded-circle img-fluid"
+          src={store.imagen}
+          style={{ width: 250 }}
+        />
+        <button
+          onClick={deleteImage}
+          className="btn-close btn-close-white"
+        ></button>
+        <p t>
           <strong>{store.respuesta}</strong>
         </p>
         <input
           type="file"
+          className="border-0"
           onChange={(e) => {
             upLoadImage(e);
           }}
