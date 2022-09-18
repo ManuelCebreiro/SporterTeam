@@ -10,13 +10,14 @@ export const Navbar = () => {
       <Link to="/perfil">
         <img
           id="imagenPerfilNavbar"
-          className="img-fluid rounded-circle"
+          className="img-fluid rounded-circle my-1"
           src={store.imagen}
         ></img>
       </Link>
 
       <button
         className="navbar-toggler"
+        id="btnnavbar"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNavDropdown"
@@ -31,8 +32,9 @@ export const Navbar = () => {
           <li className="nav-item active">
             <Link to="/home">
               <button
+                id="btnnavbar"
                 type="button"
-                className="btn btn-secondary btn-sm mt-1 ms-1"
+                className="btn btn-sm mt-1 ms-1"
               >
                 Pagina principal
               </button>
@@ -41,8 +43,9 @@ export const Navbar = () => {
           <li className="nav-item">
             <Link to="/newevent" className="mt-1">
               <button
+                id="btnnavbar"
                 type="button"
-                className="btn btn-secondary btn-sm mt-1 ms-1"
+                className="btn btn-sm mt-1 ms-1"
               >
                 Newevent
               </button>
@@ -56,8 +59,9 @@ export const Navbar = () => {
               }}
             >
               <button
+                id="btnnavbar"
                 type="button"
-                className="btn btn-secondary btn-sm mt-1 ms-1"
+                className="btn  btn-sm mt-1 ms-1"
               >
                 Log out
               </button>

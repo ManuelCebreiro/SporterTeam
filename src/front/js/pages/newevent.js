@@ -74,170 +74,185 @@ export const Newevent = () => {
   return (
     <div className="fondonewevent">
       <div className="row mb-5"></div>
-      <div id="estilofondofiltros" className="container p-3 border border-dark">
+      <div id="estilofondofiltros" className="container py-3 px-5 border border-dark">
         <div id="estilotitulonewevento" className="row text-center text-white font-monospace">
           <h1>Crear evento</h1>
         </div>
         <div className="row">
-          <div className="col-md-2">
-            <label className="form-label text-white">Deporte</label>
-            <select
-              className="form-select"
-              // value={event.sport}
-              onChange={(e) => {
-                setEvent({ ...event, sport: e.target.value });
-              }}
-            >
-              <option selected disabled>
-                Elige
-              </option>
+          <div className="row">
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Deporte</label>
+              <select
+                className="form-select"
+                // value={event.sport}
+                onChange={(e) => {
+                  setEvent({ ...event, sport: e.target.value });
+                }}
+              >
+                <option selected disabled>
+                  Elige
+                </option>
 
-              <option>Baloncesto</option>
-              <option>Fútbol</option>
-              <option>Tenis</option>
-              <option>Padel</option>
-            </select>{" "}
+                <option>Baloncesto</option>
+                <option>Fútbol</option>
+                <option>Tenis</option>
+                <option>Padel</option>
+              </select>{" "}
+            </div>
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Fecha</label>
+              <input
+                type="date"
+                className="form-control"
+                min="2022-08-27"
+                max="2030-12-31"
+                placeholder="Fecha"
+                required
+                value={event.date}
+                onChange={(e) => {
+                  setEvent({ ...event, date: e.target.value });
+                }}
+              />
+            </div>
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Duración</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Duracion evento"
+                value={event.duration}
+                onChange={(e) => {
+                  setEvent({ ...event, duration: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Participantes</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Participantes"
+                required
+                value={event.participantmax}
+                onChange={(e) => {
+                  setEvent({ ...event, participantmax: e.target.value });
+                  console.log({ participantmax: e.target.value });
+                }}
+              />
+            </div>
           </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Fecha</label>
-            <input
-              type="date"
-              className="form-control"
-              min="2022-08-27"
-              max="2030-12-31"
-              placeholder="Fecha"
-              required
-              value={event.date}
-              onChange={(e) => {
-                setEvent({ ...event, date: e.target.value });
-              }}
-            />
-          </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Duración</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Duracion evento"
-              value={event.duration}
-              onChange={(e) => {
-                setEvent({ ...event, duration: e.target.value });
-              }}
-              required
-            />
-          </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Participantes</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Participantes"
-              required
-              value={event.participantmax}
-              onChange={(e) => {
-                setEvent({ ...event, participantmax: e.target.value });
-                console.log({ participantmax: e.target.value });
-              }}
-            />
-          </div>
+          <div className="row">
+            <div className="col-lg-3 text-center my-1">
+              <label htmlFor="validationCustom04" className="form-label text-white">
+                Ciudad
+              </label>
+              <select
+                className="form-select"
+                value={event.ciudad}
+                onChange={(e) => {
+                  setEvent({ ...event, ciudad: e.target.value });
+                  console.log({ ...event, ciudad: e.target.value });
+                }}
+              >
+                <option>Elige ciudad</option>
+                {cities.map((texto, index) => {
+                  return <option key={index}>{texto.ciudad}</option>;
+                })}
+              </select>
+            </div>
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Pago</label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Cantidad"
+                value={event.payment}
+                onChange={(e) => {
+                  setEvent({ ...event, payment: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div className="col-lg-3  text-center px-0 my-1">
+              <div className="row">
+                <div className="col-lg-6 col-md-6 text-center">
+                  <label className="form-label text-white">Edad mínimo</label>
 
-          <div className="col-md-2">
-            <label htmlFor="validationCustom04" className="form-label text-white">
-              Ciudad
-            </label>
-            <select
-              className="form-select"
-              value={event.ciudad}
-              onChange={(e) => {
-                setEvent({ ...event, ciudad: e.target.value });
-                console.log({ ...event, ciudad: e.target.value });
-              }}
-            >
-              <option>Elige ciudad</option>
-              {cities.map((texto, index) => {
-                return <option key={index}>{texto.ciudad}</option>;
-              })}
-            </select>
-          </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Pago</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Cantidad"
-              value={event.payment}
-              onChange={(e) => {
-                setEvent({ ...event, payment: e.target.value });
-              }}
-              required
-            />
-          </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Edad mínima</label>
-            <input
-              type="number"
-              min="0"
-              max="150"
-              className="form-control"
-              placeholder="Mínimo 18 años"
-              value={event.agemin}
-              onChange={(e) => {
-                setEvent({ ...event, agemin: e.target.value });
-              }}
-              required
-            />
-          </div>
-          <div className="col-md-2 pe-1">
-            <label className="form-label text-white">Edad máxima</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Máximo 100 años"
-              min="0"
-              max="150"
-              value={event.agemax}
-              onChange={(e) => {
-                console.log(typeof Number(e.target.value));
-                setEvent({ ...event, agemax: e.target.value });
-              }}
-              required
-            />
-          </div>
-          <div className="col-md-2">
-            <label className="form-label text-white">Tipo de lugar</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="150"
+                    className="border-3 rounded-pill"
+                    style={{ width: 100 }}
+                    placeholder="Mínimo 18 años"
+                    value={event.agemin}
+                    onChange={(e) => {
+                      setEvent({ ...event, agemin: e.target.value });
+                    }}
+                    required
+                  />
+                </div>
 
-            <select
-              className="form-select"
-              // value={event.space ? "cubierto" : "airelibre"}
-              onChange={(e) => {
-                console.log(e.target.value)
-                if (e.target.value == "Cubierto") {
-                  setEvent({ ...event, space: true });
-                } else {
-                  setEvent({ ...event, space: false });
-                }
-              }}
-            >
-              <option selected disabled>
-                Elige
-              </option>
-              <option>Cubierto</option>
-              <option>Aire libre</option>
-            </select>
+                <div className="col-lg-6 col-md-6 text-center">
+                  <label className="form-label text-white">Edad máxima</label>
+                  <input
+                    type="number"
+                    className="border-3 rounded-pill"
+                    style={{ width: 100 }}
+                    placeholder="Máximo 100 años"
+                    min="0"
+                    max="150"
+                    value={event.agemax}
+                    onChange={(e) => {
+                      console.log(typeof Number(e.target.value));
+                      setEvent({ ...event, agemax: e.target.value });
+                    }}
+                    required
+                  />
+                </div>
+              </div>
+
+
+            </div>
+            <div className="col-lg-3 text-center my-1">
+              <label className="form-label text-white">Tipo de lugar</label>
+
+              <select
+                className="form-select"
+                // value={event.space ? "cubierto" : "airelibre"}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  if (e.target.value == "Cubierto") {
+                    setEvent({ ...event, space: true });
+                  } else {
+                    setEvent({ ...event, space: false });
+                  }
+                }}
+              >
+                <option selected disabled>
+                  Elige
+                </option>
+                <option>Cubierto</option>
+                <option>Aire libre</option>
+              </select>
+            </div>
           </div>
-          <div className="form-group">
-            <label className="my-3 text-white">Descripción</label>
-            <textarea
-              className="form-control"
-              rows="3"
-              value={event.description}
-              placeholder="Descripción"
-              onChange={(e) => {
-                setEvent({ ...event, description: e.target.value });
-              }}
-            ></textarea>
+          <div className="row">
+            <div className="col-lg-12 col-md-6">
+              <label className="my-3 text-white">Descripción</label>
+              <textarea
+                className="form-control"
+                rows="3"
+                value={event.description}
+                placeholder="Descripción"
+                onChange={(e) => {
+                  setEvent({ ...event, description: e.target.value });
+                }}
+              ></textarea>
+            </div>
           </div>
-          <div className="col-12 mt-3">
+          <div className="row justify-content-center mt-3">
             <button
               className="btn"
               id="btncrearevento"
@@ -280,13 +295,13 @@ export const Newevent = () => {
             </button>
           </div>
           <ul>
-            <div className="container">
-              <div className="table-responsive">
-                <table className="text-center table table-striped table-hover">
+            <div className="container mt-3">
+              <div className="table-responsive border-dark">
+                <table className="text-center table table-striped table-hover bg-light ">
                   {eventazo.length > 0 ? (
                     <thead>
                       <tr>
-                        <th scope="col"></th>
+                        <th scope="col" className="text-white"></th>
                         <th scope="col">Deporte</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Duracion</th>
@@ -299,7 +314,7 @@ export const Newevent = () => {
                       </tr>
                     </thead>
                   ) : undefined}
-                  <tbody>
+                  <tbody className="text-white">
                     {eventazo.map((event, index) => {
                       return (
                         <tr>

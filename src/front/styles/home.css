@@ -7,7 +7,7 @@
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
 #navbarstyle {
-  background-color: #ff773d;
+  background-color: #1A375A;
 }
 
 body {
@@ -58,7 +58,7 @@ body #bgdetalles {
 }
 
 #estilofondofiltros {
-  background: #4c5483fa;
+  background: #1A375A;
   box-shadow: 4px 4px 4px 4px black;
   border-radius: 2%;
 }
@@ -110,8 +110,7 @@ body #bgdetalles {
 }
 
 /* ---------- fin estilos pagina central ------------- */
-
-#btncrearevento {
-  background-color: #ff773d;
-  color: white
+#btnnavbar {
+  background-color: #BB723A;
+  color: white;
 }

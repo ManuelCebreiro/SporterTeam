@@ -23,4 +23,11 @@
 #estilotitulonewevento {
     -webkit-text-stroke: 1px black;
     color: transparent;
+
+}
+
+#btncrearevento {
+    background-color: #BB723A;
+    color: white;
+    width: 100px;
 }
