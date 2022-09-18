@@ -74,13 +74,14 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     user = User.query.filter_by(email=email).first()
+    
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 401
     elif email != user.email or password != user.password:
         return jsonify({"msg": "La contraseña o usuario es incorrecto o no existe"}), 402
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    return jsonify({"access_token":access_token, "userid": user.id})
 
 # Endpoint obtener datos usuario
 
@@ -147,10 +148,8 @@ def get_eventos():
 
 
 @api.route('/joinevent/<int:userid>', methods=["POST"])
-
 def post_eventos(userid):
     eventId = request.json.get("id")
-             
     user = User.query.filter_by(id = userid).one_or_none()
     event = Evento.query.filter_by(id =eventId).one_or_none()
     user.participant.append(event)
@@ -230,11 +229,15 @@ def get_userdataParticipant():
 def hacerpeticion(iduser,idevent):
     usuario = User.query.get(iduser)
     evento = Evento.query.get(idevent)
-    peticion = Association(user_id = usuario.id, event_id = evento.id, peticion = "Pendiente")
-    usuario.eventospendientes.append(peticion)
-    evento.usuariospendientes.append(peticion)
-    db.session.commit()
-    return jsonify("peticion realizada con exito"),200
+    association = Association.query.filter_by(user_id = iduser,event_id = idevent).first()
+    if association:
+        return jsonify("ya has realizado esta peticion"),401
+    else:
+        peticion = Association(user_id = usuario.id, event_id = evento.id, peticion = "Pendiente")
+        usuario.eventospendientes.append(peticion)
+        evento.usuariospendientes.append(peticion)
+        db.session.commit()
+        return jsonify("peticion realizada con exito"),200
 
 #mostrar eventos pendientes de un usuario
 @api.route('/mostrareventospendientes/<int:iduser>', methods=["GET"])
@@ -263,7 +266,6 @@ def adminusers(idevento,iduser):
     association = Association.query.filter_by(user_id = iduser,event_id = idevento).first()
     db.session.delete(association)
     db.session.commit()
-    
     return jsonify("response")
 
     

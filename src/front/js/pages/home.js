@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { DatosEventoUnico } from "../component/datoseventounico";
-
+import { PeticionUnion } from "../component/botonpeticionUnirseEvento";
 
 import "../../styles/home.css";
 
@@ -25,7 +24,6 @@ export const Home = () => {
   });
   useEffect(() => {
     actions.getEventos();
-
   }, []);
   return (
     <div className="container py-5">
@@ -188,22 +186,22 @@ export const Home = () => {
                   <th scope="row">{index}</th>
                   <td>{event.sport}</td>
                   <td>{event.date}</td>
-                  <td>{event.duration} {"minutos"}</td>
-                  <td>{event.agemin} {"años"}</td>
-                  <td>{event.agemax} {"años"}</td>
+                  <td>
+                    {event.duration} {"minutos"}
+                  </td>
+                  <td>
+                    {event.agemin} {"años"}
+                  </td>
+                  <td>
+                    {event.agemax} {"años"}
+                  </td>
                   <td>{event.ciudad}</td>
-                  <td>{event.payment} {"€"}</td>
+                  <td>
+                    {event.payment} {"€"}
+                  </td>
                   <td>{event.space ? "Cubierto" : "Aire libre"}</td>
                   <td>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => {
-                        actions.joinEvent(event.id);
-                      }}
-                    >
-                      Unirse
-                    </button>
-                    {/* <DatosEventoUnico id={event.id} /> */}
+                    <PeticionUnion idevento={event.id} />
                   </td>
                 </tr>
               );

@@ -9,7 +9,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
-      // validacionregister: false,
       eventos: [],
       eventosFilter: [],
       dataEventoUnico: {},
@@ -69,8 +68,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
       datosUsuario: {},
-      eventosPendientes: {},
-      usuariospendientes: {},
+      eventosPendientes: [],
+      usuariospendientes: [],
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -104,7 +103,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "GET",
           headers: { Authorization: "Bearer " + token },
         };
-
         fetch(
           process.env.BACKEND_URL + "/api/Userdataparticipant",
           requestOptions
@@ -112,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => setStore({ userDataEventos: result }));
       },
-      //octener todos los jugadores de un evento
+      //obtener todos los jugadores de un evento
       get_player_event: (eventid) => {
         fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
           .then((resp) => {
@@ -179,9 +177,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         newDescription
       ) => {
         const token = sessionStorage.getItem("token");
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
+
         fetch(process.env.BACKEND_URL + "/api/edituser", {
           method: "POST",
           body: JSON.stringify({
@@ -197,24 +193,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             Accept: "application/json",
             Authorization: "Bearer " + token,
           },
-        })
-          .then((resp) => {
-            if (resp.status == 200) {
-              setStore({ validacioneditregister: true });
-              swal("Perfil de usuario actualizado correctamente", {
-                icon: "success",
-                timer: 4000,
-              });
-              return resp.json();
-            } else {
-              swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
-                dangerMode: true,
-              });
-            }
-          })
-          .then((data) => {
-            console.log(data);
-          });
+        }).then((resp) => {
+          if (resp.status == 200) {
+            setStore({ validacioneditregister: true });
+            swal("Perfil de usuario actualizado correctamente", {
+              icon: "success",
+              timer: 4000,
+            });
+            return resp.json();
+          } else {
+            swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
+              dangerMode: true,
+            });
+          }
+        });
       },
 
       //funcion que filtra los eventos en la pagina pricipal
@@ -271,6 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (resp.ok) {
             getActions().getusersPendientes(eventid);
             getActions().get_player_event(eventid);
+            getActions().denegarpeticion(userid, eventid);
           }
         });
       },
@@ -282,6 +275,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
         });
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userid");
+
+        setStore({ datosUsuario: {} });
+        setStore({ eventosPendientes: {} });
         setStore({ validacion: false });
       },
 
@@ -309,13 +306,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestajson) => {
             actions.Load(respuestajson.access_token);
             sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem("userid", respuestajson.userid);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
             getActions().DatosUsuarioLogeado();
           });
       },
       // -------------------------------><------------------------------------------
-      DatosUsuarioLogeado: async () => {
+      DatosUsuarioLogeado: () => {
         const token = sessionStorage.getItem("token");
         const options = {
           headers: {
@@ -328,7 +326,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/user", options)
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
-            sessionStorage.setItem("userid", data.id);
+            console.log(data);
             setStore({ datosUsuario: data });
           });
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
@@ -450,6 +448,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       // eventos pendientes de un usuario
       geteventosPendientes: (iduser) => {
+        console.log(iduser);
         fetch(
           process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
         )
@@ -474,6 +473,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         );
         getActions().getusersPendientes(sessionStorage.getItem("userid"));
+      },
+      peticionUnion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/peticionUnion/" +
+            iduser +
+            "/" +
+            idevento,
+          {
+            method: "POST",
+          }
+        )
+          .then((response) => {
+            if (response.ok) {
+              getActions().geteventosPendientes();
+              return true;
+            } else {
+              return false;
+            }
+          })
+          .catch((error) => console.log("error", error));
       },
     },
   };
