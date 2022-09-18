@@ -29,7 +29,7 @@ export const JugadorespendientesEvento = ({ idevento }) => {
               <button
                 className="btn btn-success btn-sm  border"
                 onClick={() => {
-                  actions.joinEvent(idevento);
+                  actions.joinEvent(idevento, element.id);
                 }}
               >
                 Aceptar

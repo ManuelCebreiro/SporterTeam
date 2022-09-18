@@ -259,13 +259,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             id: eventid,
           }),
-        }).then((resp) => {
-          if (resp.ok) {
-            getActions().getusersPendientes(eventid);
-            getActions().get_player_event(eventid);
-            getActions().denegarpeticion(userid, eventid);
-          }
         });
+        getActions().getusersPendientes(eventid);
+        getActions().get_player_event(eventid);
+        getActions().denegarpeticion(userid, eventid);
       },
 
       logout: () => {
