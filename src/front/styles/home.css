@@ -60,7 +60,7 @@ body #bgdetalles {
 }
 
 #estilofondoperfil {
-  background: #2F3768;
+  background: #1A375A;
   box-shadow: 4px 4px 4px 4px black;
   border-radius: 2%;
 }
@@ -68,7 +68,7 @@ body #bgdetalles {
 #estilofondofiltros {
   background: #1A375A;
   box-shadow: 1px 1px 0px 1px rgb(182, 176, 176);
-  border-radius: 2%;
+  border-radius: 25px;
 }
 
 /* #estilodivs {
@@ -99,7 +99,7 @@ body #bgdetalles {
 .my-custom-scrollbar {
   position: relative;
   height: 300px;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .table-wrapper-scroll-y {
@@ -107,7 +107,7 @@ body #bgdetalles {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  display: scroll;
 }
 
 .tablapaginacentral {
@@ -121,4 +121,9 @@ body #bgdetalles {
 #btnnavbar {
   background-color: #BB723A;
   color: white;
+}
+
+#btnfiltrareventos:hover {
+  background-color: #BB723A;
+  border-color: white;
 }

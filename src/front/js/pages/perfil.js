@@ -16,10 +16,10 @@ export const Perfil = () => {
     (element) =>
       element.estadoEvento == "Abierto" || element.estadoEvento == "Cerrado"
   );
-  console.log(userEventosactivos)
   const userEventosFinalizado = Array.from(eventos).filter(
     (element) => element.estadoEvento == "Finalizado"
   );
+  console.log(userEventosFinalizado)
   const user = store.datosUsuario;
   return (
     <div className="container mt-3 py-2" style={{ maxWidth: 1100 }} id="estilofondoperfil">

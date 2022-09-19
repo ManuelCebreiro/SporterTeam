@@ -81,7 +81,9 @@ export const Newevent = () => {
         <div className="row">
           <div className="row">
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Deporte</label>
+              <div className="row my-1">
+                <h5 className="text-white">Deporte</h5>
+              </div>
               <select
                 className="form-select"
                 // value={event.sport}
@@ -100,7 +102,9 @@ export const Newevent = () => {
               </select>{" "}
             </div>
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Fecha</label>
+              <div className="row my-1">
+                <h5 className="text-white">Fecha</h5>
+              </div>
               <input
                 type="date"
                 className="form-control"
@@ -115,7 +119,9 @@ export const Newevent = () => {
               />
             </div>
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Duración</label>
+              <div className="row my-1">
+                <h5 className="text-white">Duración</h5>
+              </div>
               <input
                 type="number"
                 className="form-control"
@@ -128,7 +134,9 @@ export const Newevent = () => {
               />
             </div>
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Participantes</label>
+              <div className="row my-1">
+                <h5 className="text-white">Participantes</h5>
+              </div>
               <input
                 type="number"
                 className="form-control"
@@ -144,9 +152,9 @@ export const Newevent = () => {
           </div>
           <div className="row">
             <div className="col-lg-3 text-center my-1">
-              <label htmlFor="validationCustom04" className="form-label text-white">
-                Ciudad
-              </label>
+              <div className="row my-1">
+                <h5 className="text-white">Ciudad</h5>
+              </div>
               <select
                 className="form-select"
                 value={event.ciudad}
@@ -162,7 +170,9 @@ export const Newevent = () => {
               </select>
             </div>
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Pago</label>
+              <div className="row my-1">
+                <h5 className="text-white">Pago</h5>
+              </div>
               <input
                 type="number"
                 className="form-control"
@@ -176,14 +186,15 @@ export const Newevent = () => {
             </div>
             <div className="col-lg-3  text-center px-0 my-1">
               <div className="row">
-                <div className="col-lg-6 col-md-6 text-center">
+                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+
                   <label className="form-label text-white">Edad mínima</label>
 
                   <input
                     type="number"
                     min="0"
                     max="150"
-                    className="border-3 rounded-pill"
+                    className="border-3 rounded-pill text-center"
                     style={{ width: 100 }}
                     placeholder="Mín. 18"
                     value={event.agemin}
@@ -194,11 +205,11 @@ export const Newevent = () => {
                   />
                 </div>
 
-                <div className="col-lg-6 col-md-6 text-center">
+                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                   <label className="form-label text-white">Edad máxima</label>
                   <input
                     type="number"
-                    className="border-3 rounded-pill"
+                    className="border-3 rounded-pill text-center"
                     style={{ width: 100 }}
                     placeholder="Máx.100"
                     min="0"
@@ -216,7 +227,9 @@ export const Newevent = () => {
 
             </div>
             <div className="col-lg-3 text-center my-1">
-              <label className="form-label text-white">Tipo de lugar</label>
+              <div className="row my-1">
+                <h5 className="text-white">Tipo de lugar</h5>
+              </div>
 
               <select
                 className="form-select"
@@ -240,7 +253,9 @@ export const Newevent = () => {
           </div>
           <div className="row">
             <div className="col-lg-12 col-md-6">
-              <label className="my-3 text-white">Descripción</label>
+              <div className="row my-1">
+                <h5 className="text-white">Descripción</h5>
+              </div>
               <textarea
                 className="form-control"
                 rows="3"
