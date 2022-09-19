@@ -7,13 +7,13 @@
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
 #navbarstyle {
-  background-color: #1A375A;
+  background-color: #2d4053;
 }
 
 body {
   background: #f0eeee;
   /* background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?w=1380&t=st=1663466718~exp=1663467318~hmac=b5d78e63350252ad247469a1e20f10a74665a66bb1b365ec643711c1fc6eebc7'); */
-  background-image: url('https://images.unsplash.com/photo-1559692048-79a3f837883d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
+  background-image: url("https://images.unsplash.com/photo-1559692048-79a3f837883d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
   background-size: cover;
 }
 
@@ -51,7 +51,6 @@ body #bgdetalles {
 
 /* ---------------- fin estilos detalles evento administrador ------------ */
 
-
 /* ---------------------------------- ESTILOS DE PERFIL------------------------------- */
 #estilosperfil {
   background: #fafafa;
@@ -60,13 +59,13 @@ body #bgdetalles {
 }
 
 #estilofondoperfil {
-  background: #1A375A;
+  background: #1a375a;
   box-shadow: 4px 4px 4px 4px black;
   border-radius: 2%;
 }
 
 #estilofondofiltros {
-  background: #1A375A;
+  background: #1a375a;
   box-shadow: 1px 1px 0px 1px rgb(182, 176, 176);
   border-radius: 25px;
 }
@@ -77,7 +76,7 @@ body #bgdetalles {
 } */
 
 #estilotitulo {
-  background: #E9E5DF;
+  background: #e9e5df;
   text-align: center;
 }
 
@@ -86,7 +85,6 @@ body #bgdetalles {
 /* ---------------------------- ESTILO BOTON EDITAR ---------------- */
 #botoneditar {
   color: white;
-
 }
 
 #botoneditar::hover {
@@ -119,11 +117,11 @@ body #bgdetalles {
 
 /* ---------- fin estilos pagina central ------------- */
 #btnnavbar {
-  background-color: #BB723A;
+  background-color: #bb723a;
   color: white;
 }
 
 #btnfiltrareventos:hover {
-  background-color: #BB723A;
+  background-color: #bb723a;
   border-color: white;
 }

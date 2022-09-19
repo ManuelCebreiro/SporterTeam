@@ -252,8 +252,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.ciudad == "" || event.ciudad == "Cualquiera"
             ? sportResults
             : sportResults.filter((element) => element.ciudad == event.ciudad);
-        const participantesResults =
-          ciudadesResults.filter((element) => element.participantmax >= event.participantmax);
+        const participantesResults = ciudadesResults.filter(
+          (element) => element.participantmax >= event.participantmax
+        );
 
         setStore({ eventosFilter: participantesResults });
       },
@@ -305,8 +306,24 @@ const getState = ({ getStore, getActions, setStore }) => {
               return respuestadelback.json();
             } else if (respuestadelback.status == 401) {
               console.log("El email o password es incorrecto o no existe, 401");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             } else if (respuestadelback.status == 402) {
               console.log("El email o password es incorrecto o no existe, 402");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             }
           })
           .then((respuestajson) => {
