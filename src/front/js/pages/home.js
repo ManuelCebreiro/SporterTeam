@@ -228,7 +228,7 @@ export const Home = () => {
           <div className="col-lg-12 text-center">
             <button
               id="btnfiltrareventos"
-              className="border-3 rounded-pill p-2"
+              className="border-3 rounded-pill p-2 text-dark"
               onClick={() => {
                 actions.filterEvent(event);
               }}

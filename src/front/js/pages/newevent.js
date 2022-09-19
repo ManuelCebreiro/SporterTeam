@@ -194,7 +194,7 @@ export const Newevent = () => {
                     type="number"
                     min="0"
                     max="150"
-                    className="border-3 rounded-pill text-center"
+                    className="border-3 rounded-pill text-center text-dark"
                     style={{ width: 100 }}
                     placeholder="Mín. 18"
                     value={event.agemin}
@@ -209,7 +209,7 @@ export const Newevent = () => {
                   <label className="form-label text-white">Edad máxima</label>
                   <input
                     type="number"
-                    className="border-3 rounded-pill text-center"
+                    className="border-3 rounded-pill text-center text-dark"
                     style={{ width: 100 }}
                     placeholder="Máx.100"
                     min="0"

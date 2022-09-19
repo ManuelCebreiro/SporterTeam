@@ -10,7 +10,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
       respuesta: "",
       validacion: false,
-      // validacionregister: false,
       eventos: [],
       eventosFilter: [],
       dataEventoUnico: {},
@@ -69,6 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zamora", posicion: [41.49913956, -5.75494831] },
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
+      validacioneditregister: false,
       datosUsuario: {},
     },
     actions: {
@@ -84,15 +84,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             idUser: idusuario,
           }),
-        },
-
-        );
+        });
         const players = getStore().jugadores;
-        const filtrarJugadoresnoEliminados = players.filter((element) => element.id !== idusuario)
-        console.log(filtrarJugadoresnoEliminados, "esta deberia ser la listas nueva")
+        const filtrarJugadoresnoEliminados = players.filter(
+          (element) => element.id !== idusuario
+        );
+        console.log(
+          filtrarJugadoresnoEliminados,
+          "esta deberia ser la listas nueva"
+        );
 
-        setStore({ jugadores: filtrarJugadoresnoEliminados })
-        getStore().jugadores
+        setStore({ jugadores: filtrarJugadoresnoEliminados });
+        getStore().jugadores;
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -116,7 +119,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             setStore({ jugadores: data });
-
           });
       },
 
@@ -157,7 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }).then((resp) => {
           if (resp.status == 200) {
-            setStore({ validacionregister: true });
+            setStore({ validacioneditregister: true });
             return resp.json();
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
@@ -196,7 +198,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }).then((resp) => {
           if (resp.status == 200) {
-            return resp.json();
+            setStore({ validacioneditregister: true });
+            swal("Perfil de usuario actualizado correctamente", {
+              icon: "success",
+              timer: 4000,
+            });
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
               dangerMode: true,
@@ -204,53 +210,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
+      validacionFalse: () => {
+        setStore({ validacioneditregister: false });
+      },
 
       // función para editar los ajustes usuario ya existente
-      editUser: (
-        newEmail,
-        newUsername,
-        newPassword,
-        newAge,
-        newDescription
-      ) => {
-        const token = sessionStorage.getItem("token");
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
-        fetch(process.env.BACKEND_URL + "/api/edituser", {
-          method: "POST",
-          body: JSON.stringify({
-            new_email: newEmail,
-            new_username: newUsername,
-            new_password: newPassword,
-            new_age: newAge,
-            new_description: newDescription,
-          }),
-
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
-          },
-        })
-          .then((resp) => {
-            if (resp.status == 200) {
-              setStore({ validacioneditregister: true });
-              swal("Perfil de usuario actualizado correctamente", {
-                icon: "success",
-                timer: 4000,
-              });
-              return resp.json();
-            } else {
-              swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
-                dangerMode: true,
-              });
-            }
-          })
-          .then((data) => {
-            console.log(data);
-          });
-      },
 
       //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
@@ -259,14 +223,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-              ? eventos.filter((element) => element.payment > 0)
-              : eventos.filter((element) => element.payment == 0);
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-              ? paymentResults.filter((element) => element.space == true)
-              : paymentResults.filter((element) => element.space == false);
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -365,15 +329,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + token,
           },
           method: "GET",
-        }
+        };
         fetch(process.env.BACKEND_URL + "/api/user", options)
-          .then(respuestadelback =>
-            respuestadelback.json())
-          .then(data => {
-            setStore({ datosUsuario: data })
-          })
+          .then((respuestadelback) => respuestadelback.json())
+          .then((data) => {
+            setStore({ datosUsuario: data });
+          });
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
-
       },
       LoadImage: (data) => {
         setStore({ imagen: data });
@@ -459,7 +421,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
-        })
+        });
       },
       modificarevento: (event) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
@@ -469,58 +431,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            evento: event
+            evento: event,
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito")
-      },
-
-      modificarevento: (event) => {
-        fetch(process.env.BACKEND_URL + "/api/modificarevento", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            evento: event
-          }),
-        }).then((respuestadelback) => {
-          if (respuestadelback.status == 200) {
-            return respuestadelback.json();
-          }
-        });
-        alert("Evento modificado con exito")
-      },
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
+        alert("Evento modificado con exito");
       },
     },
   };
