@@ -52,13 +52,13 @@
 }
 
 #form_edituser_text-1 p {
-  color: #f19143;
+  color: #bb723a;
   font-size: 17px;
   text-align: left;
   font-weight: 300;
 }
 #form_edituser_text-2 p {
-  color: #f19143;
+  color: #bb723a;
   font-size: 17px;
   text-align: left;
   font-weight: 300;
@@ -74,10 +74,10 @@
 }
 
 #form_edituser_text-1 .error {
-  border: 1px solid #bc8803;
+  border: 1px solid #bb723a;
 }
 #form_edituser_text-2 .error {
-  border: 1px solid #bc8803;
+  border: 1px solid #bb723a;
 }
 
 #form_edituser input {
@@ -117,7 +117,7 @@
 
 #edituser_btn:hover {
   cursor: pointer;
-  background: #bc8803;
+  background: #bb723a;
 }
 
 #edituser_btn:active {
@@ -134,7 +134,7 @@
   color: #fefefe;
 }
 #salirEditUser:hover {
-  color: #ff773d;
+  color: #bb723a;
 }
 
 #App {
@@ -142,5 +142,5 @@
   margin: auto;
 }
 #edituser_btn :hover {
-  color: #ff773d;
+  color: #bb723a;
 }

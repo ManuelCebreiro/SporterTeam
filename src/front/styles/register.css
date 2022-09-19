@@ -1,5 +1,5 @@
 #registerStyle {
-  background-color: #2d4053;
+  background-color: #1a375a;
   background: url(https://images.unsplash.com/photo-1541744573515-478c959628a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80)
     no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -27,7 +27,7 @@
 #form_register_body {
   box-sizing: border-box;
   border-radius: 15px;
-  background: #2d4053;
+  background: #1a375a;
   opacity: 0.7;
   box-shadow: 6px 20px 10px black;
   padding: 5px 20px;
@@ -39,11 +39,11 @@
   border: 1px solid lightgrey;
   border-radius: 5px;
   font-size: 14px;
-  color: #2d4053;
+  color: #1a375a;
 }
 
 #form_register_body p {
-  color: #f19143;
+  color: #bb723a;
   font-size: 17px;
   text-align: left;
   font-weight: 300;
@@ -67,7 +67,7 @@
 }
 
 #form_register .error {
-  border: 1px solid #f19143;
+  border: 1px solid #bb723a;
 }
 
 #form_register label {
@@ -96,7 +96,7 @@
 
 #register_btn:hover {
   cursor: pointer;
-  background: #ff773d;
+  background: #bb723a;
 }
 
 #register_btn:active {
@@ -113,11 +113,11 @@
   color: #fefefe;
 }
 #salirRegistro:hover {
-  color: #ff773d;
+  color: #bb723a;
 }
 
 #register_btn :hover {
-  color: #ff773d;
+  color: #bb723a;
 }
 #App {
   max-width: 600px;

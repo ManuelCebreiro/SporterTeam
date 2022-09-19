@@ -60,7 +60,7 @@
 }
 
 #cardLogin {
-  background-color: #2d4053;
+  background-color: #1a375a;
   opacity: 0.7;
   box-shadow: 6px 20px 10px black;
 }
@@ -68,7 +68,7 @@
   width: 300px;
   background-color: #a5a2a2;
   border: 1px solid #fefefe;
-  color: #2d4053;
+  color: #1a375a;
 }
 
 #btnLogin:hover {
