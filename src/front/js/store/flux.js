@@ -67,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zamora", posicion: [41.49913956, -5.75494831] },
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
+      validacioneditregister: false,
       datosUsuario: {},
       eventosPendientes: [],
       usuariospendientes: [],
@@ -157,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }).then((resp) => {
           if (resp.status == 200) {
-            setStore({ validacionregister: true });
+            setStore({ validacioneditregister: true });
             return resp.json();
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
@@ -207,6 +208,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
+      validacionFalse: () => {
+        setStore({ validacioneditregister: false });
+      },
+
+      // función para editar los ajustes usuario ya existente
 
       //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
@@ -322,7 +328,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/user", options)
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
-            console.log(data);
             setStore({ datosUsuario: data });
           });
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
@@ -426,7 +431,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito");
       },
       // usuarios pendiente de un evento
       getusersPendientes: async (idevento) => {
