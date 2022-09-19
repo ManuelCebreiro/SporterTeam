@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { DatosEventoUnico } from "../component/datoseventounico";
-
+import { PeticionUnion } from "../component/botonpeticionUnirseEvento";
 
 import "../../styles/home.css";
 
@@ -26,14 +25,17 @@ export const Home = () => {
   });
   useEffect(() => {
     actions.getEventos();
-
   }, []);
   return (
     <div className="container py-5" id="estilofondohome">
-      <div className="row d-flex justify-content-center border border-dark p-3"
+      <div
+        className="row d-flex justify-content-center border border-dark p-3"
         id="estilofondofiltros"
       >
-        <div id="estilotitulonewevento" className="row text-center text-white font-monospace">
+        <div
+          id="estilotitulonewevento"
+          className="row text-center text-white font-monospace"
+        >
           <h1>Eventos</h1>
         </div>
         <div className="row">
@@ -63,7 +65,6 @@ export const Home = () => {
             </div>
             <input
               className="form-control"
-
               onChange={(e) => {
                 setEvent({ ...event, date: e.target.value });
               }}
@@ -88,7 +89,6 @@ export const Home = () => {
                 setEvent({ ...event, duration: e.target.value });
               }}
             ></input>
-
           </div>
 
           <div className="col-lg-3 text-center my-1">
@@ -173,8 +173,6 @@ export const Home = () => {
                     setEvent({ ...event, agemin: e.target.value });
                   }}
                 ></input>
-
-
               </div>
               <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                 <label
@@ -194,7 +192,6 @@ export const Home = () => {
                     setEvent({ ...event, agemax: e.target.value });
                   }}
                 ></input>
-
               </div>
             </div>
           </div>
@@ -239,8 +236,6 @@ export const Home = () => {
         </div>
       </div>
 
-
-
       <div className="table-responsive">
         <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
           <table className="text-center table table-striped table-hover mt-2">
@@ -265,23 +260,25 @@ export const Home = () => {
                     <th scope="row">{index}</th>
                     <td>{event.sport}</td>
                     <td>{event.date}</td>
-                    <td>{event.duration} {"minutos"}</td>
-                    <td>{event.participantmax} {"personas"}</td>
-                    <td>{event.agemin} {"años"}</td>
-                    <td>{event.agemax} {"años"}</td>
+                    <td>
+                      {event.duration} {"minutos"}
+                    </td>
+                    <td>
+                      {event.participantmax} {"personas"}
+                    </td>
+                    <td>
+                      {event.agemin} {"años"}
+                    </td>
+                    <td>
+                      {event.agemax} {"años"}
+                    </td>
                     <td>{event.ciudad}</td>
-                    <td>{event.payment} {"€"}</td>
+                    <td>
+                      {event.payment} {"€"}
+                    </td>
                     <td>{event.space ? "Cubierto" : "Aire libre"}</td>
                     <td>
-                      <button
-                        className="btn btn-success"
-                        onClick={() => {
-                          actions.joinEvent(event.id);
-                        }}
-                      >
-                        Unirse
-                      </button>
-                      {/* <DatosEventoUnico id={event.id} /> */}
+                      <PeticionUnion idevento={event.id} />
                     </td>
                   </tr>
                 );
