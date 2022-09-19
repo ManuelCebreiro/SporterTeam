@@ -10,6 +10,7 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (store.validacion) navigate("/home");
   }, [store.validacion]);

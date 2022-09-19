@@ -1,3 +1,4 @@
+import { element } from "prop-types";
 import swal from "sweetalert";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -251,7 +252,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.ciudad == "" || event.ciudad == "Cualquiera"
             ? sportResults
             : sportResults.filter((element) => element.ciudad == event.ciudad);
-        setStore({ eventosFilter: ciudadesResults });
+        const participantesResults =
+          ciudadesResults.filter((element) => element.participantmax >= event.participantmax);
+
+        setStore({ eventosFilter: participantesResults });
       },
       //funcion para unirse a un evento de la lista
       joinEvent: (eventid, userid) => {
