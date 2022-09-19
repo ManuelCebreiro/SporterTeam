@@ -177,7 +177,7 @@ export const Newevent = () => {
             <div className="col-lg-3  text-center px-0 my-1">
               <div className="row">
                 <div className="col-lg-6 col-md-6 text-center">
-                  <label className="form-label text-white">Edad mínimo</label>
+                  <label className="form-label text-white">Edad mínima</label>
 
                   <input
                     type="number"
@@ -185,7 +185,7 @@ export const Newevent = () => {
                     max="150"
                     className="border-3 rounded-pill"
                     style={{ width: 100 }}
-                    placeholder="Mínimo 18 años"
+                    placeholder="Mín. 18"
                     value={event.agemin}
                     onChange={(e) => {
                       setEvent({ ...event, agemin: e.target.value });
@@ -200,9 +200,9 @@ export const Newevent = () => {
                     type="number"
                     className="border-3 rounded-pill"
                     style={{ width: 100 }}
-                    placeholder="Máximo 100 años"
+                    placeholder="Máx.100"
                     min="0"
-                    max="150"
+                    max="100"
                     value={event.agemax}
                     onChange={(e) => {
                       console.log(typeof Number(e.target.value));
@@ -301,7 +301,7 @@ export const Newevent = () => {
                   {eventazo.length > 0 ? (
                     <thead>
                       <tr>
-                        <th scope="col" className="text-white"></th>
+                        <th scope="col"></th>
                         <th scope="col">Deporte</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Duracion</th>

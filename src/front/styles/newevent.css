@@ -15,9 +15,10 @@
 }
 
 .fondonewevent {
-    background-image: url('https://img.freepik.com/foto-gratis/cool-hombre-negro-haciendo-deportes-jugando-baloncesto-al-amanecer-silueta_285396-1442.jpg?w=1380&t=st=1663454983~exp=1663455583~hmac=cf4d5ea7524dd0b757d226ae05263d01f17e3149208c79cc2387f53ef984ea58');
+    background-image: url('https://images.unsplash.com/photo-1519482012999-d984ed6474d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
     background-size: cover;
     height: 100vh;
+
 }
 
 #estilotitulonewevento {

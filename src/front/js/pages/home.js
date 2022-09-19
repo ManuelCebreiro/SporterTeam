@@ -28,7 +28,7 @@ export const Home = () => {
 
   }, []);
   return (
-    <div className="container py-5">
+    <div className="container py-5" id="estilofondohome">
       <div className="row d-flex justify-content-center border border-dark p-3"
         id="estilofondofiltros"
       >
@@ -76,7 +76,7 @@ export const Home = () => {
 
         <div className="col-lg-3 text-center my-1">
           <div className="row my-1">
-            <h5 className="text-white">Payment</h5>
+            <h5 className="text-white">Pago</h5>
           </div>
           <div className="row mx-1">
             <select
@@ -101,7 +101,7 @@ export const Home = () => {
         </div>
         <div className="col-lg-3 text-center my-1">
           <div className="row my-1">
-            <h5 className="text-white">Space</h5>
+            <h5 className="text-white">Tipo de lugar</h5>
           </div>
           <div className="row mx-1">
             <select
@@ -220,8 +220,8 @@ export const Home = () => {
 
 
       <div className="table-responsive">
-        <div class="table-wrapper-scroll-y tablapaginacentral">
-          <table className="text-center table table-striped table-hover mt-4">
+        <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
+          <table className="text-center table table-striped table-hover mt-2">
             <thead>
               <tr>
                 <th scope="col"></th>
