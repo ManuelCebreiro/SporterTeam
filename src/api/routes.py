@@ -266,7 +266,7 @@ def adminusers(idevento,iduser):
     association = Association.query.filter_by(user_id = iduser,event_id = idevento).first()
     db.session.delete(association)
     db.session.commit()
-    return jsonify("response")
+    return jsonify("Peticion del usuario borrada")
 
     
 

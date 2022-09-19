@@ -111,14 +111,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((result) => setStore({ userDataEventos: result }));
       },
       //obtener todos los jugadores de un evento
-      get_player_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            setStore({ jugadores: data });
-          });
+      get_player_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/playerEvents/" + eventid
+        );
+        const data = await response.json();
+        setStore({ jugadores: data });
+        getActions().getusersPendientes(eventid);
       },
 
       look_event: (eventid) => {
@@ -430,33 +429,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         alert("Evento modificado con exito");
       },
       // usuarios pendiente de un evento
-      getusersPendientes: (idevento) => {
-        fetch(
+      getusersPendientes: async (idevento) => {
+        const response = await fetch(
           process.env.BACKEND_URL + "/api/mostrarusuariospendientes/" + idevento
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setStore({ usuariospendientes: data });
-          })
+        );
+        const data = await response.json();
 
-          .catch((error) => console.log("error", error));
+        setStore({ usuariospendientes: data });
       },
       // eventos pendientes de un usuario
-      geteventosPendientes: (iduser) => {
+      geteventosPendientes: async (iduser) => {
         console.log(iduser);
-        fetch(
+        const response = await fetch(
           process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setStore({ eventosPendientes: data });
-          })
-
-          .catch((error) => console.log("error", error));
+        );
+        const data = await response.json();
+        setStore({ eventosPendientes: data });
       },
       denegarpeticion: (iduser, idevento) => {
         fetch(
@@ -469,7 +457,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             method: "DELETE",
           }
         );
-        getActions().getusersPendientes(sessionStorage.getItem("userid"));
+        getActions().get_player_event(idevento);
       },
       peticionUnion: (iduser, idevento) => {
         fetch(

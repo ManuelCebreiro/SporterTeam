@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { RechazarJugador } from "./rechazarJugadorpendiente";
 
 export const JugadorespendientesEvento = ({ idevento }) => {
   const { store, actions } = useContext(Context);
-  console.log(idevento);
+
   useEffect(() => {
     actions.getusersPendientes(idevento);
   }, []);
 
   const jugadoresPendientes = store.usuariospendientes;
-
   return (
     <table className="table">
       <thead className="thead-dark">
