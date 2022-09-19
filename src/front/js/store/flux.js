@@ -69,6 +69,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       validacioneditregister: false,
       datosUsuario: {},
+      eventosPendientes: [],
+      usuariospendientes: [],
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -102,7 +104,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "GET",
           headers: { Authorization: "Bearer " + token },
         };
-
         fetch(
           process.env.BACKEND_URL + "/api/Userdataparticipant",
           requestOptions
@@ -110,15 +111,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => setStore({ userDataEventos: result }));
       },
-      //octener todos los jugadores de un evento
-      get_player_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            setStore({ jugadores: data });
-          });
+      //obtener todos los jugadores de un evento
+      get_player_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/playerEvents/" + eventid
+        );
+        const data = await response.json();
+        setStore({ jugadores: data });
+        getActions().getusersPendientes(eventid);
       },
 
       look_event: (eventid) => {
@@ -176,10 +176,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         newAge,
         newDescription
       ) => {
-        const store = getStore();
-        console.log(
-          `edituser: ${newEmail} ${newUsername} ${newPassword}  ${newAge} ${newDescription}`
-        );
+        const token = sessionStorage.getItem("token");
+
         fetch(process.env.BACKEND_URL + "/api/edituser", {
           method: "POST",
           body: JSON.stringify({
@@ -193,7 +191,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + store.token,
+            Authorization: "Bearer " + token,
           },
         }).then((resp) => {
           if (resp.status == 200) {
@@ -202,6 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               icon: "success",
               timer: 4000,
             });
+            return resp.json();
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
               dangerMode: true,
@@ -255,26 +254,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ eventosFilter: ciudadesResults });
       },
       //funcion para unirse a un evento de la lista
-      joinEvent: (event) => {
-        const token = sessionStorage.getItem("token");
-        fetch(process.env.BACKEND_URL + "/api/joinevent", {
+      joinEvent: (eventid, userid) => {
+        fetch(process.env.BACKEND_URL + "/api/joinevent/" + userid, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
-            id: event,
+            id: eventid,
           }),
-        }).then((resp) => {
-          if (resp.ok) {
-            swal("Usuario registrado", {
-              icon: "success",
-              timer: 4000,
-            });
-          }
         });
+        getActions().getusersPendientes(eventid);
+        getActions().get_player_event(eventid);
+        getActions().denegarpeticion(userid, eventid);
       },
 
       logout: () => {
@@ -284,6 +277,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
         });
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userid");
+
+        setStore({ datosUsuario: {} });
+        setStore({ eventosPendientes: {} });
         setStore({ validacion: false });
       },
 
@@ -311,8 +308,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestajson) => {
             actions.Load(respuestajson.access_token);
             sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem("userid", respuestajson.userid);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
+            getActions().DatosUsuarioLogeado();
           });
       },
       // -------------------------------><------------------------------------------
@@ -370,9 +369,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
+
       getEventos: () => {
         fetch(process.env.BACKEND_URL + "/api/eventos", {
           method: "GET",
@@ -434,7 +431,58 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito");
+      },
+      // usuarios pendiente de un evento
+      getusersPendientes: async (idevento) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/mostrarusuariospendientes/" + idevento
+        );
+        const data = await response.json();
+
+        setStore({ usuariospendientes: data });
+      },
+      // eventos pendientes de un usuario
+      geteventosPendientes: async (iduser) => {
+        console.log(iduser);
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        );
+        const data = await response.json();
+        setStore({ eventosPendientes: data });
+      },
+      denegarpeticion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/administrasusuarios/" +
+            idevento +
+            "/" +
+            iduser,
+          {
+            method: "DELETE",
+          }
+        );
+        getActions().get_player_event(idevento);
+      },
+      peticionUnion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/peticionUnion/" +
+            iduser +
+            "/" +
+            idevento,
+          {
+            method: "POST",
+          }
+        )
+          .then((response) => {
+            if (response.ok) {
+              getActions().geteventosPendientes();
+              return true;
+            } else {
+              return false;
+            }
+          })
+          .catch((error) => console.log("error", error));
       },
     },
   };
