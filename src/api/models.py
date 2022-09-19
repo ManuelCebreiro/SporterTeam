@@ -10,6 +10,7 @@ participant = db.Table('participant',
                        )
 
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -19,11 +20,13 @@ class User(db.Model):
     age =db.Column(db.Integer,unique=False)
     description =db.Column(db.String)
     participant = db.relationship('Evento',secondary=participant, lazy='subquery', backref=db.backref('users', lazy=True))#cambiarle el nombre
+    eventospendientes = db.relationship("Association")
     
     def __repr__(self):
         return f'<User {self.email}>'
 
     def serialize(self):
+        eventosp= list(map(lambda x:x.serialize(),self.eventospendientes))
         return {
             "id": self.id,
             "email": self.email,
@@ -31,9 +34,10 @@ class User(db.Model):
             "age": self.age,
             "description" : self.description,
             "participant" : self.participant,
-            
-            # do not serialize the password, its a security breach
+            "losEventospendientes":eventosp
+# do not serialize the password, its a security breach
         }
+    
 
     def serializeWithoutParticipant(self):
         return {
@@ -59,12 +63,13 @@ class Evento(db.Model):
     description =db.Column(db.String(250))
     admin = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=True)
     estadoEvento =db.Column(db.String(80)) #Abierto(buscando participantes) ,Cerrado(ya tiene todos los participantes),Finalizado(El evento ya se acabo), Cancelado(Evento cancelado)
-    
+    usuariospendientes = db.relationship("Association")
 
     def __repr__(self):
         return '<Eventos %r>' % self.id
 
     def serialize(self):
+        eventosp= list(map(lambda x:x.serialize(),self.usuariospendientes))
         return {
             "id": self.id,
             "sport": self.sport,
@@ -78,9 +83,28 @@ class Evento(db.Model):
             "ciudad" : self.ciudad,
             "admin" : self.admin,
             "description":self.description,
-            "participantmax":self.participantmax,
             "estadoEvento":self.estadoEvento,
+            "ParticiopantesPendientes":eventosp
             # "Lugarprovincia": self.Lugarprovincia,
             # "depolugarciudadrte": self.lugarciudad,
             # "direcionevento": self.direcionevento
+        }
+
+class Association(db.Model):
+    __tablename__ = 'association'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('evento.id'),primary_key=True)
+    peticion = db.Column(db.String(50))
+    user = db.relationship("User")
+    evento =db.relationship("Evento")
+
+    def __repr__(self):
+        return '<association %r>' % self.user_id
+    
+    def serialize(self):
+        return {
+            "user_id":self.user_id,
+            "event_id":self.event_id,
+            "peticion":self.peticion,
+            
         }
