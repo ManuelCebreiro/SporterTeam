@@ -90,7 +90,7 @@ export const Perfil = () => {
         <div className="row mx-0">
           <div className="col-lg-1 col-md-1"></div>
           {/* <div className="row"> */}
-          <div className="col-lg-10 col-md-10 col-xs-10 mb-3">
+          <div className="col-lg-10 col-md-10 col-xs-10 mb-3 px-0">
 
             <div className="card mt-3 p-2" id="estilosperfil">
               <h5 id="estilotitulo">Eventos Pendientes</h5>
