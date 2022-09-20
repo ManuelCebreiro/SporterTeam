@@ -74,4 +74,12 @@
 #btnLogin:hover {
   opacity: 0.9;
   background-color: #ffd713;
+  transform: scale(1.2) rotate(10deg);
+}
+
+#register-btn-login {
+  color: #fefefe;
+}
+#register-btn-login:hover {
+  color: #ff6c23;
 }

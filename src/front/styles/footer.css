@@ -10,10 +10,10 @@
 
 /* Footer links */
 
-.footer-distributed p.footer-links {
+.footer-distributed span.footer-links {
   font-size: 18px;
   font-weight: bold;
-  color: #ffffff;
+  color: #fefefe;
   margin: 0 0 10px;
   padding: 0;
   transition: ease 0.25s;
@@ -27,7 +27,46 @@
   transition: ease 0.25s;
 }
 
-.footer-distributed .footer-links a:before {
+.footer-links button {
+  font-size: 18px;
+  color: #fefefe;
+
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+.footer-links button:focus,
+.footer-links button:hover {
+  color: #fff;
+}
+
+.footer-links button:focus:after,
+.footer-links button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.footer-links button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #ffd713;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+.footer-distributed .footer-links button:before {
   content: "·";
   font-size: 20px;
   left: 0;
@@ -67,13 +106,14 @@
   color: #ffd713;
 }
 
-.footer-distributed p.footer-links a:hover {
+.footer-links:hover {
   text-decoration: underline;
+  color: #ffd713;
 }
 
 /* Media Queries */
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .footer-distributed .footer-left,
   .footer-distributed .footer-right {
     text-align: center;

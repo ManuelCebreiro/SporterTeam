@@ -9,7 +9,6 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (store.validacion) navigate("/home");
   }, [store.validacion]);
@@ -107,9 +106,9 @@ export const Login = () => {
                         >
                           Have already an account?{" "}
                           <Link
+                            id="register-btn-login"
                             className="fw-bold "
                             to="/register"
-                            style={{ color: "#fefefe" }}
                           >
                             Register here
                           </Link>
