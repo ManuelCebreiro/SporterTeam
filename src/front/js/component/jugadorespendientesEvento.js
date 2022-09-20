@@ -12,11 +12,10 @@ export const JugadorespendientesEvento = ({ idevento }) => {
   const jugadoresPendientes = store.usuariospendientes;
   return (
     <table className="table">
-      <thead className="thead-dark">
-        <tr>
-          <th scope="col">Jugadores Pendientes</th>
-        </tr>
-      </thead>
+      <h1 className="text-white pt-2" scope="col">
+        Jugadores Pendientes
+      </h1>
+
       <tbody>
         {Array.from(jugadoresPendientes).map((element, index) => (
           <tr key={index}>

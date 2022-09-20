@@ -26,10 +26,13 @@ export const DetallesEvento = () => {
 
   return (
     <div id="bgdetalles">
-      <div className="p-3">
-        <div className="container " id="detalleseventofondo">
-          <div className="row py-1">
-            <div className="col-lg-6">
+      <div className="p-3 ">
+        <div
+          className="container border border-white "
+          id="detalleseventofondo"
+        >
+          <div className="row px-4">
+            <div className="col-lg-4 ">
               <h1 className="text-center text-white">Cuándo y dónde</h1>
               <div className="container p-1 rounded bg-light">
                 <div className=" px-1 border border-1 bg-light ">
@@ -84,7 +87,7 @@ export const DetallesEvento = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 ">
+            <div className="col-lg-4 ">
               <h1 className="text-center text-white pe-5">Jugadores</h1>
               <div className="row">
                 <div className="col-lg-5 text-center pt-2  rounded">
@@ -137,20 +140,32 @@ export const DetallesEvento = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               {detalles.admin == datosUsuario.id ? (
                 <JugadorespendientesEvento idevento={params.theid} />
               ) : undefined}
-              <h1>Descripcion</h1>
-              <div>{detalles.description}</div>
+              <h1 className="text-white text-center">Descripcion</h1>
+              <div className="text-white px-2">{detalles.description}</div>
             </div>
             <div className="row text-center pt-3">
-              <ExpulsarUsuarioEvento
-                idevento={detalles.id}
-                idusuario={user.id}
-                buttontext={"Salir del evento"}
-                linkverificacion={true}
-              />
+              <button id="bottonstyle" class="cssbuttons-io-button">
+                {" "}
+                Dejar evento
+                <div class="icon">
+                  <svg
+                    height="24"
+                    width="24"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
           {detalles.admin == datosUsuario.id ? (

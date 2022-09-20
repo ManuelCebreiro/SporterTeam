@@ -5,11 +5,69 @@
 }
 #detalleseventofondo {
   background: #1a375a;
-  box-shadow: 1px 1px 1px 1px rgb(151, 149, 149);
+
   border-radius: 22px;
   height: 85%;
   width: 85%;
 }
 #detalles {
   border-radius: 25px;
+}
+/* From uiverse.io by @adamgiebl */
+.cssbuttons-io-button {
+  background: #bb723a;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #bb723a;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+}
+/* estilos boton salirse del evento */
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 0.9em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #bb723a;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #bb723a;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+#bottonstyle {
+  height: 90%;
+  width: 15%;
+  margin: auto;
 }
