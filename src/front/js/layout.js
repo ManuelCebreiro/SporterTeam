@@ -8,7 +8,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Newevent } from "./pages/newevent";
 import injectContext, { Context } from "./store/appContext";
-import { Navbar } from "./component/navbar";
+import { Navbarnew } from "./component/navbar";
 import { Photoperfil } from "./pages/perfil/photoperfil";
 import { DetallesEvento } from "./pages/detalles_Evento";
 import { EditUser } from "./pages/perfil/edituser";
@@ -25,7 +25,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          {store.validacion ? <Navbar /> : undefined}
+          {store.validacion ? <Navbarnew /> : undefined}
           <Routes>
             <Route element={<Home />} path="/home" />
             <Route element={<Perfil />} path="/perfil" />
