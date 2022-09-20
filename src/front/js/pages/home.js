@@ -162,7 +162,7 @@ export const Home = () => {
                   Edad mínima.
                 </label>
                 <input
-                  className="border-3 rounded-pill text-center"
+                  className="border-3 rounded-pill text-center text-dark"
                   style={{ width: 100 }}
                   placeholder="Mín. 18"
                   type="number"
@@ -182,7 +182,7 @@ export const Home = () => {
                   Edad máxima.
                 </label>
                 <input
-                  className="border-3 rounded-pill text-center"
+                  className="border-3 rounded-pill text-center text-dark"
                   placeholder="Máx.100"
                   style={{ width: 100 }}
                   type="number"
@@ -237,7 +237,7 @@ export const Home = () => {
       </div>
 
       <div className="table-responsive">
-        <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
+        <div className="table-wrapper-scroll-y tablapaginacentral bg-light">
           <table className="text-center table table-striped table-hover mt-2">
             <thead>
               <tr>
