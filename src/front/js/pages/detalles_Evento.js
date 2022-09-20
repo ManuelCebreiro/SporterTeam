@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link, useParams } from "react-router-dom";
-import { ExpulsarUsuarioEvento } from "../component/botonExpulsarUsuario";
+import { Link, useParams, useNavigate } from "react-router-dom";
+
 import { DetallesEventoAdmin } from "../component/detalles_Evento_Admin";
 import { JugadorespendientesEvento } from "../component/jugadorespendientesEvento";
 
@@ -12,7 +12,7 @@ export const DetallesEvento = () => {
   const players = store.jugadores;
   const user = store.datosUsuario;
   let params = useParams();
-  const datosUsuario = store.datosUsuario;
+  const navigate = useNavigate();
 
   useEffect(() => {
     actions.look_event(params.theid);
@@ -23,7 +23,7 @@ export const DetallesEvento = () => {
     detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
       ? { color: "green" }
       : { color: "red" };
-
+  const columna = detalles.admin == user.id ? "col-lg-4" : "col-6";
   return (
     <div id="bgdetalles">
       <div className="p-3 ">
@@ -31,9 +31,9 @@ export const DetallesEvento = () => {
           className="container border border-white "
           id="detalleseventofondo"
         >
-          <div className="row px-4">
-            <div className="col-lg-4 ">
-              <h1 className="text-center text-white">Cuándo y dónde</h1>
+          <div className="row p-4">
+            <div className={columna}>
+              <h1 className="text-center text-white">Detalles</h1>
               <div className="container p-1 rounded bg-light">
                 <div className=" px-1 border border-1 bg-light ">
                   <h5>
@@ -101,19 +101,22 @@ export const DetallesEvento = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 ">
+            <div className={columna}>
               <h1 className="text-center text-white pe-5">Jugadores</h1>
-              <div className="row">
-                <div className="col-lg-5 text-center pt-2  rounded">
+              <div className="row bg-white rounded p-1">
+                <div className="col-lg-6 text-center rounded">
                   {Array.from(players).map((element, index) => {
                     if (element.id % 2 !== 0) {
                       return (
-                        <ol key={index} className="ps-3 text-white text-center">
+                        <div
+                          key={index}
+                          className="text-dark text-start border border-1 bg-white rounded ps-1"
+                        >
                           {element.username} {""}
                           {user.id == detalles.admin ? (
                             <button
                               type="button"
-                              className="btn-close float-end"
+                              className="btn-close float-end "
                               aria-label="Close"
                               onClick={() => {
                                 actions.expulsarUsuarioEvento(
@@ -123,17 +126,21 @@ export const DetallesEvento = () => {
                               }}
                             ></button>
                           ) : undefined}
-                        </ol>
+                        </div>
                       );
                     }
                   })}
                 </div>
-                <div className="col-lg-5 text-center pt-2 rounded">
+
+                <div className="col-lg-6 text-center  rounded">
                   {Array.from(players).map((element, index) => {
                     if (element.id % 2 == 0) {
                       return (
-                        <ol key={index} className="ps-3 text-white text-center">
-                          {element.username} {""}
+                        <div
+                          key={index}
+                          className=" text-dark text-start border border-1 bg-white rounded ps-1"
+                        >
+                          {element.username}
                           {user.id == detalles.admin ? (
                             <button
                               type="button"
@@ -147,7 +154,7 @@ export const DetallesEvento = () => {
                               }}
                             ></button>
                           ) : undefined}
-                        </ol>
+                        </div>
                       );
                     }
                   })}
@@ -155,21 +162,29 @@ export const DetallesEvento = () => {
               </div>
             </div>
             <div className="col-lg-4">
-              {detalles.admin == datosUsuario.id ? (
+              {detalles.admin == user.id ? (
                 <JugadorespendientesEvento idevento={params.theid} />
               ) : undefined}
-              <h1 className="text-white text-center">Descripcion</h1>
-              <div className="text-white px-2">{detalles.description}</div>
+            </div>
+            <div className="row text-center pt-3">
+              <h1 className="text-white ">Descripcion</h1>
+              <div
+                id="descripcion"
+                className="container-fluid bg-white rounded text-start"
+              >
+                {detalles.description}
+              </div>
             </div>
             <div className="row text-center pt-3">
               <button
                 id="bottonstyle"
                 class="cssbuttons-io-button"
                 onClick={() => {
-                  actions.expulsarUsuarioEvento(
+                  const expulsar = actions.expulsarUsuarioEvento(
                     detalles.id,
-                    sessionStorage.getItem("userid")
+                    user.id
                   );
+                  if (expulsar) navigate("/perfil");
                 }}
               >
                 Dejar evento
@@ -188,10 +203,8 @@ export const DetallesEvento = () => {
               </button>
             </div>
           </div>
-          {detalles.admin == datosUsuario.id ? (
-            <DetallesEventoAdmin />
-          ) : undefined}
-          <div className="row text-center pb-5">
+          {detalles.admin == user.id ? <DetallesEventoAdmin /> : undefined}
+          <div id="rowsalir" className="row text-center">
             <Link
               to="/perfil"
               onClick={() => {

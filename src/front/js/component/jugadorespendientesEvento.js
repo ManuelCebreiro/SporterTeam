@@ -12,8 +12,8 @@ export const JugadorespendientesEvento = ({ idevento }) => {
   const jugadoresPendientes = store.usuariospendientes;
   return (
     <table id="tablajugadorespendientes" className="table">
-      <h1 className="text-white pt-2" scope="col">
-        Jugadores Pendientes
+      <h1 className="text-white pt-2 text-center" scope="col">
+        Peticiones
       </h1>
 
       <tbody>

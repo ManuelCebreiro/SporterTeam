@@ -13,6 +13,9 @@
 #detalles {
   border-radius: 25px;
 }
+#rowsalir {
+  padding-bottom: 1.7rem;
+}
 /* From uiverse.io by @adamgiebl */
 .cssbuttons-io-button {
   background: #bb723a;
@@ -67,8 +70,8 @@
   transform: scale(0.95);
 }
 #bottonstyle {
-  height: 90%;
-  width: 15%;
+  height: 40px;
+  width: 185px;
   margin: 0 auto;
 }
 #tablajugadorespendientes {
@@ -77,4 +80,7 @@
 #btnvolverperfil {
   background-color: #bb723a;
   color: white;
+}
+#descripcion {
+  height: 100px;
 }

@@ -75,13 +75,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
-        const token = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
             idUser: idusuario,
@@ -91,13 +88,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         const filtrarJugadoresnoEliminados = players.filter(
           (element) => element.id !== idusuario
         );
-        console.log(
-          filtrarJugadoresnoEliminados,
-          "esta deberia ser la listas nueva"
-        );
 
         setStore({ jugadores: filtrarJugadoresnoEliminados });
         getStore().jugadores;
+        getActions().getUserDataEventos();
+        return true;
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
