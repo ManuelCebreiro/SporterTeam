@@ -3,12 +3,12 @@ import "../../styles/footer.css";
 
 export const Footer = () => (
   <footer className="footer-distributed">
-    <div class="container p-2 m-0">
-      <section class="">
-        <div class="row">
-          <div class="col-lg-3 col-md-3 mb-2 mb-md-0">
+    <div className="container p-2 m-0">
+      <section className="">
+        <div className="row">
+          <div className="col-lg-3 col-md-3 mb-2 mb-md-0">
             <div className="footer-left">
-              <p className="footer-links">
+              <span className="footer-links">
                 <ul className="list-unstyled mb-0">
                   <li>
                     <a href="#!" className="text-white">
@@ -26,13 +26,12 @@ export const Footer = () => (
                     </a>
                   </li>
                 </ul>
-              </p>
+              </span>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-3 mb-2 mx-3 mb-md-0">
+          <div className="col-lg-3 col-md-3 mb-2 mx-3 mb-md-0">
             <div id="buttonManuel" className="footer-right">
-              {" "}
               <p>Manuel Cebreiro</p>
               <a href="#">
                 <i className="fa fa-envelope"></i>
@@ -45,10 +44,9 @@ export const Footer = () => (
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 mb-3 mx-3 mb-md-0">
+          <div className="col-lg-2 col-md-3 mb-3 mx-3 mb-md-0">
             <div id="buttonManuel" className="footer-right">
-              {" "}
-              <p>Martin Barja</p>
+              <p>Martin Barja </p>
               <a href="#">
                 <i className="fa fa-envelope"></i>
               </a>
@@ -60,9 +58,8 @@ export const Footer = () => (
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 mb-2 mx-3 mb-md-0">
+          <div className="col-lg-2 col-md-3 mb-2 mx-3 mb-md-0">
             <div id="buttonManuel" className="footer-right">
-              {" "}
               <p>David Pizarro</p>
               <a href="mailto:pizarro.developer@gmail.com">
                 <i className="fa fa-envelope"></i>
@@ -75,13 +72,13 @@ export const Footer = () => (
               </a>
             </div>
           </div>
-          <div class="col-lg-3 col-md-3 mb-2 mb-md-0">
+          <div className="col-lg-3 col-md-3 mb-2 mb-md-0">
             <div className="footer-right"> </div>
           </div>
         </div>
       </section>
     </div>
-    <div class="text-center p-2" style={{ color: "#FEFEFE" }}>
+    <div className="text-center p-2" style={{ color: "#FEFEFE" }}>
       SPORTER © 2022 Copyright:
     </div>
   </footer>
