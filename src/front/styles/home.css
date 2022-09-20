@@ -17,40 +17,6 @@ body {
   background-size: cover;
 }
 
-/* #estilofondohome {
-  background-image: url('https://images.unsplash.com/photo-1559692048-79a3f837883d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
-  background-size: cover;
-} */
-
-body #bgdetalles {
-  height: 100%;
-  background-color: #ffd5b3;
-  border-left: solid black;
-  border-right: solid black;
-  border-bottom: solid black;
-}
-
-/* -------------- fin estilos detalles evento -------------- */
-
-/* ----------- ESTILOS DETALLES EVENTO ADMINISTRADOR --------------- */
-#bgdetallesadmin {
-  background-color: #fafafa;
-  border: solid black;
-  border-style: 2px solid;
-  border-radius: 2%;
-}
-
-#estilosdatos {
-  border: solid 2px black;
-  border-bottom: none;
-}
-
-#estilosdatos1 {
-  border: solid 2px black;
-}
-
-/* ---------------- fin estilos detalles evento administrador ------------ */
-
 /* ---------------------------------- ESTILOS DE PERFIL------------------------------- */
 #estilosperfil {
   background: #fafafa;

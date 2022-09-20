@@ -1,0 +1,15 @@
+#bgdetalles {
+  background-image: url("https://thumbs.dreamstime.com/b/dise%C3%B1o-art%C3%ADstico-colorido-para-un-f%C3%BAtbol-en-una-cancha-futbol-gris-oscuro-centrado-campo-o-escenario-con-patr%C3%B3n-diagonal-rosa-172728569.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+#detalleseventofondo {
+  background: #1a375a;
+  box-shadow: 1px 1px 1px 1px rgb(151, 149, 149);
+  border-radius: 22px;
+  height: 85%;
+  width: 85%;
+}
+#detalles {
+  border-radius: 25px;
+}
