@@ -122,27 +122,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().getusersPendientes(eventid);
       },
 
-      look_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
-          .then((resp) => {
-            if (resp.ok) {
-              setStore({ datavalidacionEvento: true });
-              return resp.json();
-            } else {
-              swal(
-                "Ups, hubo un problema!",
-                "Inténtalo de nuevo más tarde",
-                "error",
-                {
-                  dangerMode: true,
-                }
-              );
-              return;
-            }
-          })
-          .then((data) => {
-            setStore({ dataEventoUnico: data });
-          });
+      look_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/lookevent/" + eventid
+        );
+        const data = await response.json();
+        setStore({ dataEventoUnico: data });
       },
       // función para registrar usuario nuevo
       register: (email, username, password, age) => {
@@ -437,7 +422,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
-      modificarevento: (event) => {
+      modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
           method: "PUT",
           headers: {
@@ -449,7 +434,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
-            return respuestadelback.json();
+            getActions().look_event(eventid);
           }
         });
       },

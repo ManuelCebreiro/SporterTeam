@@ -37,6 +37,20 @@ export const DetallesEvento = () => {
               <div className="container p-1 rounded bg-light">
                 <div className=" px-1 border border-1 bg-light ">
                   <h5>
+                    <span className="">Estado:</span>
+                    <span style={color} className="float-end">
+                      {detalles.estadoEvento}
+                    </span>
+                  </h5>
+                </div>
+                <div className=" px-1 border border-1 bg-light ">
+                  <h5>
+                    <span className="">Deporte:</span>
+                    <span className="float-end">{detalles.sport}</span>
+                  </h5>
+                </div>
+                <div className=" px-1 border border-1 bg-light ">
+                  <h5>
                     <span className="">Fecha:</span>
                     <span className="float-end">{detalles.date}</span>
                   </h5>
@@ -148,21 +162,27 @@ export const DetallesEvento = () => {
               <div className="text-white px-2">{detalles.description}</div>
             </div>
             <div className="row text-center pt-3">
-              <button id="bottonstyle" class="cssbuttons-io-button">
-                {" "}
+              <button
+                id="bottonstyle"
+                class="cssbuttons-io-button"
+                onClick={() => {
+                  actions.expulsarUsuarioEvento(
+                    detalles.id,
+                    sessionStorage.getItem("userid")
+                  );
+                }}
+              >
                 Dejar evento
                 <div class="icon">
                   <svg
-                    height="24"
-                    width="24"
-                    viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-x-lg"
+                    viewBox="0 0 16 16"
                   >
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                      d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                      fill="currentColor"
-                    ></path>
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                   </svg>
                 </div>
               </button>
@@ -171,14 +191,18 @@ export const DetallesEvento = () => {
           {detalles.admin == datosUsuario.id ? (
             <DetallesEventoAdmin />
           ) : undefined}
-          <div className="row text-center">
+          <div className="row text-center pb-5">
             <Link
               to="/perfil"
               onClick={() => {
                 actions.getUserDataEventos(params.theid);
               }}
             >
-              <button type="button" className="btn btn-secondary">
+              <button
+                id="btnvolverperfil"
+                type="button"
+                className="btn btn-secondary float-end me-4"
+              >
                 Volver al Perfil
               </button>
             </Link>

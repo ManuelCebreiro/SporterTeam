@@ -1,5 +1,5 @@
 #bgdetalles {
-  background-image: url("https://thumbs.dreamstime.com/b/dise%C3%B1o-art%C3%ADstico-colorido-para-un-f%C3%BAtbol-en-una-cancha-futbol-gris-oscuro-centrado-campo-o-escenario-con-patr%C3%B3n-diagonal-rosa-172728569.jpg");
+  background-image: url("https://raw.githubusercontent.com/ManuelCebreiro/SporterTeam/modificar-Detalles-evento-estilos/src/front/img/fondodetallesevento.jpg");
   background-size: cover;
   height: 100vh;
 }
@@ -69,5 +69,12 @@
 #bottonstyle {
   height: 90%;
   width: 15%;
-  margin: auto;
+  margin: 0 auto;
+}
+#tablajugadorespendientes {
+  margin-bottom: 30%;
+}
+#btnvolverperfil {
+  background-color: #bb723a;
+  color: white;
 }
