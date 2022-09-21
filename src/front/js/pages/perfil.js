@@ -74,7 +74,7 @@ export const Perfil = () => {
             className="col-lg-6 col-md-6 col-xs-6 my-3 py-1 "
             id="estilosperfil"
           >
-            <div className="card mt-3 mb-3 border-0">
+            <div className="card mt-2 mb-2 border-0">
               <div className="card-body">
                 <div className="row py-1">
                   <div className="col-sm-4">
@@ -90,7 +90,7 @@ export const Perfil = () => {
                   <div className="col-sm-8 text-secondary">{user.age}</div>
                 </div>
                 <hr />
-                <div className="row py-1 mb-3">
+                <div className="row py-1">
                   <div className="col-sm-4">
                     <h6 className="mb-0">Description</h6>
                   </div>
@@ -130,10 +130,10 @@ export const Perfil = () => {
                         <tr key={index}>
                           <td>{element.sport}</td>
                           <td>{element.date}</td>
-                          <td>{element.duration}</td>
+                          <td>{element.duration}{"minutos."}</td>
                           <td>{element.ciudad}</td>
                           <td>{element.space ? "Cubierto" : "Aire libre"}</td>
-                          <td>{element.payment}</td>
+                          <td className="text-center">{element.payment}{"€"}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -148,7 +148,7 @@ export const Perfil = () => {
             <div className="row gutters-sm">
               <div className="col-sm-12 mb-3">
                 <div className="card mt-3 p-2" id="estilosperfil">
-                  <h5 className=" mb-3" id="estilotitulo">
+                  <h5 className=" mb-3" id="estilotituloeventosparticipo">
                     Eventos en los que participo
                   </h5>
                   {userEventosactivos.length ? (
@@ -196,10 +196,10 @@ export const Perfil = () => {
               <br />
               <div className="col-sm-12 mb-3">
                 <div className="card mt-3 p-2" id="estilosperfil">
-                  <h5 className=" mb-3" id="estilotitulo">
+                  <h5 className=" mb-3" id="estilosperfilhistorial">
                     Historial de eventos
                   </h5>
-                  {userEventosactivos.length ? (
+                  {userEventosFinalizado.length ? (
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
                       <table className="table table-striped table-responsive">
                         <thead className="thead-dark">
@@ -217,13 +217,11 @@ export const Perfil = () => {
                             <tr key={index}>
                               <td>{element.sport}</td>
                               <td>{element.date}</td>
-                              <td>{element.duration}</td>
+                              <td>{element.duration} {"minutos."}</td>
                               <td>{element.ciudad}</td>
-                              <td>{element.space}</td>
-                              <td>{element.payment}</td>
-                              <td>
-                                <DatosEventoUnico id={element.id} />
-                              </td>
+                              <td>{element.space ? "Cubierto" : "Aire libre"}</td>
+                              <td>{element.payment}{"€"}</td>
+
                             </tr>
                           ))}
                         </tbody>

@@ -90,12 +90,12 @@ export const Newevent = () => {
               </div>
               <select
                 className="form-select"
-                // value={event.sport}
+                value={event.sport}
                 onChange={(e) => {
                   setEvent({ ...event, sport: e.target.value });
                 }}
               >
-                <option selected disabled>
+                <option>
                   Elige
                 </option>
 
@@ -238,17 +238,21 @@ export const Newevent = () => {
 
               <select
                 className="form-select"
-                // value={event.space ? "cubierto" : "airelibre"}
+                // defaultValue="Elige"
+                value={event.space == null ? "Elige" :
+                  event.space ? "Cubierto" : "Aire libre"}
                 onChange={(e) => {
                   console.log(e.target.value)
                   if (e.target.value == "Cubierto") {
                     setEvent({ ...event, space: true });
-                  } else {
+                  } else if (e.target.value == "Aire libre") {
                     setEvent({ ...event, space: false });
+                  } else {
+                    setEvent({ ...event, space: null });
                   }
                 }}
               >
-                <option selected disabled>
+                <option>
                   Elige
                 </option>
                 <option>Cubierto</option>
@@ -280,6 +284,7 @@ export const Newevent = () => {
               onClick={() => {
                 if (
                   validarCampoVacio(event.sport.length, "", "Debes escoger un deporte") &&
+                  validarCampoVacio(event.sport.length, "Elige", "Debes escoger un deporte") &&
                   validarMayorQue(event.duration, 30, "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " + `${event.duration}`) &&
                   validarMayorQue(event.agemin, 18, "La edad puesta es " + `${event.agemin}` + " y debe tener mínimo 18 años") &&
                   validarMenorQue(event.agemax, 100, "La edad puesta es " + `${event.agemax}` + " y no debe ser mayor que 100") &&
@@ -288,6 +293,7 @@ export const Newevent = () => {
                   validarMayorQue(event.participantmax, 2, "El campo de participantes debe ser mayor o igual que 2") &&
                   validarCampoVacio(event.date, "", "La fecha es incorrecta") &&
                   validarCampoVacio(event.space, null, "Debes escoger un tipo de lugar") &&
+                  validarCampoVacio(event.space, "Elige", "Debes escoger un tipo de lugar") &&
                   validarCampoVacio(event.ciudad, "", "Debes escoger una ciudad") &&
                   validarCampoVacio(event.payment, "", "Debes indicar una cantidad, puede ser de 0 €") &&
                   validarCampoVacio(event.description, "", "El campo debería contener una breve descripción")
@@ -298,7 +304,7 @@ export const Newevent = () => {
                   setEventazo([...eventazo, event]);
                   setEvent({
                     payment: "",
-                    space: "",
+                    space: null,
                     duration: "",
                     agemin: "",
                     agemax: "",
@@ -306,7 +312,7 @@ export const Newevent = () => {
                     sport: "",
                     description: "",
                     participantmax: "",
-                    ciudad: ""
+                    ciudad: "",
                   })
                 };
 

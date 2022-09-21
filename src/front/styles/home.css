@@ -46,6 +46,16 @@ body {
   text-align: center;
 }
 
+#estilotituloeventosparticipo {
+  background: #80c470;
+  text-align: center;
+}
+
+#estilosperfilhistorial {
+  background: #d65f3b;
+  text-align: center;
+}
+
 /* -------------------------------(final estilos perfil------------------------------------------------ */
 
 /* ---------------------------- ESTILO BOTON EDITAR ---------------- */
@@ -64,6 +74,7 @@ body {
   position: relative;
   /* height: 300px; */
   min-height: auto;
+  max-height: 300px;
   overflow: scroll;
 }
 
