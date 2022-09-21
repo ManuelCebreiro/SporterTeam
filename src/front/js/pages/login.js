@@ -67,14 +67,14 @@ export const Login = () => {
                             className="form-label"
                             style={{ color: "#fefefe" }}
                           >
-                            Your Email
+                            Tu Email
                           </label>
                         </div>
                         <div className="form-outline mb-4">
                           <input
                             type="password"
                             className="form-control form-control-lg"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             value={userPassword}
                             onChange={(e) => {
                               setUserPassword(e.target.value);
@@ -84,7 +84,7 @@ export const Login = () => {
                             className="form-label"
                             style={{ color: "#fefefe" }}
                           >
-                            Password
+                            Contraseña
                           </label>
                         </div>
                         <div className="d-flex justify-content-center">
@@ -104,13 +104,13 @@ export const Login = () => {
                           className="text-center mt-5 mb-0 "
                           style={{ color: "#fefefe" }}
                         >
-                          Have already an account?{" "}
+                          No estás registrado?{" "}
                           <Link
                             id="register-btn-login"
                             className="fw-bold "
                             to="/register"
                           >
-                            Register here
+                            Regístrate!!
                           </Link>
                         </p>
                       </form>

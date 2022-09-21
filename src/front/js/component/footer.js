@@ -10,22 +10,27 @@ export const Footer = () => (
             <span className="footer-links">
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a href="#!" className="text-white">
+                  <button href="#!" className="text-white">
                     Sobre Nosotros
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="mailto:sporter.team.2022@gmail.com">Contacto</a>
+                  <button
+                    href="mailto:sporter.team.2022@gmail.com"
+                    className="text-white"
+                  >
+                    Contacto
+                  </button>
                 </li>
                 <li>
-                  <a href="#!" className="text-white">
+                  <button href="#!" className="text-white">
                     Preguntas Frecuentes
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#!" className="text-white">
+                  <button href="#!" className="text-white">
                     Condiciones de Uso
-                  </a>
+                  </button>
                 </li>
               </ul>
             </span>
@@ -50,7 +55,7 @@ export const Footer = () => (
             </div>
 
             <div className="col-md-3">
-              <div id="buttonManuel" className="footer-right">
+              <div id="buttonName" className="footer-right">
                 <p>Martin Barja </p>
                 <a href="#">
                   <i className="fa fa-envelope"></i>
@@ -65,7 +70,7 @@ export const Footer = () => (
             </div>
 
             <div className="col-md-3 ">
-              <div id="buttonManuel" className="footer-right">
+              <div id="buttonName" className="footer-right">
                 <p>David Pizarro</p>
                 <a href="mailto:pizarro.developer@gmail.com">
                   <i className="fa fa-envelope"></i>

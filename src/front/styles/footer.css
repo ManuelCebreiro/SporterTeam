@@ -137,7 +137,7 @@
 }
 
 #buttonName:hover {
-  transform: scale(1.2) rotate(10deg);
+  transform: scale(1.2);
   background-color: #ffd713;
   color: #33383b;
 }
