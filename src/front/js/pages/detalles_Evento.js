@@ -34,83 +34,99 @@ export const DetallesEvento = () => {
           <div className="row p-4">
             <div className={columna}>
               <h1 className="text-center text-white">Detalles</h1>
-              <div className="container p-1 rounded bg-light">
-                <div className=" px-1 border border-1 bg-light ">
-                  <h5>
-                    <span className="">Estado:</span>
-                    <span style={color} className="float-end">
-                      {detalles.estadoEvento}
-                    </span>
-                  </h5>
+              <div className="container p-1 rounded bg-light p-3">
+                <div className="row px-1 border border-1 ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5 className="">Estado:</h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5 style={color}>{detalles.estadoEvento}</h5>
+                  </div>
                 </div>
-                <div className=" px-1 border border-1 bg-light ">
-                  <h5>
-                    <span className="">Deporte:</span>
-                    <span className="float-end">{detalles.sport}</span>
-                  </h5>
+                <div className="row px-1 border border-1 ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Deporte:</h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.sport}</h5>
+                  </div>
                 </div>
-                <div className=" px-1 border border-1 bg-light ">
-                  <h5>
-                    <span className="">Fecha:</span>
-                    <span className="float-end">{detalles.date}</span>
-                  </h5>
+                <div className="row px-1 border border-1  ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Fecha:</h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.date}</h5>
+                  </div>
                 </div>
-                <div className="border border-1 bg-light px-1">
-                  <h5>
-                    <span className="">Donde: {""}</span>
-                    <span className="float-end">{detalles.ciudad}</span>
-                  </h5>
+                <div className="row border border-1  px-1">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Donde: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.ciudad}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Plazas: {""}</span>
-                    <span className="float-end">{detalles.participantmax}</span>
-                  </h5>
+                <div className="row border border-1 px-1  ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5 className="">Plazas: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.participantmax}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Cuanto cuesta: {""}</span>
-                    <span className="float-end">{detalles.payment}</span>
-                  </h5>
+                <div className="row border border-1 px-1 bg-light ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Cuanto cuesta: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.payment}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Edad minima:{""}</span>
-                    <span className="float-end">{detalles.agemin}</span>
-                  </h5>
+                <div className="row border border-1 px-1 bg-light ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Edad minima:</h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.agemin}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Edad maxima: {""}</span>
-                    <span className="float-end">{detalles.agemax}</span>
-                  </h5>
+                <div className="row border border-1 px-1 bg-light ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5 className="">Edad maxima: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.agemax}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Duracion: {""}</span>
-                    <span className="float-end">{detalles.duration}</span>
-                  </h5>
+                <div className="row border border-1 px-1 bg-light ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5 className="">Duracion: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.duration}</h5>
+                  </div>
                 </div>
-                <div className=" border border-1 px-1 bg-light ">
-                  <h5>
-                    <span className="">Espacio: {""}</span>
-                    <span className="float-end">
-                      {detalles.space ? "Cubierto" : "Aire libre"}
-                    </span>
-                  </h5>
+                <div className=" row border border-1 px-1 bg-light ">
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>Espacio: </h5>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <h5>{detalles.space ? "Cubierto" : "Aire libre"}</h5>
+                  </div>
                 </div>
               </div>
             </div>
             <div className={columna}>
               <h1 className="text-center text-white pe-5">Jugadores</h1>
-              <div className="row bg-white rounded p-1">
+              <div className="bg-white rounded p-2">
                 <div className="col-lg-6 text-center rounded">
                   {Array.from(players).map((element, index) => {
                     if (element.id % 2 !== 0) {
                       return (
                         <div
                           key={index}
-                          className="text-dark text-start border border-1 bg-white rounded ps-1"
+                          className="text-dark text-start border border-1 bg-white rounded ps-1 "
                         >
                           {element.username} {""}
                           {user.id == detalles.admin ? (
@@ -161,24 +177,24 @@ export const DetallesEvento = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4">
-              {detalles.admin == user.id ? (
-                <JugadorespendientesEvento idevento={params.theid} />
-              ) : undefined}
-            </div>
-            <div className="row text-center pt-3">
+
+            {detalles.admin == user.id ? (
+              <JugadorespendientesEvento idevento={params.theid} />
+            ) : undefined}
+
+            <div className="text-center pt-3">
               <h1 className="text-white ">Descripcion</h1>
               <div
                 id="descripcion"
-                className="container-fluid bg-white rounded text-start"
+                className="container bg-white rounded text-start"
               >
                 {detalles.description}
               </div>
             </div>
-            <div className="row text-center pt-3">
+            <div className="row text-center pt-2 ps-4">
               <button
                 id="bottonstyle"
-                class="cssbuttons-io-button"
+                class="cssbuttons-io-button text-center"
                 onClick={() => {
                   const expulsar = actions.expulsarUsuarioEvento(
                     detalles.id,
@@ -214,7 +230,7 @@ export const DetallesEvento = () => {
               <button
                 id="btnvolverperfil"
                 type="button"
-                className="btn btn-secondary float-end me-4"
+                className="btn btn-secondary float-end me-5"
               >
                 Volver al Perfil
               </button>
