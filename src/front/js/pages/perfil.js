@@ -112,30 +112,36 @@ export const Perfil = () => {
           <div className="col-lg-10 col-md-10 col-xs-10 mb-3 px-0">
             <div className="card mt-3 p-2" id="estilosperfil">
               <h5 id="estilotitulo">Eventos Pendientes</h5>
-              <table className="table table-striped">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Deporte</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Duracion</th>
-                    <th scope="col">Ciudad</th>
-                    <th scope="col">Espacio</th>
-                    <th scope="col">Precio</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Array.from(eventosPendientes).map((element, index) => (
-                    <tr key={index}>
-                      <td>{element.sport}</td>
-                      <td>{element.date}</td>
-                      <td>{element.duration}</td>
-                      <td>{element.ciudad}</td>
-                      <td>{element.space}</td>
-                      <td>{element.payment}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {eventosPendientes.length ? (
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                  <table className="table table-striped table-responsive">
+                    <thead className="thead-dark">
+                      <tr>
+                        <th scope="col">Deporte</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Duracion</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Espacio</th>
+                        <th scope="col">Precio</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Array.from(eventosPendientes).map((element, index) => (
+                        <tr key={index}>
+                          <td>{element.sport}</td>
+                          <td>{element.date}</td>
+                          <td>{element.duration}</td>
+                          <td>{element.ciudad}</td>
+                          <td>{element.space ? "Cubierto" : "Aire libre"}</td>
+                          <td>{element.payment}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <h4 className="text-center">No hay eventos que mostrar</h4>
+              )}
             </div>
             <br />
 
@@ -183,7 +189,7 @@ export const Perfil = () => {
                       </table>
                     </div>
                   ) : (
-                    <h4>No hay eventos que mostrar</h4>
+                    <h4 className="text-center">No hay eventos que mostrar</h4>
                   )}
                 </div>
               </div>
@@ -194,35 +200,37 @@ export const Perfil = () => {
                     Historial de eventos
                   </h5>
                   {userEventosactivos.length ? (
-                    <table className="table table-striped">
-                      <thead className="thead-dark">
-                        <tr>
-                          <th scope="col">Deporte</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Duracion</th>
-                          <th scope="col">Ciudad</th>
-                          <th scope="col">Espacio</th>
-                          <th scope="col">Precio</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {userEventosFinalizado.map((element, index) => (
-                          <tr key={index}>
-                            <td>{element.sport}</td>
-                            <td>{element.date}</td>
-                            <td>{element.duration}</td>
-                            <td>{element.ciudad}</td>
-                            <td>{element.space}</td>
-                            <td>{element.payment}</td>
-                            <td>
-                              <DatosEventoUnico id={element.id} />
-                            </td>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                      <table className="table table-striped table-responsive">
+                        <thead className="thead-dark">
+                          <tr>
+                            <th scope="col">Deporte</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Duracion</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Espacio</th>
+                            <th scope="col">Precio</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {userEventosFinalizado.map((element, index) => (
+                            <tr key={index}>
+                              <td>{element.sport}</td>
+                              <td>{element.date}</td>
+                              <td>{element.duration}</td>
+                              <td>{element.ciudad}</td>
+                              <td>{element.space}</td>
+                              <td>{element.payment}</td>
+                              <td>
+                                <DatosEventoUnico id={element.id} />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   ) : (
-                    <h4>No hay eventos que mostrar</h4>
+                    <h4 className="text-center">No hay eventos que mostrar</h4>
                   )}
                 </div>
               </div>

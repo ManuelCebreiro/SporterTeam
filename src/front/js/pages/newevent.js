@@ -7,6 +7,10 @@ import swal from "sweetalert";
 
 export const Newevent = () => {
 
+  let date = new Date();
+  let output = String(date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()).padStart(2, '0');
+  // console.log(output);
+
   const validarMayorQue = (numeroaValidar, condicion, texto) => {
 
     if (Number(numeroaValidar) >= condicion) {
@@ -24,7 +28,7 @@ export const Newevent = () => {
     };
   };
   const validarMenorQue = (numeroaValidar, condicion, texto) => {
-    if (Number(numeroaValidar) < condicion) {
+    if (Number(numeroaValidar) <= condicion) {
       return true
     } else {
       swal(
@@ -108,13 +112,14 @@ export const Newevent = () => {
               <input
                 type="date"
                 className="form-control"
-                min="2022-08-27"
+                min={output}
                 max="2030-12-31"
                 placeholder="Fecha"
                 required
                 value={event.date}
                 onChange={(e) => {
                   setEvent({ ...event, date: e.target.value });
+                  console.log(event.date)
                 }}
               />
             </div>
@@ -281,9 +286,10 @@ export const Newevent = () => {
                   validarMayorQue(event.agemax, `${event.agemin}`, "La edad máxima puesta es " + `${event.agemax}` + " y debe ser mayor o igual que la edad mínima que has escogido, que es " + `${event.agemin}`) &&
                   validarMenorQue(event.participantmax, 50, "El campo de participantes debe ser menor que 50") &&
                   validarMayorQue(event.participantmax, 2, "El campo de participantes debe ser mayor o igual que 2") &&
-                  validarCampoVacio(event.date, "", "Debes escoger una fecha") &&
+                  validarCampoVacio(event.date, "", "La fecha es incorrecta") &&
                   validarCampoVacio(event.space, null, "Debes escoger un tipo de lugar") &&
                   validarCampoVacio(event.ciudad, "", "Debes escoger una ciudad") &&
+                  validarCampoVacio(event.payment, "", "Debes indicar una cantidad, puede ser de 0 €") &&
                   validarCampoVacio(event.description, "", "El campo debería contener una breve descripción")
                 ) {
 
@@ -329,7 +335,7 @@ export const Newevent = () => {
                       </tr>
                     </thead>
                   ) : undefined}
-                  <tbody className="text-white">
+                  <tbody >
                     {eventazo.map((event, index) => {
                       return (
                         <tr>

@@ -7,7 +7,7 @@
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
 #navbarstyle {
-  background-color: #2d4053;
+  background-color: #1A375A;
 }
 
 body {
@@ -62,7 +62,8 @@ body {
 /* -------------     ESTILOS PAGINA CENTRAL ----------------- */
 .my-custom-scrollbar {
   position: relative;
-  height: 300px;
+  /* height: 300px; */
+  min-height: auto;
   overflow: scroll;
 }
 
