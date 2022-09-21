@@ -51,7 +51,9 @@
   width: 100%;
   left: 0%;
 }
-
+footer {
+  margin-top: auto;
+}
 .footer-links button:after {
   content: "";
   pointer-events: none;

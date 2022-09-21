@@ -27,7 +27,7 @@ export const Perfil = () => {
 
   return (
     <div
-      className="container mt-3 py-2"
+      className="container mt-3 py-3 mb-5"
       style={{ maxWidth: 1100 }}
       id="estilofondoperfil"
     >

@@ -1,7 +1,9 @@
 #bgdetalles {
   background-image: url("https://raw.githubusercontent.com/ManuelCebreiro/SporterTeam/modificar-Detalles-evento-estilos/src/front/img/fondodetallesevento.jpg");
   background-size: cover;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 #detalleseventofondo {
   background: #1a375a;
