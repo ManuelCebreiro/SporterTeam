@@ -3,7 +3,7 @@
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
-  text-align: left;
+
   font: normal 16px;
   padding: 25px 50px;
 }
@@ -11,7 +11,7 @@
 /* Footer links */
 
 .footer-distributed span.footer-links {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #fefefe;
   margin: 0 0 10px;
@@ -28,9 +28,9 @@
 }
 
 .footer-links button {
-  font-size: 18px;
+  font-size: 12px;
   color: #fefefe;
-
+  text-align: left;
   font-weight: 400;
   cursor: pointer;
   position: relative;
@@ -113,7 +113,7 @@
 
 /* Media Queries */
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .footer-distributed .footer-left,
   .footer-distributed .footer-right {
     text-align: center;

@@ -15,8 +15,8 @@ export const Login = () => {
 
   return (
     <div className="container-fluid p-0 " id="loginstyle">
-      <div className="row">
-        <div id="letrasLogin" className="col-md-7">
+      <div className="row d-flex">
+        <div id="letrasLogin" className="col-xs-12 col-sm-12 col-md-6">
           <div>
             <div className="text-wrap-login">
               <h1 className="text-login">RUN,</h1>
@@ -33,7 +33,7 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="col-md-auto">
+        <div className="col-xs-12 col-sm-12 col-md-6">
           <section className="vh-100 bg-image-fluid">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
