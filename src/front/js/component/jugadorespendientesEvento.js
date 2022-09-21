@@ -11,32 +11,31 @@ export const JugadorespendientesEvento = ({ idevento }) => {
 
   const jugadoresPendientes = store.usuariospendientes;
   return (
-    <table className="table">
-      <thead className="thead-dark">
-        <tr>
-          <th scope="col">Jugadores Pendientes</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div className="col-lg-4">
+      <h1 className="text-white text-center" scope="col">
+        Peticiones
+      </h1>
+
+      <div className="bg-white rounded p-1">
         {Array.from(jugadoresPendientes).map((element, index) => (
-          <tr key={index}>
-            <td>{element.username}</td>
-            <td>
+          <div className="row border border-1 mx-2" key={index} id="tabla">
+            <div className="col-lg-4 text-center">{element.username}</div>
+            <div className="col-lg-4 text-center px-0">
               <RechazarJugador idevento={idevento} idusuario={element.id} />
-            </td>
-            <td>
+            </div>
+            <div className="col-lg-4 text-center px-0 ">
               <button
-                className="btn btn-success btn-sm  border"
+                className="custom-btnn "
                 onClick={() => {
                   actions.joinEvent(idevento, element.id);
                 }}
               >
                 Aceptar
               </button>
-            </td>
-          </tr>
+            </div>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };

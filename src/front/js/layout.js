@@ -26,7 +26,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          {store.validacion ? <Navbar /> : undefined}
+          {store.validacion ? <Navbarnew /> : undefined}
           <Routes>
             <Route element={<Home />} path="/home" />
             <Route element={<Perfil />} path="/perfil" />

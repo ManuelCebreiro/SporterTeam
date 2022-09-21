@@ -154,7 +154,7 @@ export const Home = () => {
           </div>
           <div className="col-lg-3  text-center px-1 my-2">
             <div className="row py-2">
-              <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+              <div className="col-lg-6 col-md-6 col-sm-6 text-center ">
                 <label
                   className="form-check-label px-1 text-white my-1"
                   htmlFor="flexSwitchCheckDefault"
@@ -237,55 +237,61 @@ export const Home = () => {
       </div>
 
       <div className="table-responsive">
-        <div className="table-wrapper-scroll-y tablapaginacentral bg-light">
-          <table className="text-center table table-striped table-hover mt-2">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Sport</th>
-                <th scope="col">Date</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Participantes</th>
-                <th scope="col">Agemin</th>
-                <th scope="col">Agemax</th>
-                <th scope="col">Ciudad</th>
-                <th scope="col">Payment</th>
-                <th scope="col">Space</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventos.map((event, index) => {
-                return (
-                  <tr key={index}>
-                    <th scope="row">{index}</th>
-                    <td>{event.sport}</td>
-                    <td>{event.date}</td>
-                    <td>
-                      {event.duration} {"minutos"}
-                    </td>
-                    <td>
-                      {event.participantmax} {"personas"}
-                    </td>
-                    <td>
-                      {event.agemin} {"años"}
-                    </td>
-                    <td>
-                      {event.agemax} {"años"}
-                    </td>
-                    <td>{event.ciudad}</td>
-                    <td>
-                      {event.payment} {"€"}
-                    </td>
-                    <td>{event.space ? "Cubierto" : "Aire libre"}</td>
-                    <td>
-                      <PeticionUnion idevento={event.id} />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {eventos.length > 0 ? (
+          <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
+            <table className="text-center table table-striped table-hover mt-2">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Sport</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Participantes</th>
+                  <th scope="col">Agemin</th>
+                  <th scope="col">Agemax</th>
+                  <th scope="col">Ciudad</th>
+                  <th scope="col">Payment</th>
+                  <th scope="col">Space</th>
+                </tr>
+              </thead>
+              <tbody>
+                {eventos.map((event, index) => {
+                  return (
+                    <tr key={index}>
+                      <th scope="row">{index}</th>
+                      <td>{event.sport}</td>
+                      <td>{event.date}</td>
+                      <td>
+                        {event.duration} {"minutos"}
+                      </td>
+                      <td>
+                        {event.participantmax} {"personas"}
+                      </td>
+                      <td>
+                        {event.agemin} {"años"}
+                      </td>
+                      <td>
+                        {event.agemax} {"años"}
+                      </td>
+                      <td>{event.ciudad}</td>
+                      <td>
+                        {event.payment} {"€"}
+                      </td>
+                      <td>{event.space ? "Cubierto" : "Aire libre"}</td>
+                      <td>
+                        <PeticionUnion idevento={event.id} />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <h4 className="text-center text-danger bg-light py-5 border-dark">
+            No hay eventos que mostrar
+          </h4>
+        )}
       </div>
     </div>
   );
