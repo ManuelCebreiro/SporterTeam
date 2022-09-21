@@ -107,13 +107,13 @@
 }
 
 #register_btn:disabled {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 #salirRegistro {
   color: #fefefe;
 }
 #salirRegistro:hover {
-  color: #bb723a;
+  color: #ff6c23;
 }
 
 #register_btn :hover {

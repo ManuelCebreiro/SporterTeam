@@ -287,8 +287,11 @@ export const Home = () => {
               </tbody>
             </table>
           </div>
-        ) : <h4 className="text-center text-danger bg-light py-5 border-dark">No hay eventos que mostrar</h4>
-        }
+        ) : (
+          <h4 className="text-center text-danger bg-light py-5 border-dark">
+            No hay eventos que mostrar
+          </h4>
+        )}
       </div>
     </div>
   );

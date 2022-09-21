@@ -25,22 +25,22 @@
   font-size: 7.5em;
   line-height: 1.2em;
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 960px) {
   .text-wrap-login h1 {
     font-size: 5.5em;
     line-height: 1.1em;
   }
 }
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 720px) {
   .text-wrap-login h1 {
     font-size: 4.9em;
-    line-height: 1em;
+    line-height: 1.1em;
   }
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
   .text-wrap-login h1 {
     font-size: 3.2em;
-    line-height: 0.8em;
+    line-height: 1.1em;
   }
 }
 
@@ -74,4 +74,12 @@
 #btnLogin:hover {
   opacity: 0.9;
   background-color: #ffd713;
+  transform: scale(1.1);
+}
+
+#register-btn-login {
+  color: #fefefe;
+}
+#register-btn-login:hover {
+  color: #ff6c23;
 }
