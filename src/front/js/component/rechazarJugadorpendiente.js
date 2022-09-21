@@ -8,7 +8,7 @@ export const RechazarJugador = ({ idevento, idusuario }) => {
   return (
     <div>
       <button
-        class="custom-btn "
+        className="custom-btn "
         onClick={() => {
           actions.denegarpeticion(idusuario, idevento);
         }}

@@ -25,7 +25,7 @@ export const JugadorespendientesEvento = ({ idevento }) => {
             </div>
             <div className="col-lg-4 text-end">
               <button
-                className="btn btn-success btn-sm  border"
+                className="custom-btnn "
                 onClick={() => {
                   actions.joinEvent(idevento, element.id);
                 }}
