@@ -91,3 +91,9 @@ body {
   background-color: #bb723a;
   border-color: white;
 }
+
+/* ------------------------- BOTON LOG OUT------------------ */
+#btnnavbarexit {
+  background-color: #bb723a;
+  color: white;
+}
