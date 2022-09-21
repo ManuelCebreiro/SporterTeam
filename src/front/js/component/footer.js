@@ -11,17 +11,25 @@ export const Footer = () => (
               <ul className="list-unstyled mb-0">
                 <li>
                   <button href="#!" className="text-white">
-                    About
+                    Sobre Nosotros
+                  </button>
+                </li>
+                <li>
+                  <button
+                    href="mailto:sporter.team.2022@gmail.com"
+                    className="text-white"
+                  >
+                    Contacto
                   </button>
                 </li>
                 <li>
                   <button href="#!" className="text-white">
-                    Faq
+                    Preguntas Frecuentes
                   </button>
                 </li>
                 <li>
                   <button href="#!" className="text-white">
-                    Terms and Conditions
+                    Condiciones de Uso
                   </button>
                 </li>
               </ul>
