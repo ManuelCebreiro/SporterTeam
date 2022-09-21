@@ -8,12 +8,12 @@ export const RechazarJugador = ({ idevento, idusuario }) => {
   return (
     <div>
       <button
-        className="btn btn-warning btn-sm  border"
+        className="custom-btn "
         onClick={() => {
           actions.denegarpeticion(idusuario, idevento);
         }}
       >
-        Rechazar
+        <span>Reachazar</span>
       </button>
     </div>
   );

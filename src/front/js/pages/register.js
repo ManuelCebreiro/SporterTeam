@@ -130,7 +130,7 @@ export const Register = () => {
             />
             {errors.age && <p>{errors.age.message}</p>}
 
-            <input id="register_btn" value="submit" type="submit" />
+            <input id="register_btn" value="enviar" type="submit" />
             <Link id="salirRegistro" className="fw-bold" to="/">
               Salir de Registro
             </Link>

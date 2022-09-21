@@ -75,13 +75,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
-        const token = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
             idUser: idusuario,
@@ -91,14 +88,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         const filtrarJugadoresnoEliminados = players.filter(
           (element) => element.id !== idusuario
         );
-        console.log(
-          filtrarJugadoresnoEliminados,
-          "esta deberia ser la listas nueva"
-        );
 
         setStore({ jugadores: filtrarJugadoresnoEliminados });
         getStore().jugadores;
-        getActions().getUserDataEventos()
+        getActions().getUserDataEventos();
+        return true;
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -123,27 +117,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().getusersPendientes(eventid);
       },
 
-      look_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
-          .then((resp) => {
-            if (resp.ok) {
-              setStore({ datavalidacionEvento: true });
-              return resp.json();
-            } else {
-              swal(
-                "Ups, hubo un problema!",
-                "Inténtalo de nuevo más tarde",
-                "error",
-                {
-                  dangerMode: true,
-                }
-              );
-              return;
-            }
-          })
-          .then((data) => {
-            setStore({ dataEventoUnico: data });
-          });
+      look_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/lookevent/" + eventid
+        );
+        const data = await response.json();
+        setStore({ dataEventoUnico: data });
       },
       // función para registrar usuario nuevo
       register: (email, username, password, age) => {
@@ -438,7 +417,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
-      modificarevento: (event) => {
+      modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
           method: "PUT",
           headers: {
@@ -450,7 +429,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
-            return respuestadelback.json();
+            getActions().look_event(eventid);
           }
         });
       },

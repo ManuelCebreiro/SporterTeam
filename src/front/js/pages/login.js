@@ -9,15 +9,14 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (store.validacion) navigate("/home");
   }, [store.validacion]);
 
   return (
     <div className="container-fluid p-0 " id="loginstyle">
-      <div className="row">
-        <div id="letrasLogin" className="col-md-7">
+      <div className="row d-flex">
+        <div id="letrasLogin" className="col-xs-12 col-sm-12 col-md-6">
           <div>
             <div className="text-wrap-login">
               <h1 className="text-login">RUN,</h1>
@@ -34,7 +33,7 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="col-md-auto">
+        <div className="col-xs-12 col-sm-12 col-md-6">
           <section className="vh-100 bg-image-fluid">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
@@ -68,14 +67,14 @@ export const Login = () => {
                             className="form-label"
                             style={{ color: "#fefefe" }}
                           >
-                            Your Email
+                            Tu Email
                           </label>
                         </div>
                         <div className="form-outline mb-4">
                           <input
                             type="password"
                             className="form-control form-control-lg"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             value={userPassword}
                             onChange={(e) => {
                               setUserPassword(e.target.value);
@@ -85,7 +84,7 @@ export const Login = () => {
                             className="form-label"
                             style={{ color: "#fefefe" }}
                           >
-                            Password
+                            Contraseña
                           </label>
                         </div>
                         <div className="d-flex justify-content-center">
@@ -105,13 +104,13 @@ export const Login = () => {
                           className="text-center mt-5 mb-0 "
                           style={{ color: "#fefefe" }}
                         >
-                          Have already an account?{" "}
+                          No estás registrado?{" "}
                           <Link
+                            id="register-btn-login"
                             className="fw-bold "
                             to="/register"
-                            style={{ color: "#fefefe" }}
                           >
-                            Register here
+                            Regístrate!!
                           </Link>
                         </p>
                       </form>

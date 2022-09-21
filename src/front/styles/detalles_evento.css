@@ -1,15 +1,154 @@
 #bgdetalles {
-  background-image: url("https://thumbs.dreamstime.com/b/dise%C3%B1o-art%C3%ADstico-colorido-para-un-f%C3%BAtbol-en-una-cancha-futbol-gris-oscuro-centrado-campo-o-escenario-con-patr%C3%B3n-diagonal-rosa-172728569.jpg");
+  background-image: url("https://raw.githubusercontent.com/ManuelCebreiro/SporterTeam/modificar-Detalles-evento-estilos/src/front/img/fondodetallesevento.jpg");
   background-size: cover;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 #detalleseventofondo {
   background: #1a375a;
-  box-shadow: 1px 1px 1px 1px rgb(151, 149, 149);
+
   border-radius: 22px;
   height: 85%;
   width: 85%;
 }
 #detalles {
   border-radius: 25px;
+}
+#rowsalir {
+  padding-bottom: 1.7rem;
+}
+
+.cssbuttons-io-button {
+  background: #c9443b;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #c9443b;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+}
+/* estilos boton salirse del evento */
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.2em;
+  width: 1.2em;
+  border-radius: 0.9em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #c9443b;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1em;
+  transition: transform 0.3s;
+  color: #bb723a;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+#bottonstyle {
+  height: 40px;
+  width: 185px;
+  margin: 0 auto;
+}
+#tablajugadorespendientes {
+  margin-bottom: 30%;
+}
+#btnvolverperfil {
+  background-color: #bb723a;
+  color: white;
+}
+#descripcion {
+  height: 100px;
+}
+#tabla {
+  height: 80%;
+}
+/* boton rechazar jugador pendiente */
+
+.custom-btn {
+  font-size: 17px;
+  color: white;
+  background-color: transparent;
+  height: 30px;
+  width: 100px;
+  border: 2.5px solid;
+  transition: 0.3s all;
+  background-image: linear-gradient(45deg, purple, red, orange, red, purple);
+  background-size: 500% 200%;
+  background-position: 25% 50%;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.custom-btn:hover {
+  box-shadow: none;
+  background-color: rgb(92, 92, 92);
+  animation: rainbow 1s 1;
+  transform: scale(1.13);
+  border-radius: 30px;
+  background-position: 70% 50%;
+}
+
+.custom-btn:active {
+  transform: scale(1.2);
+}
+.custom-btnn {
+  font-size: 17px;
+  color: white;
+  background-color: transparent;
+  height: 30px;
+  width: 100px;
+  border: 2.5px solid;
+  transition: 0.3s all;
+  background-image: linear-gradient(
+    45deg,
+    #5ccb5f,
+    #006414,
+    #98ff96,
+    #009929,
+    #003400
+  );
+  background-size: 500% 200%;
+  background-position: 25% 50%;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.custom-btnn:hover {
+  box-shadow: none;
+  background-color: rgb(92, 92, 92);
+  animation: rainbow 1s 1;
+  transform: scale(1.13);
+  border-radius: 30px;
+  background-position: 70% 50%;
+}
+
+.custom-btnn:active {
+  transform: scale(1.2);
 }
