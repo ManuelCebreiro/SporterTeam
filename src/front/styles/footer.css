@@ -127,7 +127,7 @@
   }
 }
 
-#buttonManuel {
+#buttonName {
   padding: 0.6em 1em;
   border: 2px solid #ffd713;
   transition: ease-in-out 0.3s;
@@ -136,7 +136,7 @@
   font-weight: bolder;
 }
 
-#buttonManuel:hover {
+#buttonName:hover {
   transform: scale(1.2) rotate(10deg);
   background-color: #ffd713;
   color: #33383b;

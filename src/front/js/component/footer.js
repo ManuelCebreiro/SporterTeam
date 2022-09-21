@@ -10,27 +10,22 @@ export const Footer = () => (
             <span className="footer-links">
               <ul className="list-unstyled mb-0">
                 <li>
-                  <button href="#!" className="text-white">
+                  <a href="#!" className="text-white">
                     Sobre Nosotros
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button
-                    href="mailto:sporter.team.2022@gmail.com"
-                    className="text-white"
-                  >
-                    Contacto
-                  </button>
+                  <a href="mailto:sporter.team.2022@gmail.com">Contacto</a>
                 </li>
                 <li>
-                  <button href="#!" className="text-white">
+                  <a href="#!" className="text-white">
                     Preguntas Frecuentes
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button href="#!" className="text-white">
+                  <a href="#!" className="text-white">
                     Condiciones de Uso
-                  </button>
+                  </a>
                 </li>
               </ul>
             </span>
@@ -40,7 +35,7 @@ export const Footer = () => (
         <div className="col-xs-12 col-sm-9 col-md-7 col-xl-7 mb-2 mx-3  ">
           <div className="row align-items-end">
             <div className="col-md-3 ">
-              <div id="buttonManuel" className="footer-right">
+              <div id="buttonName" className="footer-right">
                 <p>Manuel Cebreiro</p>
                 <a href="#">
                   <i className="fa fa-envelope"></i>
