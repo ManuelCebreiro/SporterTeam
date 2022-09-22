@@ -1,7 +1,6 @@
 #registerStyle {
   background-color: #1a375a;
-  background: url(https://images.unsplash.com/photo-1541744573515-478c959628a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80)
-    no-repeat center center fixed;
+  background: url(https://images.unsplash.com/photo-1541744573515-478c959628a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -32,6 +31,7 @@
   box-shadow: 6px 20px 10px black;
   padding: 5px 20px;
 }
+
 #description-textarea {
   height: 120px;
   width: 300px;
@@ -109,9 +109,11 @@
 #register_btn:disabled {
   opacity: 0.8;
 }
+
 #salirRegistro {
   color: #fefefe;
 }
+
 #salirRegistro:hover {
   color: #ff6c23;
 }
@@ -119,6 +121,7 @@
 #register_btn :hover {
   color: #bb723a;
 }
+
 #App {
   max-width: 600px;
   margin: auto;
