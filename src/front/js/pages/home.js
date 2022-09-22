@@ -6,7 +6,10 @@ import "../../styles/home.css";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const eventos = store.eventosFilter;
+  const todosloseventos = store.eventosFilter;
+  const eventos = Array.from(todosloseventos).filter(
+    (element) => element.estadoEvento !== "Finalizado"
+  );
   const ciudad = store.ciudades;
   useEffect(() => {
     actions.getEventos();

@@ -111,6 +111,10 @@ CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6
 
 npm install react-hook-form
 
+## INSTALAR SWEETALERT
+
+$ npm install --save sweetalert
+
 ## INSTALAR STYLED COMPONENTS EN REACT
 
 npm install --save styled-components
