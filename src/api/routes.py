@@ -83,6 +83,17 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify({"access_token":access_token, "userid": user.id})
 
+
+@api.route('/tokennew', methods=["POST"])
+def refresh_token():
+    id = request.json.get("id", None)
+   
+    
+    
+
+    access_token = create_access_token(identity=id)
+    return jsonify({"access_token":access_token, "userid": user.id})
+
 # Endpoint obtener datos usuario
 
 
