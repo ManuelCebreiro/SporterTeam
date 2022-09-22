@@ -44,7 +44,7 @@ export const EditUser = () => {
 
   const onSubmit = (userInfo) => {
     console.log(userInfo);
-    actions.generarnuevotoken()
+    actions.generarnuevotoken();
     actions.editUser(
       userInfo.new_email,
       userInfo.new_username,
@@ -136,7 +136,7 @@ export const EditUser = () => {
                 <div classname="container">
                   <div class="row">
                     <div className="col-sm-1"> </div>
-                    <div className="form-group mb-0 my-0 py-0 px-2 gy-0 col-sm-10">
+                    <div className="form-group mb-0 my-0 py-0 gy-0 col-sm-10">
                       <label
                         className="my-1 py-1 mx-1 mb-1 "
                         htmlFor="new_description"
