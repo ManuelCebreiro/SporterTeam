@@ -41,6 +41,7 @@
   transition-duration: 400ms;
   transition-property: color;
 }
+
 .footer-links button:focus,
 .footer-links button:hover {
   color: #fff;
@@ -51,9 +52,11 @@
   width: 100%;
   left: 0%;
 }
+
 footer {
   margin-top: auto;
 }
+
 .footer-links button:after {
   content: "";
   pointer-events: none;
@@ -116,14 +119,17 @@ footer {
 /* Media Queries */
 
 @media (max-width: 600px) {
+
   .footer-distributed .footer-left,
   .footer-distributed .footer-right {
     text-align: center;
   }
+
   .footer-distributed .footer-right {
     float: none;
     margin: 0 auto 20px;
   }
+
   .footer-distributed .footer-left p.footer-links {
     line-height: 1.8;
   }
