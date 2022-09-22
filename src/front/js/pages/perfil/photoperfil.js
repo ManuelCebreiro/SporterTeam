@@ -25,6 +25,7 @@ export const Photoperfil = (props) => {
     actions
       .getrespuesta("")
       .catch((error) => console.error("ERRORRRR!!!", error));
+
   };
 
   const deleteImage = () => {
@@ -34,12 +35,14 @@ export const Photoperfil = (props) => {
         Authorization: "Bearer " + store.token,
       },
     };
+    const imagenpredefinida = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
     fetch(process.env.BACKEND_URL + "/api/upload", options)
       .then((resp) => resp.json())
       .then((data) => actions.LoadImage(data))
       .catch((error) => console.error("ERRORRRR!!!", error));
 
-    actions.getrespuesta("Esta es la imagen predefinida.");
+    // sessionStorage.setItem("imagen", imagenpredefinida)
+    actions.LoadImage(imagenpredefinida)
   };
   return (
     <div id="fotoEditUser" className="fotodeusuario">

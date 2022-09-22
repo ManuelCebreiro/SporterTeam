@@ -286,6 +286,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("userid");
+        sessionStorage.removeItem("imagen")
 
         setStore({ datosUsuario: {} });
         setStore({ eventosPendientes: {} });
@@ -359,6 +360,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       LoadImage: (data) => {
 
         setStore({ imagen: data });
+        sessionStorage.setItem("imagen", data)
+
       },
 
       Load: (parametro) => {
@@ -375,9 +378,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             if (data) {
               setStore({ imagen: data });
+              sessionStorage.setItem("imagen", data)
+
             }
             setStore({ respuesta: "" });
           });
+
       },
 
       getrespuesta: (str) => {
@@ -387,6 +393,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
+        let imagen = sessionStorage.getItem("imagen")
+
+        setStore({ imagen: imagen })
+
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });
           setStore({ validacion: true });
