@@ -10,6 +10,7 @@ export const Perfil = () => {
     actions.getUserDataEventos();
     actions.DatosUsuarioLogeado();
     actions.geteventosPendientes(sessionStorage.getItem("userid"));
+
   }, []);
   const user = store.datosUsuario;
 

@@ -94,6 +94,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().getUserDataEventos();
         return true;
       },
+      generarnuevotoken: () => {
+        const damemiid = sessionStorage.getItem("userid")
+        const actions = getActions();
+        fetch(process.env.BACKEND_URL + "/api/tokennew", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: damemiid
+          }),
+        })
+          .then((respuestajson) => {
+            actions.Load(respuestajson.access_token);
+            sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem("userid", respuestajson.userid);
+            setStore({ token: respuestajson.access_token });
+            setStore({ validacion: true });
+
+          })
+
+
+      },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
         var requestOptions = {
@@ -334,6 +357,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
       },
       LoadImage: (data) => {
+
         setStore({ imagen: data });
       },
 
