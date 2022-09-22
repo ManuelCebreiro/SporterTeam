@@ -40,6 +40,7 @@
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 400ms;
   transition-property: color;
+  padding-left: 25px;
 }
 
 .footer-links button:focus,
@@ -119,12 +120,6 @@ footer {
 /* Media Queries */
 
 @media (max-width: 600px) {
-
-  .footer-distributed .footer-left,
-  .footer-distributed .footer-right {
-    text-align: center;
-  }
-
   .footer-distributed .footer-right {
     float: none;
     margin: 0 auto 20px;
@@ -137,7 +132,6 @@ footer {
 
 #buttonName {
   padding: 0.6em 1em;
-  border: 2px solid #ffd713;
   transition: ease-in-out 0.3s;
   background-color: transparent;
   color: #fefefe;

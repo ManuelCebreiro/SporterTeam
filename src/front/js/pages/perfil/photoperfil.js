@@ -25,7 +25,6 @@ export const Photoperfil = (props) => {
     actions
       .getrespuesta("")
       .catch((error) => console.error("ERRORRRR!!!", error));
-
   };
 
   const deleteImage = () => {
@@ -56,6 +55,7 @@ export const Photoperfil = (props) => {
             width: "12.5rem",
             height: "12.5rem",
             borderRadius: "50%",
+            overflow: "hidden",
           }}
         >
           <img
