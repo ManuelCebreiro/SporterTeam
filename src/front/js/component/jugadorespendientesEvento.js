@@ -20,9 +20,6 @@ export const JugadorespendientesEvento = ({ idevento }) => {
         {Array.from(jugadoresPendientes).map((element, index) => (
           <div className="row border border-1 mx-2" key={index} id="tabla">
             <div className="col-lg-4 text-center">{element.username}</div>
-            <div className="col-lg-4 text-center px-0">
-              <RechazarJugador idevento={idevento} idusuario={element.id} />
-            </div>
             <div className="col-lg-4 text-center px-0 ">
               <button
                 className="custom-btnn "
@@ -32,6 +29,9 @@ export const JugadorespendientesEvento = ({ idevento }) => {
               >
                 Aceptar
               </button>
+            </div>
+            <div className="col-lg-4 text-center px-0">
+              <RechazarJugador idevento={idevento} idusuario={element.id} />
             </div>
           </div>
         ))}

@@ -377,6 +377,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
             if (data) {
+              console.log(typeof (data), "mierda")
               setStore({ imagen: data });
               sessionStorage.setItem("imagen", data)
 
@@ -395,7 +396,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         let datotoken = sessionStorage.getItem("token");
         let imagen = sessionStorage.getItem("imagen")
 
-        setStore({ imagen: imagen })
+        if (imagen !== "" && imagen !== null && imagen !== undefined) {
+          setStore({ imagen: imagen })
+        }
+
 
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });

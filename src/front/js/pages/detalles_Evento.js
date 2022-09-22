@@ -119,14 +119,16 @@ export const DetallesEvento = () => {
             </div>
             <div className={columna}>
               <h1 className="text-center text-white pe-5">Jugadores</h1>
-              <div className="bg-white rounded p-2">
+              <div className="row bg-white rounded p-2">
                 <div className="col-lg-6 text-center rounded">
                   {Array.from(players).map((element, index) => {
-                    if (element.id % 2 !== 0) {
+                    const changecoloradmin = element.id == detalles.admin ? { color: "green" } : { color: "dark" }
+                    if (index % 2 != 0) {
                       return (
                         <div
+                          style={changecoloradmin}
                           key={index}
-                          className="text-dark text-start border border-1 bg-white rounded ps-1 "
+                          className="text-start border border-1 rounded ps-1 "
                         >
                           {element.username} {""}
                           {user.id == detalles.admin ? (
@@ -150,11 +152,14 @@ export const DetallesEvento = () => {
 
                 <div className="col-lg-6 text-center  rounded">
                   {Array.from(players).map((element, index) => {
-                    if (element.id % 2 == 0) {
+                    const changecoloradmin = element.id == detalles.admin ? { color: "green", fontWeight: "bold" } : { color: "black" }
+
+                    if (index % 2 == 0) {
                       return (
                         <div
+                          style={changecoloradmin}
                           key={index}
-                          className=" text-dark text-start border border-1 bg-white rounded ps-1"
+                          className="text-start border border-1 rounded ps-1"
                         >
                           {element.username}
                           {user.id == detalles.admin ? (
