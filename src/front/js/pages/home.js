@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { PeticionUnion } from "../component/botonpeticionUnirseEvento";
 
 import "../../styles/home.css";
+import { object } from "prop-types";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -10,10 +11,17 @@ export const Home = () => {
   const eventos = Array.from(todosloseventos).filter(
     (element) => element.estadoEvento !== "Finalizado"
   );
+
+
   const ciudad = store.ciudades;
+
   useEffect(() => {
+    actions.eventosparticipantes();
     actions.getEventos();
+
   }, []);
+
+  // console.log(todosloseventos)
 
   const [event, setEvent] = useState({
     payment: null,
@@ -26,9 +34,7 @@ export const Home = () => {
     sport: "",
     ciudad: "",
   });
-  useEffect(() => {
-    actions.getEventos();
-  }, []);
+
   return (
     <div className="container-fluid" id="estilofondohome">
       <div className="container py-5">
@@ -236,6 +242,15 @@ export const Home = () => {
               >
                 Filtrar eventos
               </button>
+              <button
+                id="btnfiltrareventos"
+                className="border-3 rounded-pill p-2 text-dark"
+                onClick={() => {
+                  actions.eventosparticipantes();
+                }}
+              >
+                Filtrar eventos
+              </button>
             </div>
           </div>
         </div>
@@ -262,14 +277,14 @@ export const Home = () => {
                   {eventos.map((event, index) => {
                     return (
                       <tr key={index}>
-                        <th scope="row">{index}</th>
+                        <th scope="row">{index + 1}</th>
                         <td>{event.sport}</td>
                         <td>{event.date}</td>
                         <td>
                           {event.duration} {"minutos"}
                         </td>
                         <td>
-                          {event.participantmax} {"personas"}
+                          {event.jugadorDelEvento}/{event.participantmax}{"personas"}
                         </td>
                         <td>
                           {event.agemin} {"años"}

@@ -74,6 +74,30 @@ const getState = ({ getStore, getActions, setStore }) => {
       usuariospendientes: [],
     },
     actions: {
+      eventosparticipantes: async () => {
+        for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
+          let text = await getActions().jugadores(getStore().eventos[x].id)
+
+          Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+          console.log(text)
+
+        }
+      },
+      jugadores: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/playerEvents/" + eventid
+        );
+        const data = await response.json();
+
+        const arr = data.length
+        // let result = 0
+        // for (let x = 0; x < eventos.length; x++) {
+        //   eventos[eventid].cantidadjugadores = arr
+        //   result++
+        // }
+        // console.log(arr)
+        return arr
+      },
       expulsarUsuarioEvento: (idevento, idusuario) => {
         fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
           method: "DELETE",
@@ -427,6 +451,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ eventos: data });
             setStore({ eventosFilter: data });
           });
+        getActions().eventosparticipantes()
       },
       crearevento: (event) => {
         const store = getStore();
@@ -482,7 +507,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       // eventos pendientes de un usuario
       geteventosPendientes: async (iduser) => {
-        console.log(iduser);
+        // console.log(iduser);
         const response = await fetch(
           process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
         );
