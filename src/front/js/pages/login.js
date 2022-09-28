@@ -52,6 +52,12 @@ export const Login = () => {
                       </h2>
                       <form>
                         <div className="form-outline mb-4">
+                          <label
+                            className="form-label"
+                            style={{ color: "#fefefe" }}
+                          >
+                            Tu Email
+                          </label>
                           <input
                             type="email"
                             className="form-control form-control-lg"
@@ -63,14 +69,14 @@ export const Login = () => {
                             }}
                             required
                           />
+                        </div>
+                        <div className="form-outline mb-4">
                           <label
                             className="form-label"
                             style={{ color: "#fefefe" }}
                           >
-                            Tu Email
+                            Contraseña
                           </label>
-                        </div>
-                        <div className="form-outline mb-4">
                           <input
                             type="password"
                             className="form-control form-control-lg"
@@ -80,12 +86,6 @@ export const Login = () => {
                               setUserPassword(e.target.value);
                             }}
                           />
-                          <label
-                            className="form-label"
-                            style={{ color: "#fefefe" }}
-                          >
-                            Contraseña
-                          </label>
                         </div>
                         <div className="d-flex justify-content-center">
                           <button
@@ -96,7 +96,7 @@ export const Login = () => {
                             type="button"
                             className="btn  btn-block btn-lg gradient-custom-2 "
                           >
-                            Enter
+                            Entrar
                           </button>
                         </div>
 

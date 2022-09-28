@@ -7,7 +7,7 @@
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
 #navbarstyle {
-  background-color: #1A375A;
+  background-color: #1a375a;
 }
 
 #estilofondohome {
@@ -25,24 +25,33 @@
   background: #fafafa;
   box-shadow: 5px 10px 5px black;
   border-radius: 2%;
+  opacity: 0.9;
 }
 
 #estilofondoperfil {
   background: #1a375a;
   box-shadow: 4px 4px 4px 4px black;
   border-radius: 2%;
+  opacity: 0.9;
 }
 
 #estilofondofiltros {
   background: #1a375a;
   box-shadow: 1px 1px 0px 1px rgb(182, 176, 176);
   border-radius: 25px;
+  opacity: 0.9;
 }
 
 /* #estilodivs {
   box-shadow: 1px 1px 1px 1px black;
 
 } */
+#eventos-mostrar {
+  opacity: 0.9;
+}
+#eventos-mostrar-2 {
+  opacity: 0.9;
+}
 
 #estilotitulo {
   background: #e9e5df;
@@ -66,7 +75,7 @@
   color: white;
 }
 
-#botoneditar::hover {
+#botoneditar:hover {
   color: yellow;
 }
 

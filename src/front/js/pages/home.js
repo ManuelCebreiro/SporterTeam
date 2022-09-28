@@ -240,7 +240,7 @@ export const Home = () => {
           </div>
         </div>
 
-        <div className="table-responsive">
+        <div id="eventos-mostrar" className="table-responsive">
           {eventos.length > 0 ? (
             <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
               <table className="text-center table table-striped table-hover mt-2">
@@ -292,7 +292,10 @@ export const Home = () => {
               </table>
             </div>
           ) : (
-            <h4 className="text-center text-danger bg-light py-5 border-dark">
+            <h4
+              id="eventos-mostrar-2"
+              className="text-center text-danger bg-light py-5 border-dark"
+            >
               No hay eventos que mostrar
             </h4>
           )}

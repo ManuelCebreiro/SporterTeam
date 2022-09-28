@@ -176,6 +176,7 @@ export const EditUser = () => {
                       </label>
                       <input
                         name="new_password"
+                        placeholder="Mínimo 5 caracteres"
                         type="password"
                         className={errors.new_password && "error"}
                         {...register("new_password", {
@@ -199,6 +200,7 @@ export const EditUser = () => {
                       <input
                         name="new_password_repeat"
                         type="password"
+                        placeholder="Misma contraseña"
                         className={errors.new_password_repeat && "error"}
                         {...register("new_password_repeat", {
                           validate: (value) => {
