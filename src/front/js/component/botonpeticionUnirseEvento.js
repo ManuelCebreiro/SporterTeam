@@ -22,7 +22,7 @@ export const PeticionUnion = ({ idevento }) => {
   if (eventosPendientesfiltrados.length || estado == "Pendiente") {
     return (
       <div>
-        <button className="btn btn-g-warning btn-sm  border" disabled={true}>
+        <button className="btn btn-warning btn-sm  border" disabled={true}>
           Pendiente
         </button>
       </div>
@@ -39,6 +39,7 @@ export const PeticionUnion = ({ idevento }) => {
     return (
       <div>
         <button
+          id="btnPeticionUnirseEvento"
           className="btn bg-info btn-sm  border"
           onClick={() => {
             actions.peticionUnion(userid, idevento);

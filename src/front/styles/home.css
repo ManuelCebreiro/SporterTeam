@@ -121,3 +121,8 @@
   background-color: #bb723a;
   color: white;
 }
+
+/* ------------------------- BOTON PETICION UNIRSE A EVENTO------------------ */
+#btnPeticionUnirseEvento:hover {
+  transform: scale(1.1);
+}
