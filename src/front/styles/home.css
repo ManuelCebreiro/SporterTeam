@@ -76,7 +76,9 @@
   color: white;
   margin-right: 10px;
 }
-
+svg.bi-pencil-fill {
+  margin-right: 0.5rem;
+}
 #botoneditar:hover {
   background-color: yellow;
   color: #1a375a;
