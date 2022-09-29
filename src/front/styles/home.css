@@ -72,11 +72,16 @@
 
 /* ---------------------------- ESTILO BOTON EDITAR ---------------- */
 #botoneditar {
+  background-color: #d65f3b;
   color: white;
+  margin-right: 10px;
 }
 
 #botoneditar:hover {
-  color: yellow;
+  background-color: yellow;
+  color: #1a375a;
+  transform: scale(1.1);
+  padding-left: 5px;
 }
 
 /* ---------- final boton editar -------------- */
@@ -114,6 +119,7 @@
 #btnfiltrareventos:hover {
   background-color: #bb723a;
   border-color: white;
+  transform: scale(1.1);
 }
 
 /* ------------------------- BOTON LOG OUT------------------ */

@@ -10,7 +10,6 @@ export const Perfil = () => {
     actions.getUserDataEventos();
     actions.DatosUsuarioLogeado();
     actions.geteventosPendientes(sessionStorage.getItem("userid"));
-
   }, []);
   const user = store.datosUsuario;
 
@@ -48,6 +47,7 @@ export const Perfil = () => {
                 >
                   <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
                 </svg>
+                Editar Usuario
               </Link>
             </div>
             <div className="col-lg-1 col-md-1 col-xs-1 "></div>
@@ -82,7 +82,9 @@ export const Perfil = () => {
                     <div className="col-sm-4">
                       <h6 className="mb-0">Username:</h6>
                     </div>
-                    <div className="col-sm-8 text-secondary">{user.username}</div>
+                    <div className="col-sm-8 text-secondary">
+                      {user.username}
+                    </div>
                   </div>
                   <hr />
                   <div className="row py-1">
@@ -132,10 +134,16 @@ export const Perfil = () => {
                           <tr key={index}>
                             <td>{element.sport}</td>
                             <td>{element.date}</td>
-                            <td>{element.duration}{"minutos."}</td>
+                            <td>
+                              {element.duration}
+                              {"minutos."}
+                            </td>
                             <td>{element.ciudad}</td>
                             <td>{element.space ? "Cubierto" : "Aire libre"}</td>
-                            <td className="text-center">{element.payment}{"€"}</td>
+                            <td className="text-center">
+                              {element.payment}
+                              {"€"}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -191,7 +199,9 @@ export const Perfil = () => {
                         </table>
                       </div>
                     ) : (
-                      <h4 className="text-center">No hay eventos que mostrar</h4>
+                      <h4 className="text-center">
+                        No hay eventos que mostrar
+                      </h4>
                     )}
                   </div>
                 </div>
@@ -219,18 +229,26 @@ export const Perfil = () => {
                               <tr key={index}>
                                 <td>{element.sport}</td>
                                 <td>{element.date}</td>
-                                <td>{element.duration} {"minutos."}</td>
+                                <td>
+                                  {element.duration} {"minutos."}
+                                </td>
                                 <td>{element.ciudad}</td>
-                                <td>{element.space ? "Cubierto" : "Aire libre"}</td>
-                                <td>{element.payment}{"€"}</td>
-
+                                <td>
+                                  {element.space ? "Cubierto" : "Aire libre"}
+                                </td>
+                                <td>
+                                  {element.payment}
+                                  {"€"}
+                                </td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
                       </div>
                     ) : (
-                      <h4 className="text-center">No hay eventos que mostrar</h4>
+                      <h4 className="text-center">
+                        No hay eventos que mostrar
+                      </h4>
                     )}
                   </div>
                 </div>
