@@ -8,7 +8,8 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { Newevent } from "./pages/newevent";
 import injectContext, { Context } from "./store/appContext";
-import { Navbar } from "./component/navbar";
+import { Navbarnew } from "./component/navbar";
+import { Footer } from "./component/footer";
 import { Photoperfil } from "./pages/perfil/photoperfil";
 import { DetallesEvento } from "./pages/detalles_Evento";
 import { EditUser } from "./pages/perfil/edituser";
@@ -25,7 +26,7 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          {store.validacion ? <Navbar /> : undefined}
+          {store.validacion ? <Navbarnew /> : undefined}
           <Routes>
             <Route element={<Home />} path="/home" />
             <Route element={<Perfil />} path="/perfil" />
@@ -33,13 +34,13 @@ const Layout = () => {
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Login />} path="/" />
             <Route element={<Register />} path="/register" />
-            <Route element={<Perfil />} path="/perfil" />
             <Route element={<EditUser />} path="/Edituser" />
             <Route
               element={<DetallesEvento />}
               path="/Detalles_Evento/:theid"
             />
           </Routes>
+          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>

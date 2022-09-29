@@ -54,6 +54,7 @@ export const Register = () => {
             <label htmlFor="username">Username</label>
             <input
               name="username"
+              placeholder="Mínimo 5 caracteres"
               type="text"
               className={errors.name && "error"}
               {...register("username", {
@@ -74,6 +75,7 @@ export const Register = () => {
             <input
               name="email"
               type="text"
+              placeholder="tuemail@gracias.es"
               className={errors.email && "error"}
               {...register("email", {
                 required: messages.required,
@@ -89,6 +91,7 @@ export const Register = () => {
             <input
               name="password"
               type="password"
+              placeholder="Mínimo 5 caracteres"
               className={errors.password && "error"}
               {...register("password", {
                 required: messages.required,
@@ -104,6 +107,7 @@ export const Register = () => {
             <input
               name="password_repeat"
               type="password"
+              placeholder="Misma contraseña"
               className={errors.password_repeat && "error"}
               {...register("password_repeat", {
                 required: messages.required,
@@ -119,6 +123,7 @@ export const Register = () => {
             <label htmlFor="age">Tu edad</label>
             <input
               name="age"
+              placeholder="Mínimo 18 años"
               className={errors.age && "error"}
               {...register("age", {
                 required: messages.required,
@@ -130,7 +135,7 @@ export const Register = () => {
             />
             {errors.age && <p>{errors.age.message}</p>}
 
-            <input id="register_btn" value="submit" type="submit" />
+            <input id="register_btn" value="enviar" type="submit" />
             <Link id="salirRegistro" className="fw-bold" to="/">
               Salir de Registro
             </Link>

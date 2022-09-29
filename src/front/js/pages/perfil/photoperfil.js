@@ -34,22 +34,36 @@ export const Photoperfil = (props) => {
         Authorization: "Bearer " + store.token,
       },
     };
+    // const imagenpredefinida = "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200"
     fetch(process.env.BACKEND_URL + "/api/upload", options)
       .then((resp) => resp.json())
       .then((data) => actions.LoadImage(data))
       .catch((error) => console.error("ERRORRRR!!!", error));
 
-    actions.getrespuesta("Esta es la imagen predefinida.");
+    // sessionStorage.setItem("imagen", imagenpredefinida)
+    // actions.LoadImage(imagenpredefinida)
   };
   return (
     <div id="fotoEditUser" className="fotodeusuario">
       {/* <form onSubmit={upLoadImage}> */}
-      <div className="row px-1 mx-1 my-3 mb-0 ">
-        <img
-          className="rounded-circle img-fluid"
-          src={store.imagen}
-          style={{ width: 250 }}
-        />
+      <div className="row px-0 mx-1 my-3 mb-0 ">
+        <div
+          className="p-0"
+          style={{
+            display: "grid",
+            placeItems: "center",
+            width: "12.5rem",
+            height: "12.5rem",
+            borderRadius: "50%",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            className="rounded-circle img-fluid"
+            src={store.imagen}
+            style={{ width: "200px", height: "200px", objectFit: "fill" }}
+          />
+        </div>
         <button
           onClick={deleteImage}
           className="btn-close btn-close-white"

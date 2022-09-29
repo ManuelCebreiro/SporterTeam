@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Evento
+from api.models import db, User, Evento ,Association
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -74,13 +74,25 @@ def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     user = User.query.filter_by(email=email).first()
+    
     if user is None:
         return jsonify({"msg": "El usuario no existe"}), 401
     elif email != user.email or password != user.password:
         return jsonify({"msg": "La contraseña o usuario es incorrecto o no existe"}), 402
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    return jsonify({"access_token":access_token, "userid": user.id})
+
+
+@api.route('/tokennew', methods=["POST"])
+def refresh_token():
+    id = request.json.get("id", None)
+   
+    
+    
+
+    access_token = create_access_token(identity=id)
+    return jsonify({"access_token":access_token, "userid": user.id})
 
 # Endpoint obtener datos usuario
 
@@ -146,14 +158,11 @@ def get_eventos():
 # endpoint para apuntarse a un evento
 
 
-@api.route('/joinevent', methods=["POST"])
-@jwt_required()
-def post_eventos():
+@api.route('/joinevent/<int:userid>', methods=["POST"])
+def post_eventos(userid):
     eventId = request.json.get("id")
-    identity = get_jwt_identity()           #guardar token en un usuario
-    user = User.query.filter_by(email = identity).one_or_none()
+    user = User.query.filter_by(id = userid).one_or_none()
     event = Evento.query.filter_by(id =eventId).one_or_none()
-
     user.participant.append(event)
     db.session.commit()
 
@@ -212,6 +221,8 @@ def delete_usersEvent(id):
 
 
 
+
+
 @api.route('/Userdataparticipant', methods=["GET"])
 @jwt_required()
 def get_userdataParticipant():
@@ -224,7 +235,51 @@ def get_userdataParticipant():
     except:
         return jsonify( "Data fail"),400
 
-        
+#usuario hace peticion para unirse al evento
+@api.route('/peticionUnion/<int:iduser>/<int:idevent>', methods=["POST"])
+def hacerpeticion(iduser,idevent):
+    usuario = User.query.get(iduser)
+    evento = Evento.query.get(idevent)
+    association = Association.query.filter_by(user_id = iduser,event_id = idevent).first()
+    if association:
+        return jsonify("ya has realizado esta peticion"),401
+    else:
+        peticion = Association(user_id = usuario.id, event_id = evento.id, peticion = "Pendiente")
+        usuario.eventospendientes.append(peticion)
+        evento.usuariospendientes.append(peticion)
+        db.session.commit()
+        return jsonify("peticion realizada con exito"),200
+
+#mostrar eventos pendientes de un usuario
+@api.route('/mostrareventospendientes/<int:iduser>', methods=["GET"])
+def mostrareventospendientes(iduser):
+    eventoUser = Association.query.filter_by(user_id = iduser).all()
+    pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
+    data = [x.serialize() for x in pendientes]
+    eventodata = list(map(lambda x:Evento.query.get(x["event_id"]),data))
+    eventos = [x.serialize() for x in eventodata]
+    return jsonify(eventos),200
+
+#mostrar usuarios pendientes de un evento
+@api.route('/mostrarusuariospendientes/<int:idevento>', methods=["GET"])
+def mostrarusuariospendientes(idevento):
+    eventoUser = Association.query.filter_by(event_id = idevento).all()
+    pendientes = list(filter(lambda x : x.peticion == "Pendiente", eventoUser))
+    data = [x.serialize() for x in pendientes]
+    userdata = list(map(lambda x:User.query.get(x["user_id"]),data))
+    usuarios = [x.serializeWithoutParticipant() for x in userdata]
+    return jsonify(usuarios),200
+
+@api.route('/administrasusuarios/<int:idevento>/<int:iduser>', methods=["DELETE"])
+def adminusers(idevento,iduser):
+    evento = Evento.query.get(idevento)
+    user = User.query.get(iduser)
+    association = Association.query.filter_by(user_id = iduser,event_id = idevento).first()
+    db.session.delete(association)
+    db.session.commit()
+    return jsonify("Peticion del usuario borrada")
+
+    
 
 @api.route('/modificarevento', methods=["PUT"])
 def modificar_evento():

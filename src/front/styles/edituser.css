@@ -7,11 +7,13 @@
   background-position: center center;
   height: 100vh;
 }
+
 @media screen and (max-width: 770px) {
   #edituserStyle {
     height: 170vh;
   }
 }
+
 @media screen and (max-width: 320px) {
   #edituserStyle {
     height: 200vh;
@@ -23,6 +25,7 @@
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
 #form_edituser_tittle {
   color: #fefefe;
 }
@@ -45,6 +48,7 @@
   box-shadow: 6px 20px 10px black;
   padding: 5px 20px;
 }
+
 #description-textarea {
   border: 1px solid lightgrey;
   border-radius: 5px;
@@ -52,13 +56,14 @@
 }
 
 #form_edituser_text-1 p {
-  color: #f19143;
+  color: #bb723a;
   font-size: 17px;
   text-align: left;
   font-weight: 300;
 }
+
 #form_edituser_text-2 p {
-  color: #f19143;
+  color: #bb723a;
   font-size: 17px;
   text-align: left;
   font-weight: 300;
@@ -68,16 +73,18 @@
   display: inline;
   content: "⚠ ";
 }
+
 #form_edituser_text-2 p::before {
   display: inline;
   content: "⚠ ";
 }
 
 #form_edituser_text-1 .error {
-  border: 1px solid #bc8803;
+  border: 1px solid #bb723a;
 }
+
 #form_edituser_text-2 .error {
-  border: 1px solid #bc8803;
+  border: 1px solid #bb723a;
 }
 
 #form_edituser input {
@@ -117,7 +124,8 @@
 
 #edituser_btn:hover {
   cursor: pointer;
-  background: #bc8803;
+  background: #ffd713;
+  transform: scale(1.1);
 }
 
 #edituser_btn:active {
@@ -130,17 +138,16 @@
 #edituser_btn:disabled {
   opacity: 0.4;
 }
+
 #salirEditUser {
   color: #fefefe;
 }
+
 #salirEditUser:hover {
-  color: #ff773d;
+  color: #ff6c23;
 }
 
 #App {
   max-width: 600px;
   margin: auto;
-}
-#edituser_btn :hover {
-  color: #ff773d;
 }

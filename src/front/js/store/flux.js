@@ -1,3 +1,4 @@
+import { element } from "prop-types";
 import swal from "sweetalert";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -67,18 +68,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Zamora", posicion: [41.49913956, -5.75494831] },
         { ciudad: "Zaragoza", posicion: [41.65645655, -0.87928652] },
       ],
-      datosUsuario: {},
       validacioneditregister: false,
+      datosUsuario: {},
+      eventosPendientes: [],
+      usuariospendientes: [],
     },
     actions: {
       expulsarUsuarioEvento: (idevento, idusuario) => {
-        const token = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
             idUser: idusuario,
@@ -88,13 +88,34 @@ const getState = ({ getStore, getActions, setStore }) => {
         const filtrarJugadoresnoEliminados = players.filter(
           (element) => element.id !== idusuario
         );
-        console.log(
-          filtrarJugadoresnoEliminados,
-          "esta deberia ser la listas nueva"
-        );
 
         setStore({ jugadores: filtrarJugadoresnoEliminados });
         getStore().jugadores;
+        getActions().getUserDataEventos();
+        return true;
+      },
+      generarnuevotoken: () => {
+        const damemiid = sessionStorage.getItem("userid")
+        const actions = getActions();
+        fetch(process.env.BACKEND_URL + "/api/tokennew", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: damemiid
+          }),
+        })
+          .then((respuestajson) => {
+            actions.Load(respuestajson.access_token);
+            sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem("userid", respuestajson.userid);
+            setStore({ token: respuestajson.access_token });
+            setStore({ validacion: true });
+
+          })
+
+
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -102,7 +123,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "GET",
           headers: { Authorization: "Bearer " + token },
         };
-
         fetch(
           process.env.BACKEND_URL + "/api/Userdataparticipant",
           requestOptions
@@ -111,37 +131,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((result) => setStore({ userDataEventos: result }));
       },
       //obtener todos los jugadores de un evento
-      get_player_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/playerEvents/" + eventid)
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            setStore({ jugadores: data });
-          });
+      get_player_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/playerEvents/" + eventid
+        );
+        const data = await response.json();
+        setStore({ jugadores: data });
+        getActions().getusersPendientes(eventid);
       },
 
-      look_event: (eventid) => {
-        fetch(process.env.BACKEND_URL + "/api/lookevent/" + eventid)
-          .then((resp) => {
-            if (resp.ok) {
-              setStore({ datavalidacionEvento: true });
-              return resp.json();
-            } else {
-              swal(
-                "Ups, hubo un problema!",
-                "Inténtalo de nuevo más tarde",
-                "error",
-                {
-                  dangerMode: true,
-                }
-              );
-              return;
-            }
-          })
-          .then((data) => {
-            setStore({ dataEventoUnico: data });
-          });
+      look_event: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/lookevent/" + eventid
+        );
+        const data = await response.json();
+        setStore({ dataEventoUnico: data });
       },
       // función para registrar usuario nuevo
       register: (email, username, password, age) => {
@@ -166,12 +170,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
           }
         });
-      },
-      validacionFalse: () => {
-        setStore({ validacioneditregister: false });
-      },
-      validacionFalse: () => {
-        setStore({ validacioneditregister: false });
       },
 
       // función para editar los ajustes usuario ya existente
@@ -206,6 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               icon: "success",
               timer: 4000,
             });
+            return resp.json();
           } else {
             swal("Ups, hubo un problema!", "Usuario ya existe", "error", {
               dangerMode: true,
@@ -213,6 +212,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         });
       },
+      validacionFalse: () => {
+        setStore({ validacioneditregister: false });
+      },
+
+      // función para editar los ajustes usuario ya existente
 
       //funcion que filtra los eventos en la pagina pricipal
       filterEvent: (event) => {
@@ -221,14 +225,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -251,29 +255,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.ciudad == "" || event.ciudad == "Cualquiera"
             ? sportResults
             : sportResults.filter((element) => element.ciudad == event.ciudad);
-        setStore({ eventosFilter: ciudadesResults });
+        const participantesResults = ciudadesResults.filter(
+          (element) => element.participantmax >= event.participantmax
+        );
+
+        setStore({ eventosFilter: participantesResults });
       },
       //funcion para unirse a un evento de la lista
-      joinEvent: (event) => {
-        const token = sessionStorage.getItem("token");
-        fetch(process.env.BACKEND_URL + "/api/joinevent", {
+      joinEvent: (eventid, userid) => {
+        fetch(process.env.BACKEND_URL + "/api/joinevent/" + userid, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
-            id: event,
+            id: eventid,
           }),
-        }).then((resp) => {
-          if (resp.ok) {
-            swal("Usuario registrado", {
-              icon: "success",
-              timer: 4000,
-            });
-          }
         });
+        getActions().getusersPendientes(eventid);
+        getActions().get_player_event(eventid);
+        getActions().denegarpeticion(userid, eventid);
       },
 
       logout: () => {
@@ -283,6 +285,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=200",
         });
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userid");
+        sessionStorage.removeItem("imagen")
+
+        setStore({ datosUsuario: {} });
+        setStore({ eventosPendientes: {} });
         setStore({ validacion: false });
       },
 
@@ -303,15 +310,33 @@ const getState = ({ getStore, getActions, setStore }) => {
               return respuestadelback.json();
             } else if (respuestadelback.status == 401) {
               console.log("El email o password es incorrecto o no existe, 401");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             } else if (respuestadelback.status == 402) {
               console.log("El email o password es incorrecto o no existe, 402");
+              swal(
+                "Ups, hubo un problema!",
+                "email o password incorrecto",
+                "error",
+                {
+                  dangerMode: true,
+                }
+              );
             }
           })
           .then((respuestajson) => {
             actions.Load(respuestajson.access_token);
             sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem("userid", respuestajson.userid);
             setStore({ token: respuestajson.access_token });
             setStore({ validacion: true });
+            getActions().DatosUsuarioLogeado();
           });
       },
       // -------------------------------><------------------------------------------
@@ -324,7 +349,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + token,
           },
           method: "GET",
-        };
+        };;
         fetch(process.env.BACKEND_URL + "/api/user", options)
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
@@ -333,7 +358,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
       },
       LoadImage: (data) => {
+
         setStore({ imagen: data });
+        sessionStorage.setItem("imagen", data)
+
       },
 
       Load: (parametro) => {
@@ -349,10 +377,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
             if (data) {
+              console.log(typeof (data), "mierda")
               setStore({ imagen: data });
+              sessionStorage.setItem("imagen", data)
+
             }
             setStore({ respuesta: "" });
           });
+
       },
 
       getrespuesta: (str) => {
@@ -362,6 +394,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
+        let imagen = sessionStorage.getItem("imagen")
+
+        if (imagen !== "" && imagen !== null && imagen !== undefined) {
+          setStore({ imagen: imagen })
+        }
+
+
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });
           setStore({ validacion: true });
@@ -369,9 +408,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
+
       getEventos: () => {
         fetch(process.env.BACKEND_URL + "/api/eventos", {
           method: "GET",
@@ -417,10 +454,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
-        alert("Evento modificado con exito");
       },
-
-      modificarevento: (event) => {
+      modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
           method: "PUT",
           headers: {
@@ -432,36 +467,61 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         }).then((respuestadelback) => {
           if (respuestadelback.status == 200) {
-            return respuestadelback.json();
+            getActions().look_event(eventid);
           }
         });
-        alert("Evento modificado con exito");
       },
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
+      // usuarios pendiente de un evento
+      getusersPendientes: async (idevento) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/mostrarusuariospendientes/" + idevento
+        );
+        const data = await response.json();
+
+        setStore({ usuariospendientes: data });
       },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
+      // eventos pendientes de un usuario
+      geteventosPendientes: async (iduser) => {
+        console.log(iduser);
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
+        );
+        const data = await response.json();
+        setStore({ eventosPendientes: data });
+      },
+      denegarpeticion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+          "/api/administrasusuarios/" +
+          idevento +
+          "/" +
+          iduser,
+          {
+            method: "DELETE",
+          }
+        );
+        getActions().get_player_event(idevento);
+      },
+      peticionUnion: (iduser, idevento) => {
+        fetch(
+          process.env.BACKEND_URL +
+          "/api/peticionUnion/" +
+          iduser +
+          "/" +
+          idevento,
+          {
+            method: "POST",
+          }
+        )
+          .then((response) => {
+            if (response.ok) {
+              getActions().geteventosPendientes();
+              return true;
+            } else {
+              return false;
+            }
+          })
+          .catch((error) => console.log("error", error));
       },
     },
   };
