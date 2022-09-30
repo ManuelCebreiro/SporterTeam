@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         return true;
       },
       generarnuevotoken: () => {
-        const damemiid = sessionStorage.getItem("userid")
+        const damemiid = sessionStorage.getItem("userid");
         const actions = getActions();
         fetch(process.env.BACKEND_URL + "/api/tokennew", {
           method: "POST",
@@ -103,19 +103,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: damemiid
+            id: damemiid,
           }),
-        })
-          .then((respuestajson) => {
-            actions.Load(respuestajson.access_token);
-            sessionStorage.setItem("token", respuestajson.access_token);
-            sessionStorage.setItem("userid", respuestajson.userid);
-            setStore({ token: respuestajson.access_token });
-            setStore({ validacion: true });
-
-          })
-
-
+        }).then((respuestajson) => {
+          actions.Load(respuestajson.access_token);
+          sessionStorage.setItem("token", respuestajson.access_token);
+          sessionStorage.setItem("userid", respuestajson.userid);
+          setStore({ token: respuestajson.access_token });
+          setStore({ validacion: true });
+        });
       },
       getUserDataEventos: () => {
         const token = sessionStorage.getItem("token");
@@ -225,14 +221,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-              ? eventos.filter((element) => element.payment > 0)
-              : eventos.filter((element) => element.payment == 0);
+            ? eventos.filter((element) => element.payment > 0)
+            : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-              ? paymentResults.filter((element) => element.space == true)
-              : paymentResults.filter((element) => element.space == false);
+            ? paymentResults.filter((element) => element.space == true)
+            : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -286,7 +282,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("userid");
-        sessionStorage.removeItem("imagen")
+        sessionStorage.removeItem("imagen");
 
         setStore({ datosUsuario: {} });
         setStore({ eventosPendientes: {} });
@@ -349,7 +345,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: "Bearer " + token,
           },
           method: "GET",
-        };;
+        };
         fetch(process.env.BACKEND_URL + "/api/user", options)
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
@@ -358,10 +354,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         // --------------------------> DATOS DE USUARIO LOGEADO. HACEMOS UN GET A LA BASE DE DATOS PARA TRAER TODOS LOS DATOS DEL USUARIO <------------------------
       },
       LoadImage: (data) => {
-
         setStore({ imagen: data });
-        sessionStorage.setItem("imagen", data)
-
+        sessionStorage.setItem("imagen", data);
       },
 
       Load: (parametro) => {
@@ -377,14 +371,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((respuestadelback) => respuestadelback.json())
           .then((data) => {
             if (data) {
-              console.log(typeof (data), "mierda")
+              console.log(typeof data, "mierda");
               setStore({ imagen: data });
-              sessionStorage.setItem("imagen", data)
-
+              sessionStorage.setItem("imagen", data);
             }
             setStore({ respuesta: "" });
           });
-
       },
 
       getrespuesta: (str) => {
@@ -394,12 +386,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
-        let imagen = sessionStorage.getItem("imagen")
+        let imagen = sessionStorage.getItem("imagen");
 
         if (imagen !== "" && imagen !== null && imagen !== undefined) {
-          setStore({ imagen: imagen })
+          setStore({ imagen: imagen });
         }
-
 
         if (datotoken !== "" && datotoken !== null && datotoken !== undefined) {
           setStore({ token: datotoken });
@@ -492,10 +483,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       denegarpeticion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-          "/api/administrasusuarios/" +
-          idevento +
-          "/" +
-          iduser,
+            "/api/administrasusuarios/" +
+            idevento +
+            "/" +
+            iduser,
           {
             method: "DELETE",
           }
@@ -505,10 +496,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       peticionUnion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-          "/api/peticionUnion/" +
-          iduser +
-          "/" +
-          idevento,
+            "/api/peticionUnion/" +
+            iduser +
+            "/" +
+            idevento,
           {
             method: "POST",
           }
@@ -522,6 +513,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
           .catch((error) => console.log("error", error));
+      },
+      eventoFinalizado: (evento) => {
+        const fecha = new Date();
+        const newFecha = new Date(evento.date);
+        if (fecha > newFecha && evento.estadoEvento != "Finalizado") {
+          evento.estadoEvento = "Finalizado";
+          getActions().modificarevento(evento, evento.id);
+          console.log("esta pasado de fecha", evento);
+        } else {
+          console.log("todo ok", evento);
+        }
       },
     },
   };
