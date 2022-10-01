@@ -6,9 +6,6 @@
 /* PALETA COLORES #FABC3C #FFB238 #F19143 #FF773D #F55536 */
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
-#navbarstyle {
-  background-color: #1a375a;
-}
 
 #estilofondohome {
   /* background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?w=1380&t=st=1663466718~exp=1663467318~hmac=b5d78e63350252ad247469a1e20f10a74665a66bb1b365ec643711c1fc6eebc7'); */
@@ -88,6 +85,7 @@ svg.bi-pencil-fill:hover {
   min-height: auto;
   max-height: 300px;
   overflow: scroll;
+  margin-right: 20px;
 }
 
 .table-wrapper-scroll-y {
@@ -106,10 +104,6 @@ svg.bi-pencil-fill:hover {
 }
 
 /* ---------- fin estilos pagina central ------------- */
-#btnnavbar {
-  background-color: #bb723a;
-  color: white;
-}
 
 #btnfiltrareventos {
   background-color: #d65f3b;
@@ -120,12 +114,6 @@ svg.bi-pencil-fill:hover {
   border-color: white;
   transform: scale(1.1);
   color: #1a375a;
-}
-
-/* ------------------------- BOTON LOG OUT------------------ */
-#btnnavbarexit {
-  background-color: #d65f3b;
-  color: white;
 }
 
 /* ------------------------- BOTON PETICION UNIRSE A EVENTO------------------ */

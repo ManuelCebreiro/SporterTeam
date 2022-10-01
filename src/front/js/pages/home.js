@@ -40,7 +40,7 @@ export const Home = () => {
             id="estilotitulonewevento"
             className="row text-center text-white font-monospace"
           >
-            <h1>Eventos</h1>
+            <h1>Pachangas</h1>
           </div>
           <div className="row">
             <div className="col-lg-3 text-center my-1">
