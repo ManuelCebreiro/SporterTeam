@@ -33,6 +33,7 @@
 }
 #btncrearevento:hover {
   background-color: #ffd713;
+  border-color: white;
   transform: scale(1.1);
   color: #1a375a;
   width: 200px;

@@ -228,13 +228,14 @@ export const Home = () => {
           <div className="row">
             <div className="col-lg-12 text-center">
               <button
+                type="button"
                 id="btnfiltrareventos"
-                className="border-3 rounded-pill p-2 text-dark"
+                className="btn border-1 p-2"
                 onClick={() => {
                   actions.filterEvent(event);
                 }}
               >
-                Filtrar eventos
+                Filtrar pachangas
               </button>
             </div>
           </div>
@@ -247,15 +248,15 @@ export const Home = () => {
                 <thead>
                   <tr>
                     <th scope="col"></th>
-                    <th scope="col">Sport</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Duration</th>
+                    <th scope="col">Deporte</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Duración</th>
                     <th scope="col">Participantes</th>
-                    <th scope="col">Agemin</th>
-                    <th scope="col">Agemax</th>
+                    <th scope="col">Edad min.</th>
+                    <th scope="col">Edad max.</th>
                     <th scope="col">Ciudad</th>
-                    <th scope="col">Payment</th>
-                    <th scope="col">Space</th>
+                    <th scope="col">Pago</th>
+                    <th scope="col">Tipo lugar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -296,7 +297,7 @@ export const Home = () => {
               id="eventos-mostrar-2"
               className="text-center text-danger bg-light py-5 border-dark"
             >
-              No hay eventos que mostrar
+              No hay pachangas que mostrar
             </h4>
           )}
         </div>
