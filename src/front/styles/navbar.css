@@ -54,43 +54,15 @@
   bottom: 50%;
   transition: 500ms;
   transition-delay: 500ms;
-  background-color: red;
-  box-shadow: 0 0 10px red, 0 0 30px red, 0 0 50px red;
+  background-color: #d65f3b;
+  box-shadow: 0 0 10px #d65f3b, 0 0 30px #d65f3b, 0 0 50px #d65f3b;
 }
 
 #btnnavbar-2 div {
   transition: 500ms;
   position: absolute;
-  background-color: red;
-  box-shadow: 0 0 15px red, 0 0 30px red, 0 0 50px red;
-}
-
-#btnnavbar-2 .top {
-  width: 15px;
-  height: 2px;
-  top: 0;
-  left: 0;
-}
-
-#btnnavbar-2 .bottom {
-  width: 15px;
-  height: 2px;
-  bottom: 0;
-  right: 0;
-}
-
-#btnnavbar-2 .left {
-  width: 2px;
-  height: 15px;
-  top: 0;
-  left: 0;
-}
-
-#btnnavbar-2 .right {
-  width: 2px;
-  height: 15px;
-  bottom: 0;
-  right: 0;
+  background-color: #d65f3b;
+  box-shadow: 0 0 15px #d65f3b, 0 0 30px #d65f3b, 0 0 50px #d65f3b;
 }
 
 #btnnavbar-2:hover {
