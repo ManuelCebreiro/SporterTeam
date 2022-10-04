@@ -26,6 +26,9 @@ export const Home = () => {
     sport: "",
     ciudad: "",
   });
+  for (let i = 0; i < todosloseventos.length; i++) {
+    actions.eventoFinalizado(todosloseventos[i]);
+  }
   useEffect(() => {
     actions.getEventos();
   }, []);
