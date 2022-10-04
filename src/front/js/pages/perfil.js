@@ -63,12 +63,12 @@ export const Perfil = () => {
               id="estilosperfil"
             >
               <div className="card mt-2 mb-2 border-0">
-                <div className="card-body">
+                <div className="card-body pt-1">
                   <div className="row">
                     <div className="text-end pe-0">
                       <Link
                         to="/Edituser"
-                        className="btn d-flex justify-content-end"
+                        className="btn d-flex justify-content-end p-0"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
