@@ -32,12 +32,11 @@ export const Navbarnew = () => {
             </Link>
 
             <Link to="/newevent" className="mx-2">
-              <button id="btnnavbar-2" type="button" className="btn mt-1 ms-1">
+              <button
+                // id="btnnavbar-2" 
+                id="btnnavbar-2"
+                type="button" className="atari btn mt-1 ms-1">
                 <span>Crear Pachanga</span>
-                <div class="top"></div>
-                <div class="left"></div>
-                <div class="bottom"></div>
-                <div class="right"></div>
               </button>
             </Link>
           </Nav>
