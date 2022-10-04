@@ -63,15 +63,9 @@ export const Perfil = () => {
               id="estilosperfil"
             >
               <div className="card mt-2 mb-2 border-0">
-                <div className="card-body">
-                  <div className="row ">
-                    <div className="col-sm-4">
-                      <h6 className="">Usuario:</h6>
-                    </div>
-                    <div className="col-sm-5 text-secondary">
-                      {user.username}
-                    </div>
-                    <div className="col-sm-3">
+                <div className="card-body pt-1">
+                  <div className="row">
+                    <div className="text-end pe-0">
                       <Link
                         to="/Edituser"
                         className="btn d-flex justify-content-end"
@@ -88,6 +82,15 @@ export const Perfil = () => {
                         </svg>
                       </Link>
                     </div>
+                  </div>
+                  <div className="row ">
+                    <div className="col-sm-4">
+                      <h6 className="">Usuario:</h6>
+                    </div>
+                    <div className="col-sm-5 text-secondary">
+                      {user.username}
+                    </div>
+                    <div className="col-sm-3"></div>
                   </div>
                   <hr />
                   <div className="row py-1">

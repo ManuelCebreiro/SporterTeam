@@ -18,13 +18,13 @@
   margin-right: 10px;
 }
 #btnnavbar-1:hover {
-  background-color: yellow;
+  background-color: #ffd713;
   border-color: white;
   transform: scale(1.1);
   color: #1a375a;
 }
 #btnnavbar-2 {
-  padding: 8px 60px;
+  padding: 7px 10px;
   background-color: #d65f3b;
   border: none;
   font-size: 16px;
@@ -38,9 +38,6 @@
   transition: 500ms;
   transition-delay: 500ms;
   font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 600;
 }
 
 #btnnavbar-2:before {
@@ -54,8 +51,8 @@
   bottom: 50%;
   transition: 500ms;
   transition-delay: 500ms;
-  background-color: #d65f3b;
-  box-shadow: 0 0 10px #d65f3b, 0 0 30px #d65f3b, 0 0 50px #d65f3b;
+  background-color: #ffd713;
+  box-shadow: 0 0 10px #ffd713, 0 0 30px #ffd713, 0 0 50px #ffd713;
 }
 
 #btnnavbar-2 div {
