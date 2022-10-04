@@ -8,12 +8,16 @@ import { object } from "prop-types";
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const todosloseventos = store.eventosFilter;
-  const eventos = Array.from(todosloseventos).filter(
+  const eventosFil = Array.from(todosloseventos).filter(
     (element) => element.estadoEvento !== "Finalizado"
+  );
+  const eventos = Array.from(eventosFil).filter(
+    (element) => element.estadoEvento !== "Cerrado"
   );
 
 
   const ciudad = store.ciudades;
+
 
   useEffect(() => {
     actions.eventosparticipantes();
@@ -238,15 +242,6 @@ export const Home = () => {
                 className="border-3 rounded-pill p-2 text-dark"
                 onClick={() => {
                   actions.filterEvent(event);
-                }}
-              >
-                Filtrar eventos
-              </button>
-              <button
-                id="btnfiltrareventos"
-                className="border-3 rounded-pill p-2 text-dark"
-                onClick={() => {
-                  actions.eventosparticipantes();
                 }}
               >
                 Filtrar eventos

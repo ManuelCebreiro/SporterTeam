@@ -10,20 +10,56 @@ export const DetallesEvento = () => {
   const { store, actions } = useContext(Context);
   const detalles = store.dataEventoUnico;
   const players = store.jugadores;
+  const estado = store.estado;
   const user = store.datosUsuario;
   let params = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    actions.eventosparticipantes();
     actions.look_event(params.theid);
     actions.get_player_event(params.theid);
     actions.DatosUsuarioLogeado();
-  }, []);
+  }, [
+    // store.jugadores
+  ]);
+
+  // useEffect(() => {
+  //   actions.look_event(params.theid);
+  //   actions.get_player_event(params.theid);
+
+  // }, [
+  //   // store.jugadores
+  // ]);
   const color =
     detalles.estadoEvento == "Abierto" || detalles.estadoEvento == "Cerrado"
       ? { color: "green" }
       : { color: "red" };
   const columna = detalles.admin == user.id ? "col-lg-4" : "col-6";
+
+  // const estadoEvento =
+  //   players.length == estado.participantmax && estado.estadoEvento == "Abierto"
+  //   ?store.estado.estadoEvento == "Cerrado"
+  //   :
+
+
+  if (players.length == detalles.participantmax && detalles.estadoEvento == "Abierto") {
+    detalles.estadoEvento = "Cerrado"
+    actions.look_event(params.theid)
+    actions.modificarevento(detalles, detalles.id)
+    console.log("antes de esto hay una funcion retrasado")
+  }
+  else if (players.length != detalles.participantmax && detalles.estadoEvento != "Abierto") {
+    detalles.estadoEvento = "Abierto"
+    actions.look_event(params.theid),
+      actions.modificarevento(detalles, detalles.id)
+    console.log("antes de esto hay una funcion retrasado")
+
+  } else console.log("esto no va")
+
+
+
+
   return (
     <div id="bgdetalles">
       <div className="p-3 ">
@@ -123,6 +159,7 @@ export const DetallesEvento = () => {
                 <div className="col-lg-6 text-center rounded">
                   {Array.from(players).map((element, index) => {
                     const changecoloradmin = element.id == detalles.admin ? { color: "green" } : { color: "dark" }
+
                     if (index % 2 != 0) {
                       return (
                         <div

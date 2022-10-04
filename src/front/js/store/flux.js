@@ -79,8 +79,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           let text = await getActions().jugadores(getStore().eventos[x].id)
 
           Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
-          console.log(text)
-
         }
       },
       jugadores: async (eventid) => {
@@ -90,12 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const data = await response.json();
 
         const arr = data.length
-        // let result = 0
-        // for (let x = 0; x < eventos.length; x++) {
-        //   eventos[eventid].cantidadjugadores = arr
-        //   result++
-        // }
-        // console.log(arr)
+
         return arr
       },
       expulsarUsuarioEvento: (idevento, idusuario) => {
@@ -414,7 +407,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       getrespuesta: (str) => {
         setStore({ respuesta: str });
       },
-
+      cambiarestado: (datos) => {
+        setStore({ dataEventoUnico: datos })
+      },
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
@@ -452,6 +447,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ eventosFilter: data });
           });
         getActions().eventosparticipantes()
+
+
       },
       crearevento: (event) => {
         const store = getStore();
@@ -479,6 +476,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
+        getActions().eventosparticipantes()
       },
       modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
