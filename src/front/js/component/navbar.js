@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import getState from "../store/flux";
 import Nav from "react-bootstrap/Nav";
+
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
@@ -35,7 +36,7 @@ export const Navbarnew = () => {
               <button
                 id="btnnavbar-2"
                 type="button"
-                className="animated-button btn mt-1 ms-1"
+                className="atari btn mt-1 ms-1"
               >
                 <span>Crear Pachanga</span>
                 <div class="top"></div>
