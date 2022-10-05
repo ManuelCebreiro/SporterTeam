@@ -75,7 +75,7 @@ export const Newevent = () => {
           id="estilotitulonewevento"
           className="row text-center text-white font-monospace"
         >
-          <h1>Crear Partido</h1>
+          <h1>Crear Pachanga</h1>
         </div>
         <div className="row">
           <div className="row">
@@ -182,8 +182,8 @@ export const Newevent = () => {
                 required
               />
             </div>
-            <div className="col-lg-3  text-center px-0 my-1">
-              <div className="row">
+            <div className="col-lg-3  text-center px-1 my-2">
+              <div className="row py-2">
                 <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                   <label className="form-label text-white">Edad mínima</label>
 

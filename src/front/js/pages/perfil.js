@@ -35,21 +35,7 @@ export const Perfil = () => {
         <div className="main-body pt-4">
           <div className="row ">
             <div className="col-lg-1 col-md-1"></div>
-            <div className="col-lg-10 col-md-10 d-flex flex-row-reverse px-0 ">
-              <Link to="/Edituser" className="btn " id="botoneditar">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil-fill "
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                </svg>
-                Editar Usuario
-              </Link>
-            </div>
+            <div className="col-lg-10 col-md-10 d-flex flex-row-reverse px-0 "></div>
             <div className="col-lg-1 col-md-1 col-xs-1 "></div>
             <div className="col-lg-2 col-md-1"></div>
           </div>
@@ -77,26 +63,46 @@ export const Perfil = () => {
               id="estilosperfil"
             >
               <div className="card mt-2 mb-2 border-0">
-                <div className="card-body">
-                  <div className="row py-1">
-                    <div className="col-sm-4">
-                      <h6 className="mb-0">Username:</h6>
+                <div className="card-body pt-1">
+                  <div className="row">
+                    <div className="text-end pe-0">
+                      <Link
+                        to="/Edituser"
+                        className="btn d-flex justify-content-end"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          fill="currentColor"
+                          class="bi bi-pencil-fill "
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                      </Link>
                     </div>
-                    <div className="col-sm-8 text-secondary">
+                  </div>
+                  <div className="row ">
+                    <div className="col-sm-4">
+                      <h6 className="">Usuario:</h6>
+                    </div>
+                    <div className="col-sm-5 text-secondary">
                       {user.username}
                     </div>
+                    <div className="col-sm-3"></div>
                   </div>
                   <hr />
                   <div className="row py-1">
                     <div className="col-sm-4">
-                      <h6 className="mb-0">Age</h6>
+                      <h6 className="">Edad</h6>
                     </div>
                     <div className="col-sm-8 text-secondary">{user.age}</div>
                   </div>
                   <hr />
                   <div className="row py-1">
                     <div className="col-sm-4">
-                      <h6 className="mb-0">Description</h6>
+                      <h6 className="">Descripción</h6>
                     </div>
                     <div className="col-sm-8 text-secondary">
                       {user.description}
@@ -115,7 +121,7 @@ export const Perfil = () => {
             {/* <div className="row"> */}
             <div className="col-lg-10 col-md-10 col-xs-10 mb-3 px-0">
               <div className="card mt-3 p-2" id="estilosperfil">
-                <h5 id="estilotitulo">Eventos Pendientes</h5>
+                <h5 id="estilotitulo">Pachangas Pendientes</h5>
                 {eventosPendientes.length ? (
                   <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table className="table table-striped table-responsive">
@@ -150,7 +156,7 @@ export const Perfil = () => {
                     </table>
                   </div>
                 ) : (
-                  <h4 className="text-center">No hay eventos que mostrar</h4>
+                  <h4 className="text-center">No hay pachangas que mostrar</h4>
                 )}
               </div>
               <br />
@@ -159,7 +165,7 @@ export const Perfil = () => {
                 <div className="col-sm-12 mb-3">
                   <div className="card mt-3 p-2" id="estilosperfil">
                     <h5 className=" mb-3" id="estilotituloeventosparticipo">
-                      Eventos en los que participo
+                      Pachangas en las que participo
                     </h5>
                     {userEventosactivos.length ? (
                       <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -200,7 +206,7 @@ export const Perfil = () => {
                       </div>
                     ) : (
                       <h4 className="text-center">
-                        No hay eventos que mostrar
+                        No hay pachangas que mostrar
                       </h4>
                     )}
                   </div>
@@ -209,7 +215,7 @@ export const Perfil = () => {
                 <div className="col-sm-12 mb-3">
                   <div className="card mt-3 p-2" id="estilosperfil">
                     <h5 className=" mb-3" id="estilosperfilhistorial">
-                      Historial de eventos
+                      Historial de pachangas
                     </h5>
                     {userEventosFinalizado.length ? (
                       <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -247,7 +253,7 @@ export const Perfil = () => {
                       </div>
                     ) : (
                       <h4 className="text-center">
-                        No hay eventos que mostrar
+                        No hay pachangas que mostrar
                       </h4>
                     )}
                   </div>

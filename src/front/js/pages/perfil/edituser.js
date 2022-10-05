@@ -75,12 +75,12 @@ export const EditUser = () => {
                     className="col-sm-5 px-2 gy-0 py-0 ms-2 my-0"
                   >
                     <label className="mb-1" htmlFor="new_username">
-                      Username: {user.username}
+                      Usuario: {user.username}
                     </label>
                     <input
                       name="new_username"
                       type="text"
-                      placeholder="Tu nuevo Username"
+                      placeholder="Tu nuevo usuario"
                       className={errors.new_username && "error"}
                       {...register("new_username", {
                         minLength: {

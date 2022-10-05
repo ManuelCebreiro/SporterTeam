@@ -1,14 +1,6 @@
-#imagenPerfilNavbar {
-  width: 40px;
-  height: 40px;
-}
-
 /* PALETA COLORES #FABC3C #FFB238 #F19143 #FF773D #F55536 */
 
 /* ------------------------------------------------------ ESTILOS DETALLES DE EVENTO ------------------------- */
-#navbarstyle {
-  background-color: #1a375a;
-}
 
 #estilofondohome {
   /* background-image: url('https://img.freepik.com/foto-gratis/herramientas-deportivas_53876-138077.jpg?w=1380&t=st=1663466718~exp=1663467318~hmac=b5d78e63350252ad247469a1e20f10a74665a66bb1b365ec643711c1fc6eebc7'); */
@@ -49,6 +41,7 @@
 #eventos-mostrar {
   opacity: 0.9;
 }
+
 #eventos-mostrar-2 {
   opacity: 0.9;
 }
@@ -71,19 +64,13 @@
 /* -------------------------------(final estilos perfil------------------------------------------------ */
 
 /* ---------------------------- ESTILO BOTON EDITAR ---------------- */
-#botoneditar {
-  background-color: #d65f3b;
-  color: white;
-  margin-right: 10px;
-}
+
 svg.bi-pencil-fill {
   margin-right: 0.5rem;
 }
-#botoneditar:hover {
-  background-color: yellow;
-  color: #1a375a;
-  transform: scale(1.1);
-  padding-left: 5px;
+
+svg.bi-pencil-fill:hover {
+  transform: scale(1.3);
 }
 
 /* ---------- final boton editar -------------- */
@@ -95,6 +82,7 @@ svg.bi-pencil-fill {
   min-height: auto;
   max-height: 300px;
   overflow: scroll;
+  margin-right: 20px;
 }
 
 .table-wrapper-scroll-y {
@@ -113,21 +101,17 @@ svg.bi-pencil-fill {
 }
 
 /* ---------- fin estilos pagina central ------------- */
-#btnnavbar {
-  background-color: #bb723a;
+
+#btnfiltrareventos {
+  background-color: #d65f3b;
   color: white;
 }
 
 #btnfiltrareventos:hover {
-  background-color: #bb723a;
+  background-color: #ffd713;
   border-color: white;
   transform: scale(1.1);
-}
-
-/* ------------------------- BOTON LOG OUT------------------ */
-#btnnavbarexit {
-  background-color: #bb723a;
-  color: white;
+  color: #1a375a;
 }
 
 /* ------------------------- BOTON PETICION UNIRSE A EVENTO------------------ */

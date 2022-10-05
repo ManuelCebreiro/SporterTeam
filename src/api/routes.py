@@ -313,3 +313,13 @@ def modificar_evento():
     
     db.session.commit()
     return jsonify({"msg":"evento modificado"})
+
+# @api.route('/eliminarEvento/<int:idevento>', methods=["DELETE"])
+# def delete_evento(idevento):
+#     evento = Evento.query.get(idevento)
+#     db.session.delete(evento)
+#     db.session.commit()
+
+#     return jsonify("evento pasado eliminado"),200
+
+
