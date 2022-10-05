@@ -51,7 +51,7 @@ export const Register = () => {
       <div id="body_register" className="vh-100 bg-image-fluid">
         <form id="form_register" onSubmit={handleSubmit(onSubmit)}>
           <div id="form_register_body" className="cardRegister">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Usuario</label>
             <input
               name="username"
               placeholder="Mínimo 5 caracteres"
@@ -135,7 +135,7 @@ export const Register = () => {
             />
             {errors.age && <p>{errors.age.message}</p>}
 
-            <input id="register_btn" value="enviar" type="submit" />
+            <input id="register_btn" value="Enviar" type="submit" />
             <Link id="salirRegistro" className="fw-bold" to="/">
               Salir de Registro
             </Link>

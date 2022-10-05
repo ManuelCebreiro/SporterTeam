@@ -169,7 +169,7 @@ export const Home = () => {
                     Edad mínima.
                   </label>
                   <input
-                    className="border-3 rounded-pill text-center text-dark"
+                    className="rounded-pill text-center text-dark"
                     style={{ width: 100 }}
                     placeholder="Mín. 18"
                     type="number"
