@@ -31,7 +31,8 @@ export const EditUser = () => {
     actions.DatosUsuarioLogeado();
     if (store.validacioneditregister) {
       actions.validacionFalse();
-      navigate("/perfil");
+      actions.logout();
+      navigate("/");
     }
   }, [store.validacioneditregister]);
   const user = store.datosUsuario;

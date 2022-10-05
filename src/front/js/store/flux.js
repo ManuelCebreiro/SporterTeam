@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         { ciudad: "Almería", posicion: [36.83892362, -2.46413188] },
         { ciudad: "Avila", posicion: [40.65586958, -4.69771277] },
         { ciudad: "Badajoz", posicion: [38.87874339, -6.97099704] },
+        { ciudad: "Barcelona", posicion: [41.390205, 2.154007] },
         { ciudad: "Bilbao", posicion: [43.25721957, -2.92390606] },
         { ciudad: "Burgos", posicion: [42.34113004, -3.70419805] },
         { ciudad: "Caceres", posicion: [3.47316762, -6.37121092] },
@@ -213,7 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }).then((resp) => {
           if (resp.status == 200) {
             setStore({ validacioneditregister: true });
-            swal("Perfil de usuario actualizado correctamente", {
+            swal("Perfil actualizado. Por favor ingresa de nuevo", {
               icon: "success",
               timer: 4000,
             });
@@ -238,14 +239,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -506,10 +507,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       denegarpeticion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-            "/api/administrasusuarios/" +
-            idevento +
-            "/" +
-            iduser,
+          "/api/administrasusuarios/" +
+          idevento +
+          "/" +
+          iduser,
           {
             method: "DELETE",
           }
@@ -519,10 +520,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       peticionUnion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-            "/api/peticionUnion/" +
-            iduser +
-            "/" +
-            idevento,
+          "/api/peticionUnion/" +
+          iduser +
+          "/" +
+          idevento,
           {
             method: "POST",
           }

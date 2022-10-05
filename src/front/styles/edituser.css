@@ -1,8 +1,6 @@
 #edituserStyle {
-  background: url(https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1293&q=80)
-    no-repeat center center fixed;
+  background: url(https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1293&q=80) no-repeat center center fixed;
   background-repeat: no-repeat;
-
   background-size: cover;
   background-position: center center;
   height: 100vh;
@@ -95,7 +93,6 @@
   border: 1px solid #fefefe;
   padding: 5px 15px;
   margin-bottom: 5px;
-  font-size: 14px;
   color: #081127;
 }
 
@@ -114,10 +111,10 @@
   background-color: #a5a2a2;
   border: 1px solid #fefefe;
   color: #fefefe;
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin-top: 25px;
   padding: 15px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   letter-spacing: 5px;
 }
