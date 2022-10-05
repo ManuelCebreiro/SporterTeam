@@ -27,7 +27,10 @@ export const DetallesEventoAdmin = () => {
     actions.look_event(params.theid);
     actions.get_player_event(params.theid);
     actions.DatosUsuarioLogeado();
+
   }, []);
+
+
 
   return (
     <div className="container">
@@ -90,6 +93,7 @@ export const DetallesEventoAdmin = () => {
               Value={detalles.participantmax}
               onChange={(e) => {
                 setDetails({ ...details, participantmax: e.target.value });
+
               }}
             />
           </div>
@@ -187,6 +191,7 @@ export const DetallesEventoAdmin = () => {
               Value={detalles.estadoEvento}
               onChange={(e) => {
                 setDetails({ ...details, estadoEvento: e.target.value });
+
               }}
             >
               <option selected disabled>
@@ -195,7 +200,6 @@ export const DetallesEventoAdmin = () => {
               <option>Abierto</option>
               <option>Cerrado</option>
               <option>Finalizado</option>
-              <option>Cancelado</option>
             </select>
           </div>
         </div>

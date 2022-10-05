@@ -74,6 +74,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       usuariospendientes: [],
     },
     actions: {
+      eventosparticipantes: async () => {
+        for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
+          let text = await getActions().jugadores(getStore().eventos[x].id)
+
+          Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+        }
+      },
+      jugadores: async (eventid) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/playerEvents/" + eventid
+        );
+        const data = await response.json();
+
+        const arr = data.length
+
+        return arr
+      },
       expulsarUsuarioEvento: (idevento, idusuario) => {
         fetch(process.env.BACKEND_URL + "/api/exitEvents/" + idevento, {
           method: "DELETE",
@@ -382,7 +399,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       getrespuesta: (str) => {
         setStore({ respuesta: str });
       },
-
+      cambiarestado: (datos) => {
+        setStore({ dataEventoUnico: datos })
+      },
       //FUNCION reloadToken PARA QUE NO SE PIERDA EL TOKEN DEL STORAGE
       reloadToken: () => {
         let datotoken = sessionStorage.getItem("token");
@@ -418,6 +437,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ eventos: data });
             setStore({ eventosFilter: data });
           });
+        getActions().eventosparticipantes()
+
+
       },
       crearevento: (event) => {
         const store = getStore();
@@ -445,6 +467,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             return respuestadelback.json();
           }
         });
+        getActions().eventosparticipantes()
       },
       modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
@@ -473,7 +496,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       // eventos pendientes de un usuario
       geteventosPendientes: async (iduser) => {
-        console.log(iduser);
+        // console.log(iduser);
         const response = await fetch(
           process.env.BACKEND_URL + "/api/mostrareventospendientes/" + iduser
         );

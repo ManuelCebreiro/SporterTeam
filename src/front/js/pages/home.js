@@ -3,17 +3,29 @@ import { Context } from "../store/appContext";
 import { PeticionUnion } from "../component/botonpeticionUnirseEvento";
 
 import "../../styles/home.css";
+import { object } from "prop-types";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const todosloseventos = store.eventosFilter;
-  const eventos = Array.from(todosloseventos).filter(
+  const eventosFil = Array.from(todosloseventos).filter(
     (element) => element.estadoEvento !== "Finalizado"
   );
+  const eventos = Array.from(eventosFil).filter(
+    (element) => element.estadoEvento !== "Cerrado"
+  );
+
+
   const ciudad = store.ciudades;
+
+
   useEffect(() => {
+    actions.eventosparticipantes();
     actions.getEventos();
+
   }, []);
+
+  // console.log(todosloseventos)
 
   const [event, setEvent] = useState({
     payment: null,
@@ -29,9 +41,7 @@ export const Home = () => {
   for (let i = 0; i < todosloseventos.length; i++) {
     actions.eventoFinalizado(todosloseventos[i]);
   }
-  useEffect(() => {
-    actions.getEventos();
-  }, []);
+
   return (
     <div className="container-fluid" id="estilofondohome">
       <div className="container py-5">
@@ -266,14 +276,14 @@ export const Home = () => {
                   {eventos.map((event, index) => {
                     return (
                       <tr key={index}>
-                        <th scope="row">{index}</th>
+                        <th scope="row">{index + 1}</th>
                         <td>{event.sport}</td>
                         <td>{event.date}</td>
                         <td>
                           {event.duration} {"minutos"}
                         </td>
                         <td>
-                          {event.participantmax} {"personas"}
+                          {event.jugadorDelEvento}/{event.participantmax}{"personas"}
                         </td>
                         <td>
                           {event.agemin} {"años"}
