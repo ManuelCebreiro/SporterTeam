@@ -1,5 +1,6 @@
 #edituserStyle {
-  background: url(https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1293&q=80) no-repeat center center fixed;
+  background: url(https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1293&q=80)
+    no-repeat center center fixed;
   background-repeat: no-repeat;
 
   background-size: cover;
@@ -123,7 +124,8 @@
 
 #edituser_btn:hover {
   cursor: pointer;
-  background: #bb723a;
+  background: #ffd713;
+  transform: scale(1.1);
 }
 
 #edituser_btn:active {
@@ -142,14 +144,10 @@
 }
 
 #salirEditUser:hover {
-  color: #bb723a;
+  color: #ff6c23;
 }
 
 #App {
   max-width: 600px;
   margin: auto;
-}
-
-#edituser_btn :hover {
-  color: #bb723a;
 }

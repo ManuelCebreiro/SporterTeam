@@ -38,6 +38,9 @@ export const Home = () => {
     sport: "",
     ciudad: "",
   });
+  for (let i = 0; i < todosloseventos.length; i++) {
+    actions.eventoFinalizado(todosloseventos[i]);
+  }
 
   return (
     <div className="container-fluid" id="estilofondohome">
@@ -50,7 +53,7 @@ export const Home = () => {
             id="estilotitulonewevento"
             className="row text-center text-white font-monospace"
           >
-            <h1>Eventos</h1>
+            <h1>Pachangas</h1>
           </div>
           <div className="row">
             <div className="col-lg-3 text-center my-1">
@@ -238,34 +241,35 @@ export const Home = () => {
           <div className="row">
             <div className="col-lg-12 text-center">
               <button
+                type="button"
                 id="btnfiltrareventos"
-                className="border-3 rounded-pill p-2 text-dark"
+                className="btn border-1 p-2"
                 onClick={() => {
                   actions.filterEvent(event);
                 }}
               >
-                Filtrar eventos
+                Filtrar pachangas
               </button>
             </div>
           </div>
         </div>
 
-        <div className="table-responsive">
+        <div id="eventos-mostrar" className="table-responsive">
           {eventos.length > 0 ? (
             <div class="table-wrapper-scroll-y tablapaginacentral bg-light">
               <table className="text-center table table-striped table-hover mt-2">
                 <thead>
                   <tr>
                     <th scope="col"></th>
-                    <th scope="col">Sport</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Duration</th>
+                    <th scope="col">Deporte</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Duración</th>
                     <th scope="col">Participantes</th>
-                    <th scope="col">Agemin</th>
-                    <th scope="col">Agemax</th>
+                    <th scope="col">Edad min.</th>
+                    <th scope="col">Edad max.</th>
                     <th scope="col">Ciudad</th>
-                    <th scope="col">Payment</th>
-                    <th scope="col">Space</th>
+                    <th scope="col">Pago</th>
+                    <th scope="col">Tipo lugar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -302,8 +306,11 @@ export const Home = () => {
               </table>
             </div>
           ) : (
-            <h4 className="text-center text-danger bg-light py-5 border-dark">
-              No hay eventos que mostrar
+            <h4
+              id="eventos-mostrar-2"
+              className="text-center text-danger bg-light py-5 border-dark"
+            >
+              No hay pachangas que mostrar
             </h4>
           )}
         </div>

@@ -6,57 +6,46 @@ import { nominalTypeHack } from "prop-types";
 import swal from "sweetalert";
 
 export const Newevent = () => {
-
   let date = new Date();
-  let output = String(date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()).padStart(2, '0');
+  let output = String(
+    date.getFullYear() +
+      "-" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      date.getDate()
+  ).padStart(2, "0");
   // console.log(output);
 
   const validarMayorQue = (numeroaValidar, condicion, texto) => {
-
     if (Number(numeroaValidar) >= condicion) {
-      return true
+      return true;
     } else {
-      swal(
-        "¡Ups, hubo un problema!",
-        texto,
-        "error",
-        {
-          dangerMode: true,
-        }
-      );
-      return false
-    };
+      swal("¡Ups, hubo un problema!", texto, "error", {
+        dangerMode: true,
+      });
+      return false;
+    }
   };
   const validarMenorQue = (numeroaValidar, condicion, texto) => {
     if (Number(numeroaValidar) <= condicion) {
-      return true
+      return true;
     } else {
-      swal(
-        "¡Ups, hubo un problema!",
-        texto,
-        "error",
-        {
-          dangerMode: true,
-        }
-      );
-      return false
-    };
+      swal("¡Ups, hubo un problema!", texto, "error", {
+        dangerMode: true,
+      });
+      return false;
+    }
   };
   const validarCampoVacio = (campoAValidar, condicion, texto) => {
     if (campoAValidar != condicion) {
-      return true
+      return true;
     } else {
-      swal(
-        "¡Ups, hubo un problema!",
-        texto,
-        "error",
-        {
-          dangerMode: true,
-        }
-      );
-      return false
-    };
-  }
+      swal("¡Ups, hubo un problema!", texto, "error", {
+        dangerMode: true,
+      });
+      return false;
+    }
+  };
 
   const { store, actions } = useContext(Context);
   const [event, setEvent] = useState({
@@ -78,9 +67,15 @@ export const Newevent = () => {
   return (
     <div className="fondonewevent">
       <div className="row mb-5"></div>
-      <div id="estilofondofiltros" className="container py-3 px-5 border border-dark">
-        <div id="estilotitulonewevento" className="row text-center text-white font-monospace">
-          <h1>Crear evento</h1>
+      <div
+        id="estilofondofiltros"
+        className="container py-3 px-5 border border-dark"
+      >
+        <div
+          id="estilotitulonewevento"
+          className="row text-center text-white font-monospace"
+        >
+          <h1>Crear Partido</h1>
         </div>
         <div className="row">
           <div className="row">
@@ -95,9 +90,7 @@ export const Newevent = () => {
                   setEvent({ ...event, sport: e.target.value });
                 }}
               >
-                <option>
-                  Elige
-                </option>
+                <option>Elige</option>
 
                 <option>Baloncesto</option>
                 <option>Fútbol</option>
@@ -119,7 +112,7 @@ export const Newevent = () => {
                 value={event.date}
                 onChange={(e) => {
                   setEvent({ ...event, date: e.target.value });
-                  console.log(event.date)
+                  console.log(event.date);
                 }}
               />
             </div>
@@ -192,7 +185,6 @@ export const Newevent = () => {
             <div className="col-lg-3  text-center px-0 my-1">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-6 text-center">
-
                   <label className="form-label text-white">Edad mínima</label>
 
                   <input
@@ -228,8 +220,6 @@ export const Newevent = () => {
                   />
                 </div>
               </div>
-
-
             </div>
             <div className="col-lg-3 text-center my-1">
               <div className="row my-1">
@@ -239,10 +229,15 @@ export const Newevent = () => {
               <select
                 className="form-select"
                 // defaultValue="Elige"
-                value={event.space == null ? "Elige" :
-                  event.space ? "Cubierto" : "Aire libre"}
+                value={
+                  event.space == null
+                    ? "Elige"
+                    : event.space
+                    ? "Cubierto"
+                    : "Aire libre"
+                }
                 onChange={(e) => {
-                  console.log(e.target.value)
+                  console.log(e.target.value);
                   if (e.target.value == "Cubierto") {
                     setEvent({ ...event, space: true });
                   } else if (e.target.value == "Aire libre") {
@@ -252,9 +247,7 @@ export const Newevent = () => {
                   }
                 }}
               >
-                <option>
-                  Elige
-                </option>
+                <option>Elige</option>
                 <option>Cubierto</option>
                 <option>Aire libre</option>
               </select>
@@ -283,22 +276,81 @@ export const Newevent = () => {
               type="submit"
               onClick={() => {
                 if (
-                  validarCampoVacio(event.sport.length, "", "Debes escoger un deporte") &&
-                  validarCampoVacio(event.sport.length, "Elige", "Debes escoger un deporte") &&
-                  validarMayorQue(event.duration, 30, "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " + `${event.duration}`) &&
-                  validarMayorQue(event.agemin, 18, "La edad puesta es " + `${event.agemin}` + " y debe tener mínimo 18 años") &&
-                  validarMenorQue(event.agemax, 100, "La edad puesta es " + `${event.agemax}` + " y no debe ser mayor que 100") &&
-                  validarMayorQue(event.agemax, `${event.agemin}`, "La edad máxima puesta es " + `${event.agemax}` + " y debe ser mayor o igual que la edad mínima que has escogido, que es " + `${event.agemin}`) &&
-                  validarMenorQue(event.participantmax, 50, "El campo de participantes debe ser menor que 50") &&
-                  validarMayorQue(event.participantmax, 2, "El campo de participantes debe ser mayor o igual que 2") &&
+                  validarCampoVacio(
+                    event.sport.length,
+                    "",
+                    "Debes escoger un deporte"
+                  ) &&
+                  validarCampoVacio(
+                    event.sport.length,
+                    "Elige",
+                    "Debes escoger un deporte"
+                  ) &&
+                  validarMayorQue(
+                    event.duration,
+                    30,
+                    "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " +
+                      `${event.duration}`
+                  ) &&
+                  validarMayorQue(
+                    event.agemin,
+                    18,
+                    "La edad puesta es " +
+                      `${event.agemin}` +
+                      " y debe tener mínimo 18 años"
+                  ) &&
+                  validarMenorQue(
+                    event.agemax,
+                    100,
+                    "La edad puesta es " +
+                      `${event.agemax}` +
+                      " y no debe ser mayor que 100"
+                  ) &&
+                  validarMayorQue(
+                    event.agemax,
+                    `${event.agemin}`,
+                    "La edad máxima puesta es " +
+                      `${event.agemax}` +
+                      " y debe ser mayor o igual que la edad mínima que has escogido, que es " +
+                      `${event.agemin}`
+                  ) &&
+                  validarMenorQue(
+                    event.participantmax,
+                    50,
+                    "El campo de participantes debe ser menor que 50"
+                  ) &&
+                  validarMayorQue(
+                    event.participantmax,
+                    2,
+                    "El campo de participantes debe ser mayor o igual que 2"
+                  ) &&
                   validarCampoVacio(event.date, "", "La fecha es incorrecta") &&
-                  validarCampoVacio(event.space, null, "Debes escoger un tipo de lugar") &&
-                  validarCampoVacio(event.space, "Elige", "Debes escoger un tipo de lugar") &&
-                  validarCampoVacio(event.ciudad, "", "Debes escoger una ciudad") &&
-                  validarCampoVacio(event.payment, "", "Debes indicar una cantidad, puede ser de 0 €") &&
-                  validarCampoVacio(event.description, "", "El campo debería contener una breve descripción")
+                  validarCampoVacio(
+                    event.space,
+                    null,
+                    "Debes escoger un tipo de lugar"
+                  ) &&
+                  validarCampoVacio(
+                    event.space,
+                    "Elige",
+                    "Debes escoger un tipo de lugar"
+                  ) &&
+                  validarCampoVacio(
+                    event.ciudad,
+                    "",
+                    "Debes escoger una ciudad"
+                  ) &&
+                  validarCampoVacio(
+                    event.payment,
+                    "",
+                    "Debes indicar una cantidad, puede ser de 0 €"
+                  ) &&
+                  validarCampoVacio(
+                    event.description,
+                    "",
+                    "El campo debería contener una breve descripción"
+                  )
                 ) {
-
                   console.log(eventazo);
                   actions.crearevento(event);
                   setEventazo([...eventazo, event]);
@@ -313,9 +365,8 @@ export const Newevent = () => {
                     description: "",
                     participantmax: "",
                     ciudad: "",
-                  })
-                };
-
+                  });
+                }
               }}
             >
               Crear
@@ -341,7 +392,7 @@ export const Newevent = () => {
                       </tr>
                     </thead>
                   ) : undefined}
-                  <tbody >
+                  <tbody>
                     {eventazo.map((event, index) => {
                       return (
                         <tr>
@@ -368,6 +419,6 @@ export const Newevent = () => {
           </ul>
         </div>
       </div>
-    </div >
+    </div>
   );
 };

@@ -83,6 +83,11 @@
   background-color: #bb723a;
   color: white;
 }
+#btnvolverperfil:hover {
+  background-color: yellow;
+  color: #1a375a;
+  transform: scale(1.1);
+}
 #descripcion {
   height: 100px;
 }
@@ -111,7 +116,7 @@
   background-color: rgb(92, 92, 92);
   animation: rainbow 1s 1;
   transform: scale(1.13);
-  border-radius: 30px;
+  border-radius: 10px;
   background-position: 70% 50%;
 }
 
@@ -145,7 +150,7 @@
   background-color: rgb(92, 92, 92);
   animation: rainbow 1s 1;
   transform: scale(1.13);
-  border-radius: 30px;
+  border-radius: 10px;
   background-position: 70% 50%;
 }
 
