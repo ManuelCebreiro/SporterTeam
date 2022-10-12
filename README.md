@@ -1,5 +1,5 @@
 # SPORTERTEAM
-<img src="https://github.com/ManuelCebreiro/SporterTeam/blob/readme/src/front/img/PAGINA%20WEB.png?raw=true">
+<img src="https://raw.githubusercontent.com/ManuelCebreiro/SporterTeam/03b885e4504644601b6d301c74ac2d1630a38edc/src/front/img/PAGINA%20WEB.png">
 
 A social app to find football, basketball, tennis and padel matches. An external API is used to host users profiles photopraphies. Users can create a match or join a sport match previously created by other user. 
 
