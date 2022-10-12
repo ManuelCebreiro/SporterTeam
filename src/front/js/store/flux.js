@@ -78,7 +78,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
           let text = await getActions().jugadores(getStore().eventos[x].id)
 
-          Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+          sessionStorage.setItem(getStore().eventos[x].id, text)
+
+          // sessionStorage.setItem("token", respuestajson.access_token);
+
+          // Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
         }
       },
       jugadores: async (eventid) => {
@@ -238,14 +242,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           event.payment == null
             ? eventos
             : event.payment == true
-            ? eventos.filter((element) => element.payment > 0)
-            : eventos.filter((element) => element.payment == 0);
+              ? eventos.filter((element) => element.payment > 0)
+              : eventos.filter((element) => element.payment == 0);
         const spaceResult =
           event.space == null
             ? paymentResults
             : event.space == true
-            ? paymentResults.filter((element) => element.space == true)
-            : paymentResults.filter((element) => element.space == false);
+              ? paymentResults.filter((element) => element.space == true)
+              : paymentResults.filter((element) => element.space == false);
         const durationResults = spaceResult.filter(
           (element) => element.duration >= event.duration
         );
@@ -506,10 +510,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       denegarpeticion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-            "/api/administrasusuarios/" +
-            idevento +
-            "/" +
-            iduser,
+          "/api/administrasusuarios/" +
+          idevento +
+          "/" +
+          iduser,
           {
             method: "DELETE",
           }
@@ -519,10 +523,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       peticionUnion: (iduser, idevento) => {
         fetch(
           process.env.BACKEND_URL +
-            "/api/peticionUnion/" +
-            iduser +
-            "/" +
-            idevento,
+          "/api/peticionUnion/" +
+          iduser +
+          "/" +
+          idevento,
           {
             method: "POST",
           }
