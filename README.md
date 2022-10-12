@@ -1,3 +1,48 @@
+# SPORTERTEAM
+
+A social app to find football, basketball, tennis and padel matches. An external API is used to host users profiles photopraphies. Users can create a match or join a sport match previously created by other user. 
+
+## Authors ✒️
+
+MARTIN BARJA BALSEIRO
+MANUEL CEBREIRO RUIZ DE CORTAZAR
+DAVID PIZARRO PALANCAR  
+
+## LinkedIn
+
+www.linkedin.com/in/martin-barja-balseiro/
+www.linkedin.com/in/manuelcebreiro/
+www.linkedin.com/in/david-pizarro-developer/
+
+## live
+
+(https://sporterteam.herokuapp.com/)
+
+## Contact
+
+If you wanna contact us you can visit our LinkedIn profiles
+
+
+## Tools
+
+- React Hooks - useState, useEffect, use Context
+- React Router Dom - Link, useNavigate, useParams
+- React Hook Form - useForm
+- React Bootstrap - Nav, Navbar
+- CSS and Bootstrap
+- Form Handling in React
+- Data Fetching in React
+- Environment Variables; Sweetalert, React Styled Components
+
+
+
+## Resources & References
+
+- [External API](https://cloudinary.com/)
+- [SweetAlert](https://sweetalert.js.org/)
+
+
+
 # WebApp boilerplate with React JS and Flask API
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
@@ -98,27 +143,18 @@ To update with all yours tables you can edit the file app.py and go to the line 
 
 This boilerplate it's 100% integrated with Herkou, [follow this tutorial](https://start.4geeksacademy.com/backend/deploy-heroku-posgres) and just by pushing your changes to the heroku repository will deploy the website afterwards.
 
-PAQUETES A INSTALAR
 
-En el archivo .env
-Poner si falta
-BACKEND_URL=https://3001-manuelcebre-sporterteam-zsuzsc2i9jn.ws-eu63.gitpod.io
-
-Y para las fotos de perfil. Cloudinary.
 CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6a
 
-## INSTALAR REACT-HOOK-FORM
+## INSTALL REACT-HOOK-FORM
 
 npm install react-hook-form
 
-## INSTALAR SWEETALERT
+## INSTALL SWEETALERT
 
 $ npm install --save sweetalert
 
-## INSTALAR STYLED COMPONENTS EN REACT
+## INSTALL STYLED COMPONENTS EN REACT
 
 npm install --save styled-components
 
-## MANO DE SANTO
-
-rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade
