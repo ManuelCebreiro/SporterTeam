@@ -12,9 +12,12 @@ A social app to find football, basketball, tennis and padel matches. An external
 
 (https://sporterteam.herokuapp.com/)
 
-## Contact
+## Contact 📧 EMAIL
 
-If you wanna contact us you can visit our LinkedIn profiles
+- MARTIN BARJA BALSEIRO (barjabalseiro@gmail.com)
+- MANUEL CEBREIRO RUIZ DE CORTAZAR (cebreirom@gmail.com)
+- DAVID PIZARRO PALANCAR (pizarro.developer@gmail.com)
+
 
 
 ## Tools
