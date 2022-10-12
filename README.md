@@ -1,51 +1,43 @@
-# WebApp boilerplate with React JS and Flask API
+# SPORTERTEAM
+<img src="https://raw.githubusercontent.com/ManuelCebreiro/SporterTeam/03b885e4504644601b6d301c74ac2d1630a38edc/src/front/img/PAGINA%20WEB.png">
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
+A social app to find football, basketball, tennis and padel matches. An external API is used to host users profiles photopraphies. Users can create a match or join a sport match previously created by other user. 
 
-> Documentation: https://start.4geeksacademy.com/
+## Authors ✒️ LinkedIn
 
-<p align="center">
-<a href="https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b"><img src="https://github.com/4GeeksAcademy/flask-rest-hello/blob/main/docs/assets/how-to.png?raw=true?raw=true" /></a>
-</p>
+- MARTIN BARJA BALSEIRO (www.linkedin.com/in/martin-barja-balseiro/)
+- MANUEL CEBREIRO RUIZ DE CORTAZAR (www.linkedin.com/in/manuelcebreiro/)
+- DAVID PIZARRO PALANCAR (www.linkedin.com/in/david-pizarro-developer/)
 
-- React.js front end and python/flask backend for your web application.
-- Extensive documentation [here](https://start.4geeksacademy.com/).
-- Integrated with Pipenv for package managing.
-- Fast deloyment to heroku [in just a few steps here](https://start.4geeksacademy.com/backend/deploy-heroku-posgres).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
+## WEBSITE🌐
 
-### Styles
+https://sporterteam.herokuapp.com/
 
-You can update the `styles/index.scss` or create new `.scss` files inside `styles/` and import them into your current scss or js files depending on your needs.
+## Contact 📧 EMAIL
 
-### Components
+- MARTIN BARJA BALSEIRO (barjabalseiro@gmail.com)
+- MANUEL CEBREIRO RUIZ DE CORTAZAR (cebreirom@gmail.com)
+- DAVID PIZARRO PALANCAR (pizarro.developer@gmail.com)
 
-Add more files into your `./src/js/components` or styles folder as you need them and import them into your current files as needed.
 
-💡Note: There is an example using the Context API inside `views/demo.js`;
 
-### Views (Components)
+## Tools
 
-Add more files into your `./src/js/views` and import them in `./src/js/layout.jsx`.
+- React Hooks - useState, useEffect, use Context
+- React Router Dom - Link, useNavigate, useParams
+- React Hook Form - useForm
+- React Bootstrap - Nav, Navbar
+- CSS and Bootstrap
+- Form Handling in React
+- Data Fetching in React
+- Environment Variables; Sweetalert, React Styled Components
 
-### Context
 
-This boilerplate comes with a centralized general Context API. The file `./src/js/store/flux.js` has a base structure for the store, we encourage you to change it and adapt it to your needs.
 
-React Context [docs](https://reactjs.org/docs/context.html)
-BreathCode Lesson [view](https://content.breatheco.de/lesson/react-hooks-explained)
+## Resources & References
 
-The `Provider` is already set. You can consume from any component using the useContext hook to get the `store` and `actions` from the Context. Check `/views/demo.js` to see a demo.
-
-```jsx
-import { Context } from "../store/appContext";
-const MyComponentSuper = () => {
-  //here you use useContext to get store and actions
-  const { store, actions } = useContext(Context);
-  return <div>{/* you can use your actions or store inside the html */}</div>;
-};
-```
+- [External API](https://cloudinary.com/)
+- [SweetAlert](https://sweetalert.js.org/)
 
 ### Back-End Manual Installation:
 
@@ -65,28 +57,6 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 5. Run the migrations: `$ pipenv run upgrade`
 6. Run the application: `$ pipenv run start`
 
-### Backend Populate Table Users
-
-To insert test users in the database execute the following command:
-
-```sh
-$ flask insert-test-users 5
-```
-
-And you will see the following message:
-
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
-
-To update with all yours tables you can edit the file app.py and go to the line 80 to insert the code to populate others tables
-
 ### Front-End Manual Installation:
 
 - Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
@@ -94,31 +64,15 @@ To update with all yours tables you can edit the file app.py and go to the line 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
 
-## Publish your website!
-
-This boilerplate it's 100% integrated with Herkou, [follow this tutorial](https://start.4geeksacademy.com/backend/deploy-heroku-posgres) and just by pushing your changes to the heroku repository will deploy the website afterwards.
-
-PAQUETES A INSTALAR
-
-En el archivo .env
-Poner si falta
-BACKEND_URL=https://3001-manuelcebre-sporterteam-zsuzsc2i9jn.ws-eu63.gitpod.io
-
-Y para las fotos de perfil. Cloudinary.
-CLOUDINARY_URL=cloudinary://192925155888185:ubznkteGZCF3F6AT5ANd7W-kG8Y@domvwmn6a
-
-## INSTALAR REACT-HOOK-FORM
+## INSTALL REACT-HOOK-FORM
 
 npm install react-hook-form
 
-## INSTALAR SWEETALERT
+## INSTALL SWEETALERT
 
 $ npm install --save sweetalert
 
-## INSTALAR STYLED COMPONENTS EN REACT
+## INSTALL STYLED COMPONENTS EN REACT
 
 npm install --save styled-components
 
-## MANO DE SANTO
-
-rm -R -f ./migrations && pipenv run init && psql -U gitpod -c 'DROP DATABASE example;' || true && psql -U gitpod -c 'CREATE DATABASE example;' && psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example && pipenv run migrate && pipenv run upgrade
