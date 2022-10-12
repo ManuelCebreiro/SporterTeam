@@ -9,10 +9,10 @@ export const Newevent = () => {
   let date = new Date();
   let output = String(
     date.getFullYear() +
-      "-" +
-      String(date.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      date.getDate()
+    "-" +
+    String(date.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    date.getDate()
   ).padStart(2, "0");
   // console.log(output);
 
@@ -233,8 +233,8 @@ export const Newevent = () => {
                   event.space == null
                     ? "Elige"
                     : event.space
-                    ? "Cubierto"
-                    : "Aire libre"
+                      ? "Cubierto"
+                      : "Aire libre"
                 }
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -290,29 +290,29 @@ export const Newevent = () => {
                     event.duration,
                     30,
                     "La duración mínima debe ser mayor o igual a 30 minutos, y has puesto " +
-                      `${event.duration}`
+                    `${event.duration}`
                   ) &&
                   validarMayorQue(
                     event.agemin,
                     18,
                     "La edad puesta es " +
-                      `${event.agemin}` +
-                      " y debe tener mínimo 18 años"
+                    `${event.agemin}` +
+                    " y debe tener mínimo 18 años"
                   ) &&
                   validarMenorQue(
                     event.agemax,
                     100,
                     "La edad puesta es " +
-                      `${event.agemax}` +
-                      " y no debe ser mayor que 100"
+                    `${event.agemax}` +
+                    " y no debe ser mayor que 100"
                   ) &&
                   validarMayorQue(
                     event.agemax,
                     `${event.agemin}`,
                     "La edad máxima puesta es " +
-                      `${event.agemax}` +
-                      " y debe ser mayor o igual que la edad mínima que has escogido, que es " +
-                      `${event.agemin}`
+                    `${event.agemax}` +
+                    " y debe ser mayor o igual que la edad mínima que has escogido, que es " +
+                    `${event.agemin}`
                   ) &&
                   validarMenorQue(
                     event.participantmax,
@@ -397,7 +397,7 @@ export const Newevent = () => {
                       return (
                         <tr>
                           <th key={index} scope="row">
-                            {index}
+                            {index + 1}
                           </th>
                           <td>{event.sport}</td>
                           <td>{event.date}</td>

@@ -283,7 +283,8 @@ export const Home = () => {
                           {event.duration} {"minutos"}
                         </td>
                         <td>
-                          {event.jugadorDelEvento}/{event.participantmax}{"personas"}
+                          {sessionStorage.getItem(event.id)}
+                          /{event.participantmax}{" personas"}
                         </td>
                         <td>
                           {event.agemin} {"años"}

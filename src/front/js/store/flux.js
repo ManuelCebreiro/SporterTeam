@@ -79,7 +79,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
           let text = await getActions().jugadores(getStore().eventos[x].id)
 
-          Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+          sessionStorage.setItem(getStore().eventos[x].id, text)
+
+          // sessionStorage.setItem("token", respuestajson.access_token);
+
+          // Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
         }
       },
       jugadores: async (eventid) => {
