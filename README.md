@@ -2,17 +2,11 @@
 
 A social app to find football, basketball, tennis and padel matches. An external API is used to host users profiles photopraphies. Users can create a match or join a sport match previously created by other user. 
 
-## Authors ✒️
+## Authors ✒️ LinkedIn
 
-MARTIN BARJA BALSEIRO
-MANUEL CEBREIRO RUIZ DE CORTAZAR
-DAVID PIZARRO PALANCAR  
-
-## LinkedIn
-
-www.linkedin.com/in/martin-barja-balseiro/
-www.linkedin.com/in/manuelcebreiro/
-www.linkedin.com/in/david-pizarro-developer/
+- MARTIN BARJA BALSEIRO (www.linkedin.com/in/martin-barja-balseiro/)
+- MANUEL CEBREIRO RUIZ DE CORTAZAR (www.linkedin.com/in/manuelcebreiro/)
+- DAVID PIZARRO PALANCAR (www.linkedin.com/in/david-pizarro-developer/)
 
 ## live
 
