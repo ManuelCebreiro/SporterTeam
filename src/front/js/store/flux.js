@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       eventosparticipantes: async () => {
-        for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
+        for (let x = 0; x < Array.from(getStore().eventos).length; x++) {
           let text = await getActions().jugadores(getStore().eventos[x].id)
 
           sessionStorage.setItem(getStore().eventos[x].id, text)

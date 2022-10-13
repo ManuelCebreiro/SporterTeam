@@ -150,7 +150,7 @@ export const Home = () => {
               </div>
               <div className="row mx-1">
                 <select
-                  defaultValue="cualquiera"
+                  defaultValue="Cualquiera"
                   className="form-select"
                   id="validationCustom04"
                   onChange={(e) => {
@@ -165,7 +165,7 @@ export const Home = () => {
                 >
                   <option>Si</option>
                   <option>No</option>
-                  <option>cualquiera</option>
+                  <option>Cualquiera</option>
                 </select>
               </div>
             </div>
@@ -218,22 +218,22 @@ export const Home = () => {
               </div>
               <div className="row mx-1">
                 <select
-                  defaultValue="cualquiera"
+                  defaultValue="Cualquiera"
                   className="form-select"
                   id="validationCustom04"
                   onChange={(e) => {
-                    if (e.target.value == "Si") {
+                    if (e.target.value == "Cubierto") {
                       setEvent({ ...event, space: true });
-                    } else if (e.target.value == "No") {
+                    } else if (e.target.value == "Aire libre") {
                       setEvent({ ...event, space: false });
                     } else {
                       setEvent({ ...event, space: null });
                     }
                   }}
                 >
-                  <option>Si</option>
-                  <option>No</option>
-                  <option>cualquiera</option>
+                  <option>Cubierto</option>
+                  <option>Aire libre</option>
+                  <option>Cualquiera</option>
                 </select>
               </div>
             </div>
