@@ -13,6 +13,12 @@ export const Login = () => {
     if (store.validacion) navigate("/home");
   }, [store.validacion]);
 
+  useEffect(() => {
+    actions.getEventos();
+    actions.eventosparticipantes();
+
+  }, []);
+
   return (
     <div className="container-fluid p-0 " id="loginstyle">
       <div className="row d-flex">

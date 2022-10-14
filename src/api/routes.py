@@ -187,7 +187,7 @@ def create_evento():
     user.participant.append(evento)         #usuario metido en la tabla de participantes
     db.session.add(evento)
     db.session.commit()
-    return jsonify({"msg":"evento creado"})
+    return jsonify({"msg":"evento creado", "id": evento.id})
 
 
 #sacar los datos de un evento

@@ -20,8 +20,8 @@ export const Home = () => {
 
 
   useEffect(() => {
-    actions.eventosparticipantes();
     actions.getEventos();
+    actions.eventosparticipantes();
 
   }, []);
 
