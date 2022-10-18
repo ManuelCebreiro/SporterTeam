@@ -61,7 +61,7 @@ export const Photoperfil = (props) => {
           <img
             className="rounded-circle img-fluid"
             src={store.imagen}
-            style={{ width: "200px", height: "200px", objectFit: "fill" }}
+            style={{ width: "200px", height: "200px", objectFit: "cover" }}
           />
         </div>
         <button
