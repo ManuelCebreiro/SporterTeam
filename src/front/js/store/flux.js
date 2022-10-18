@@ -76,14 +76,17 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       eventosparticipantes: async () => {
-        for (let x = 0; x <= Array.from(getStore().eventos).length; x++) {
-          let text = await getActions().jugadores(getStore().eventos[x].id)
+        for (let x = 0; x < Array.from(getStore().eventosFilter).length; x++) {
+          if (getStore().eventosFilter[x].estadoEvento == "Abierto") {
+            let text = await getActions().jugadores(getStore().eventosFilter[x].id)
 
-          sessionStorage.setItem(getStore().eventos[x].id, text)
 
-          // sessionStorage.setItem("token", respuestajson.access_token);
+            sessionStorage.setItem(getStore().eventosFilter[x].id, text)
 
-          // Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+            // sessionStorage.setItem("token", respuestajson.access_token);
+
+            // Object.assign(getStore().eventos[x], { "jugadorDelEvento": text })
+          }
         }
       },
       jugadores: async (eventid) => {
@@ -471,8 +474,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (respuestadelback.status == 200) {
             return respuestadelback.json();
           }
-        });
-        getActions().eventosparticipantes()
+        }).then((respuesta) => {
+          getActions().eventosparticipantes()
+          sessionStorage.setItem(respuesta.id, 1)
+        })
+          ;
       },
       modificarevento: (event, eventid) => {
         fetch(process.env.BACKEND_URL + "/api/modificarevento", {
