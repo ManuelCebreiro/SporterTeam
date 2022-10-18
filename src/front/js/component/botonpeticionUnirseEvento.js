@@ -30,7 +30,10 @@ export const PeticionUnion = ({ idevento }) => {
   } else if (eventosfiltrados.length) {
     return (
       <div>
-        <button className="btn btn-success  border-dark" disabled={true}>
+        <button
+          className="btn text-success fw-bold border-dark"
+          disabled={true}
+        >
           Aceptado
         </button>
       </div>
