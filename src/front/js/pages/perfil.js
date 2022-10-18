@@ -142,7 +142,7 @@ export const Perfil = () => {
                             <td>{element.date}</td>
                             <td>
                               {element.duration}
-                              {"minutos."}
+                              {" minutos."}
                             </td>
                             <td>{element.ciudad}</td>
                             <td>{element.space ? "Cubierto" : "Aire libre"}</td>
