@@ -74,6 +74,7 @@ export const Photoperfil = (props) => {
         <input
           type="file"
           className="border-0"
+          style={{ color: "#1A375A", opacity: "0.7" }}
           onChange={(e) => {
             upLoadImage(e);
           }}
