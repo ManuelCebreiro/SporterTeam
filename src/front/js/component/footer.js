@@ -42,10 +42,10 @@ export const Footer = () => (
             <div className="col-md-3 ">
               <div id="buttonName" className="footer-right">
                 <p>Manuel Cebreiro</p>
-                <a href="#">
+                <a href="mailto:cebreirom@gmail.com">
                   <i className="fa fa-envelope"></i>
                 </a>
-                <a href="#">
+                <a href="https://www.linkedin.com/in/manuelcebreiro/">
                   <i className="fa fa-linkedin"></i>
                 </a>
                 <a href="https://github.com/ManuelCebreiro">
@@ -60,7 +60,7 @@ export const Footer = () => (
                 <a href="#">
                   <i className="fa fa-envelope"></i>
                 </a>
-                <a href="#">
+                <a href="https://www.linkedin.com/in/developermartinbarja/">
                   <i className="fa fa-linkedin"></i>
                 </a>
                 <a href="https://github.com/Hanksito">
